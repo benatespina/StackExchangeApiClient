@@ -38,7 +38,7 @@ class AnswerSpec extends ObjectBehavior
 
     function its_is_accepted_is_mutable()
     {
-        $this->setIsAccepted(true)->shouldReturn($this);
+        $this->setAccepted(true)->shouldReturn($this);
         $this->isAccepted()->shouldReturn(true);
     }
 

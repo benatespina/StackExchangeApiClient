@@ -45,7 +45,7 @@ class AnswerAPI
      * @param array $params QueryString parameter(s), by default, the basic to work:
      *                      array('site' => 'stackoverflow', 'sort' => 'activity')
      *
-     * @return array
+     * @return array<BenatEspina\StackExchangeApiClient\Model\AnswerInterface>
      */
     public function getAnswers($params = array('site' => 'stackoverflow', 'sort' => 'activity'))
     {
@@ -61,7 +61,7 @@ class AnswerAPI
      * @param array    $params QueryString parameter(s), by default, the basic to work:
      *                         array('site' => 'stackoverflow', 'sort' => 'activity')
      *
-     * @return array
+     * @return array<BenatEspina\StackExchangeApiClient\Model\AnswerInterface>
      */
     public function getAnswersById($ids, $params = array('site' => 'stackoverflow', 'sort' => 'activity'))
     {
@@ -73,7 +73,7 @@ class AnswerAPI
      *
      * @param array $response Decoded array containing response
      *
-     * @return array
+     * @return array<BenatEspina\StackExchangeApiClient\Model\AnswerInterface>
      */
     private function responseToAnswer($response)
     {

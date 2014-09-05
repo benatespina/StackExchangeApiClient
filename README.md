@@ -1,5 +1,10 @@
-#Stack Exchange v2.2 API Client
-PHP library for interacting with the [Stack Exchange](http://stackexchange.com/)'s version 2.2 REST API.
+# ![stackExchange-logo](https://d13yacurqjgara.cloudfront.net/users/237691/avatars/mini/se-logo_256-circle.png?1393431053) Stack Exchange v2.2 API Client
+> PHP library for interacting with the [Stack Exchange](http://stackexchange.com/)'s version 2.2 REST API.
+
+[![Build Status](https://travis-ci.org/benatespina/StackExchangeApiClient.svg)](https://travis-ci.org/benatespina/StackExchangeApiClient)
+[![Coverage Status](https://img.shields.io/coveralls/benatespina/StackExchangeApiClient.svg)](https://coveralls.io/r/benatespina/StackExchangeApiClient)
+[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/benatespina/StackExchangeApiClient/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/benatespina/StackExchangeApiClient/?branch=master)
+[![SensioLabsInsight](https://insight.sensiolabs.com/projects/1ebace1c-be1b-4a53-bef8-78d910aa2200/mini.png)](https://insight.sensiolabs.com/projects/1ebace1c-be1b-4a53-bef8-78d910aa2200)
 
 ***This is a work in progress library and some features are not available yet.***
 
@@ -31,37 +36,37 @@ Current status
 
 This API has many methods, so the status of the calls are separated **by type** in the following files:
  
- - [Access Tokens](https://github.com/benatespina/blob/master/access_tokens.md)
- - [Answers](https://github.com/benatespina/blob/master/answers.md)
- - [Badges](https://github.com/benatespina/blob/master/badges.md)
- - [Comments](https://github.com/benatespina/blob/master/comments.md)
- - [Errors](https://github.com/benatespina/blob/master/errors.md)
- - [Events](https://github.com/benatespina/blob/master/events.md)
- - [Filters](https://github.com/benatespina/blob/master/filters.md)
- - [Flag Options](https://github.com/benatespina/blob/master/flag_options.md)
- - [Inbox Items](https://github.com/benatespina/blob/master/inbox.md)
- - [Network Users](https://github.com/benatespina/blob/master/network_users.md)
- - [Merge History](https://github.com/benatespina/blob/master/merge_history.md)
- - [Network Activity](https://github.com/benatespina/blob/master/network_activity.md)
- - [Notifications](https://github.com/benatespina/blob/master/notifications.md)
- - [Posts](https://github.com/benatespina/blob/master/posts.md)
- - [Privileges](https://github.com/benatespina/blob/master/privileges.md)
- - [Questions](https://github.com/benatespina/blob/master/questions.md)
- - [Question Timelines](https://github.com/benatespina/blob/master/question.md)
- - [Reputation](https://github.com/benatespina/blob/master/reputation.md)
- - [Reputation History](https://github.com/benatespina/blob/master/reputation_history.md)
- - [Revisions](https://github.com/benatespina/blob/master/revisions.md)
- - [Search Excerpts](https://github.com/benatespina/blob/master/search_excerpts.md)
- - [Sites](https://github.com/benatespina/blob/master/sites.md)
- - [Suggested Edits](https://github.com/benatespina/blob/master/suggested_edits.md)
- - [Tags](https://github.com/benatespina/blob/master/tags.md)
- - [Tag Scores](https://github.com/benatespina/blob/master/tag_scores.md)
- - [Tag Synonyms](https://github.com/benatespina/blob/master/tag_synonyms.md)
- - [Tag Wikis](https://github.com/benatespina/blob/master/tag_wikis.md)
- - [Top Tags](https://github.com/benatespina/blob/master/top_tags.md)
- - [Users](https://github.com/benatespina/blob/master/users.md)
- - [User Timeline](https://github.com/benatespina/blob/master/user.md)
- - [Write Permissions](https://github.com/benatespina/blob/master/write_permissions.md)
+ - [Access Tokens](https://github.com/benatespina/StackExchangeApiClient/blob/master/Resources/doc/access_tokens.md)
+ - [Answers](https://github.com/benatespina/StackExchangeApiClient/blob/master/Resources/doc/answers.md)
+ - [Badges](https://github.com/benatespina/StackExchangeApiClient/blob/master/Resources/doc/badges.md)
+ - [Comments](https://github.com/benatespina/StackExchangeApiClient/blob/master/Resources/doc/comments.md)
+ - [Errors](https://github.com/benatespina/StackExchangeApiClient/blob/master/Resources/doc/errors.md)
+ - [Events](https://github.com/benatespina/StackExchangeApiClient/blob/master/Resources/doc/events.md)
+ - [Filters](https://github.com/benatespina/StackExchangeApiClient/blob/master/Resources/doc/filters.md)
+ - [Flag Options](https://github.com/benatespina/StackExchangeApiClient/blob/master/Resources/doc/flag_options.md)
+ - [Inbox Items](https://github.com/benatespina/StackExchangeApiClient/blob/master/Resources/doc/inbox.md)
+ - [Network Users](https://github.com/benatespina/StackExchangeApiClient/blob/master/Resources/doc/network_users.md)
+ - [Merge History](https://github.com/benatespina/StackExchangeApiClient/blob/master/Resources/doc/merge_history.md)
+ - [Network Activity](https://github.com/benatespina/StackExchangeApiClient/blob/master/Resources/doc/network_activity.md)
+ - [Notifications](https://github.com/benatespina/StackExchangeApiClient/blob/master/Resources/doc/notifications.md)
+ - [Posts](https://github.com/benatespina/StackExchangeApiClient/blob/master/Resources/doc/posts.md)
+ - [Privileges](https://github.com/benatespina/StackExchangeApiClient/blob/master/Resources/doc/privileges.md)
+ - [Questions](https://github.com/benatespina/StackExchangeApiClient/blob/master/Resources/doc/questions.md)
+ - [Question Timelines](https://github.com/benatespina/StackExchangeApiClient/blob/master/Resources/doc/question.md)
+ - [Reputation](https://github.com/benatespina/StackExchangeApiClient/blob/master/Resources/doc/reputation.md)
+ - [Reputation History](https://github.com/benatespina/StackExchangeApiClient/blob/master/Resources/doc/reputation_history.md)
+ - [Revisions](https://github.com/benatespina/StackExchangeApiClient/blob/master/Resources/doc/revisions.md)
+ - [Search Excerpts](https://github.com/benatespina/StackExchangeApiClient/blob/master/Resources/doc/search_excerpts.md)
+ - [Sites](https://github.com/benatespina/StackExchangeApiClient/blob/master/Resources/doc/sites.md)
+ - [Suggested Edits](https://github.com/benatespina/StackExchangeApiClient/blob/master/Resources/doc/suggested_edits.md)
+ - [Tags](https://github.com/benatespina/StackExchangeApiClient/blob/master/Resources/doc/tags.md)
+ - [Tag Scores](https://github.com/benatespina/StackExchangeApiClient/blob/master/Resources/doc/tag_scores.md)
+ - [Tag Synonyms](https://github.com/benatespina/StackExchangeApiClient/blob/master/Resources/doc/tag_synonyms.md)
+ - [Tag Wikis](https://github.com/benatespina/StackExchangeApiClient/blob/master/Resources/doc/tag_wikis.md)
+ - [Top Tags](https://github.com/benatespina/StackExchangeApiClient/blob/master/Resources/doc/top_tags.md)
+ - [Users](https://github.com/benatespina/StackExchangeApiClient/blob/master/Resources/doc/users.md)
+ - [User Timeline](https://github.com/benatespina/StackExchangeApiClient/blob/master/Resources/doc/user.md)
+ - [Write Permissions](https://github.com/benatespina/StackExchangeApiClient/blob/master/Resources/doc/write_permissions.md)
 
 Tests
 -----

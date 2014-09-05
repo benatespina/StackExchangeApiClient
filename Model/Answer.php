@@ -77,8 +77,8 @@ class Answer implements AnswerInterface
             $this->owner = new User($json['owner']);
             $this->isAccepted = $json['is_accepted'];
             $this->score = $json['score'];
-            $this->lastActivityDate = new \DateTime("@" . $json['last_activity_date']);
-            $this->creationDate = new \DateTime("@" . $json['creation_date']);
+            $this->lastActivityDate = new \DateTime('@' . $json['last_activity_date']);
+            $this->creationDate = new \DateTime('@' . $json['creation_date']);
             $this->answerId = $json['answer_id'];
             $this->questionId = $json['question_id'];
         }
@@ -105,7 +105,7 @@ class Answer implements AnswerInterface
     /**
      * {@inheritdoc}
      */
-    public function setIsAccepted($isAccepted)
+    public function setAccepted($isAccepted)
     {
         $this->isAccepted = $isAccepted;
 

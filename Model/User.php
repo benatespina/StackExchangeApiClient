@@ -81,7 +81,7 @@ class User implements UserInterface
             $this->displayName = $json['display_name'];
             $this->link = $json['link'];
 
-            if (isset($json['accept_rate'])) {
+            if (isset($json['accept_rate']) === true) {
                 $this->acceptRate = $json['accept_rate'];
             }
         }

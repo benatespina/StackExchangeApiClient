@@ -34,13 +34,13 @@ interface AnswerInterface
     public function getOwner();
 
     /**
-     * Sets is accepted.
+     * Sets accepted boolean.
      *
      * @param bool $isAccepted The isAccepted boolean
      *
      * @return \BenatEspina\StackExchangeApiClient\Model\AnswerInterface
      */
-    public function setIsAccepted($isAccepted);
+    public function setAccepted($isAccepted);
 
     /**
      * Gets is accepted.
