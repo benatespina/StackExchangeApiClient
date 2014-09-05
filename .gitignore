@@ -1,0 +1,6 @@
+src/
+vendor/
+bin/
+coverage/
+composer.lock
+coverage.xml
