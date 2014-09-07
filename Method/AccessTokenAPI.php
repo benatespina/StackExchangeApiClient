@@ -25,14 +25,14 @@ class AccessTokenAPI
      *
      * @var \BenatEspina\StackExchangeApiClient\Client
      */
-    private $client;
+    protected $client;
 
     /**
      * The prefix of access tokens API requests.
      *
      * @var string
      */
-    private $prefix = '/access-tokens';
+    protected $prefix = '/access-tokens';
 
     /**
      * Constructor.

@@ -28,6 +28,13 @@ class AnswerAPI
     protected $client;
 
     /**
+     * The prefix of answers API requests.
+     *
+     * @var string
+     */
+    protected $prefix = '/answers';
+
+    /**
      * Constructor.
      *
      * @param \BenatEspina\StackExchangeApiClient\Client $client that will be used to connect the server
@@ -42,14 +49,14 @@ class AnswerAPI
      *
      * More info: http://api.stackexchange.com/docs/answers
      *
-     * @param array $params QueryString parameter(s), by default, the basic to work:
-     *                      array('site' => 'stackoverflow', 'sort' => 'activity')
+     * @param string[] $params QueryString parameter(s), by default, the basic to work:
+     *                         array('site' => 'stackoverflow', 'sort' => 'activity')
      *
      * @return array<BenatEspina\StackExchangeApiClient\Model\AnswerInterface>
      */
     public function getAnswers($params = array('site' => 'stackoverflow', 'sort' => 'activity'))
     {
-        return $this->responseToAnswer($this->client->get('/answers', $params));
+        return $this->responseToAnswer($this->client->get($this->prefix, $params));
     }
 
     /**
@@ -58,20 +65,20 @@ class AnswerAPI
      * More info: http://api.stackexchange.com/docs/answers-by-ids
      *
      * @param string[] $ids    The array which contains the ids delimited by semicolon
-     * @param array    $params QueryString parameter(s), by default, the basic to work:
+     * @param string[] $params QueryString parameter(s), by default, the basic to work:
      *                         array('site' => 'stackoverflow', 'sort' => 'activity')
      *
      * @return array<BenatEspina\StackExchangeApiClient\Model\AnswerInterface>
      */
     public function getAnswersById($ids, $params = array('site' => 'stackoverflow', 'sort' => 'activity'))
     {
-        return $this->responseToAnswer($this->client->get('/answers/' . implode(';', $ids), $params));
+        return $this->responseToAnswer($this->client->get($this->prefix . '/' . implode(';', $ids), $params));
     }
 
     /**
      * Transforms the json decodes array to answer objects array.
      *
-     * @param array $response Decoded array containing response
+     * @param mixed $response Decoded array containing response
      *
      * @return array<BenatEspina\StackExchangeApiClient\Model\AnswerInterface>
      */
