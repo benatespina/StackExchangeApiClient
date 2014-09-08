@@ -38,15 +38,43 @@ class Client
     /**
      * Scaffold for GET api requests.
      *
-     * @param string $method The api method, for example: /answers
-     * @param array  $query  QueryString that filters the response, for example:
-     *                       array('site' => 'stackoverflow', 'sort' => 'activity')
+     * @param string $method The api method
+     * @param array  $query  QueryString that filters the response
      *
      * @throws Exception\RequestException when the status code is higher than 226. According to the Wikipedia:
      *                                    http://en.wikipedia.org/wiki/List_of_HTTP_status_codes#2xx_Success
-     * @return array Decoded array containing response
+     * @return mixed Decoded array containing response
      */
     public function get($method, $query = array())
+    {
+        return $this->baseRequest('get', $method, $query);
+    }
+
+    /**
+     * Scaffold for POST api requests.
+     *
+     * @param string $method The api method
+     * @param array  $query  QueryString that filters the response
+     *
+     * @return mixed Decoded array containing response
+     */
+    public function post($method, $query = array())
+    {
+        return $this->baseRequest('post', $method, $query);
+    }
+
+    /**
+     * Base method for the api requests of library.
+     *
+     * @param string $request The request that can be 'get', 'post', 'put', 'patch' and 'delete'
+     * @param string $method  The api method
+     * @param array  $query   QueryString that filters the response
+     *
+     * @throws Exception\RequestException when the status code is higher than 226. According to the Wikipedia:
+     *                                    http://en.wikipedia.org/wiki/List_of_HTTP_status_codes#2xx_Success
+     * @return mixed Decoded array containing response
+     */
+    private function baseRequest($request, $method, $query = array())
     {
         $curl = new Curl();
         $browser = new Browser($curl);
@@ -60,7 +88,7 @@ class Client
             $url .= "$key=$value&";
         }
 
-        $response = $browser->get($url);
+        $response = $browser->$request($url);
 
         if ($browser->getLastResponse()->getStatusCode() > 226) {
             throw new RequestException(json_decode(gzdecode($browser->getLastResponse()->getContent()), true));

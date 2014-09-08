@@ -42,4 +42,22 @@ class ClientSpec extends ObjectBehavior
             )
         )->during('get', array('/answers'));
     }
+
+    function it_posts()
+    {
+        $this->post('/filters/create')->shouldBeArray();
+    }
+
+    function it_throws_an_exception_because_no_method_found_with_this_name()
+    {
+        $this->shouldThrow(
+            new RequestException(
+                array(
+                    'error_id'      => 404,
+                    'error_message' => 'no method found with this name',
+                    'error_name'    => 'no_method'
+                )
+            )
+        )->during('post', array('/no-method'));
+    }
 }
