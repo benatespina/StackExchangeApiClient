@@ -10,7 +10,7 @@
 
 namespace spec\Benatespina\StackExchangeApiClient\Model;
 
-use BenatEspina\StackExchangeApiClient\Model\UserInterface;
+use BenatEspina\StackExchangeApiClient\Model\Interfaces\UserInterface;
 use PhpSpec\ObjectBehavior;
 
 /**

@@ -52,11 +52,13 @@ class FilterAPI
      *
      * @param string[] $params QueryString parameter(s), it admits include, exclude and unsafe
      *
-     * @return array<BenatEspina\StackExchangeApiClient\Model\FilterInterface>
+     * @return \BenatEspina\StackExchangeApiClient\Model\Interfaces\FilterInterface
      */
     public function postFilter($params = array())
     {
-        return $this->client->post($this->prefix . '/create', $params);
+        $response = $this->client->post($this->prefix . '/create', $params);
+
+        return new Filter($response['items'][0]);
     }
 
     /**
@@ -66,7 +68,7 @@ class FilterAPI
      *
      * @param string[] $filters The array which contains the filters delimited by semicolon
      *
-     * @return array<BenatEspina\StackExchangeApiClient\Model\FilterInterface>
+     * @return array<BenatEspina\StackExchangeApiClient\Model\Interfaces\FilterInterface>
      */
     public function getFilters($filters)
     {

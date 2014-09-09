@@ -23,7 +23,7 @@ class FilterAPISpec extends ObjectBehavior
     /**
      * Array which contains filter objects. It is the return type of methods of filter.
      *
-     * @var array<\BenatEspina\StackExchangeApiClient\Model\FilterInterface>
+     * @var array<\BenatEspina\StackExchangeApiClient\Model\Interfaces\FilterInterface>
      */
     private $response = array(
         'items' => array(
@@ -59,7 +59,7 @@ class FilterAPISpec extends ObjectBehavior
 
         $this->postFilter(
             array('include' => 'answer.body', 'exclude' => 'answer', 'base' => 'default', 'unsafe' => 'false')
-        )->shouldBeArray();
+        )->shouldReturnAnInstanceOf('BenatEspina\StackExchangeApiClient\Model\Interfaces\FilterInterface');
     }
 
     function it_gets_filters(Client $client)
