@@ -10,6 +10,8 @@
 
 namespace BenatEspina\StackExchangeApiClient\Model;
 
+use BenatEspina\StackExchangeApiClient\Util\Utilities;
+
 /**
  * Class Filter.
  *
@@ -116,11 +118,7 @@ class Filter implements FilterInterface
      */
     public function removeIncludedField($includedField)
     {
-        $key = array_search($includedField, $this->includedFields);
-        if ($key !== false) {
-            unset($this->includedFields[$key]);
-            array_values($this->includedFields);
-        }
+        $this->includedFields = Utilities::removeElement($includedField, $this->includedFields);
 
         return $this;
     }

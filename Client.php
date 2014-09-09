@@ -81,11 +81,11 @@ class Client
 
         $url = $this->baseUrl . '/' . $this->version . $method;
         if (count($query) > 0) {
-            $url .= "?";
+            $url .= '?';
         }
 
         foreach ($query as $key => $value) {
-            $url .= "$key=$value&";
+            $url .= $key . '=' . $value . '&';
         }
 
         $response = $browser->$request($url);
