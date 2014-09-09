@@ -27,7 +27,7 @@ class AnswerSpec extends ObjectBehavior
 
     function it_implements_answer_interface()
     {
-        $this->shouldImplement('BenatEspina\StackExchangeApiClient\Model\AnswerInterface');
+        $this->shouldImplement('BenatEspina\StackExchangeApiClient\Model\Interfaces\AnswerInterface');
     }
 
     function its_owner_is_mutable(UserInterface $owner)

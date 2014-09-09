@@ -8,12 +8,12 @@
  * @license MIT
  */
 
-namespace BenatEspina\StackExchangeApiClient\Model;
+namespace BenatEspina\StackExchangeApiClient\Model\Interfaces;
 
 /**
  * Interface FilterInterface
  *
- * @package BenatEspina\StackExchangeApiClient\Model
+ * @package BenatEspina\StackExchangeApiClient\Model\Interfaces
  */
 interface FilterInterface
 {
@@ -22,7 +22,7 @@ interface FilterInterface
      *
      * @param string $filter The filter id
      *
-     * @return \BenatEspina\StackExchangeApiClient\Model\FilterInterface
+     * @return \BenatEspina\StackExchangeApiClient\Model\Interfaces\FilterInterface
      */
     public function setFilter($filter);
 
@@ -38,7 +38,7 @@ interface FilterInterface
      *
      * @param string $filterType The filter type that can be 'safe', 'unsafe' or 'invalid'.
      *
-     * @return \BenatEspina\StackExchangeApiClient\Model\FilterInterface
+     * @return \BenatEspina\StackExchangeApiClient\Model\Interfaces\FilterInterface
      */
     public function setFilterType($filterType);
 
@@ -54,7 +54,7 @@ interface FilterInterface
      *
      * @param string $includedField The included fields.
      *
-     * @return \BenatEspina\StackExchangeApiClient\Model\FilterInterface
+     * @return \BenatEspina\StackExchangeApiClient\Model\Interfaces\FilterInterface
      */
     public function addIncludedField($includedField);
 
@@ -63,7 +63,7 @@ interface FilterInterface
      *
      * @param string $includedField The included fields.
      *
-     * @return \BenatEspina\StackExchangeApiClient\Model\FilterInterface
+     * @return \BenatEspina\StackExchangeApiClient\Model\Interfaces\FilterInterface
      */
     public function removeIncludedField($includedField);
 

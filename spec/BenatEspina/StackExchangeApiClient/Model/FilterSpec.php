@@ -26,7 +26,7 @@ class FilterSpec extends ObjectBehavior
 
     function it_implements_filter_interface()
     {
-        $this->shouldImplement('BenatEspina\StackExchangeApiClient\Model\FilterInterface');
+        $this->shouldImplement('BenatEspina\StackExchangeApiClient\Model\Interfaces\FilterInterface');
     }
 
     function its_filter_is_mutable()

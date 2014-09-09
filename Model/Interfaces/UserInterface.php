@@ -8,12 +8,12 @@
  * @license MIT
  */
 
-namespace BenatEspina\StackExchangeApiClient\Model;
+namespace BenatEspina\StackExchangeApiClient\Model\Interfaces;
 
 /**
  * Interface UserInterface.
  *
- * @package BenatEspina\StackExchangeApiClient\Model
+ * @package BenatEspina\StackExchangeApiClient\Model\Interfaces
  */
 interface UserInterface
 {
@@ -22,7 +22,7 @@ interface UserInterface
      *
      * @param integer $userId The id
      *
-     * @return \BenatEspina\StackExchangeApiClient\Model\UserInterface
+     * @return \BenatEspina\StackExchangeApiClient\Model\Interfaces\UserInterface
      */
     public function setUserId($userId);
 
@@ -38,7 +38,7 @@ interface UserInterface
      *
      * @param integer $reputation The reputation
      *
-     * @return \BenatEspina\StackExchangeApiClient\Model\UserInterface
+     * @return \BenatEspina\StackExchangeApiClient\Model\Interfaces\UserInterface
      */
     public function setReputation($reputation);
 
@@ -54,7 +54,7 @@ interface UserInterface
      *
      * @param string $userType The userType
      *
-     * @return \BenatEspina\StackExchangeApiClient\Model\UserInterface
+     * @return \BenatEspina\StackExchangeApiClient\Model\Interfaces\UserInterface
      */
     public function setUserType($userType);
 
@@ -70,7 +70,7 @@ interface UserInterface
      *
      * @param integer $acceptRate The acceptRate
      *
-     * @return \BenatEspina\StackExchangeApiClient\Model\UserInterface
+     * @return \BenatEspina\StackExchangeApiClient\Model\Interfaces\UserInterface
      */
     public function setAcceptRate($acceptRate);
 
@@ -86,7 +86,7 @@ interface UserInterface
      *
      * @param string $profileImage The profileImage
      *
-     * @return \BenatEspina\StackExchangeApiClient\Model\UserInterface
+     * @return \BenatEspina\StackExchangeApiClient\Model\Interfaces\UserInterface
      */
     public function setProfileImage($profileImage);
 
@@ -102,7 +102,7 @@ interface UserInterface
      *
      * @param string $displayName The displayName
      *
-     * @return \BenatEspina\StackExchangeApiClient\Model\UserInterface
+     * @return \BenatEspina\StackExchangeApiClient\Model\Interfaces\UserInterface
      */
     public function setDisplayName($displayName);
 
@@ -118,7 +118,7 @@ interface UserInterface
      *
      * @param string $link The link
      *
-     * @return \BenatEspina\StackExchangeApiClient\Model\UserInterface
+     * @return \BenatEspina\StackExchangeApiClient\Model\Interfaces\UserInterface
      */
     public function setLink($link);
 

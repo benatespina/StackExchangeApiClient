@@ -10,6 +10,7 @@
 
 namespace BenatEspina\StackExchangeApiClient\Model;
 
+use BenatEspina\StackExchangeApiClient\Model\Interfaces\FilterInterface;
 use BenatEspina\StackExchangeApiClient\Util\Utilities;
 
 /**

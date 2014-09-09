@@ -26,7 +26,7 @@ class UserSpec extends ObjectBehavior
 
     function it_implements_user_interface()
     {
-        $this->shouldImplement('BenatEspina\StackExchangeApiClient\Model\UserInterface');
+        $this->shouldImplement('BenatEspina\StackExchangeApiClient\Model\Interfaces\UserInterface');
     }
 
     function its_user_id_is_mutable()

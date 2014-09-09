@@ -10,6 +10,8 @@
 
 namespace BenatEspina\StackExchangeApiClient\Model;
 
+use BenatEspina\StackExchangeApiClient\Model\Interfaces\UserInterface;
+
 /**
  * Class User.
  *

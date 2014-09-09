@@ -10,6 +10,9 @@
 
 namespace BenatEspina\StackExchangeApiClient\Model;
 
+use BenatEspina\StackExchangeApiClient\Model\Interfaces\AnswerInterface;
+use BenatEspina\StackExchangeApiClient\Model\Interfaces\UserInterface;
+
 /**
  * Class Answer.
  *
@@ -20,7 +23,7 @@ class Answer implements AnswerInterface
     /**
      * User object.
      *
-     * @var \BenatEspina\StackExchangeApiClient\Model\UserInterface
+     * @var \BenatEspina\StackExchangeApiClient\Model\Interfaces\UserInterface
      */
     protected $owner;
 

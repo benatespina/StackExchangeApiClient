@@ -10,6 +10,7 @@
 
 namespace BenatEspina\StackExchangeApiClient\Model;
 
+use BenatEspina\StackExchangeApiClient\Model\Interfaces\AccessTokenInterface;
 use BenatEspina\StackExchangeApiClient\Util\Utilities;
 
 /**

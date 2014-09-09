@@ -8,28 +8,28 @@
  * @license MIT
  */
 
-namespace BenatEspina\StackExchangeApiClient\Model;
+namespace BenatEspina\StackExchangeApiClient\Model\Interfaces;
 
 /**
  * Interface AnswerInterface.
  *
- * @package BenatEspina\StackExchangeApiClient\Model
+ * @package BenatEspina\StackExchangeApiClient\Model\Interfaces
  */
 interface AnswerInterface
 {
     /**
      * Sets owner.
      *
-     * @param \BenatEspina\StackExchangeApiClient\Model\UserInterface $owner The owner
+     * @param \BenatEspina\StackExchangeApiClient\Model\Interfaces\UserInterface $owner The owner
      *
-     * @return \BenatEspina\StackExchangeApiClient\Model\AnswerInterface
+     * @return \BenatEspina\StackExchangeApiClient\Model\Interfaces\AnswerInterface
      */
     public function setOwner(UserInterface $owner);
 
     /**
      * Gets owner.
      *
-     * @return \BenatEspina\StackExchangeApiClient\Model\UserInterface
+     * @return \BenatEspina\StackExchangeApiClient\Model\Interfaces\UserInterface
      */
     public function getOwner();
 
@@ -38,7 +38,7 @@ interface AnswerInterface
      *
      * @param bool $isAccepted The isAccepted boolean
      *
-     * @return \BenatEspina\StackExchangeApiClient\Model\AnswerInterface
+     * @return \BenatEspina\StackExchangeApiClient\Model\Interfaces\AnswerInterface
      */
     public function setAccepted($isAccepted);
 
@@ -54,7 +54,7 @@ interface AnswerInterface
      *
      * @param integer $score The score
      *
-     * @return \BenatEspina\StackExchangeApiClient\Model\AnswerInterface
+     * @return \BenatEspina\StackExchangeApiClient\Model\Interfaces\AnswerInterface
      */
     public function setScore($score);
 
@@ -70,7 +70,7 @@ interface AnswerInterface
      *
      * @param \DateTime $lastActivityDate The lastActivityDate
      *
-     * @return \BenatEspina\StackExchangeApiClient\Model\AnswerInterface
+     * @return \BenatEspina\StackExchangeApiClient\Model\Interfaces\AnswerInterface
      */
     public function setLastActivityDate(\DateTime $lastActivityDate);
 
@@ -86,7 +86,7 @@ interface AnswerInterface
      *
      * @param \DateTime $creationDate The creationDate
      *
-     * @return \BenatEspina\StackExchangeApiClient\Model\AnswerInterface
+     * @return \BenatEspina\StackExchangeApiClient\Model\Interfaces\AnswerInterface
      */
     public function setCreationDate(\DateTime $creationDate);
 
@@ -102,7 +102,7 @@ interface AnswerInterface
      *
      * @param integer $answerId The id
      *
-     * @return \BenatEspina\StackExchangeApiClient\Model\AnswerInterface
+     * @return \BenatEspina\StackExchangeApiClient\Model\Interfaces\AnswerInterface
      */
     public function setAnswerId($answerId);
 
@@ -118,7 +118,7 @@ interface AnswerInterface
      *
      * @param integer $questionId The id
      *
-     * @return \BenatEspina\StackExchangeApiClient\Model\AnswerInterface
+     * @return \BenatEspina\StackExchangeApiClient\Model\Interfaces\AnswerInterface
      */
     public function setQuestionId($questionId);
 

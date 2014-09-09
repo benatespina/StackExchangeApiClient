@@ -26,7 +26,7 @@ class AccessTokenSpec extends ObjectBehavior
 
     function it_implements_acess_token_interface()
     {
-        $this->shouldImplement('BenatEspina\StackExchangeApiClient\Model\AccessTokenInterface');
+        $this->shouldImplement('BenatEspina\StackExchangeApiClient\Model\Interfaces\AccessTokenInterface');
     }
 
     function its_access_token_is_mutable()

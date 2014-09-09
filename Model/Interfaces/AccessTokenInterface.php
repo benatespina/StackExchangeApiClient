@@ -8,12 +8,12 @@
  * @license MIT
  */
 
-namespace BenatEspina\StackExchangeApiClient\Model;
+namespace BenatEspina\StackExchangeApiClient\Model\Interfaces;
 
 /**
  * Interface AccessTokenInterface
  *
- * @package BenatEspina\StackExchangeApiClient\Model
+ * @package BenatEspina\StackExchangeApiClient\Model\Interfaces
  */
 interface AccessTokenInterface
 {
@@ -22,7 +22,7 @@ interface AccessTokenInterface
      *
      * @param string $accessToken The access token
      *
-     * @return \BenatEspina\StackExchangeApiClient\Model\AccessTokenInterface
+     * @return \BenatEspina\StackExchangeApiClient\Model\Interfaces\AccessTokenInterface
      */
     public function setAccessToken($accessToken);
 
@@ -38,7 +38,7 @@ interface AccessTokenInterface
      *
      * @param string $accountId The account id.
      *
-     * @return \BenatEspina\StackExchangeApiClient\Model\AccessTokenInterface
+     * @return \BenatEspina\StackExchangeApiClient\Model\Interfaces\AccessTokenInterface
      */
     public function setAccountId($accountId);
 
@@ -54,7 +54,7 @@ interface AccessTokenInterface
      *
      * @param \DateTime $expiresOnDate The expires on date.
      *
-     * @return \BenatEspina\StackExchangeApiClient\Model\AccessTokenInterface
+     * @return \BenatEspina\StackExchangeApiClient\Model\Interfaces\AccessTokenInterface
      */
     public function setExpiresOnDate(\DateTime $expiresOnDate);
 
@@ -70,7 +70,7 @@ interface AccessTokenInterface
      * 
      * @param string $scope The scope
      *
-     * @return \BenatEspina\StackExchangeApiClient\Model\AccessTokenInterface
+     * @return \BenatEspina\StackExchangeApiClient\Model\Interfaces\AccessTokenInterface
      */
     public function addScope($scope);
 
@@ -79,7 +79,7 @@ interface AccessTokenInterface
      * 
      * @param string $scope The scope
      *
-     * @return \BenatEspina\StackExchangeApiClient\Model\AccessTokenInterface
+     * @return \BenatEspina\StackExchangeApiClient\Model\Interfaces\AccessTokenInterface
      */
     public function removeScope($scope);
 
