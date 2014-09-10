@@ -11,11 +11,11 @@
 namespace BenatEspina\StackExchangeApiClient\Util;
 
 /**
- * Class Utilities.
+ * Class Util.
  *
  * @package BenatEspina\StackExchangeApiClient\Util
  */
-class Utilities
+class Util
 {
     /**
      * Deletes the resource if exists. After of the element is removed, array is rearranged.
@@ -23,7 +23,7 @@ class Utilities
      * @param mixed $resource The resource, it can be string, integer or whatever object
      * @param array $array    The array that contains the elements
      *
-     * @return array
+     * @return array<mixed>
      */
     public static function removeElement($resource, $array)
     {
@@ -34,5 +34,23 @@ class Utilities
         }
 
         return $array;
+    }
+
+    /**
+     * Sets the resource if exists.
+     *
+     * @param array  $array    The array that contains the elements
+     * @param mixed  $resource The resource, it can be string, integer or whatever object
+     * @param string $key      The index of array
+     *
+     * @return mixed
+     */
+    public static function setIfExists($array, $resource, $key)
+    {
+        if (isset($array[$key]) === true) {
+            $resource = $resource[$key];
+        }
+
+        return $resource;
     }
 }

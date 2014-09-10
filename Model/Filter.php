@@ -11,7 +11,7 @@
 namespace BenatEspina\StackExchangeApiClient\Model;
 
 use BenatEspina\StackExchangeApiClient\Model\Interfaces\FilterInterface;
-use BenatEspina\StackExchangeApiClient\Util\Utilities;
+use BenatEspina\StackExchangeApiClient\Util\Util;
 
 /**
  * Class Filter.
@@ -119,7 +119,7 @@ class Filter implements FilterInterface
      */
     public function removeIncludedField($includedField)
     {
-        $this->includedFields = Utilities::removeElement($includedField, $this->includedFields);
+        $this->includedFields = Util::removeElement($includedField, $this->includedFields);
 
         return $this;
     }

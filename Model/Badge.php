@@ -13,6 +13,7 @@ namespace BenatEspina\StackExchangeApiClient\Model;
 use BenatEspina\StackExchangeApiClient\Model\Abstracts\BaseAbstractModel;
 use BenatEspina\StackExchangeApiClient\Model\Interfaces\BadgeInterface;
 use BenatEspina\StackExchangeApiClient\Model\Interfaces\UserInterface;
+use BenatEspina\StackExchangeApiClient\Util\Util;
 
 /**
  * Class Badge.
@@ -76,7 +77,7 @@ class Badge extends BaseAbstractModel implements BadgeInterface
      * @var \BenatEspina\StackExchangeApiClient\Model\Interfaces\UserInterface
      */
     protected $user;
-
+    
     /**
      * Constructor.
      *
@@ -85,22 +86,14 @@ class Badge extends BaseAbstractModel implements BadgeInterface
     public function __construct($json = null)
     {
         if ($json !== null) {
-            if (isset($json['award_count']) === true) {
-                $this->awardCount = $json['award_count'];
-            }
-            if (isset($json['badge_id']) === true) {
-                $this->badgeId = $json['badge_id'];
-            }
+            $this->awardCount = Util::setIfExists($json, $this->awardCount, 'award_count');
+            $this->badgeId = Util::setIfExists($json, $this->badgeId, 'badge_id');
+            $this->description = Util::setIfExists($json, $this->description, 'description');
+            $this->name = Util::setIfExists($json, $this->name, 'name');
             if ($json['badge_type'] === self::BADGE_TYPE_TAG_BASED
                 || $json['badge_type'] === self::BADGE_TYPE_NAMED
             ) {
                 $this->badgeType = $json['badge_type'];
-            }
-            if (isset($json['description']) === true) {
-                $this->description = $json['description'];
-            }
-            if (isset($json['name']) === true) {
-                $this->name = $json['name'];
             }
             if ($json['rank'] === self::RANK_BRONZE
                 || $json['rank'] === self::RANK_SILVER
@@ -108,15 +101,11 @@ class Badge extends BaseAbstractModel implements BadgeInterface
             ) {
                 $this->rank = $json['rank'];
             }
-            if (isset($json['rank']) === true) {
-                $this->rank = $json['rank'];
-            }
             if (isset($json['user']) === true) {
                 $this->user = new User($json['user']);
             }
             parent::__construct($json);
         }
-
     }
 
     /**

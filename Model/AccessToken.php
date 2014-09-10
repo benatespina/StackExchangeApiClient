@@ -11,7 +11,7 @@
 namespace BenatEspina\StackExchangeApiClient\Model;
 
 use BenatEspina\StackExchangeApiClient\Model\Interfaces\AccessTokenInterface;
-use BenatEspina\StackExchangeApiClient\Util\Utilities;
+use BenatEspina\StackExchangeApiClient\Util\Util;
 
 /**
  * Class AccessToken.
@@ -135,7 +135,7 @@ class AccessToken implements AccessTokenInterface
      */
     public function removeScope($scope)
     {
-        $this->scope = Utilities::removeElement($scope, $this->scope);
+        $this->scope = Util::removeElement($scope, $this->scope);
 
         return $this;
     }
