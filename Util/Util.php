@@ -48,9 +48,26 @@ class Util
     public static function setIfExists($array, $resource, $key)
     {
         if (isset($array[$key]) === true) {
-            $resource = $resource[$key];
+            return $resource[$key];
+        }
+    }
+
+    /**
+     * Checks if any string of the array is equal to the resource given.
+     *
+     * @param string   $resource The resource
+     * @param string[] $array    The array that contains the strings
+     *
+     * @return bool
+     */
+    public static function isEqual($resource, $array)
+    {
+        foreach ($array as $string) {
+            if ($resource === $string) {
+                return true;
+            }
         }
 
-        return $resource;
+        return false;
     }
 }
