@@ -75,6 +75,29 @@ interface BadgeInterface
     public function setDescription($description);
 
     /**
+     * Gets description.
+     *
+     * @return string
+     */
+    public function getDescription();
+
+    /**
+     * Sets link.
+     *
+     * @param string $link The link
+     *
+     * @return string
+     */
+    public function setLink($link);
+
+    /**
+     * Gets link.
+     *
+     * @return string
+     */
+    public function getLink();
+
+    /**
      * Sets name.
      *
      * @param string $name The name
@@ -109,16 +132,16 @@ interface BadgeInterface
     /**
      * Sets user.
      *
-     * @param \BenatEspina\StackExchangeApiClient\Model\Interfaces\UserInterface $user The user object
+     * @param \BenatEspina\StackExchangeApiClient\Model\Interfaces\ShallowUserInterface|null $user The shallow user
      *
      * @return \BenatEspina\StackExchangeApiClient\Model\Interfaces\BadgeInterface
      */
-    public function setUser(UserInterface $user);
+    public function setUser(ShallowUserInterface $user);
 
     /**
      * Gets user.
      *
-     * @return \BenatEspina\StackExchangeApiClient\Model\Interfaces\UserInterface
+     * @return \BenatEspina\StackExchangeApiClient\Model\Interfaces\ShallowUserInterface|null
      */
     public function getUser();
 }
