@@ -10,89 +10,72 @@
 
 namespace BenatEspina\StackExchangeApiClient\Model;
 
+use BenatEspina\StackExchangeApiClient\Model\Abstracts\AnswerQuestionAbstract as BaseAnswer;
 use BenatEspina\StackExchangeApiClient\Model\Interfaces\AnswerInterface;
-use BenatEspina\StackExchangeApiClient\Model\Interfaces\UserInterface;
+use BenatEspina\StackExchangeApiClient\Model\Traits\AwardedBountyTrait;
+use BenatEspina\StackExchangeApiClient\Util\Util;
 
 /**
  * Class Answer.
  *
  * @package BenatEspina\StackExchangeApiClient\Model
  */
-class Answer implements AnswerInterface
+class Answer extends BaseAnswer implements AnswerInterface
 {
+    use AwardedBountyTrait;
+
     /**
-     * User object.
+     * Private boolean that shows if answer is accepted of not.
      *
-     * @var \BenatEspina\StackExchangeApiClient\Model\Interfaces\UserInterface
+     * @var boolean
      */
-    protected $owner;
+    protected $accepted;
+
+    /**
+     * Boolean that shows it can flag or not.
+     *
+     * @var boolean
+     */
+    protected $canFlag;
 
     /**
      * Boolean that shows if answer is accepted or not.
      *
-     * @var bool
+     * @var boolean
      */
     protected $isAccepted;
 
     /**
-     * The score.
-     *
-     * @var integer
-     */
-    protected $score;
-
-    /**
-     * Last activity date.
-     *
-     * @var \DateTime
-     */
-    protected $lastActivityDate;
-
-    /**
-     * Creation date.
-     *
-     * @var \DateTime
-     */
-    protected $creationDate;
-
-    /**
-     * The answer id.
-     *
-     * @var integer
-     */
-    protected $answerId;
-
-    /**
      * The question id.
      *
-     * @var integer
+     * @var int
      */
     protected $questionId;
 
     /**
      * Constructor.
      *
-     * @param null|array $json The json string being decoded
+     * @param null|(int|string)[] $json The json string being decoded
      */
     public function __construct($json = null)
     {
-        if ($json !== null) {
-            $this->owner = new User($json['owner']);
-            $this->isAccepted = $json['is_accepted'];
-            $this->score = $json['score'];
-            $this->lastActivityDate = new \DateTime('@' . $json['last_activity_date']);
-            $this->creationDate = new \DateTime('@' . $json['creation_date']);
-            $this->answerId = $json['answer_id'];
-            $this->questionId = $json['question_id'];
-        }
+        parent::__construct($json);
+        $this->id = Util::setIfExists($json, 'answer_id');
+
+        $this->loadAwardedBounty($json);
+
+        $this->accepted = Util::setIfExists($json, 'accepted');
+        $this->canFlag = Util::setIfExists($json, 'can_flag');
+        $this->isAccepted = Util::setIfExists($json, 'is_accepted');
+        $this->questionId = Util::setIfExists($json, 'question_id');
     }
 
     /**
      * {@inheritdoc}
      */
-    public function setOwner(UserInterface $owner)
+    public function setAccepted($accepted)
     {
-        $this->owner = $owner;
+        $this->accepted = $accepted;
 
         return $this;
     }
@@ -100,15 +83,33 @@ class Answer implements AnswerInterface
     /**
      * {@inheritdoc}
      */
-    public function getOwner()
+    public function hasAccepted()
     {
-        return $this->owner;
+        return $this->accepted;
     }
 
     /**
      * {@inheritdoc}
      */
-    public function setAccepted($isAccepted)
+    public function setCanFlag($canFlag)
+    {
+        $this->canFlag = $canFlag;
+
+        return $this;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function isCanFlag()
+    {
+        return $this->canFlag;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setIsAccepted($isAccepted)
     {
         $this->isAccepted = $isAccepted;
 
@@ -126,83 +127,11 @@ class Answer implements AnswerInterface
     /**
      * {@inheritdoc}
      */
-    public function setScore($score)
-    {
-        $this->score = $score;
-
-        return $this;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getScore()
-    {
-        return $this->score;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function setLastActivityDate(\DateTime $lastActivityDate)
-    {
-        $this->lastActivityDate = $lastActivityDate;
-
-        return $this;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getLastActivityDate()
-    {
-        return $this->lastActivityDate;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function setCreationDate(\DateTime $creationDate)
-    {
-        $this->creationDate = $creationDate;
-
-        return $this;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getCreationDate()
-    {
-        return $this->creationDate;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
     public function setQuestionId($questionId)
     {
         $this->questionId = $questionId;
 
         return $this;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function setAnswerId($answerId)
-    {
-        $this->answerId = $answerId;
-
-        return $this;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getAnswerId()
-    {
-        return $this->answerId;
     }
 
     /**

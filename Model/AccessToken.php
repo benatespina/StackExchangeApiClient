@@ -41,7 +41,8 @@ class AccessToken implements AccessTokenInterface
      */
     protected $expiresOnDate;
 
-    /** An array of scopes.
+    /**
+     * An array of scopes.
      *
      * @var string[]|null
      */
@@ -50,20 +51,14 @@ class AccessToken implements AccessTokenInterface
     /**
      * Constructor.
      *
-     * @param null|array $json The json string being decoded
+     * @param null|(int|string)[] $json The json string being decoded
      */
     public function __construct($json = null)
     {
-        $this->scope = array();
-
-        if ($json !== null) {
-            $this->accessToken = Util::setIfExists($json, $this->accessToken, 'access_token');
-            $this->accountId = Util::setIfExists($json, $this->accountId, 'account_id');
-            $this->expiresOnDate = new \DateTime(
-                '@' . Util::setIfExists($json, $this->expiresOnDate, 'expires_on_date')
-            );
-            $this->scope = Util::setIfExists($json, $this->scope, 'scope');
-        }
+        $this->accessToken = Util::setIfExists($json, 'access_token');
+        $this->accountId = Util::setIfExists($json, 'account_id');
+        $this->expiresOnDate = Util::setIfDateTimeExists($json, 'expires_on_date');
+        $this->scope = Util::setIfArrayExists($json, 'scope');
     }
 
     /**

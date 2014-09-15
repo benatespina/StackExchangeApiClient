@@ -39,35 +39,75 @@ class Util
     /**
      * Sets the resource if exists.
      *
-     * @param array  $array    The array that contains the elements
-     * @param mixed  $resource The resource, it can be string, integer or whatever object
-     * @param string $key      The index of array
+     * @param string $resource The resource generally $json
+     * @param string $key      The index of resource
      *
-     * @return mixed
+     * @return string|int|null
      */
-    public static function setIfExists($array, $resource, $key)
+    public static function setIfExists($resource, $key)
     {
-        if (isset($array[$key]) === true) {
+        if (isset($resource[$key]) === true) {
             return $resource[$key];
+        }
+    }
+
+    /**
+     * Sets the array resource if exists.
+     *
+     * @param string $resource The resource generally $json
+     * @param string $key      The index of resource
+     *
+     * @return array (string|int)[]|array()
+     */
+    public static function setIfArrayExists($resource, $key)
+    {
+        if (self::setIfExists($resource, $key) !== null) {
+            $result = array();
+
+            foreach ($resource[$key] as $element) {
+                $result[] = $element;
+            }
+
+            return $result;
+        }
+
+        return array();
+    }
+
+    /**
+     * Sets the datetime resource if exists.
+     *
+     * @param string $resource The resource generally $json
+     * @param string $key      The index of resource
+     *
+     * @return \DateTime|null
+     */
+    public static function setIfDateTimeExists($resource, $key)
+    {
+        if (self::setIfExists($resource, $key) !== null) {
+            return new \DateTime('@' . $resource[$key]);
         }
     }
 
     /**
      * Checks if any string of the array is equal to the resource given.
      *
-     * @param string   $resource The resource
+     * @param string   $resource The resource generally $json
+     * @param string   $key      The index of resource
      * @param string[] $array    The array that contains the strings
      *
-     * @return bool
+     * @return string|null
      */
-    public static function isEqual($resource, $array)
+    public static function isEqual($resource, $key, $array)
     {
-        foreach ($array as $string) {
-            if ($resource === $string) {
-                return true;
+        if (self::setIfExists($resource, $key) !== null) {
+            foreach ($array as $string) {
+                if ($resource[$key] === $string) {
+                    return $string;
+                }
             }
         }
 
-        return false;
+        return null;
     }
 }

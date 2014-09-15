@@ -10,122 +10,76 @@
 
 namespace BenatEspina\StackExchangeApiClient\Model\Interfaces;
 
+use BenatEspina\StackExchangeApiClient\Model\Interfaces\Traits\AwardedBountyInterface;
+
 /**
  * Interface AnswerInterface.
  *
  * @package BenatEspina\StackExchangeApiClient\Model\Interfaces
  */
-interface AnswerInterface
+interface AnswerInterface extends AwardedBountyInterface
 {
     /**
-     * Sets owner.
+     * Sets accepted.
      *
-     * @param \BenatEspina\StackExchangeApiClient\Model\Interfaces\UserInterface $owner The owner
+     * @param boolean $accepted The accepted boolean
      *
-     * @return \BenatEspina\StackExchangeApiClient\Model\Interfaces\AnswerInterface
+     * @return $this self Object
      */
-    public function setOwner(UserInterface $owner);
+    public function setAccepted($accepted);
 
     /**
-     * Gets owner.
+     * Gets accepted.
      *
-     * @return \BenatEspina\StackExchangeApiClient\Model\Interfaces\UserInterface
+     * @return boolean
      */
-    public function getOwner();
+    public function hasAccepted();
 
     /**
-     * Sets accepted boolean.
+     * Sets can flag.
      *
-     * @param bool $isAccepted The isAccepted boolean
+     * @param boolean $canFlag The canFlag boolean
      *
-     * @return \BenatEspina\StackExchangeApiClient\Model\Interfaces\AnswerInterface
+     * @return $this self Object
      */
-    public function setAccepted($isAccepted);
+    public function setCanFlag($canFlag);
+
+    /**
+     * Gets can flag.
+     *
+     * @return boolean
+     */
+    public function isCanFlag();
+
+    /**
+     * Sets is accepted.
+     *
+     * @param boolean $isAccepted The isAccepted boolean
+     *
+     * @return $this self Object
+     */
+    public function setIsAccepted($isAccepted);
 
     /**
      * Gets is accepted.
      *
-     * @return bool
+     * @return boolean
      */
     public function isAccepted();
 
     /**
-     * Sets score.
+     * Sets the question id.
      *
-     * @param integer $score The score
+     * @param int $questionId The question id
      *
-     * @return \BenatEspina\StackExchangeApiClient\Model\Interfaces\AnswerInterface
-     */
-    public function setScore($score);
-
-    /**
-     * Gets score.
-     *
-     * @return integer
-     */
-    public function getScore();
-
-    /**
-     * Sets last activity date.
-     *
-     * @param \DateTime $lastActivityDate The lastActivityDate
-     *
-     * @return \BenatEspina\StackExchangeApiClient\Model\Interfaces\AnswerInterface
-     */
-    public function setLastActivityDate(\DateTime $lastActivityDate);
-
-    /**
-     * Gets last activity date.
-     *
-     * @return \DateTime
-     */
-    public function getLastActivityDate();
-
-    /**
-     * Sets creation date.
-     *
-     * @param \DateTime $creationDate The creationDate
-     *
-     * @return \BenatEspina\StackExchangeApiClient\Model\Interfaces\AnswerInterface
-     */
-    public function setCreationDate(\DateTime $creationDate);
-
-    /**
-     * Gets creation date.
-     *
-     * @return \DateTime
-     */
-    public function getCreationDate();
-
-    /**
-     * Sets id.
-     *
-     * @param integer $answerId The id
-     *
-     * @return \BenatEspina\StackExchangeApiClient\Model\Interfaces\AnswerInterface
-     */
-    public function setAnswerId($answerId);
-
-    /**
-     * Gets id.
-     *
-     * @return integer
-     */
-    public function getAnswerId();
-
-    /**
-     * Sets question id.
-     *
-     * @param integer $questionId The id
-     *
-     * @return \BenatEspina\StackExchangeApiClient\Model\Interfaces\AnswerInterface
+     * @return $this self Object
      */
     public function setQuestionId($questionId);
 
     /**
-     * Gets question id.
+     * Gets the question id.
      *
-     * @return integer
+     * @return int
      */
     public function getQuestionId();
 }
