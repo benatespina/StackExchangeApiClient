@@ -90,7 +90,7 @@ trait MigrateTrait
     /**
      * Loads the variables if the data exist into resource. It works like a constructor.
      *
-     * @param mixed[] $resource The resource
+     * @param null|(int|string)[] $resource The resource
      *
      * @return void
      */

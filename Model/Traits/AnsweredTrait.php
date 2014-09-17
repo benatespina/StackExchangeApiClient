@@ -20,77 +20,45 @@ use BenatEspina\StackExchangeApiClient\Util\Util;
 trait AnsweredTrait
 {
     /**
-     * Accepted answer id.
+     * Boolean that shows if question is answered or not.
      *
-     * @var int|null
+     * @var boolean
      */
-    protected $acceptedAnswerId;
+    protected $isAnswered;
 
     /**
-     * Number of answers.
+     * Sets is answered.
      *
-     * @var int
-     */
-    protected $answerCount;
-
-    /**
-     * Sets accepted answer id.
-     *
-     * @param int|null $acceptedAnswerId The accepted answer id
+     * @param boolean|null $isAnswered The isAnswered boolean
      *
      * @return $this self Object
      */
-    public function setAcceptedAnswerId($acceptedAnswerId)
+    public function setIsAnswered($isAnswered)
     {
-        $this->acceptedAnswerId = $acceptedAnswerId;
+        $this->isAnswered = $isAnswered;
 
         return $this;
     }
 
     /**
-     * Gets accepted answer id.
+     * Gets is answered.
      *
-     * @return int|null
+     * @return boolean|null
      */
-    public function getAcceptedAnswerId()
+    public function isAnswered()
     {
-        return $this->acceptedAnswerId;
-    }
-
-    /**
-     * Sets number of answers.
-     *
-     * @param int $answerCount The number of answers
-     *
-     * @return $this self Object
-     */
-    public function setAnswerCount($answerCount)
-    {
-        $this->answerCount = $answerCount;
-
-        return $this;
-    }
-
-    /**
-     * Gets number of answers.
-     *
-     * @return int
-     */
-    public function getAnswerCount()
-    {
-        return $this->answerCount;
+        return $this->isAnswered;
     }
 
     /**
      * Loads the variables if the data exist into resource. It works like a constructor.
      *
-     * @param mixed[] $resource The resource
+     * @param null|(int|string)[] $resource The resource
      *
      * @return void
      */
     protected function loadAnswered($resource)
     {
-        $this->acceptedAnswerId = Util::setIfExists($resource, 'accepted_answer_id');
-        $this->answerCount = Util::setIfExists($resource, 'answer_count');
+        $this->isAnswered = Util::setIfExists($resource, 'is_answered');
     }
 }
