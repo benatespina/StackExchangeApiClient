@@ -8,7 +8,7 @@
  * @license MIT
  */
 
-namespace spec\Benatespina\StackExchangeApiClient;
+namespace spec\BenatEspina\StackExchangeApiClient;
 
 use BenatEspina\StackExchangeApiClient\Exception\RequestException;
 use PhpSpec\ObjectBehavior;

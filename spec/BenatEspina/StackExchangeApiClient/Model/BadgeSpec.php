@@ -8,7 +8,7 @@
  * @license MIT
  */
 
-namespace spec\Benatespina\StackExchangeApiClient\Model;
+namespace spec\BenatEspina\StackExchangeApiClient\Model;
 
 use BenatEspina\StackExchangeApiClient\Model\Interfaces\UserInterface;
 use PhpSpec\ObjectBehavior;
@@ -25,11 +25,6 @@ class BadgeSpec extends ObjectBehavior
         $this->shouldHaveType('BenatEspina\StackExchangeApiClient\Model\Badge');
     }
 
-    function it_extends_base_abstract_model()
-    {
-        $this->shouldHaveType('BenatEspina\StackExchangeApiClient\Model\Abstracts\BaseAbstractModel');
-    }
-
     function it_implements_user_interface()
     {
         $this->shouldImplement('BenatEspina\StackExchangeApiClient\Model\Interfaces\BadgeInterface');
@@ -41,11 +36,11 @@ class BadgeSpec extends ObjectBehavior
         $this->getAwardCount()->shouldReturn(2000);
     }
 
-    function its_badge_id_is_mutable()
-    {
-        $this->setBadgeId('badge-id')->shouldReturn($this);
-        $this->getBadgeId()->shouldReturn('badge-id');
-    }
+//    function its_badge_id_is_mutable()
+//    {
+//        $this->setId(25669772)->shouldReturn($this);
+//        $this->getId()->shouldReturn(25669772);
+//    }
 
     function its_badge_type_is_mutable()
     {
@@ -57,6 +52,12 @@ class BadgeSpec extends ObjectBehavior
     {
         $this->setDescription('badge-description')->shouldReturn($this);
         $this->getDescription()->shouldReturn('badge-description');
+    }
+
+    function its_link_is_mutable()
+    {
+        $this->setLink('http://link-url.com')->shouldReturn($this);
+        $this->getLink()->shouldReturn('http://link-url.com');
     }
 
     function its_name_is_mutable()
@@ -75,11 +76,5 @@ class BadgeSpec extends ObjectBehavior
     {
         $this->setUser($user)->shouldReturn($this);
         $this->getUser()->shouldReturn($user);
-    }
-
-    function its_link_is_mutable()
-    {
-        $this->setLink('http://link-url.com')->shouldReturn($this);
-        $this->getLink()->shouldReturn('http://link-url.com');
     }
 }

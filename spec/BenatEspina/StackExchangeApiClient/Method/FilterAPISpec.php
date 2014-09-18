@@ -8,7 +8,7 @@
  * @license MIT
  */
 
-namespace spec\Benatespina\StackExchangeApiClient\Method;
+namespace spec\BenatEspina\StackExchangeApiClient\Method;
 
 use BenatEspina\StackExchangeApiClient\Client;
 use PhpSpec\ObjectBehavior;
