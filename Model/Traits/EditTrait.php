@@ -44,6 +44,8 @@ trait EditTrait
     public function setLastEditDate($lastEditDate)
     {
         $this->lastEditDate = $lastEditDate;
+        
+        return $this;
     }
 
     /**
@@ -66,6 +68,8 @@ trait EditTrait
     public function setLastEditor($lastEditor)
     {
         $this->lastEditor = $lastEditor;
+        
+        return $this;
     }
 
     /**

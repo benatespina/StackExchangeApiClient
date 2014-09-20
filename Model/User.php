@@ -11,90 +11,145 @@
 namespace BenatEspina\StackExchangeApiClient\Model;
 
 use BenatEspina\StackExchangeApiClient\Model\Interfaces\UserInterface;
+use BenatEspina\StackExchangeApiClient\Model\Traits\ReputationChangeTrait;
+use BenatEspina\StackExchangeApiClient\Model\Traits\VoteCountTrait;
+use BenatEspina\StackExchangeApiClient\Util\Util;
 
 /**
  * Class User.
  *
  * @package BenatEspina\StackExchangeApiClient\Model
  */
-class User implements UserInterface
+class User extends ShallowUser implements UserInterface
 {
-    /**
-     * User id.
-     *
-     * @var integer
-     */
-    protected $userId;
+    use 
+        ReputationChangeTrait,
+        VoteCountTrait;
 
     /**
-     * Reputation.
+     * About me.
      *
-     * @var integer
+     * @var string|null
      */
-    protected $reputation;
+    protected $aboutMe;
 
     /**
-     * User type.
+     * Account id.
      *
-     * @var string
+     * @var int
      */
-    protected $userType;
+    protected $accountId;
 
     /**
-     * Accept rate.
+     * Age.
      *
-     * @var integer
+     * @var int|null
      */
-    protected $acceptRate;
+    protected $age;
 
     /**
-     * Url of profile image.
+     * Answer count.
      *
-     * @var string
+     * @var int
      */
-    protected $profileImage;
+    protected $answerCount;
 
     /**
-     * Name that is displayed in the site.
+     * Creation date.
      *
-     * @var string
+     * @var \DateTime
      */
-    protected $displayName;
+    protected $creationDate;
 
     /**
-     * Url of user profile.
+     * Boolean that shows if user is employee or not.
      *
-     * @var string
+     * @var bool
      */
-    protected $link;
+    protected $isEmployee;
+
+    /**
+     * Last access date.
+     *
+     * @var \DateTime
+     */
+    protected $lastAccessDate;
+
+    /**
+     * Last modified date.
+     *
+     * @var \DateTime|null
+     */
+    protected $lastModifiedDate;
+
+    /**
+     * Location.
+     *
+     * @var string|null
+     */
+    protected $location;
+
+    /**
+     * Number of questions.
+     *
+     * @var int
+     */
+    protected $questionCount;
+
+    /**
+     * Time penalty date.
+     *
+     * @var \DateTime|null
+     */
+    protected $timedPenaltyDate;
+
+    /**
+     * Number of visits.
+     *
+     * @var int
+     */
+    protected $viewCount;
+
+    /**
+     * Personal website url.
+     *
+     * @var string|null
+     */
+    protected $websiteUrl;
 
     /**
      * Constructor.
      *
-     * @param null|array $json The json string being decoded
+     * @param null|(int|string)[] $json The json string being decoded
      */
     public function __construct($json = null)
     {
-        if ($json !== null) {
-            $this->userId = $json['user_id'];
-            $this->reputation = $json['reputation'];
-            $this->userType = $json['user_type'];
-            $this->profileImage = $json['profile_image'];
-            $this->displayName = $json['display_name'];
-            $this->link = $json['link'];
+        parent::__construct($json);
 
-            if (isset($json['accept_rate']) === true) {
-                $this->acceptRate = $json['accept_rate'];
-            }
-        }
+        $this->loadReputationChange($json);
+        $this->loadVoteCount($json);
+
+        $this->aboutMe = Util::setIfExists($json, 'about_me');
+        $this->accountId = Util::setIfExists($json, 'account_id');
+        $this->age = Util::setIfExists($json, 'age');
+        $this->answerCount = Util::setIfExists($json, 'answer_count');
+        $this->creationDate = Util::setIfDateTimeExists($json, 'creation_date');
+        $this->isEmployee = Util::setIfExists($json, $this->isEmployee, 'is_employee');
+        $this->lastAccessDate = Util::setIfDateTimeExists($json, 'last_access_date');
+        $this->lastModifiedDate = Util::setIfExists($json, 'last_modified_date');
+        $this->location = Util::setIfExists($json, 'location');
+        $this->questionCount = Util::setIfExists($json, 'question_count');
+        $this->timedPenaltyDate = Util::setIfDateTimeExists($json, 'timed_penalty_date');
+        $this->viewCount = Util::setIfExists($json, 'view_count');
+        $this->websiteUrl = Util::setIfExists($json, 'website_url');
     }
 
     /**
      * {@inheritdoc}
      */
-    public function setUserId($userId)
+    public function setAboutMe($aboutMe)
     {
-        $this->userId = $userId;
+        $this->aboutMe = $aboutMe;
 
         return $this;
     }
@@ -102,17 +157,17 @@ class User implements UserInterface
     /**
      * {@inheritdoc}
      */
-    public function getUserId()
+    public function getAboutMe()
     {
-        return $this->userId;
+        return $this->aboutMe;
     }
 
     /**
      * {@inheritdoc}
      */
-    public function setReputation($reputation)
+    public function setAccountId($accountId)
     {
-        $this->reputation = $reputation;
+        $this->accountId = $accountId;
 
         return $this;
     }
@@ -120,17 +175,17 @@ class User implements UserInterface
     /**
      * {@inheritdoc}
      */
-    public function getReputation()
+    public function getAccountId()
     {
-        return $this->reputation;
+        return $this->accountId;
     }
 
     /**
      * {@inheritdoc}
      */
-    public function setUserType($userType)
+    public function setAge($age)
     {
-        $this->userType = $userType;
+        $this->age = $age;
 
         return $this;
     }
@@ -138,17 +193,17 @@ class User implements UserInterface
     /**
      * {@inheritdoc}
      */
-    public function getUserType()
+    public function getAge()
     {
-        return $this->userType;
+        return $this->age;
     }
 
     /**
      * {@inheritdoc}
      */
-    public function setAcceptRate($acceptRate)
+    public function setAnswerCount($answerCount)
     {
-        $this->acceptRate = $acceptRate;
+        $this->answerCount = $answerCount;
 
         return $this;
     }
@@ -156,17 +211,17 @@ class User implements UserInterface
     /**
      * {@inheritdoc}
      */
-    public function getAcceptRate()
+    public function getAnswerCount()
     {
-        return $this->acceptRate;
+        return $this->answerCount;
     }
 
     /**
      * {@inheritdoc}
      */
-    public function setProfileImage($profileImage)
+    public function setCreationDate(\DateTime $creationDate)
     {
-        $this->profileImage = $profileImage;
+        $this->creationDate = $creationDate;
 
         return $this;
     }
@@ -174,17 +229,17 @@ class User implements UserInterface
     /**
      * {@inheritdoc}
      */
-    public function getProfileImage()
+    public function getCreationDate()
     {
-        return $this->profileImage;
+        return $this->creationDate;
     }
 
     /**
      * {@inheritdoc}
      */
-    public function setDisplayName($displayName)
+    public function setIsEmployee($isEmployee)
     {
-        $this->displayName = $displayName;
+        $this->isEmployee = $isEmployee;
 
         return $this;
     }
@@ -192,17 +247,17 @@ class User implements UserInterface
     /**
      * {@inheritdoc}
      */
-    public function getDisplayName()
+    public function isEmployee()
     {
-        return $this->displayName;
+        return $this->isEmployee;
     }
 
     /**
      * {@inheritdoc}
      */
-    public function setLink($link)
+    public function setLastAccessDate(\DateTime $lastAccessDate)
     {
-        $this->link = $link;
+        $this->lastAccessDate = $lastAccessDate;
 
         return $this;
     }
@@ -210,8 +265,116 @@ class User implements UserInterface
     /**
      * {@inheritdoc}
      */
-    public function getLink()
+    public function getLastAccessDate()
     {
-        return $this->link;
+        return $this->lastAccessDate;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setLastModifiedDate($lastModifiedDate)
+    {
+        $this->lastModifiedDate = $lastModifiedDate;
+
+        return $this;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getLastModifiedDate()
+    {
+        return $this->lastModifiedDate;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setLocation($location)
+    {
+        $this->location = $location;
+
+        return $this;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getLocation()
+    {
+        return $this->location;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setQuestionCount($questionCount)
+    {
+        $this->questionCount = $questionCount;
+
+        return $this;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getQuestionCount()
+    {
+        return $this->questionCount;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setTimedPenaltyDate($timedPenaltyDate)
+    {
+        $this->timedPenaltyDate = $timedPenaltyDate;
+
+        return $this;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getTimedPenaltyDate()
+    {
+        return $this->timedPenaltyDate;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setViewCount($viewCount)
+    {
+        $this->viewCount = $viewCount;
+
+        return $this;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getViewCount()
+    {
+        return $this->viewCount;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setWebsiteUrl($websiteUrl)
+    {
+        $this->websiteUrl = $websiteUrl;
+
+        return $this;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getWebsiteUrl()
+    {
+        return $this->websiteUrl;
     }
 }

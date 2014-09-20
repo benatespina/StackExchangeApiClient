@@ -26,14 +26,14 @@ trait TopTrait
      *
      * @var array<\BenatEspina\StackExchangeApiClient\Model\Interfaces\NetworkPostInterface>
      */
-    protected $topAnswers;
+    protected $topAnswers = array();
 
     /**
      * Top questions.
      *
      * @var array<\BenatEspina\StackExchangeApiClient\Model\Interfaces\NetworkPostInterface>
      */
-    protected $topQuestions;
+    protected $topQuestions = array();
 
     /**
      * Adds top answer.

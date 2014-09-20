@@ -110,4 +110,24 @@ class Util
 
         return null;
     }
+
+    /**
+     * Checks if any string of the array is equal to the element given.
+     * It is quite similar than isEqual, but this one checks a string, not a resource into json.
+     *
+     * @param string   $element The element that is a string
+     * @param string[] $array   The array that contains the strings
+     *
+     * @return boolean
+     */
+    public static function coincidesElement($element, $array)
+    {
+        foreach ($array as $string) {
+            if ($string === $element) {
+                return true;
+            }
+        }
+
+        return false;
+    }
 }

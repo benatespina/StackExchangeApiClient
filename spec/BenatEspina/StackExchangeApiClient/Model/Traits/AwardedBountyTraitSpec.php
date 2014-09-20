@@ -18,7 +18,7 @@ use PhpSpec\ObjectBehavior;
  *
  * @package spec\Benatespina\StackExchangeApiClient\Model\Traits
  */
-class AwardedBountySpec extends ObjectBehavior
+class AwardedBountyTraitSpec extends ObjectBehavior
 {
     function let()
     {

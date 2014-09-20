@@ -18,34 +18,18 @@ namespace BenatEspina\StackExchangeApiClient\Model\Interfaces\Traits;
 interface AnsweredInterface
 {
     /**
-     * Sets accepted answer id.
+     * Sets is answered.
      *
-     * @param int|null $acceptedAnswerId The accepted answer id
-     *
-     * @return $this self Object
-     */
-    public function setAcceptedAnswerId($acceptedAnswerId);
-
-    /**
-     * Gets accepted answer id.
-     *
-     * @return int|null
-     */
-    public function getAcceptedAnswerId();
-
-    /**
-     * Sets number of answers.
-     *
-     * @param int $answerCount The number of answers
+     * @param boolean|null $isAnswered The isAnswered boolean
      *
      * @return $this self Object
      */
-    public function setAnswerCount($answerCount);
+    public function setIsAnswered($isAnswered);
 
     /**
-     * Gets number of answers.
+     * Gets is answered.
      *
-     * @return int
+     * @return boolean|null
      */
-    public function getAnswerCount();
+    public function isAnswered();
 }

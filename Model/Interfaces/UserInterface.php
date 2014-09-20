@@ -10,122 +10,220 @@
 
 namespace BenatEspina\StackExchangeApiClient\Model\Interfaces;
 
+use BenatEspina\StackExchangeApiClient\Model\Interfaces\Traits\VoteCountInterface;
+
 /**
  * Interface UserInterface.
  *
  * @package BenatEspina\StackExchangeApiClient\Model\Interfaces
  */
-interface UserInterface
+interface UserInterface extends ShallowUserInterface, ReputationChangeInterface, VoteCountInterface
 {
     /**
-     * Sets id.
+     * Sets about me.
      *
-     * @param integer $userId The id
+     * @param string|null $aboutMe The about me
      *
-     * @return \BenatEspina\StackExchangeApiClient\Model\Interfaces\UserInterface
+     * @return $this self Object
      */
-    public function setUserId($userId);
+    public function setAboutMe($aboutMe);
 
     /**
-     * Gets id.
+     * Gets about me.
      *
-     * @return integer
+     * @return string|null
      */
-    public function getUserId();
+    public function getAboutMe();
 
     /**
-     * Sets reputation.
+     * Sets account id.
      *
-     * @param integer $reputation The reputation
+     * @param int $accountId The account id
      *
-     * @return \BenatEspina\StackExchangeApiClient\Model\Interfaces\UserInterface
+     * @return $this self Object
      */
-    public function setReputation($reputation);
+    public function setAccountId($accountId);
 
     /**
-     * Gets reputation.
+     * Gets account id.
      *
-     * @return integer
+     * @return int
      */
-    public function getReputation();
+    public function getAccountId();
 
     /**
-     * Sets user type.
+     * Sets age.
      *
-     * @param string $userType The userType
+     * @param int|null $age The age
      *
-     * @return \BenatEspina\StackExchangeApiClient\Model\Interfaces\UserInterface
+     * @return $this self Object
      */
-    public function setUserType($userType);
+    public function setAge($age);
 
     /**
-     * Gets user type.
+     * Gets age.
      *
-     * @return string
+     * @return int|null
      */
-    public function getUserType();
+    public function getAge();
 
     /**
-     * Sets accept rate.
+     * Sets number of answers.
      *
-     * @param integer $acceptRate The acceptRate
+     * @param int $answerCount The number of answers
      *
-     * @return \BenatEspina\StackExchangeApiClient\Model\Interfaces\UserInterface
+     * @return $this self Object
      */
-    public function setAcceptRate($acceptRate);
+    public function setAnswerCount($answerCount);
 
     /**
-     * Gets accept rate.
+     * Gets number of answers.
      *
-     * @return integer
+     * @return int
      */
-    public function getAcceptRate();
+    public function getAnswerCount();
 
     /**
-     * Sets profile image.
+     * Sets creation date.
      *
-     * @param string $profileImage The profileImage
+     * @param \DateTime $creationDate The creation date
      *
-     * @return \BenatEspina\StackExchangeApiClient\Model\Interfaces\UserInterface
+     * @return $this self Object
      */
-    public function setProfileImage($profileImage);
+    public function setCreationDate(\DateTime $creationDate);
 
     /**
-     * Gets profile image.
+     * Gets creation date.
      *
-     * @return string
+     * @return \DateTime
      */
-    public function getProfileImage();
+    public function getCreationDate();
 
     /**
-     * Sets display name.
+     * Sets is employee.
      *
-     * @param string $displayName The displayName
+     * @param boolean $isEmployee The isEmployee boolean
      *
-     * @return \BenatEspina\StackExchangeApiClient\Model\Interfaces\UserInterface
+     * @return $this self Object
      */
-    public function setDisplayName($displayName);
+    public function setIsEmployee($isEmployee);
 
     /**
-     * Gets display name.
+     * Gets is employee.
      *
-     * @return string
+     * @return boolean
      */
-    public function getDisplayName();
+    public function isEmployee();
 
     /**
-     * Sets link.
+     * Sets last access date.
      *
-     * @param string $link The link
+     * @param \DateTime $lastAccessDate The last access date
      *
-     * @return \BenatEspina\StackExchangeApiClient\Model\Interfaces\UserInterface
+     * @return $this self Object
      */
-    public function setLink($link);
+    public function setLastAccessDate(\DateTime $lastAccessDate);
 
     /**
-     * Gets link.
+     * Gets last access date.
      *
-     * @return string
+     * @return \DateTime
      */
-    public function getLink();
+    public function getLastAccessDate();
+
+    /**
+     * Sets last modified date.
+     *
+     * @param \DateTime|null $lastModifiedDate The last modified date
+     *
+     * @return $this self Object
+     */
+    public function setLastModifiedDate($lastModifiedDate);
+
+    /**
+     * Gets last modified date.
+     *
+     * @return \DateTime|null
+     */
+    public function getLastModifiedDate();
+
+    /**
+     * Sets location.
+     *
+     * @param string|null $location The location
+     *
+     * @return $this self Object
+     */
+    public function setLocation($location);
+
+    /**
+     * Gets location.
+     *
+     * @return string|null
+     */
+    public function getLocation();
+
+    /**
+     * Sets question id.
+     *
+     * @param int $questionCount The question id
+     *
+     * @return $this self Object
+     */
+    public function setQuestionCount($questionCount);
+
+    /**
+     * Gets question id.
+     *
+     * @return int
+     */
+    public function getQuestionCount();
+
+    /**
+     * Sets timed penalty date.
+     *
+     * @param \DateTime|null $timedPenaltyDate The time penalty date
+     *
+     * @return $this self Object
+     */
+    public function setTimedPenaltyDate($timedPenaltyDate);
+
+    /**
+     * Gets timed penalty date.
+     *
+     * @return \DateTime|null
+     */
+    public function getTimedPenaltyDate();
+
+    /**
+     * Sets number of views.
+     *
+     * @param int $viewCount The number of views
+     *
+     * @return $this self Object
+     */
+    public function setViewCount($viewCount);
+
+    /**
+     * Gets number of views.
+     *
+     * @return int
+     */
+    public function getViewCount();
+
+    /**
+     * Sets website url.
+     *
+     * @param string|null $websiteUrl The website url
+     *
+     * @return $this self Object
+     */
+    public function setWebsiteUrl($websiteUrl);
+
+    /**
+     * Gets website url.
+     *
+     * @return string|null
+     */
+    public function getWebsiteUrl();
 }

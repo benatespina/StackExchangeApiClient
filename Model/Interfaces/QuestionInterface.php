@@ -11,6 +11,7 @@
 namespace BenatEspina\StackExchangeApiClient\Model\Interfaces;
 
 use BenatEspina\StackExchangeApiClient\Model\Interfaces\Traits\AnsweredInterface;
+use BenatEspina\StackExchangeApiClient\Model\Interfaces\Traits\AnswerInterface as AnswerTrait;
 use BenatEspina\StackExchangeApiClient\Model\Interfaces\Traits\BountyInterface;
 use BenatEspina\StackExchangeApiClient\Model\Interfaces\Traits\CloseInterface;
 use BenatEspina\StackExchangeApiClient\Model\Interfaces\Traits\CommentCountInterface;
@@ -25,6 +26,7 @@ use BenatEspina\StackExchangeApiClient\Model\Interfaces\Traits\VoteCountInterfac
  * @package BenatEspina\StackExchangeApiClient\Model\Interfaces
  */
 interface QuestionInterface extends
+    AnswerTrait,
     AnsweredInterface,
     BountyInterface,
     CommentCountInterface,
@@ -90,22 +92,6 @@ interface QuestionInterface extends
      * @return int
      */
     public function getDeleteVoteCount();
-
-    /**
-     * Sets is answered.
-     *
-     * @param boolean $isAnswered The isAnswered boolean
-     *
-     * @return $this self Object
-     */
-    public function setAnswered($isAnswered);
-
-    /**
-     * Gets is answered.
-     *
-     * @return boolean
-     */
-    public function isAnswered();
 
     /**
      * Sets notice.

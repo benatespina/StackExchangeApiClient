@@ -13,11 +13,11 @@ namespace spec\BenatEspina\StackExchangeApiClient\Model\Traits;
 use PhpSpec\ObjectBehavior;
 
 /**
- * Class AnswerSpec.
+ * Class AnswerTraitSpec.
  *
  * @package spec\Benatespina\StackExchangeApiClient\Model\Traits
  */
-class AnswerSpec extends ObjectBehavior
+class AnswerTraitSpec extends ObjectBehavior
 {
     function let()
     {

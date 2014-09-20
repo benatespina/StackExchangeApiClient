@@ -63,6 +63,8 @@ abstract class AnswerQuestionAbstract extends AnswerPostQuestionAbstract
     public function setCommunityOwnedDate($communityOwnedDate)
     {
         $this->communityOwnedDate = $communityOwnedDate;
+        
+        return $this;
     }
 
     /**
@@ -85,6 +87,8 @@ abstract class AnswerQuestionAbstract extends AnswerPostQuestionAbstract
     public function setLockedDate($lockedDate)
     {
         $this->lockedDate = $lockedDate;
+        
+        return $this;
     }
 
     /**

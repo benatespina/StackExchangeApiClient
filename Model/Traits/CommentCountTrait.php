@@ -33,7 +33,7 @@ trait CommentCountTrait
      *
      * @var array<\BenatEspina\StackExchangeApiClient\Model\Interfaces\CommentInterface>|null
      */
-    protected $comments;
+    protected $comments = array();
 
     /**
      * Sets number of comments.

@@ -22,7 +22,7 @@ interface BadgeInterface
      *
      * @param integer $awardCount The award count
      *
-     * @return \BenatEspina\StackExchangeApiClient\Model\Interfaces\BadgeInterface
+     * @return $this self Object
      */
     public function setAwardCount($awardCount);
 
@@ -34,27 +34,11 @@ interface BadgeInterface
     public function getAwardCount();
 
     /**
-     * Sets badge id.
-     *
-     * @param integer $badgeId The badge id
-     *
-     * @return \BenatEspina\StackExchangeApiClient\Model\Interfaces\BadgeInterface
-     */
-    public function setBadgeId($badgeId);
-
-    /**
-     * Gets badge id.
-     *
-     * @return integer
-     */
-    public function getBadgeId();
-
-    /**
      * Sets badge type.
      *
      * @param string $badgeType The badge type, it can be 'named' or 'tag_based'
      *
-     * @return \BenatEspina\StackExchangeApiClient\Model\Interfaces\BadgeInterface
+     * @return $this self Object
      */
     public function setBadgeType($badgeType);
 
@@ -70,7 +54,7 @@ interface BadgeInterface
      *
      * @param string $description The description
      *
-     * @return string
+     * @return $this self Object
      */
     public function setDescription($description);
 
@@ -86,7 +70,7 @@ interface BadgeInterface
      *
      * @param string $link The link
      *
-     * @return string
+     * @return $this self Object
      */
     public function setLink($link);
 
@@ -102,7 +86,7 @@ interface BadgeInterface
      *
      * @param string $name The name
      *
-     * @return \BenatEspina\StackExchangeApiClient\Model\Interfaces\BadgeInterface
+     * @return $this self Object
      */
     public function setName($name);
 
@@ -118,7 +102,7 @@ interface BadgeInterface
      *
      * @param string $rank The rank, it can be, 'gold', 'silver' or 'bronze'
      *
-     * @return mixed
+     * @return $this self Object
      */
     public function setRank($rank);
 
@@ -134,7 +118,7 @@ interface BadgeInterface
      *
      * @param \BenatEspina\StackExchangeApiClient\Model\Interfaces\ShallowUserInterface|null $user The shallow user
      *
-     * @return \BenatEspina\StackExchangeApiClient\Model\Interfaces\BadgeInterface
+     * @return $this self Object
      */
     public function setUser(ShallowUserInterface $user);
 

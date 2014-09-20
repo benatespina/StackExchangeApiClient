@@ -10,6 +10,7 @@
 
 namespace BenatEspina\StackExchangeApiClient\Model;
 
+use BenatEspina\StackExchangeApiClient\Model\Abstracts\BaseAbstract as BaseBadge;
 use BenatEspina\StackExchangeApiClient\Model\Interfaces\BadgeInterface;
 use BenatEspina\StackExchangeApiClient\Model\Interfaces\ShallowUserInterface;
 use BenatEspina\StackExchangeApiClient\Util\Util;
@@ -19,7 +20,7 @@ use BenatEspina\StackExchangeApiClient\Util\Util;
  *
  * @package BenatEspina\StackExchangeApiClient\Model
  */
-class Badge implements BadgeInterface
+class Badge extends BaseBadge implements BadgeInterface
 {
     const BADGE_TYPE_NAMED = 'named';
     const BADGE_TYPE_TAG_BASED = 'tag_based';
@@ -31,16 +32,9 @@ class Badge implements BadgeInterface
     /**
      * The award count.
      *
-     * @var integer
+     * @var int
      */
     protected $awardCount;
-
-    /**
-     * The badge id.
-     *
-     * @var integer
-     */
-    protected $badgeId;
 
     /**
      * The badge type that can be 'named' or 'tag_based'.
@@ -78,7 +72,7 @@ class Badge implements BadgeInterface
     protected $rank;
 
     /**
-     * User object.
+     * The user.
      *
      * @var \BenatEspina\StackExchangeApiClient\Model\Interfaces\ShallowUserInterface|null
      */
@@ -87,24 +81,23 @@ class Badge implements BadgeInterface
     /**
      * Constructor.
      *
-     * @param null|(int|string|ShallowUserInterface)[] $json The json string being decoded
+     * @param null|(int|string)[] $json The json string being decoded
      */
     public function __construct($json = null)
     {
-        if ($json !== null) {
-            $this->awardCount = Util::setIfExists($json, $this->awardCount, 'award_count');
-            $this->badgeId = Util::setIfExists($json, $this->badgeId, 'badge_id');
-            $this->description = Util::setIfExists($json, $this->description, 'description');
-            $this->link = Util::setIfExists($json, $this->link, 'link');
-            $this->name = Util::setIfExists($json, $this->name, 'name');
-            $this->badgeType = Util::isEqual(
-                $json['badge_type'], array(self::BADGE_TYPE_NAMED, self::BADGE_TYPE_TAG_BASED)
-            );
-            $this->rank = Util::isEqual(
-                $json['rank'], array(self::RANK_GOLD, self::RANK_BRONZE, self::RANK_SILVER)
-            );
-            $this->user = new ShallowUser(Util::setIfExists($json, $this->user, 'user'));
-        }
+        $this->id = Util::setIfExists($json, 'badge_id');
+
+        $this->awardCount = Util::setIfExists($json, 'award_count');
+        $this->description = Util::setIfExists($json, 'description');
+        $this->name = Util::setIfExists($json, 'name');
+        $this->badgeType = Util::isEqual(
+            $json, 'badge_type', array(self::BADGE_TYPE_NAMED, self::BADGE_TYPE_TAG_BASED)
+        );
+        $this->link = Util::setIfExists($json, 'link');
+        $this->rank = Util::isEqual(
+            $json, 'rank', array(self::RANK_GOLD, self::RANK_BRONZE, self::RANK_SILVER)
+        );
+        $this->user = new ShallowUser(Util::setIfExists($json, 'user'));
     }
 
     /**
@@ -123,24 +116,6 @@ class Badge implements BadgeInterface
     public function getAwardCount()
     {
         return $this->awardCount;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function setBadgeId($badgeId)
-    {
-        $this->badgeId = $badgeId;
-
-        return $this;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getBadgeId()
-    {
-        return $this->badgeId;
     }
 
     /**

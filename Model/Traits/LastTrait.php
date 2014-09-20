@@ -29,9 +29,9 @@ trait LastTrait
     /**
      * Array that contains the last tags.
      *
-     * @var string|null
+     * @var string[]|null
      */
-    protected $lastTags;
+    protected $lastTags = array();
 
     /**
      * The last title.
@@ -136,7 +136,7 @@ trait LastTrait
     protected function loadLast($resource)
     {
         $this->lastBody = Util::setIfExists($resource, 'last_body');
-        $this->lastTags = Util::setIfExists($resource, 'last_tags');
+        $this->lastTags = Util::setIfArrayExists($resource, 'last_tags');
         $this->lastTitle = Util::setIfExists($resource, 'last_title');
     }
 }

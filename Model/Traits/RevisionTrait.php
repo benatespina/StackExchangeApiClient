@@ -98,7 +98,9 @@ trait RevisionTrait
      */
     public function setRevisionType($revisionType)
     {
-        $this->revisionType = $revisionType;
+        if (Util::coincidesElement($revisionType, array('single_user','vote_based'))) {
+            $this->revisionType = $revisionType;
+        }
 
         return $this;
     }

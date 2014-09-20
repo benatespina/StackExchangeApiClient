@@ -11,23 +11,23 @@
 namespace BenatEspina\StackExchangeApiClient\Model\Interfaces;
 
 /**
- * Interface FilterInterface
+ * Interface FilterInterface.
  *
  * @package BenatEspina\StackExchangeApiClient\Model\Interfaces
  */
 interface FilterInterface
 {
     /**
-     * Sets filter id.
+     * Sets filter.
      *
-     * @param string $filter The filter id
+     * @param string $filter The filter
      *
      * @return \BenatEspina\StackExchangeApiClient\Model\Interfaces\FilterInterface
      */
     public function setFilter($filter);
 
     /**
-     * Gets filter id.
+     * Gets filter.
      *
      * @return string
      */

@@ -20,12 +20,12 @@ use BenatEspina\StackExchangeApiClient\Util\Util;
  */
 class Filter implements FilterInterface
 {
+    const FILTER_TYPE_INVALID = 'invalid';
     const FILTER_TYPE_SAFE = 'safe';
     const FILTER_TYPE_UNSAFE = 'unsafe';
-    const FILTER_TYPE_INVALID = 'invalid';
 
     /**
-     * The filter id.
+     * The filter.
      *
      * @var string
      */
@@ -48,24 +48,15 @@ class Filter implements FilterInterface
     /**
      * Constructor.
      *
-     * @param null|array $json The json string being decoded
+     * @param null|(int|string)[] $json The json string being decoded
      */
     public function __construct($json = null)
     {
-        $this->includedFields = array();
-
-        if ($json !== null) {
-            if ($json['filter_type'] === self::FILTER_TYPE_SAFE
-                || $json['filter_type'] === self::FILTER_TYPE_UNSAFE
-                || $json['filter_type'] === self::FILTER_TYPE_INVALID
-            ) {
-                $this->filter = $json['filter'];
-                $this->filterType = $json['filter_type'];
-                foreach ($json['included_fields'] as $includedFields) {
-                    $this->includedFields[] = $includedFields;
-                }
-            }
-        }
+        $this->filter = Util::setIfExists($json, 'filter');
+        $this->filterType = Util::isEqual(
+            $json, 'filter_type', array(self::FILTER_TYPE_INVALID, self::FILTER_TYPE_SAFE, self::FILTER_TYPE_UNSAFE)
+        );
+        $this->includedFields = Util::setIfArrayExists($json, 'included_fields');
     }
 
     /**

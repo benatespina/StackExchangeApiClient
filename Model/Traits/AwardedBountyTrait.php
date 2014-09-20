@@ -33,7 +33,7 @@ trait AwardedBountyTrait
      *
      * @var array<\BenatEspina\StackExchangeApiClient\Model\Interfaces\ShallowUserInterface>|null
      */
-    protected $awardedBountyUsers;
+    protected $awardedBountyUsers = array();
 
     /**
      * Sets awarded bounty amount.

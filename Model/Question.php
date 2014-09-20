@@ -15,6 +15,7 @@ use BenatEspina\StackExchangeApiClient\Model\Interfaces\AnswerInterface;
 use BenatEspina\StackExchangeApiClient\Model\Interfaces\NoticeInterface;
 use BenatEspina\StackExchangeApiClient\Model\Interfaces\QuestionInterface;
 use BenatEspina\StackExchangeApiClient\Model\Traits\AnsweredTrait;
+use BenatEspina\StackExchangeApiClient\Model\Traits\AnswerTrait;
 use BenatEspina\StackExchangeApiClient\Model\Traits\BountyTrait;
 use BenatEspina\StackExchangeApiClient\Model\Traits\CloseTrait;
 use BenatEspina\StackExchangeApiClient\Model\Traits\FavoriteTrait;
@@ -29,6 +30,7 @@ use BenatEspina\StackExchangeApiClient\Util\Util;
 class Question extends BaseQuestion implements QuestionInterface
 {
     use
+        AnswerTrait,
         AnsweredTrait,
         BountyTrait,
         CloseTrait,
@@ -55,13 +57,6 @@ class Question extends BaseQuestion implements QuestionInterface
      * @var int
      */
     protected $deleteVoteCount;
-
-    /**
-     * Boolean that shows if question is answered or not.
-     *
-     * @var boolean
-     */
-    protected $isAnswered;
 
     /**
      * Notice.
@@ -101,6 +96,7 @@ class Question extends BaseQuestion implements QuestionInterface
         parent::__construct($json);
         $this->id = Util::setIfExists($json, 'question_id');
 
+        $this->loadAnswer($json);
         $this->loadAnswered($json);
         $this->loadBounty($json);
         $this->loadClose($json);
@@ -113,7 +109,6 @@ class Question extends BaseQuestion implements QuestionInterface
         }
         $this->canFlag = Util::setIfExists($json, 'can_flag');
         $this->deleteVoteCount = Util::setIfExists($json, 'delete_vote_count');
-        $this->isAnswered = Util::setIfExists($json, 'is_answered');
         $this->notice = new Notice(Util::setIfExists($json, 'notice'));
         $this->protectedDate = Util::setIfDateTimeExists($json, 'protected_date');
         $this->reopenVoteCount = Util::setIfExists($json, 'reopen_vote_count');
@@ -182,24 +177,6 @@ class Question extends BaseQuestion implements QuestionInterface
     public function getDeleteVoteCount()
     {
         return $this->deleteVoteCount;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function setAnswered($isAnswered)
-    {
-        $this->isAnswered = $isAnswered;
-
-        return $this;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function isAnswered()
-    {
-        return $this->isAnswered;
     }
 
     /**
