@@ -68,14 +68,14 @@ interface QuestionInterface extends
      *
      * @return $this self Object
      */
-    public function setCanFlag($canFlag);
+    public function setFlag($canFlag);
 
     /**
      * Gets can flag.
      *
      * @return boolean
      */
-    public function isCanFlag();
+    public function canFlag();
 
     /**
      * Sets number of delete votes.

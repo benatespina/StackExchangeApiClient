@@ -24,7 +24,7 @@ class AnswerSpec extends ObjectBehavior
         $this->shouldHaveType('BenatEspina\StackExchangeApiClient\Model\Answer');
     }
 
-    function it_extends_AnswerQuestionAbstract()
+    function it_extends_answer_question_abstract()
     {
         $this->shouldHaveType('BenatEspina\StackExchangeApiClient\Model\Abstracts\AnswerQuestionAbstract');
     }

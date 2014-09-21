@@ -42,7 +42,7 @@ class Question extends BaseQuestion implements QuestionInterface
      *
      * @var array<\BenatEspina\StackExchangeApiClient\Model\Interfaces\AnswerInterface>|null
      */
-    protected $answers;
+    protected $answers = array();
 
     /**
      * Boolean that shows it can flag or not.
@@ -146,7 +146,7 @@ class Question extends BaseQuestion implements QuestionInterface
     /**
      * {@inheritdoc}
      */
-    public function setCanFlag($canFlag)
+    public function setFlag($canFlag)
     {
         $this->canFlag = $canFlag;
 
@@ -156,7 +156,7 @@ class Question extends BaseQuestion implements QuestionInterface
     /**
      * {@inheritdoc}
      */
-    public function isCanFlag()
+    public function canFlag()
     {
         return $this->canFlag;
     }

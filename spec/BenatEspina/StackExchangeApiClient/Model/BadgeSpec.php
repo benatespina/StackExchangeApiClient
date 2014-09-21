@@ -10,7 +10,7 @@
 
 namespace spec\BenatEspina\StackExchangeApiClient\Model;
 
-use BenatEspina\StackExchangeApiClient\Model\Interfaces\UserInterface;
+use BenatEspina\StackExchangeApiClient\Model\Interfaces\ShallowUserInterface;
 use PhpSpec\ObjectBehavior;
 
 /**
@@ -25,7 +25,12 @@ class BadgeSpec extends ObjectBehavior
         $this->shouldHaveType('BenatEspina\StackExchangeApiClient\Model\Badge');
     }
 
-    function it_implements_user_interface()
+    function it_extends_base_abstract()
+    {
+        $this->shouldHaveType('BenatEspina\StackExchangeApiClient\Model\Abstracts\BaseAbstract');
+    }
+
+    function it_implements_badge_interface()
     {
         $this->shouldImplement('BenatEspina\StackExchangeApiClient\Model\Interfaces\BadgeInterface');
     }
@@ -36,16 +41,20 @@ class BadgeSpec extends ObjectBehavior
         $this->getAwardCount()->shouldReturn(2000);
     }
 
-//    function its_badge_id_is_mutable()
-//    {
-//        $this->setId(25669772)->shouldReturn($this);
-//        $this->getId()->shouldReturn(25669772);
-//    }
+    function its_is_not_a_valid_badge_type()
+    {
+        $this->setBadgeType('named')->shouldReturn($this);
+
+        $this->setBadgeType('invalid-badge-type')->shouldReturn($this);
+        $this->getBadgeType()->shouldReturn('named');
+    }
 
     function its_badge_type_is_mutable()
     {
         $this->setBadgeType('named')->shouldReturn($this);
-        $this->getBadgeType()->shouldReturn('named');
+
+        $this->setBadgeType('tag_based')->shouldReturn($this);
+        $this->getBadgeType()->shouldReturn('tag_based');
     }
 
     function its_description_is_mutable()
@@ -66,13 +75,23 @@ class BadgeSpec extends ObjectBehavior
         $this->getName()->shouldReturn('badge-name');
     }
 
-    function its_rank_is_mutable()
+    function its_is_not_a_valid_rank()
     {
-        $this->setRank('safe')->shouldReturn($this);
-        $this->getRank()->shouldReturn('safe');
+        $this->setRank('gold')->shouldReturn($this);
+
+        $this->setRank('invalid-rank')->shouldReturn($this);
+        $this->getRank()->shouldReturn('gold');
     }
 
-    function its_user_is_mutable(UserInterface $user)
+    function its_rank_is_mutable()
+    {
+        $this->setRank('gold')->shouldReturn($this);
+        
+        $this->setRank('silver')->shouldReturn($this);
+        $this->getRank()->shouldReturn('silver');
+    }
+
+    function its_user_is_mutable(ShallowUserInterface $user)
     {
         $this->setUser($user)->shouldReturn($this);
         $this->getUser()->shouldReturn($user);

@@ -82,7 +82,16 @@ class Filter implements FilterInterface
      */
     public function setFilterType($filterType)
     {
-        $this->filterType = $filterType;
+        if (Util::coincidesElement(
+            $filterType,
+            array(
+                self::FILTER_TYPE_INVALID,
+                self::FILTER_TYPE_SAFE,
+                self::FILTER_TYPE_UNSAFE
+            )
+        )) {
+            $this->filterType = $filterType;
+        }
 
         return $this;
     }

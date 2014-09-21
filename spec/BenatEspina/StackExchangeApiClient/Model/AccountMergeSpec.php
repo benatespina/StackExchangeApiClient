@@ -24,7 +24,7 @@ class AccountMergeSpec extends ObjectBehavior
         $this->shouldHaveType('BenatEspina\StackExchangeApiClient\Model\AccountMerge');
     }
 
-    function it_implements_acess_token_interface()
+    function it_implements_account_merge_interface()
     {
         $this->shouldImplement('BenatEspina\StackExchangeApiClient\Model\Interfaces\AccountMergeInterface');
     }

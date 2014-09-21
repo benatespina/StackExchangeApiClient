@@ -25,6 +25,11 @@ class ShallowUserSpec extends ObjectBehavior
         $this->shouldHaveType('BenatEspina\StackExchangeApiClient\Model\ShallowUser');
     }
 
+    function it_extends_base_abstract()
+    {
+        $this->shouldHaveType('BenatEspina\StackExchangeApiClient\Model\Abstracts\BaseAbstract');
+    }
+
     function it_implements_shallow_user_interface()
     {
         $this->shouldImplement('BenatEspina\StackExchangeApiClient\Model\Interfaces\ShallowUserInterface');

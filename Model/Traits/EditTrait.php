@@ -10,6 +10,7 @@
 
 namespace BenatEspina\StackExchangeApiClient\Model\Traits;
 
+use BenatEspina\StackExchangeApiClient\Model\Interfaces\ShallowUserInterface;
 use BenatEspina\StackExchangeApiClient\Model\ShallowUser;
 use BenatEspina\StackExchangeApiClient\Util\Util;
 
@@ -41,7 +42,7 @@ trait EditTrait
      *
      * @return $this self Object
      */
-    public function setLastEditDate($lastEditDate)
+    public function setLastEditDate(\DateTime $lastEditDate)
     {
         $this->lastEditDate = $lastEditDate;
         
@@ -65,7 +66,7 @@ trait EditTrait
      *
      * @return $this self Object
      */
-    public function setLastEditor($lastEditor)
+    public function setLastEditor(ShallowUserInterface $lastEditor)
     {
         $this->lastEditor = $lastEditor;
         

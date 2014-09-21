@@ -136,7 +136,15 @@ class Comment extends BaseComment implements CommentInterface
      */
     public function setPostType($postType)
     {
-        $this->postType = $postType;
+        if (Util::coincidesElement(
+            $postType,
+            array(
+                self::POST_TYPE_ANSWER,
+                self::POST_TYPE_QUESTION
+            )
+        )) {
+            $this->postType = $postType;
+        }
 
         return $this;
     }

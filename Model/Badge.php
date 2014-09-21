@@ -123,7 +123,15 @@ class Badge extends BaseBadge implements BadgeInterface
      */
     public function setBadgeType($badgeType)
     {
-        $this->badgeType = $badgeType;
+        if (Util::coincidesElement(
+            $badgeType,
+            array(
+                self::BADGE_TYPE_NAMED,
+                self::BADGE_TYPE_TAG_BASED
+            )
+        )) {
+            $this->badgeType = $badgeType;
+        }
 
         return $this;
     }
@@ -195,7 +203,16 @@ class Badge extends BaseBadge implements BadgeInterface
      */
     public function setRank($rank)
     {
-        $this->rank = $rank;
+        if (Util::coincidesElement(
+            $rank,
+            array(
+                self::RANK_BRONZE,
+                self::RANK_GOLD,
+                self::RANK_SILVER
+            )
+        )) {
+            $this->rank = $rank;
+        }
 
         return $this;
     }

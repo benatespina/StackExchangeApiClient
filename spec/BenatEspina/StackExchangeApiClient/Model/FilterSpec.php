@@ -35,10 +35,20 @@ class FilterSpec extends ObjectBehavior
         $this->getFilter()->shouldReturn('filter-id');
     }
 
+    function its_is_not_a_valid_filter_type()
+    {
+        $this->setFilterType('safe')->shouldReturn($this);
+
+        $this->setFilterType('invalid-filter-type')->shouldReturn($this);
+        $this->getFilterType()->shouldReturn('safe');
+    }
+
     function its_is_filter_type_is_mutable()
     {
-        $this->setFilterType('filter-type')->shouldReturn($this);
-        $this->getFilterType()->shouldReturn('filter-type');
+        $this->setFilterType('safe')->shouldReturn($this);
+
+        $this->setFilterType('unsafe')->shouldReturn($this);
+        $this->getFilterType()->shouldReturn('unsafe');
     }
 
     function its_included_fields_is_mutable()

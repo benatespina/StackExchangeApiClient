@@ -10,6 +10,7 @@
 
 namespace BenatEspina\StackExchangeApiClient\Model\Traits;
 
+use BenatEspina\StackExchangeApiClient\Model\BadgeCount;
 use BenatEspina\StackExchangeApiClient\Model\Interfaces\BadgeCountInterface;
 use BenatEspina\StackExchangeApiClient\Util\Util;
 
