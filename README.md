@@ -6,6 +6,10 @@
 [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/benatespina/StackExchangeApiClient/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/benatespina/StackExchangeApiClient/?branch=master)
 [![SensioLabsInsight](https://insight.sensiolabs.com/projects/1ebace1c-be1b-4a53-bef8-78d910aa2200/mini.png)](https://insight.sensiolabs.com/projects/1ebace1c-be1b-4a53-bef8-78d910aa2200)
 
+[![Latest Stable Version](https://poser.pugx.org/benatespina/stack-exchange-api-client/v/stable.svg)](https://packagist.org/packages/benatespina/stack-exchange-api-client)
+[![Total Downloads](https://poser.pugx.org/benatespina/stack-exchange-api-client/downloads.svg)](https://packagist.org/packages/benatespina/stack-exchange-api-client)
+[![Latest Unstable Version](https://poser.pugx.org/benatespina/stack-exchange-api-client/v/unstable.svg)](https://packagist.org/packages/benatespina/stack-exchange-api-client)
+
 ***This is a work in progress library and some features are not available yet.***
 
 Usage
@@ -109,3 +113,5 @@ Inspirated by my friend [Gorka Laucirica](http://gorkalaucirica.net)'s
 
 Created by **benatespina** - [benatespina@gmail.com](mailto:benatespina@gmail.com).
 Copyright (c) 2014
+
+[![License](https://poser.pugx.org/benatespina/stack-exchange-api-client/license.svg)](https://packagist.org/packages/benatespina/stack-exchange-api-client)
