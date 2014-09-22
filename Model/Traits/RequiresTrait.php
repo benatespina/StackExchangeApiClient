@@ -115,14 +115,14 @@ trait RequiresTrait
     /**
      * Loads the variables if the data exist into resource. It works like a constructor.
      *
-     * @param null|(int|string)[] $resource The resource
+     * @param null|mixed[] $resource The resource
      *
      * @return void
      */
     protected function loadAnswered($resource)
     {
-        $this->requiresComment = Util::setIfExists($resource, 'requires_comment');
-        $this->requiresQuestionId = Util::setIfExists($resource, 'requires_question_id');
-        $this->requiresSite = Util::setIfArrayExists($resource, 'requires_site');
+        $this->requiresComment = Util::setIfBoolExists($resource, 'requires_comment');
+        $this->requiresQuestionId = Util::setIfBoolExists($resource, 'requires_question_id');
+        $this->requiresSite = Util::setIfBoolExists($resource, 'requires_site');
     }
 }

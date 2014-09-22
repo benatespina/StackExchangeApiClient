@@ -100,13 +100,13 @@ trait CommentCountTrait
     /**
      * Loads the variables if the data exist into resource. It works like a constructor.
      *
-     * @param null|(int|string)[] $resource The resource
+     * @param null|mixed[] $resource The resource
      *
      * @return void
      */
     protected function loadCommentCount($resource)
     {
-        $this->commentCount = Util::setIfExists($resource, 'comment_count');
+        $this->commentCount = Util::setIfIntegerExists($resource, 'comment_count');
         $comments = Util::setIfArrayExists($resource, 'comments');
         foreach ($comments as $comment) {
             $this->comments[] = new Comment($comment);

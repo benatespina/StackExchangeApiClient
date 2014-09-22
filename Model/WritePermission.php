@@ -66,18 +66,18 @@ class WritePermission extends BaseWritePermission implements WritePermissionInte
     /**
      * Constructor.
      *
-     * @param null|(int|string)[] $json The json string being decoded
+     * @param null|mixed[] $json The json string being decoded
      */
     public function __construct($json = null)
     {
-        $this->id = Util::setIfExists($json, 'user_id');
+        $this->id = Util::setIfIntegerExists($json, 'user_id');
 
-        $this->canAdd = Util::setIfExists($json, 'can_add');
-        $this->canDelete = Util::setIfExists($json, 'can_delete');
-        $this->canEdit = Util::setIfExists($json, 'can_edit');
-        $this->maxDailyActions = Util::setIfExists($json, 'max_daily_actions');
-        $this->minSecondsBetweenActions = Util::setIfExists($json, 'min_seconds_between_actions');
-        $this->objectType = Util::setIfExists($json, 'object_type');
+        $this->canAdd = Util::setIfBoolExists($json, 'can_add');
+        $this->canDelete = Util::setIfBoolExists($json, 'can_delete');
+        $this->canEdit = Util::setIfBoolExists($json, 'can_edit');
+        $this->maxDailyActions = Util::setIfIntegerExists($json, 'max_daily_actions');
+        $this->minSecondsBetweenActions = Util::setIfIntegerExists($json, 'min_seconds_between_actions');
+        $this->objectType = Util::setIfStringExists($json, 'object_type');
     }
 
     /**

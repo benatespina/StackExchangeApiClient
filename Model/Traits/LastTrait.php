@@ -129,14 +129,14 @@ trait LastTrait
     /**
      * Loads the variables if the data exist into resource. It works like a constructor.
      *
-     * @param null|(int|string)[] $resource The resource
+     * @param null|mixed[] $resource The resource
      *
      * @return void
      */
     protected function loadLast($resource)
     {
-        $this->lastBody = Util::setIfExists($resource, 'last_body');
+        $this->lastBody = Util::setIfStringExists($resource, 'last_body');
         $this->lastTags = Util::setIfArrayExists($resource, 'last_tags');
-        $this->lastTitle = Util::setIfExists($resource, 'last_title');
+        $this->lastTitle = Util::setIfStringExists($resource, 'last_title');
     }
 }

@@ -90,13 +90,13 @@ trait MigrateTrait
     /**
      * Loads the variables if the data exist into resource. It works like a constructor.
      *
-     * @param null|(int|string)[] $resource The resource
+     * @param null|mixed[] $resource The resource
      *
      * @return void
      */
     protected function loadMigration($resource)
     {
-        $this->migratedFrom = new MigrationInfo(Util::setIfExists($resource, 'migrated_from'));
-        $this->migratedTo = new MigrationInfo(Util::setIfExists($resource, 'migrated_to'));
+        $this->migratedFrom = new MigrationInfo(Util::setIfArrayExists($resource, 'migrated_from'));
+        $this->migratedTo = new MigrationInfo(Util::setIfArrayExists($resource, 'migrated_to'));
     }
 }

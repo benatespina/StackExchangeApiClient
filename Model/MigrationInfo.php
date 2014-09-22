@@ -45,13 +45,13 @@ class MigrationInfo implements MigrationInfoInterface
     /**
      * Constructor.
      *
-     * @param null|(int|string)[] $json The json string being decoded
+     * @param null|mixed[] $json The json string being decoded
      */
     public function __construct($json = null)
     {
         $this->onDate = Util::setIfDateTimeExists($json, 'on_date');
-        $this->otherSite = new Site(Util::setIfExists($json, 'other_site'));
-        $this->questionId = Util::setIfExists($json, 'question_id');
+        $this->otherSite = new Site(Util::setIfArrayExists($json, 'other_site'));
+        $this->questionId = Util::setIfIntegerExists($json, 'question_id');
     }
 
     /**

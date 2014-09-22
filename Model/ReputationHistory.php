@@ -87,13 +87,13 @@ class ReputationHistory implements ReputationHistoryInterface
     /**
      * Constructor.
      *
-     * @param null|(int|string)[] $json The json string being decoded
+     * @param null|mixed[] $json The json string being decoded
      */
     public function __construct($json = null)
     {
         $this->creationDate = Util::setIfDateTimeExists($json, 'creation_date');
-        $this->postId = Util::setIfExists($json, 'post_id');
-        $this->reputationChange = Util::setIfExists($json, 'reputation_change');
+        $this->postId = Util::setIfIntegerExists($json, 'post_id');
+        $this->reputationChange = Util::setIfIntegerExists($json, 'reputation_change');
         $this->reputationHistoryType = Util::isEqual(
             $json,
             'reputation_history_type',
@@ -123,7 +123,7 @@ class ReputationHistory implements ReputationHistoryInterface
                 self::REPUTATION_HISTORY_TYPE_USER_DELETED
             )
         );
-        $this->userId = Util::setIfExists($json, 'user_id');
+        $this->userId = Util::setIfIntegerExists($json, 'user_id');
     }
 
     /**

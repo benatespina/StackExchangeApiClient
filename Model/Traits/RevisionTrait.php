@@ -98,7 +98,7 @@ trait RevisionTrait
      */
     public function setRevisionType($revisionType)
     {
-        if (Util::coincidesElement($revisionType, array('single_user','vote_based'))) {
+        if (Util::coincidesElement($revisionType, array('single_user', 'vote_based'))) {
             $this->revisionType = $revisionType;
         }
 
@@ -118,15 +118,15 @@ trait RevisionTrait
     /**
      * Loads the variables if the data exist into resource. It works like a constructor.
      *
-     * @param null|(int|string)[] $resource  The resource
-     * @param string[]            $constants The array of constants
+     * @param null|mixed[] $resource  The resource
+     * @param string[]     $constants The array of constants
      *
      * @return void
      */
     protected function loadRevision($resource, $constants)
     {
-        $this->revisionGuid = Util::setIfExists($resource, 'revision_guid');
-        $this->revisionNumber = new ShallowUser(Util::setIfExists($resource, 'revision_number'));
+        $this->revisionGuid = Util::setIfStringExists($resource, 'revision_guid');
+        $this->revisionNumber = Util::setIfIntegerExists($resource, 'revision_number');
         $this->revisionType = Util::isEqual($resource, 'revision_type', $constants);
     }
 }

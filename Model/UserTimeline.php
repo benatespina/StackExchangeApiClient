@@ -107,20 +107,20 @@ class UserTimeline extends BaseUserTimeline implements UserTimelineInterface
     /**
      * Constructor.
      *
-     * @param null|(int|string)[] $json The json string being decoded
+     * @param null|mixed[] $json The json string being decoded
      */
     public function __construct($json = null)
     {
-        $this->id = Util::setIfExists($json, 'user_id');
+        $this->id = Util::setIfIntegerExists($json, 'user_id');
 
-        $this->badgeId = Util::setIfExists($json, 'badge_id');
-        $this->commentId = Util::setIfExists($json, 'comment_id');
+        $this->badgeId = Util::setIfIntegerExists($json, 'badge_id');
+        $this->commentId = Util::setIfIntegerExists($json, 'comment_id');
         $this->creationDate = Util::setIfDateTimeExists($json, 'creation_date');
-        $this->detail = Util::setIfExists($json, 'detail');
-        $this->link = new ShallowUser(Util::setIfExists($json, 'link'));
-        $this->postId = Util::setIfExists($json, 'post_id');
+        $this->detail = Util::setIfStringExists($json, 'detail');
+        $this->link = new ShallowUser(Util::setIfArrayExists($json, 'link'));
+        $this->postId = Util::setIfIntegerExists($json, 'post_id');
         $this->postType = Util::isEqual($json, 'post_type', array(self::POST_TYPE_ANSWER, self::POST_TYPE_QUESTION));
-        $this->suggestedEditId = Util::setIfExists($json, 'suggested_edit_id');
+        $this->suggestedEditId = Util::setIfIntegerExists($json, 'suggested_edit_id');
         $this->timelineType = Util::isEqual(
             $json,
             'timeline_type',
@@ -135,7 +135,7 @@ class UserTimeline extends BaseUserTimeline implements UserTimelineInterface
                 self::TIMELINE_TYPE_VOTE_AGGREGATE,
             )
         );
-        $this->title = Util::setIfExists($json, $this->title, 'title');
+        $this->title = Util::setIfStringExists($json, 'title');
     }
 
     /**

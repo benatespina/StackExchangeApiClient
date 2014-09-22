@@ -84,18 +84,18 @@ class SuggestedEdit extends BaseSuggestedEdit implements SuggestedEditInterface
     /**
      * Constructor.
      *
-     * @param null|(int|string)[] $json The json string being decoded
+     * @param null|mixed[] $json The json string being decoded
      */
     public function __construct($json = null)
     {
-        $this->approvalDate = Util::setIfExists($json, 'approval_date');
-        $this->body = Util::setIfExists($json, 'body');
-        $this->comment = Util::setIfExists($json, 'comment');
-        $this->postId = Util::setIfExists($json, 'post_id');
+        $this->approvalDate = Util::setIfDateTimeExists($json, 'approval_date');
+        $this->body = Util::setIfStringExists($json, 'body');
+        $this->comment = Util::setIfStringExists($json, 'comment');
+        $this->postId = Util::setIfIntegerExists($json, 'post_id');
         $this->postType = Util::isEqual($json, 'post_type', array(self::POST_TYPE_QUESTION, self::POST_TYPE_ANSWER));
-        $this->proposingUser = new ShallowUser(Util::setIfExists($json, 'proposing_user'));
-        $this->rejectionDate = Util::setIfDateTimeExists($json, $this->rejectionDate, 'rejection_date');
-        $this->suggestedEditId = new ShallowUser(Util::setIfExists($json, 'suggested_edit_id'));
+        $this->proposingUser = new ShallowUser(Util::setIfArrayExists($json, 'proposing_user'));
+        $this->rejectionDate = Util::setIfDateTimeExists($json, 'rejection_date');
+        $this->suggestedEditId = new ShallowUser(Util::setIfArrayExists($json, 'suggested_edit_id'));
     }
 
     /**

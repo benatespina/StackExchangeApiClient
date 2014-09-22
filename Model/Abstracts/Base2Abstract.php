@@ -29,7 +29,7 @@ abstract class Base2Abstract
     /**
      * Array that contains tags.
      *
-     * @var string[]|null
+     * @var string[]
      */
     protected $tags;
 
@@ -43,13 +43,13 @@ abstract class Base2Abstract
     /**
      * Constructor.
      *
-     * @param null|(int|string)[] $json The json string being decoded
+     * @param null|mixed[] $json The json string being decoded
      */
     public function __construct($json = null)
     {
         $this->creationDate = Util::setIfDateTimeExists($json, 'creation_date');
         $this->tags = Util::setIfArrayExists($json, 'tags');
-        $this->title = Util::setIfExists($json, 'title');
+        $this->title = Util::setIfStringExists($json, 'title');
     }
 
     /**
@@ -107,7 +107,7 @@ abstract class Base2Abstract
     /**
      * Gets array of tags.
      *
-     * @return string[]|null
+     * @return string[]
      */
     public function getTags()
     {

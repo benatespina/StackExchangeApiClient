@@ -115,14 +115,14 @@ trait GenericIdTrait
     /**
      * Loads the variables if the data exist into resource. It works like a constructor.
      *
-     * @param null|(int|string)[] $resource The resource
+     * @param null|mixed[] $resource The resource
      *
      * @return void
      */
     protected function loadGenericId($resource)
     {
-        $this->answerId = Util::setIfExists($resource, 'answer_id');
-        $this->body = Util::setIfExists($resource, 'body');
-        $this->questionId = Util::setIfExists($resource, 'question_id');
+        $this->answerId = Util::setIfIntegerExists($resource, 'answer_id');
+        $this->body = Util::setIfStringExists($resource, 'body');
+        $this->questionId = Util::setIfIntegerExists($resource, 'question_id');
     }
 }

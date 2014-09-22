@@ -43,7 +43,7 @@ abstract class AnswerQuestionAbstract extends AnswerPostQuestionAbstract
     /**
      * Constructor.
      *
-     * @param null|(int|string)[] $json The json string being decoded
+     * @param null|mixed[] $json The json string being decoded
      */
     public function __construct($json = null)
     {

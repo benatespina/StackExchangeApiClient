@@ -86,15 +86,15 @@ class InboxItem implements InboxItemInterface
     /**
      * Constructor.
      *
-     * @param null|(int|string)[] $json The json string being decoded
+     * @param null|mixed[] $json The json string being decoded
      */
     public function __construct($json = null)
     {
         $this->loadGenericId($json);
 
-        $this->commentId = Util::setIfExists($json, 'comment_id');
+        $this->commentId = Util::setIfIntegerExists($json, 'comment_id');
         $this->creationDate = Util::setIfDateTimeExists($json, 'creation_date');
-        $this->isUnread = Util::setIfExists($json, 'is_unread');
+        $this->isUnread = Util::setIfBoolExists($json, 'is_unread');
         $this->itemType = Util::isEqual(
             $json,
             'item_type', 
@@ -109,9 +109,9 @@ class InboxItem implements InboxItemInterface
                 self::ITEM_TYPE_POST_NOTICE
             )
         );
-        $this->link = Util::setIfExists($json, 'link');
-        $this->site = new Site(Util::setIfExists($json, 'site'));
-        $this->title = Util::setIfExists($json, 'title');
+        $this->link = Util::setIfStringExists($json, 'link');
+        $this->site = new Site(Util::setIfArrayExists($json, 'site'));
+        $this->title = Util::setIfStringExists($json, 'title');
     }
 
     /**

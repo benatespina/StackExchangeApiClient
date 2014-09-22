@@ -45,13 +45,13 @@ class TagScore implements TagScoreInterface
     /**
      * Constructor.
      *
-     * @param null|(int|string)[] $json The json string being decoded
+     * @param null|mixed[] $json The json string being decoded
      */
     public function __construct($json = null)
     {
-        $this->postCount = Util::setIfExists($json, 'post_count');
-        $this->score = Util::setIfExists($json, 'score');
-        $this->user = new ShallowUser(Util::setIfExists($json, 'user'));
+        $this->postCount = Util::setIfIntegerExists($json, 'post_count');
+        $this->score = Util::setIfIntegerExists($json, 'score');
+        $this->user = new ShallowUser(Util::setIfArrayExists($json, 'user'));
     }
 
     /**

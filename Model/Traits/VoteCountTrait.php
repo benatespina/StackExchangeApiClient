@@ -84,13 +84,13 @@ trait VoteCountTrait
     /**
      * Loads the variables if the data exist into resource. It works like a constructor.
      *
-     * @param mixed[] $resource The resource
+     * @param null|mixed[] $resource The resource
      *
      * @return void
      */
     protected function loadVoteCount($resource)
     {
-        $this->downVoteCount = Util::setIfExists($resource, 'down_vote_count');
-        $this->upVoteCount = Util::setIfExists($resource, 'up_vote_count');
+        $this->downVoteCount = Util::setIfIntegerExists($resource, 'down_vote_count');
+        $this->upVoteCount = Util::setIfIntegerExists($resource, 'up_vote_count');
     }
 }

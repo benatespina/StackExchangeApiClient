@@ -146,15 +146,15 @@ trait UrlTrait
     /**
      * Loads the variables if the data exist into resource. It works like a constructor.
      *
-     * @param null|(int|string)[] $resource The resource
+     * @param null|mixed[] $resource The resource
      *
      * @return void
      */
     protected function loadUrl($resource)
     {
-        $this->faviconUrl = Util::setIfExists($resource, 'favicon_url');
-        $this->highResIconUrl = Util::setIfExists($resource, 'high_resolution_icon_url');
-        $this->iconUrl = Util::setIfExists($resource, 'icon_url');
-        $this->logoUrl = Util::setIfExists($resource, 'logo_url');
+        $this->faviconUrl = Util::setIfStringExists($resource, 'favicon_url');
+        $this->highResIconUrl = Util::setIfStringExists($resource, 'high_resolution_icon_url');
+        $this->iconUrl = Util::setIfStringExists($resource, 'icon_url');
+        $this->logoUrl = Util::setIfStringExists($resource, 'logo_url');
     }
 }

@@ -48,9 +48,9 @@ class Styling implements StylingInterface
      */
     public function __construct($json = null)
     {
-        $this->linkColor = Util::setIfExists($json, 'link_color');
-        $this->tagForegroundColor = Util::setIfExists($json, 'tag_foreground_color');
-        $this->tagBackgroundColor = Util::setIfExists($json, 'tag_background_color');
+        $this->linkColor = Util::setIfStringExists($json, 'link_color');
+        $this->tagForegroundColor = Util::setIfStringExists($json, 'tag_foreground_color');
+        $this->tagBackgroundColor = Util::setIfStringExists($json, 'tag_background_color');
     }
 
     /**

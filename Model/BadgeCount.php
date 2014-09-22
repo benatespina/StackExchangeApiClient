@@ -11,6 +11,7 @@
 namespace BenatEspina\StackExchangeApiClient\Model;
 
 use BenatEspina\StackExchangeApiClient\Model\Interfaces\BadgeCountInterface;
+use BenatEspina\StackExchangeApiClient\Util\Util;
 
 /**
  * Class BadgeCount.
@@ -39,6 +40,18 @@ class BadgeCount implements BadgeCountInterface
      * @var int
      */
     protected $silver;
+
+    /**
+     * Constructor.
+     *
+     * @param null|mixed[] $json The json string being decoded
+     */
+    public function __construct($json = null)
+    {
+        $this->bronze = Util::setIfIntegerExists($json, 'bronze');
+        $this->gold = Util::setIfIntegerExists($json, 'gold');
+        $this->silver = Util::setIfIntegerExists($json, 'silver');
+    }
 
     /**
      * {@inheritdoc}

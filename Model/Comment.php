@@ -63,18 +63,18 @@ class Comment extends BaseComment implements CommentInterface
     /**
      * Constructor.
      *
-     * @param null|(int|string)[] $json The json string being decoded
+     * @param null|mixed[] $json The json string being decoded
      */
     public function __construct($json = null)
     {
         parent::__construct($json);
-        $this->id = Util::setIfExists($json, 'comment_id');
+        $this->id = Util::setIfIntegerExists($json, 'comment_id');
 
-        $this->canFlag = Util::setIfExists($json, 'can_flag');
-        $this->edited = Util::setIfExists($json, 'edited');
-        $this->postId = Util::setIfExists($json, 'post_id');
-        $this->postType = Util::setIfExists($json, 'post_type');
-        $this->replyToUser = new ShallowUser(Util::setIfExists($json, 'reply_to_user'));
+        $this->canFlag = Util::setIfBoolExists($json, 'can_flag');
+        $this->edited = Util::setIfBoolExists($json, 'edited');
+        $this->postId = Util::setIfIntegerExists($json, 'post_id');
+        $this->postType = Util::isEqual($json, 'post_type', array(self::POST_TYPE_ANSWER, self::POST_TYPE_QUESTION));
+        $this->replyToUser = new ShallowUser(Util::setIfArrayExists($json, 'reply_to_user'));
     }
 
     /**

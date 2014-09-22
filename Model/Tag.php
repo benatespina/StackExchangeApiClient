@@ -78,18 +78,18 @@ class Tag implements TagInterface
     /**
      * Constructor.
      *
-     * @param null|(int|string)[] $json The json string being decoded
+     * @param null|mixed[] $json The json string being decoded
      */
     public function __construct($json = null)
     {
-        $this->count = Util::setIfExists($json, 'count');
-        $this->hasSynonyms = Util::setIfExists($json, 'has_synonyms');
-        $this->isModeratorOnly = Util::setIfExists($json, 'is_moderator_only');
-        $this->isRequired = Util::setIfExists($json, 'is_required');
+        $this->count = Util::setIfIntegerExists($json, 'count');
+        $this->hasSynonyms = Util::setIfBoolExists($json, 'has_synonyms');
+        $this->isModeratorOnly = Util::setIfBoolExists($json, 'is_moderator_only');
+        $this->isRequired = Util::setIfBoolExists($json, 'is_required');
         $this->lastActivityDate = Util::setIfDateTimeExists($json, 'last_activity_date');
-        $this->name = Util::setIfExists($json, 'name');
+        $this->name = Util::setIfStringExists($json, 'name');
         $this->synonyms = Util::setIfArrayExists($json, 'synonyms');
-        $this->userId = Util::setIfExists($json, 'user_id');
+        $this->userId = Util::setIfIntegerExists($json, 'user_id');
     }
 
     /**

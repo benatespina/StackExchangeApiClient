@@ -91,17 +91,17 @@ class Reputation implements ReputationInterface
     /**
      * Constructor.
      *
-     * @param null|(int|string)[] $json The json string being decoded
+     * @param null|mixed[] $json The json string being decoded
      */
     public function __construct($json = null)
     {
-        $this->link = Util::setIfExists($json, 'link');
+        $this->link = Util::setIfStringExists($json, 'link');
         $this->onDate = Util::setIfDateTimeExists($json, 'on_date');
-        $this->postId = Util::setIfExists($json, 'post_id');
+        $this->postId = Util::setIfIntegerExists($json, 'post_id');
         $this->postType = Util::isEqual($json, 'post_type', array(self::POST_TYPE_ANSWER, self::POST_TYPE_QUESTION));
-        $this->reputationChange = Util::setIfExists($json, 'reputation_change');
-        $this->title = Util::setIfExists($json, 'title');
-        $this->userId = Util::setIfExists($json, 'user_id');
+        $this->reputationChange = Util::setIfIntegerExists($json, 'reputation_change');
+        $this->title = Util::setIfStringExists($json, 'title');
+        $this->userId = Util::setIfIntegerExists($json, 'user_id');
         $this->voteType = Util::isEqual(
             $json,
             'vote_type',

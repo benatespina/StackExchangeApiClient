@@ -30,7 +30,7 @@ abstract class AnswerPostQuestionAbstract extends ResourceAbstract
     /**
      * Downvoted.
      *
-     * @var boolean.
+     * @var boolean
      */
     protected $downvoted;
 
@@ -58,7 +58,7 @@ abstract class AnswerPostQuestionAbstract extends ResourceAbstract
     /**
      * Constructor.
      *
-     * @param null|(int|string)[] $json The json string being decoded
+     * @param null|mixed[] $json The json string being decoded
      */
     public function __construct($json = null)
     {
@@ -67,11 +67,11 @@ abstract class AnswerPostQuestionAbstract extends ResourceAbstract
         $this->loadEdit($json);
         $this->loadVoteCount($json);
 
-        $this->downvoted = Util::setIfExists($json, 'downvoted');
+        $this->downvoted = Util::setIfBoolExists($json, 'downvoted');
         $this->lastActivityDate = Util::setIfDateTimeExists($json, 'last_activity_date');
-        $this->link = Util::setIfExists($json, 'link');
-        $this->shareLink = Util::setIfExists($json, 'share_link');
-        $this->title = Util::setIfExists($json, 'title');
+        $this->link = Util::setIfStringExists($json, 'link');
+        $this->shareLink = Util::setIfStringExists($json, 'share_link');
+        $this->title = Util::setIfStringExists($json, 'title');
     }
 
     /**

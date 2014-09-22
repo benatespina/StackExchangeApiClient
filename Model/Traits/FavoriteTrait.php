@@ -84,13 +84,13 @@ trait FavoriteTrait
     /**
      * Loads the variables if the data exist into resource. It works like a constructor.
      *
-     * @param null|(int|string)[] $resource The resource
+     * @param null|mixed[] $resource The resource
      *
      * @return void
      */
     protected function loadFavorite($resource)
     {
-        $this->favoriteCount = Util::setIfExists($resource, 'favorite_count');
-        $this->favorited = Util::setIfExists($resource, 'favorited');
+        $this->favoriteCount = Util::setIfIntegerExists($resource, 'favorite_count');
+        $this->favorited = Util::setIfBoolExists($resource, 'favorited');
     }
 }

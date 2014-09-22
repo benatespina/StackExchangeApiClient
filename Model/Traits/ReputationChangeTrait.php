@@ -177,16 +177,16 @@ trait ReputationChangeTrait
     /**
      * Loads the variables if the data exist into resource. It works like a constructor.
      *
-     * @param null|(int|string)[] $resource The resource
+     * @param null|mixed[] $resource The resource
      *
      * @return void
      */
     protected function loadReputationChange($resource)
     {
-        $this->day = Util::setIfExists($resource, 'reputation_change_day');
-        $this->month = Util::setIfExists($resource, 'reputation_change_month');
-        $this->quarter = Util::setIfExists($resource, 'reputation_change_quarter');
-        $this->week = Util::setIfExists($resource, 'reputation_change_week');
-        $this->year = Util::setIfExists($resource, 'reputation_change_year');
+        $this->day = Util::setIfIntegerExists($resource, 'reputation_change_day');
+        $this->month = Util::setIfIntegerExists($resource, 'reputation_change_month');
+        $this->quarter = Util::setIfIntegerExists($resource, 'reputation_change_quarter');
+        $this->week = Util::setIfIntegerExists($resource, 'reputation_change_week');
+        $this->year = Util::setIfIntegerExists($resource, 'reputation_change_year');
     }
 }

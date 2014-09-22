@@ -93,18 +93,18 @@ class QuestionTimeline implements QuestionTimelineInterface
     /**
      * Constructor.
      *
-     * @param null|(int|string)[] $json The json string being decoded
+     * @param null|mixed[] $json The json string being decoded
      */
     public function __construct($json = null)
     {
         $this->loadVoteCount($json);
 
-        $this->commentId = Util::setIfExists($json, 'comment_id');
+        $this->commentId = Util::setIfIntegerExists($json, 'comment_id');
         $this->creationDate = Util::setIfDateTimeExists($json, 'creation_date');
-        $this->owner = new ShallowUser(Util::setIfExists($json, 'owner'));
-        $this->postId = Util::setIfExists($json, 'post_id');
-        $this->questionId = Util::setIfExists($json, 'question_id');
-        $this->revisionGuid = Util::setIfExists($json, 'revision_guid');
+        $this->owner = new ShallowUser(Util::setIfArrayExists($json, 'owner'));
+        $this->postId = Util::setIfIntegerExists($json, 'post_id');
+        $this->questionId = Util::setIfIntegerExists($json, 'question_id');
+        $this->revisionGuid = Util::setIfStringExists($json, 'revision_guid');
         $this->timelineType = Util::isEqual(
             $json,
             'timeline_type',
@@ -119,7 +119,7 @@ class QuestionTimeline implements QuestionTimelineInterface
                 self::TIMELINE_TYPE_VOTE_AGGREGATE,
             )
         );
-        $this->user = new ShallowUser(Util::setIfExists($json, 'user'));
+        $this->user = new ShallowUser(Util::setIfArrayExists($json, 'user'));
     }
 
     /**

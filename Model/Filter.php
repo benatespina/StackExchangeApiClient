@@ -48,11 +48,11 @@ class Filter implements FilterInterface
     /**
      * Constructor.
      *
-     * @param null|(int|string)[] $json The json string being decoded
+     * @param null|mixed[] $json The json string being decoded
      */
     public function __construct($json = null)
     {
-        $this->filter = Util::setIfExists($json, 'filter');
+        $this->filter = Util::setIfStringExists($json, 'filter');
         $this->filterType = Util::isEqual(
             $json, 'filter_type', array(self::FILTER_TYPE_INVALID, self::FILTER_TYPE_SAFE, self::FILTER_TYPE_UNSAFE)
         );

@@ -81,23 +81,23 @@ class Badge extends BaseBadge implements BadgeInterface
     /**
      * Constructor.
      *
-     * @param null|(int|string)[] $json The json string being decoded
+     * @param null|mixed[] $json The json string being decoded
      */
     public function __construct($json = null)
     {
-        $this->id = Util::setIfExists($json, 'badge_id');
+        $this->id = Util::setIfIntegerExists($json, 'badge_id');
 
-        $this->awardCount = Util::setIfExists($json, 'award_count');
-        $this->description = Util::setIfExists($json, 'description');
-        $this->name = Util::setIfExists($json, 'name');
+        $this->awardCount = Util::setIfIntegerExists($json, 'award_count');
+        $this->description = Util::setIfStringExists($json, 'description');
+        $this->name = Util::setIfStringExists($json, 'name');
         $this->badgeType = Util::isEqual(
             $json, 'badge_type', array(self::BADGE_TYPE_NAMED, self::BADGE_TYPE_TAG_BASED)
         );
-        $this->link = Util::setIfExists($json, 'link');
+        $this->link = Util::setIfStringExists($json, 'link');
         $this->rank = Util::isEqual(
             $json, 'rank', array(self::RANK_GOLD, self::RANK_BRONZE, self::RANK_SILVER)
         );
-        $this->user = new ShallowUser(Util::setIfExists($json, 'user'));
+        $this->user = new ShallowUser(Util::setIfArrayExists($json, 'user'));
     }
 
     /**

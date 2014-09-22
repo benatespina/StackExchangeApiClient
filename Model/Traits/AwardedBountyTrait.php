@@ -102,13 +102,13 @@ trait AwardedBountyTrait
     /**
      * Loads the variables if the data exist into resource. It works like a constructor.
      *
-     * @param null|(int|string)[] $resource The resource
+     * @param null|mixed[] $resource The resource
      *
      * @return void
      */
     protected function loadAwardedBounty($resource)
     {
-        $this->awardedBountyAmount = Util::setIfExists($resource, 'awarded_bounty_amount');
+        $this->awardedBountyAmount = Util::setIfIntegerExists($resource, 'awarded_bounty_amount');
         $awardedBountyUsers = Util::setIfArrayExists($resource, 'awarded_bounty_users');
         foreach ($awardedBountyUsers as $awardedBountyUser) {
             $this->awardedBountyUsers[] = new ShallowUser($awardedBountyUser);

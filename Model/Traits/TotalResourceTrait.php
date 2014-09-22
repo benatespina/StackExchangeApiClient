@@ -270,19 +270,19 @@ trait TotalResourceTrait
     /**
      * Loads the variables if the data exist into resource. It works like a constructor.
      *
-     * @param null|(int|string)[] $resource The resource
+     * @param null|mixed[] $resource The resource
      *
      * @return void
      */
     protected function loadEdit($resource)
     {
-        $this->totalAccepted = Util::setIfExists($resource, 'total_accepted');
-        $this->totalAnswers = Util::setIfExists($resource, 'total_answers');
-        $this->totalBadges = Util::setIfExists($resource, 'total_badges');
-        $this->totalComments = Util::setIfExists($resource, 'total_comments');
-        $this->totalQuestions = Util::setIfExists($resource, 'total_questions');
-        $this->totalUnanswered = Util::setIfExists($resource, 'total_unanswered');
-        $this->totalUsers = Util::setIfExists($resource, 'total_users');
-        $this->totalVotes = Util::setIfExists($resource, 'total_votes');
+        $this->totalAccepted = Util::setIfIntegerExists($resource, 'total_accepted');
+        $this->totalAnswers = Util::setIfIntegerExists($resource, 'total_answers');
+        $this->totalBadges = Util::setIfIntegerExists($resource, 'total_badges');
+        $this->totalComments = Util::setIfIntegerExists($resource, 'total_comments');
+        $this->totalQuestions = Util::setIfIntegerExists($resource, 'total_questions');
+        $this->totalUnanswered = Util::setIfIntegerExists($resource, 'total_unanswered');
+        $this->totalUsers = Util::setIfIntegerExists($resource, 'total_users');
+        $this->totalVotes = Util::setIfIntegerExists($resource, 'total_votes');
     }
 }

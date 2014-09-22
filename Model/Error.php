@@ -44,13 +44,13 @@ class Error implements ErrorInterface
     /**
      * Constructor.
      *
-     * @param null|(int|string)[] $json The json string being decoded
+     * @param null|mixed[] $json The json string being decoded
      */
     public function __construct($json = null)
     {
-        $this->description = Util::setIfExists($json, 'description');
-        $this->errorId = Util::setIfExists($json, 'error_id');
-        $this->errorName = Util::setIfExists($json, 'error_name');
+        $this->description = Util::setIfStringExists($json, 'description');
+        $this->errorId = Util::setIfIntegerExists($json, 'error_id');
+        $this->errorName = Util::setIfStringExists($json, 'error_name');
     }
 
     /**

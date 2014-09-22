@@ -73,18 +73,17 @@ abstract class ResourceAbstract extends BaseAbstract
     /**
      * Constructor.
      *
-     * @param null|(int|string)[] $json The json string being decoded
+     * @param null|mixed[] $json The json string being decoded
      */
     public function __construct($json = null)
     {
-        $this->body = Util::setIfExists($json, 'body');
-        $this->bodyMarkDown = Util::setIfExists($json, 'body_markdown');
-        $this->canFlag = Util::setIfExists($json, 'can_flag');
+        $this->body = Util::setIfStringExists($json, 'body');
+        $this->bodyMarkDown = Util::setIfStringExists($json, 'body_markdown');
         $this->creationDate = Util::setIfDateTimeExists($json, 'creation_date');
-        $this->link = Util::setIfExists($json, 'link');
-        $this->owner = new ShallowUser(Util::setIfExists($json, 'owner'));
-        $this->score = Util::setIfExists($json, 'score');
-        $this->upvoted = Util::setIfExists($json, 'upvoted');
+        $this->link = Util::setIfStringExists($json, 'link');
+        $this->owner = new ShallowUser(Util::setIfArrayExists($json, 'owner'));
+        $this->score = Util::setIfIntegerExists($json, 'score');
+        $this->upvoted = Util::setIfBoolExists($json, 'upvoted');
     }
 
     /**

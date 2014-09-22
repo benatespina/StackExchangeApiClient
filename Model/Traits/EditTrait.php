@@ -86,13 +86,13 @@ trait EditTrait
     /**
      * Loads the variables if the data exist into resource. It works like a constructor.
      *
-     * @param null|(int|string)[] $resource The resource
+     * @param null|mixed[] $resource The resource
      *
      * @return void
      */
     protected function loadEdit($resource)
     {
         $this->lastEditDate = Util::setIfDateTimeExists($resource, 'last_edit_date');
-        $this->lastEditor = new ShallowUser(Util::setIfExists($resource, 'last_editor'));
+        $this->lastEditor = new ShallowUser(Util::setIfArrayExists($resource, 'last_editor'));
     }
 }

@@ -65,16 +65,16 @@ class TopTag implements TopTagInterface
     /**
      * Constructor.
      *
-     * @param null|(int|string)[] $json The json string being decoded
+     * @param null|mixed[] $json The json string being decoded
      */
     public function __construct($json = null)
     {
-        $this->answerCount = Util::setIfExists($json, 'answer_count');
-        $this->answerScore = Util::setIfExists($json, 'answer_score');
-        $this->questionCount = Util::setIfExists($json, 'question_count');
-        $this->questionScore = Util::setIfExists($json, 'question_score');
-        $this->tagName = Util::setIfExists($json, 'tag_name');
-        $this->userId = Util::setIfExists($json, 'user_id');
+        $this->answerCount = Util::setIfIntegerExists($json, 'answer_count');
+        $this->answerScore = Util::setIfIntegerExists($json, 'answer_score');
+        $this->questionCount = Util::setIfIntegerExists($json, 'question_count');
+        $this->questionScore = Util::setIfIntegerExists($json, 'question_score');
+        $this->tagName = Util::setIfStringExists($json, 'tag_name');
+        $this->userId = Util::setIfIntegerExists($json, 'user_id');
     }
 
     /**

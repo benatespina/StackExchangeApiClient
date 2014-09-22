@@ -44,19 +44,19 @@ class AccessToken implements AccessTokenInterface
     /**
      * An array of scopes.
      *
-     * @var string[]|null
+     * @var string[]
      */
     protected $scope;
 
     /**
      * Constructor.
      *
-     * @param null|(int|string)[] $json The json string being decoded
+     * @param null|mixed[] $json The json string being decoded
      */
     public function __construct($json = null)
     {
-        $this->accessToken = Util::setIfExists($json, 'access_token');
-        $this->accountId = Util::setIfExists($json, 'account_id');
+        $this->accessToken = Util::setIfStringExists($json, 'access_token');
+        $this->accountId = Util::setIfStringExists($json, 'account_id');
         $this->expiresOnDate = Util::setIfDateTimeExists($json, 'expires_on_date');
         $this->scope = Util::setIfArrayExists($json, 'scope');
     }

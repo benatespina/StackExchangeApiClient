@@ -44,13 +44,13 @@ class Privilege implements PrivilegeInterface
     /**
      * Constructor.
      *
-     * @param null|(int|string)[] $json The json string being decoded
+     * @param null|mixed[] $json The json string being decoded
      */
     public function __construct($json = null)
     {
-        $this->description = Util::setIfExists($json, 'description');
-        $this->reputation = Util::setIfExists($json, 'reputation');
-        $this->shortDescription = Util::setIfExists($json, 'short_description');
+        $this->description = Util::setIfStringExists($json, 'description');
+        $this->reputation = Util::setIfIntegerExists($json, 'reputation');
+        $this->shortDescription = Util::setIfStringExists($json, 'short_description');
     }
 
     /**

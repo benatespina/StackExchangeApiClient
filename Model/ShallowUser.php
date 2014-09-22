@@ -79,18 +79,18 @@ class ShallowUser extends BaseShallowUser implements ShallowUserInterface
     /**
      * Constructor.
      *
-     * @param null|(int|string)[] $json The json string being decoded
+     * @param null|mixed[] $json The json string being decoded
      */
     public function __construct($json = null)
     {
-        $this->id = Util::setIfExists($json, 'user_id');
+        $this->id = Util::setIfIntegerExists($json, 'user_id');
 
-        $this->acceptRate = Util::setIfExists($json, 'accept_rate');
-        $this->badgeCount = Util::setIfExists($json, 'badge_count');
-        $this->displayName = Util::setIfExists($json, 'display_name');
-        $this->link = Util::setIfExists($json, 'link');
-        $this->profileImage = Util::setIfExists($json, 'profile_image');
-        $this->reputation = Util::setIfExists($json, 'reputation');
+        $this->acceptRate = Util::setIfIntegerExists($json, 'accept_rate');
+        $this->badgeCount = new BadgeCount(Util::setIfArrayExists($json, 'badge_count'));
+        $this->displayName = Util::setIfStringExists($json, 'display_name');
+        $this->link = Util::setIfStringExists($json, 'link');
+        $this->profileImage = Util::setIfStringExists($json, 'profile_image');
+        $this->reputation = Util::setIfIntegerExists($json, 'reputation');
         $this->userType = Util::isEqual(
             $json,
             'user_type',

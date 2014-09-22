@@ -84,21 +84,21 @@ class NetworkUser extends BaseNetworkUser implements NetworkUserInterface
     /**
      * Constructor.
      *
-     * @param null|(int|string)[] $json The json string being decoded
+     * @param null|mixed[] $json The json string being decoded
      */
     public function __construct($json = null)
     {
-        $this->id = Util::setIfExists($json, 'user_id');
+        $this->id = Util::setIfIntegerExists($json, 'user_id');
         
         $this->loadCount($json);
         $this->loadTop($json);
 
-        $this->accountId = Util::setIfExists($json, 'account_id');
+        $this->accountId = Util::setIfIntegerExists($json, 'account_id');
         $this->creationDate = Util::setIfDateTimeExists($json, 'creation_date');
         $this->lastAccessDate = Util::setIfDateTimeExists($json, 'last_access_date');
-        $this->reputation = Util::setIfExists($json, 'reputation');
-        $this->siteName = Util::setIfExists($json, 'site_name');
-        $this->siteUrl = Util::setIfExists($json, 'site_url');
+        $this->reputation = Util::setIfIntegerExists($json, 'reputation');
+        $this->siteName = Util::setIfStringExists($json, 'site_name');
+        $this->siteUrl = Util::setIfStringExists($json, 'site_url');
 
         $this->userType = Util::isEqual(
             $json,

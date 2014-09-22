@@ -44,13 +44,13 @@ class AccountMerge implements AccountMergeInterface
     /**
      * Constructor.
      *
-     * @param null|(int|string)[] $json The json string being decoded
+     * @param null|mixed[] $json The json string being decoded
      */
     public function __construct($json = null)
     {
         $this->mergeDate = Util::setIfDateTimeExists($json, 'merge_date');
-        $this->newAccountId = Util::setIfExists($json, 'new_account_id');
-        $this->oldAccountId = Util::setIfExists($json, 'old_account_id');
+        $this->newAccountId = Util::setIfIntegerExists($json, 'new_account_id');
+        $this->oldAccountId = Util::setIfIntegerExists($json, 'old_account_id');
     }
 
     /**

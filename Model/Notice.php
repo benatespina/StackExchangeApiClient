@@ -44,13 +44,13 @@ class Notice implements NoticeInterface
     /**
      * Constructor.
      *
-     * @param null|(int|string)[] $json The json string being decoded
+     * @param null|mixed[] $json The json string being decoded
      */
     public function __construct($json = null)
     {
-        $this->body = Util::setIfExists($json, 'body');
+        $this->body = Util::setIfStringExists($json, 'body');
         $this->creationDate = Util::setIfDateTimeExists($json, 'creation_date');
-        $this->ownerUserId = Util::setIfExists($json, 'owner_user_id');
+        $this->ownerUserId = Util::setIfIntegerExists($json, 'owner_user_id');
     }
 
     /**

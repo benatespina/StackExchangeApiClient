@@ -69,16 +69,16 @@ class Info implements InfoInterface
     /**
      * Constructor.
      *
-     * @param null|(int|string)[] $json The json string being decoded
+     * @param null|mixed[] $json The json string being decoded
      */
     public function __construct($json = null)
     {
-        $this->answersPerMinute = Util::setIfExists($json, 'answers_per_minute');
-        $this->apiRevision = Util::setIfExists($json, 'api_revision');
-        $this->badgesPerMinute = Util::setIfExists($json, 'badges_per_minute');
-        $this->newActiveUsers = Util::setIfExists($json, 'new_active_users');
-        $this->questionsPerMinute = Util::setIfExists($json, 'questions_per_minute');
-        $this->site = new Site(Util::setIfExists($json, 'site'));
+        $this->answersPerMinute = Util::setIfIntegerExists($json, 'answers_per_minute');
+        $this->apiRevision = Util::setIfStringExists($json, 'api_revision');
+        $this->badgesPerMinute = Util::setIfIntegerExists($json, 'badges_per_minute');
+        $this->newActiveUsers = Util::setIfIntegerExists($json, 'new_active_users');
+        $this->questionsPerMinute = Util::setIfIntegerExists($json, 'questions_per_minute');
+        $this->site = new Site(Util::setIfArrayExists($json, 'site'));
     }
 
     /**

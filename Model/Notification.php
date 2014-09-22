@@ -84,13 +84,13 @@ class Notification implements NotificationInterface
     /**
      * Constructor.
      *
-     * @param null|(int|string)[] $json The json string being decoded
+     * @param null|mixed[] $json The json string being decoded
      */
     public function __construct($json = null)
     {
-        $this->body = Util::setIfExists($json, 'body');
+        $this->body = Util::setIfStringExists($json, 'body');
         $this->creationDate = Util::setIfDateTimeExists($json, 'creation_date');
-        $this->isUnread = Util::setIfExists($json, 'is_unread');
+        $this->isUnread = Util::setIfBoolExists($json, 'is_unread');
         $this->notificationType = Util::isEqual(
             $json,
             'notification_type',
@@ -112,8 +112,8 @@ class Notification implements NotificationInterface
                 self::NOTIFICATION_TYPE_SUBSTANTIVE_EDIT
             )
         );
-        $this->postId = Util::setIfExists($json, 'post_id');
-        $this->site = new Site(Util::setIfExists($json, 'site'));
+        $this->postId = Util::setIfIntegerExists($json, 'post_id');
+        $this->site = new Site(Util::setIfArrayExists($json, 'site'));
     }
 
     /**

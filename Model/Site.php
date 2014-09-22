@@ -134,19 +134,19 @@ class Site implements SiteInterface
     /**
      * Constructor.
      *
-     * @param null|(int|string)[] $json The json string being decoded
+     * @param null|mixed[] $json The json string being decoded
      */
     public function __construct($json = null)
     {
         $this->loadUrl($json);
 
         $this->aliases = Util::setIfArrayExists($json, 'aliases');
-        $this->apiSiteParameter = Util::setIfExists($json, 'api_site_parameter');
-        $this->audience = Util::setIfExists($json, 'audience');
+        $this->apiSiteParameter = Util::setIfStringExists($json, 'api_site_parameter');
+        $this->audience = Util::setIfStringExists($json, 'audience');
         $this->closedBetaDate = Util::setIfDateTimeExists($json, 'closed_beta_date');
         $this->launchDate = Util::setIfDateTimeExists($json, 'launch_date');
         $this->markdownExtensions = Util::setIfArrayExists($json, 'markdown_extensions');
-        $this->name = Util::setIfExists($json, 'name');
+        $this->name = Util::setIfStringExists($json, 'name');
         $this->openBetaDate = Util::setIfDateTimeExists($json, 'open_beta_date');
         $sites = Util::setIfArrayExists($json, 'related_sites');
         foreach ($sites as $site) {
@@ -167,9 +167,9 @@ class Site implements SiteInterface
             'site_type',
             array(self::SITE_TYPE_MAIN_SITE, self::SITE_TYPE_META_SITE)
         );
-        $this->siteUrl = Util::setIfExists($json, 'site_url');
-        $this->styling = new Styling(Util::setIfExists($json, 'styling'));
-        $this->twitterAccount = Util::setIfExists($json, 'twitter_account');
+        $this->siteUrl = Util::setIfStringExists($json, 'site_url');
+        $this->styling = new Styling(Util::setIfArrayExists($json, 'styling'));
+        $this->twitterAccount = Util::setIfStringExists($json, 'twitter_account');
     }
 
     /**

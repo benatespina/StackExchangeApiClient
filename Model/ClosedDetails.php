@@ -60,7 +60,7 @@ class ClosedDetails implements ClosedDetailsInterface
     /**
      * Constructor.
      *
-     * @param null|(int|string)[] $json The json string being decoded
+     * @param null|mixed[] $json The json string being decoded
      */
     public function __construct($json = null)
     {
@@ -68,13 +68,13 @@ class ClosedDetails implements ClosedDetailsInterface
         foreach ($users as $user) {
             $this->byUsers[] = new ShallowUser($user);
         }
-        $this->description = Util::setIfExists($json, 'description');
-        $this->onHold = Util::setIfExists($json, 'on_hold');        
+        $this->description = Util::setIfStringExists($json, 'description');
+        $this->onHold = Util::setIfBoolExists($json, 'on_hold');        
         $originalQuestions = Util::setIfArrayExists($json, 'original_questions');
         foreach ($originalQuestions as $originalQuestion) {
             $this->originalQuestions[] = new OriginalQuestion($originalQuestion);
         }
-        $this->reason = Util::setIfExists($json, $this->reason, 'reason');
+        $this->reason = Util::setIfStringExists($json, 'reason');
     }
 
     /**

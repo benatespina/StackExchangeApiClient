@@ -117,14 +117,14 @@ trait BountyTrait
     /**
      * Loads the variables if the data exist into resource. It works like a constructor.
      *
-     * @param null|(int|string)[] $resource The resource
+     * @param null|mixed[] $resource The resource
      *
      * @return void
      */
     protected function loadBounty($resource)
     {
-        $this->bodyAmount = Util::setIfExists($resource, 'body_amount');
+        $this->bodyAmount = Util::setIfIntegerExists($resource, 'body_amount');
         $this->bountyClosesDate = Util::setIfDateTimeExists($resource, 'bounty_closes_date');
-        $this->bountyUser = new ShallowUser(Util::setIfExists($resource, 'bounty_user'));
+        $this->bountyUser = new ShallowUser(Util::setIfArrayExists($resource, 'bounty_user'));
     }
 }

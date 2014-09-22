@@ -72,17 +72,17 @@ class TagWiki implements TagWikiInterface
     /**
      * Constructor.
      *
-     * @param null|(int|string)[] $json The json string being decoded
+     * @param null|mixed[] $json The json string being decoded
      */
     public function __construct($json = null)
     {
-        $this->body = Util::setIfExists($json, 'body');
+        $this->body = Util::setIfStringExists($json, 'body');
         $this->bodyLastEditDate = Util::setIfDateTimeExists($json, 'body_last_edit_date');
-        $this->excerpt = Util::setIfExists($json, $this->excerpt, 'excerpt');
-        $this->excerptLastEditDate = Util::setIfExists($json, 'excerpt_last_edit_date');
-        $this->lastBodyEditor = new ShallowUser(Util::setIfExists($json, 'last_body_editor'));
-        $this->lastExcerptEditor = new ShallowUser(Util::setIfExists($json, 'last_excerpt_editor'));
-        $this->tagName = Util::setIfExists($json, 'tag_name');
+        $this->excerpt = Util::setIfStringExists($json, 'excerpt');
+        $this->excerptLastEditDate = Util::setIfDateTimeExists($json, 'excerpt_last_edit_date');
+        $this->lastBodyEditor = new ShallowUser(Util::setIfArrayExists($json, 'last_body_editor'));
+        $this->lastExcerptEditor = new ShallowUser(Util::setIfArrayExists($json, 'last_excerpt_editor'));
+        $this->tagName = Util::setIfStringExists($json, 'tag_name');
     }
 
     /**

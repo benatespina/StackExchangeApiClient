@@ -58,11 +58,11 @@ class Event extends BaseEvent implements EventInterface
     /**
      * Constructor.
      *
-     * @param null|(int|string)[] $json The json string being decoded
+     * @param null|mixed[] $json The json string being decoded
      */
     public function __construct($json = null)
     {
-        $this->id = Util::setIfExists($json, 'event_id');
+        $this->id = Util::setIfIntegerExists($json, 'event_id');
 
         $this->creationDate = Util::setIfDateTimeExists($json, 'creation_date');
         $this->eventType = Util::isEqual(
@@ -76,8 +76,8 @@ class Event extends BaseEvent implements EventInterface
                 self::EVENT_TYPE_USER_CREATED
             )
         );
-        $this->excerpt = Util::setIfExists($json, 'excerpt');
-        $this->link = Util::setIfExists($json, 'link');
+        $this->excerpt = Util::setIfStringExists($json, 'excerpt');
+        $this->link = Util::setIfStringExists($json, 'link');
     }
 
     /**

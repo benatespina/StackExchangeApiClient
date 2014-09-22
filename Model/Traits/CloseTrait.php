@@ -149,16 +149,16 @@ trait CloseTrait
     /**
      * Loads the variables if the data exist into resource. It works like a constructor.
      *
-     * @param null|(int|string)[] $resource The resource
+     * @param null|mixed[] $resource The resource
      *
      * @return void
      */
     protected function loadClose($resource)
     {
-        $this->canClose = Util::setIfExists($resource, 'can_close');
-        $this->closeVoteCount = Util::setIfExists($resource, 'close_vote_count');
+        $this->canClose = Util::setIfBoolExists($resource, 'can_close');
+        $this->closeVoteCount = Util::setIfIntegerExists($resource, 'close_vote_count');
         $this->closedDate = Util::setIfDateTimeExists($resource, 'closed_date');
-        $this->closedDetails = new ClosedDetails(Util::setIfExists($resource, 'closed_details'));
-        $this->closedReason = Util::setIfExists($resource, 'closed_reason');
+        $this->closedDetails = new ClosedDetails(Util::setIfArrayExists($resource, 'closed_details'));
+        $this->closedReason = Util::setIfStringExists($resource, 'closed_reason');
     }
 }

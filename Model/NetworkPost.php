@@ -48,15 +48,15 @@ class NetworkPost extends BaseNetworkPost implements NetworkPostInterface
     /**
      * Constructor.
      *
-     * @param null|(int|string)[] $json The json string being decoded
+     * @param null|mixed[] $json The json string being decoded
      */
     public function __construct($json = null)
     {
-        $this->id = Util::setIfExists($json, 'post_id');
+        $this->id = Util::setIfIntegerExists($json, 'post_id');
 
         $this->postType = Util::isEqual($json, 'post_type', array(self::POST_TYPE_ANSWER, self::POST_TYPE_QUESTION));
-        $this->score = Util::setIfExists($json, $this->score, 'score');
-        $this->title = Util::setIfExists($json, $this->title, 'title');
+        $this->score = Util::setIfIntegerExists($json, 'score');
+        $this->title = Util::setIfStringExists($json, 'title');
     }
 
     /**

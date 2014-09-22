@@ -53,12 +53,12 @@ trait AnsweredTrait
     /**
      * Loads the variables if the data exist into resource. It works like a constructor.
      *
-     * @param null|(int|string)[] $resource The resource
+     * @param null|mixed[] $resource The resource
      *
      * @return void
      */
     protected function loadAnswered($resource)
     {
-        $this->isAnswered = Util::setIfExists($resource, 'is_answered');
+        $this->isAnswered = Util::setIfBoolExists($resource, 'is_answered');
     }
 }

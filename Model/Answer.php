@@ -55,19 +55,19 @@ class Answer extends BaseAnswer implements AnswerInterface
     /**
      * Constructor.
      *
-     * @param null|(int|string)[] $json The json string being decoded
+     * @param null|mixed[] $json The json string being decoded
      */
     public function __construct($json = null)
     {
         parent::__construct($json);
-        $this->id = Util::setIfExists($json, 'answer_id');
+        $this->id = Util::setIfIntegerExists($json, 'answer_id');
 
         $this->loadAwardedBounty($json);
 
-        $this->accepted = Util::setIfExists($json, 'accepted');
-        $this->canFlag = Util::setIfExists($json, 'can_flag');
-        $this->isAccepted = Util::setIfExists($json, 'is_accepted');
-        $this->questionId = Util::setIfExists($json, 'question_id');
+        $this->accepted = Util::setIfBoolExists($json, 'accepted');
+        $this->canFlag = Util::setIfBoolExists($json, 'can_flag');
+        $this->isAccepted = Util::setIfBoolExists($json, 'is_accepted');
+        $this->questionId = Util::setIfIntegerExists($json, 'question_id');
     }
 
     /**

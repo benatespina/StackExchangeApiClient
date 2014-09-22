@@ -132,7 +132,7 @@ class SearchExcerpt extends BaseSearchExcerpt implements SearchExcerptInterface
     /**
      * Constructor.
      *
-     * @param null|(int|string)[] $json The json string being decoded
+     * @param null|mixed[] $json The json string being decoded
      */
     public function __construct($json = null)
     {
@@ -141,20 +141,20 @@ class SearchExcerpt extends BaseSearchExcerpt implements SearchExcerptInterface
         $this->loadAnswered($json);
         $this->loadGenericId($json);
         
-        $this->answerCount = Util::setIfExists($json, 'answer_count');
+        $this->answerCount = Util::setIfIntegerExists($json, 'answer_count');
         $this->closedDate = Util::setIfDateTimeExists($json, 'closed_date');
         $this->communityOwnedDate = Util::setIfDateTimeExists($json, 'community_owned_date');
         $this->equivalentTagsSearch = Util::setIfArrayExists($json, 'equivalent_tag_search');
-        $this->excerpt = Util::setIfExists($json, 'excerpt');
-        $this->hasAcceptedAnswer = Util::setIfExists($json, 'has_accepted_answer');
-        $this->isAccepted = Util::setIfExists($json, 'is_accepted');
+        $this->excerpt = Util::setIfStringExists($json, 'excerpt');
+        $this->hasAcceptedAnswer = Util::setIfBoolExists($json, 'has_accepted_answer');
+        $this->isAccepted = Util::setIfBoolExists($json, 'is_accepted');
         $this->itemType = Util::isEqual($json, 'item_type', array(self::ITEM_TYPE_ANSWER, self::ITEM_TYPE_QUESTION));
         $this->lastActivityDate = Util::setIfDateTimeExists($json, 'last_activity_date');
-        $this->lastActivityUser = new ShallowUser(Util::setIfExists($json, 'last_activity_user'));
+        $this->lastActivityUser = new ShallowUser(Util::setIfArrayExists($json, 'last_activity_user'));
         $this->lockedDate = Util::setIfDateTimeExists($json, 'locked_date');
-        $this->owner = new ShallowUser(Util::setIfExists($json, 'owner'));
-        $this->questionScore = Util::setIfExists($json, 'question_score');
-        $this->score = Util::setIfExists($json, 'score');
+        $this->owner = new ShallowUser(Util::setIfArrayExists($json, 'owner'));
+        $this->questionScore = Util::setIfIntegerExists($json, 'question_score');
+        $this->score = Util::setIfIntegerExists($json, 'score');
     }
 
     /**

@@ -58,15 +58,15 @@ class TagSynonym implements TagSynonymInterface
     /**
      * Constructor.
      *
-     * @param null|(int|string)[] $json The json string being decoded
+     * @param null|mixed[] $json The json string being decoded
      */
     public function __construct($json = null)
     {
-        $this->appliedCount = Util::setIfExists($json, 'applied_count');
+        $this->appliedCount = Util::setIfIntegerExists($json, 'applied_count');
         $this->creationDate = Util::setIfDateTimeExists($json, 'creation_date');
-        $this->fromTag = Util::setIfExists($json, 'from_tag');
+        $this->fromTag = Util::setIfStringExists($json, 'from_tag');
         $this->lastAppliedDate = Util::setIfDateTimeExists($json, 'last_applied_date');
-        $this->toTag = Util::setIfExists($json, 'to_tag');
+        $this->toTag = Util::setIfStringExists($json, 'to_tag');
     }
 
     /**

@@ -117,14 +117,14 @@ trait CountTrait
     /**
      * Loads the variables if the data exist into resource. It works like a constructor.
      *
-     * @param null|(int|string)[] $resource The resource
+     * @param null|mixed[] $resource The resource
      *
      * @return void
      */
     protected function loadCount($resource)
     {
-        $this->answerCount = Util::setIfExists($resource, 'answer_count');
-        $this->badgeCount = new BadgeCount(Util::setIfExists($resource, 'badge_counts'));
-        $this->questionCount = Util::setIfExists($resource, 'question_count');
+        $this->answerCount = Util::setIfIntegerExists($resource, 'answer_count');
+        $this->badgeCount = new BadgeCount(Util::setIfArrayExists($resource, 'badge_counts'));
+        $this->questionCount = Util::setIfIntegerExists($resource, 'question_count');
     }
 }

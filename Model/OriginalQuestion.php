@@ -34,15 +34,15 @@ class OriginalQuestion extends BaseOriginalQuestion implements OriginalQuestionI
     /**
      * Constructor.
      *
-     * @param null|(int|string)[] $json The json string being decoded
+     * @param null|mixed[] $json The json string being decoded
      */
     public function __construct($json = null)
     {
-        $this->id = Util::setIfExists($json, 'question_id');
+        $this->id = Util::setIfIntegerExists($json, 'question_id');
 
         $this->loadAnswer($json);
 
-        $this->title = Util::setIfExists($json, 'title');
+        $this->title = Util::setIfStringExists($json, 'title');
     }
 
     /**

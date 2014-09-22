@@ -55,16 +55,16 @@ class RelatedSite implements RelatedSiteInterface
     /**
      * Constructor.
      *
-     * @param null|(int|string)[] $json The json string being decoded
+     * @param null|mixed[] $json The json string being decoded
      */
     public function __construct($json = null)
     {
-        $this->apiSiteParameter = Util::setIfExists($json, 'api_site_parameter');
-        $this->name = Util::setIfExists($json, 'name');
+        $this->apiSiteParameter = Util::setIfStringExists($json, 'api_site_parameter');
+        $this->name = Util::setIfStringExists($json, 'name');
         $this->relation = Util::isEqual(
             $json, 'relation', array(self::RELATION_CHAT, self::RELATION_META, self::RELATION_PARENT)
         );
-        $this->siteUrl = Util::setIfExists($json, 'site_url');
+        $this->siteUrl = Util::setIfStringExists($json, 'site_url');
     }
 
     /**

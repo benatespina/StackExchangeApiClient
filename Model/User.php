@@ -120,7 +120,7 @@ class User extends ShallowUser implements UserInterface
     /**
      * Constructor.
      *
-     * @param null|(int|string)[] $json The json string being decoded
+     * @param null|mixed[] $json The json string being decoded
      */
     public function __construct($json = null)
     {
@@ -129,19 +129,19 @@ class User extends ShallowUser implements UserInterface
         $this->loadReputationChange($json);
         $this->loadVoteCount($json);
 
-        $this->aboutMe = Util::setIfExists($json, 'about_me');
-        $this->accountId = Util::setIfExists($json, 'account_id');
-        $this->age = Util::setIfExists($json, 'age');
-        $this->answerCount = Util::setIfExists($json, 'answer_count');
+        $this->aboutMe = Util::setIfStringExists($json, 'about_me');
+        $this->accountId = Util::setIfIntegerExists($json, 'account_id');
+        $this->age = Util::setIfIntegerExists($json, 'age');
+        $this->answerCount = Util::setIfIntegerExists($json, 'answer_count');
         $this->creationDate = Util::setIfDateTimeExists($json, 'creation_date');
-        $this->isEmployee = Util::setIfExists($json, $this->isEmployee, 'is_employee');
+        $this->isEmployee = Util::setIfBoolExists($json, 'is_employee');
         $this->lastAccessDate = Util::setIfDateTimeExists($json, 'last_access_date');
-        $this->lastModifiedDate = Util::setIfExists($json, 'last_modified_date');
-        $this->location = Util::setIfExists($json, 'location');
-        $this->questionCount = Util::setIfExists($json, 'question_count');
+        $this->lastModifiedDate = Util::setIfDateTimeExists($json, 'last_modified_date');
+        $this->location = Util::setIfStringExists($json, 'location');
+        $this->questionCount = Util::setIfIntegerExists($json, 'question_count');
         $this->timedPenaltyDate = Util::setIfDateTimeExists($json, 'timed_penalty_date');
-        $this->viewCount = Util::setIfExists($json, 'view_count');
-        $this->websiteUrl = Util::setIfExists($json, 'website_url');
+        $this->viewCount = Util::setIfIntegerExists($json, 'view_count');
+        $this->websiteUrl = Util::setIfStringExists($json, 'website_url');
     }
 
     /**

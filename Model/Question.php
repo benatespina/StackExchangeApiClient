@@ -89,12 +89,12 @@ class Question extends BaseQuestion implements QuestionInterface
     /**
      * Constructor.
      *
-     * @param null|(int|string)[] $json The json string being decoded
+     * @param null|mixed[] $json The json string being decoded
      */
     public function __construct($json = null)
     {
         parent::__construct($json);
-        $this->id = Util::setIfExists($json, 'question_id');
+        $this->id = Util::setIfIntegerExists($json, 'question_id');
 
         $this->loadAnswer($json);
         $this->loadAnswered($json);
@@ -107,12 +107,12 @@ class Question extends BaseQuestion implements QuestionInterface
         foreach ($answers as $answer) {
             $this->answers[] = new Answer($answer);
         }
-        $this->canFlag = Util::setIfExists($json, 'can_flag');
-        $this->deleteVoteCount = Util::setIfExists($json, 'delete_vote_count');
-        $this->notice = new Notice(Util::setIfExists($json, 'notice'));
+        $this->canFlag = Util::setIfBoolExists($json, 'can_flag');
+        $this->deleteVoteCount = Util::setIfIntegerExists($json, 'delete_vote_count');
+        $this->notice = new Notice(Util::setIfArrayExists($json, 'notice'));
         $this->protectedDate = Util::setIfDateTimeExists($json, 'protected_date');
-        $this->reopenVoteCount = Util::setIfExists($json, 'reopen_vote_count');
-        $this->viewCount = Util::setIfExists($json, 'view_count');
+        $this->reopenVoteCount = Util::setIfIntegerExists($json, 'reopen_vote_count');
+        $this->viewCount = Util::setIfIntegerExists($json, 'view_count');
     }
 
     /**

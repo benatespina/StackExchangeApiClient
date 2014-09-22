@@ -85,11 +85,11 @@ class NetworkActivity extends BaseNetworkActivity implements NetworkActivityInte
     /**
      * Constructor.
      *
-     * @param null|(int|string)[] $json The json string being decoded
+     * @param null|mixed[] $json The json string being decoded
      */
     public function __construct($json = null)
     {
-        $this->accountId = Util::setIfExists($json, $this->accountId, 'account_id');
+        $this->accountId = Util::setIfIntegerExists($json, 'account_id');
         $this->activityType = Util::isEqual(
             $json, 'activity_type',
             array(
@@ -99,11 +99,11 @@ class NetworkActivity extends BaseNetworkActivity implements NetworkActivityInte
                 self::ACTIVITY_TYPE_QUESTION_POSTED
             )
         );
-        $this->apiSiteParameter = Util::setIfExists($json, 'api_site_parameter');
-        $this->description = Util::setIfExists($json, 'description');
-        $this->link = Util::setIfExists($json, 'link');
-        $this->postId = Util::setIfExists($json, 'post_id');
-        $this->score = Util::setIfExists($json, 'score');
+        $this->apiSiteParameter = Util::setIfStringExists($json, 'api_site_parameter');
+        $this->description = Util::setIfStringExists($json, 'description');
+        $this->link = Util::setIfStringExists($json, 'link');
+        $this->postId = Util::setIfIntegerExists($json, 'post_id');
+        $this->score = Util::setIfIntegerExists($json, 'score');
     }
 
     /**

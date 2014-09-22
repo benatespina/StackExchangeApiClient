@@ -86,7 +86,7 @@ class Revision extends BaseRevision implements RevisionInterface
     /**
      * Constructor.
      *
-     * @param null|(int|string)[] $json The json string being decoded
+     * @param null|mixed[] $json The json string being decoded
      */
     public function __construct($json = null)
     {
@@ -95,13 +95,13 @@ class Revision extends BaseRevision implements RevisionInterface
         $this->loadLast($json);
         $this->loadRevision($json, array(self::REVISION_TYPE_SINGLE_USER, self::REVISION_TYPE_VOTE_BASED));
 
-        $this->body = Util::setIfExists($json, 'body');
-        $this->comment = Util::setIfExists($json, 'comment');
-        $this->isRollback = Util::setIfExists($json, 'is_rollback');
-        $this->postId = Util::setIfExists($json, 'post_id');
+        $this->body = Util::setIfStringExists($json, 'body');
+        $this->comment = Util::setIfStringExists($json, 'comment');
+        $this->isRollback = Util::setIfBoolExists($json, 'is_rollback');
+        $this->postId = Util::setIfIntegerExists($json, 'post_id');
         $this->postType = Util::isEqual($json, 'post_type', array(self::POST_TYPE_QUESTION, self::POST_TYPE_ANSWER));
-        $this->setCommunityWiki = Util::setIfExists($json, 'set_community_wiki');
-        $this->user = new ShallowUser(Util::setIfExists($json, 'user'));
+        $this->setCommunityWiki = Util::setIfBoolExists($json, 'set_community_wiki');
+        $this->user = new ShallowUser(Util::setIfArrayExists($json, 'user'));
     }
 
     /**
