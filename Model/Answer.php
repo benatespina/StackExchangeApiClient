@@ -29,7 +29,7 @@ class Answer extends BaseAnswer implements AnswerInterface
      *
      * @var boolean
      */
-    protected $accepted;
+    protected $privateAccepted;
 
     /**
      * Boolean that shows it can flag or not.
@@ -64,7 +64,7 @@ class Answer extends BaseAnswer implements AnswerInterface
 
         $this->loadAwardedBounty($json);
 
-        $this->accepted = Util::setIfBoolExists($json, 'accepted');
+        $this->privateAccepted = Util::setIfBoolExists($json, 'accepted');
         $this->canFlag = Util::setIfBoolExists($json, 'can_flag');
         $this->isAccepted = Util::setIfBoolExists($json, 'is_accepted');
         $this->questionId = Util::setIfIntegerExists($json, 'question_id');
@@ -73,9 +73,9 @@ class Answer extends BaseAnswer implements AnswerInterface
     /**
      * {@inheritdoc}
      */
-    public function setAccepted($accepted)
+    public function setPrivateAccepted($accepted)
     {
-        $this->accepted = $accepted;
+        $this->privateAccepted = $accepted;
 
         return $this;
     }
@@ -85,7 +85,7 @@ class Answer extends BaseAnswer implements AnswerInterface
      */
     public function hasAccepted()
     {
-        return $this->accepted;
+        return $this->privateAccepted;
     }
 
     /**
@@ -109,7 +109,7 @@ class Answer extends BaseAnswer implements AnswerInterface
     /**
      * {@inheritdoc}
      */
-    public function setIsAccepted($isAccepted)
+    public function setAccepted($isAccepted)
     {
         $this->isAccepted = $isAccepted;
 

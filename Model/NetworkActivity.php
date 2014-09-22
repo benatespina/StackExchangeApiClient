@@ -137,7 +137,8 @@ class NetworkActivity extends BaseNetworkActivity implements NetworkActivityInte
                 self::ACTIVITY_TYPE_COMMENT_POSTED,
                 self::ACTIVITY_TYPE_QUESTION_POSTED
             )
-        )) {
+        ) === true
+        ) {
             $this->activityType = $activityType;
         }
 

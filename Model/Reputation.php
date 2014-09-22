@@ -176,7 +176,7 @@ class Reputation implements ReputationInterface
      */
     public function setPostType($postType)
     {
-        if (Util::coincidesElement($postType, array(self::POST_TYPE_ANSWER, self::POST_TYPE_QUESTION))) {
+        if (Util::coincidesElement($postType, array(self::POST_TYPE_ANSWER, self::POST_TYPE_QUESTION)) === true) {
             $this->postType = $postType;
         }
 
@@ -261,7 +261,8 @@ class Reputation implements ReputationInterface
                 self::VOTE_TYPE_SUGGESTED_EDITS,
                 self::VOTE_TYPE_UP_VOTES
             )
-        )) {
+        ) === true
+        ) {
             $this->voteType = $voteType;
         }
 

@@ -194,7 +194,8 @@ class Notification implements NotificationInterface
                 self::NOTIFICATION_TYPE_REPUTATION_BONUS,
                 self::NOTIFICATION_TYPE_SUBSTANTIVE_EDIT
             )
-        )) {
+        ) === true
+        ) {
             $this->notificationType = $notificationType;
         }
 

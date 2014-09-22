@@ -217,14 +217,15 @@ class ShallowUser extends BaseShallowUser implements ShallowUserInterface
     public function setUserType($userType)
     {
         if (Util::coincidesElement(
-            $userType, 
+            $userType,
             array(
                 self::USER_TYPE_DOES_NOT_EXIST,
                 self::USER_TYPE_MODERATOR,
                 self::USER_TYPE_REGISTERED,
                 self::USER_TYPE_UNREGISTERED
             )
-        )) {
+        ) === true
+        ) {
             $this->userType = $userType;
         }
 

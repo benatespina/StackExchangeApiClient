@@ -46,7 +46,7 @@ class InboxItemSpec extends ObjectBehavior
 
     function its_is_unread_is_mutable()
     {
-        $this->setIsUnread(true)->shouldReturn($this);
+        $this->setUnread(true)->shouldReturn($this);
         $this->isUnread()->shouldReturn(true);
     }
 

@@ -58,7 +58,7 @@ interface InboxItemInterface extends GenericIdInterface
      *
      * @return $this self Object
      */
-    public function setIsUnread($isUnread);
+    public function setUnread($isUnread);
 
     /**
      * Gets is unread.

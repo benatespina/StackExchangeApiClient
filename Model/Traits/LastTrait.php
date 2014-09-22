@@ -29,7 +29,7 @@ trait LastTrait
     /**
      * Array that contains the last tags.
      *
-     * @var string[]|null
+     * @var string[]
      */
     protected $lastTags = array();
 
@@ -95,7 +95,7 @@ trait LastTrait
     /**
      * Gets array of last tags.
      *
-     * @return string[]|null
+     * @return string[]
      */
     public function getLastTags()
     {

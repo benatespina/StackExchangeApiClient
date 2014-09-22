@@ -26,7 +26,7 @@ class AnsweredTraitSpec extends ObjectBehavior
 
     function its_is_answered_is_mutable()
     {
-        $this->setIsAnswered(true)->shouldReturn($this);
+        $this->setAnswered(true)->shouldReturn($this);
         $this->isAnswered()->shouldReturn(true);
     }
 }

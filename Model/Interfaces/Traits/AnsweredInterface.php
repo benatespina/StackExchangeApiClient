@@ -24,7 +24,7 @@ interface AnsweredInterface
      *
      * @return $this self Object
      */
-    public function setIsAnswered($isAnswered);
+    public function setAnswered($isAnswered);
 
     /**
      * Gets is answered.

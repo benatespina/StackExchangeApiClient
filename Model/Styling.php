@@ -44,7 +44,7 @@ class Styling implements StylingInterface
     /**
      * Constructor.
      *
-     * @param null|array $json The json string being decoded
+     * @param null|mixed[] $json The json string being decoded
      */
     public function __construct($json = null)
     {

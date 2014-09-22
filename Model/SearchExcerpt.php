@@ -55,7 +55,7 @@ class SearchExcerpt extends BaseSearchExcerpt implements SearchExcerptInterface
     /**
      * Array that contains equivalent tags search.
      *
-     * @var string[]|null
+     * @var string[]
      */
     protected $equivalentTagsSearch;
 
@@ -137,10 +137,10 @@ class SearchExcerpt extends BaseSearchExcerpt implements SearchExcerptInterface
     public function __construct($json = null)
     {
         parent::__construct($json);
-        
+
         $this->loadAnswered($json);
         $this->loadGenericId($json);
-        
+
         $this->answerCount = Util::setIfIntegerExists($json, 'answer_count');
         $this->closedDate = Util::setIfDateTimeExists($json, 'closed_date');
         $this->communityOwnedDate = Util::setIfDateTimeExists($json, 'community_owned_date');
@@ -298,13 +298,7 @@ class SearchExcerpt extends BaseSearchExcerpt implements SearchExcerptInterface
      */
     public function setItemType($itemType)
     {
-        if (Util::coincidesElement(
-            $itemType,
-            array(
-                self::ITEM_TYPE_ANSWER,
-                self::ITEM_TYPE_QUESTION
-            )
-        )) {
+        if (Util::coincidesElement($itemType, array(self::ITEM_TYPE_ANSWER, self::ITEM_TYPE_QUESTION)) === true) {
             $this->itemType = $itemType;
         }
 

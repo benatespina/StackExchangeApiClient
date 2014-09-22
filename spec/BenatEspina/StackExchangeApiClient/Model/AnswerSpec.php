@@ -34,9 +34,9 @@ class AnswerSpec extends ObjectBehavior
         $this->shouldImplement('BenatEspina\StackExchangeApiClient\Model\Interfaces\AnswerInterface');
     }
 
-    function its_accepted_is_mutable()
+    function its_private_accepted_is_mutable()
     {
-        $this->setAccepted(true)->shouldReturn($this);
+        $this->setPrivateAccepted(true)->shouldReturn($this);
         $this->hasAccepted()->shouldReturn(true);
     }
 
@@ -48,7 +48,7 @@ class AnswerSpec extends ObjectBehavior
 
     function its_is_accepted_is_mutable()
     {
-        $this->setIsAccepted(true)->shouldReturn($this);
+        $this->setAccepted(true)->shouldReturn($this);
         $this->isAccepted()->shouldReturn(true);
     }
 

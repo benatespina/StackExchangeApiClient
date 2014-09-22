@@ -57,7 +57,11 @@ trait CloseTrait
     protected $closedReason;
 
     /**
-     * {@inheritdoc}
+     * Sets can close.
+     *
+     * @param boolean $canClose The canClose boolean
+     *
+     * @return $this self Object
      */
     public function setCanClose($canClose)
     {
@@ -67,7 +71,9 @@ trait CloseTrait
     }
 
     /**
-     * {@inheritdoc}
+     * Gets can close.
+     *
+     * @return boolean
      */
     public function isCanClose()
     {
@@ -75,7 +81,11 @@ trait CloseTrait
     }
 
     /**
-     * {@inheritdoc}
+     * Sets number of close votes.
+     *
+     * @param int $closeVoteCount The number of close votes
+     *
+     * @return $this self Object
      */
     public function setCloseVoteCount($closeVoteCount)
     {
@@ -85,7 +95,9 @@ trait CloseTrait
     }
 
     /**
-     * {@inheritdoc}
+     * Gets close vote count.
+     *
+     * @return int
      */
     public function getCloseVoteCount()
     {
@@ -93,7 +105,11 @@ trait CloseTrait
     }
 
     /**
-     * {@inheritdoc}
+     * Sets closed date.
+     *
+     * @param \DateTime|null $closedDate The closed date
+     *
+     * @return $this self Object
      */
     public function setClosedDate(\DateTime $closedDate)
     {
@@ -103,7 +119,9 @@ trait CloseTrait
     }
 
     /**
-     * {@inheritdoc}
+     * Gets closed date.
+     *
+     * @return \DateTime|null
      */
     public function getClosedDate()
     {
@@ -111,7 +129,12 @@ trait CloseTrait
     }
 
     /**
-     * {@inheritdoc}
+     * Sets closed details.
+     *
+     * @param \BenatEspina\StackExchangeApiClient\Model\Interfaces\ClosedDetailsInterface|null $closedDetails The closed
+     *                                                                                                        details
+     *
+     * @return $this self Object
      */
     public function setClosedDetails(ClosedDetailsInterface $closedDetails)
     {
@@ -121,7 +144,9 @@ trait CloseTrait
     }
 
     /**
-     * {@inheritdoc}
+     * Gets closed details.
+     *
+     * @return \BenatEspina\StackExchangeApiClient\Model\Interfaces\ClosedDetailsInterface|null
      */
     public function getClosedDetails()
     {
@@ -129,7 +154,11 @@ trait CloseTrait
     }
 
     /**
-     * {@inheritdoc}
+     * Sets closed reason.
+     *
+     * @param string|null $closedReason The closed reason
+     *
+     * @return $this self Object
      */
     public function setClosedReason($closedReason)
     {
@@ -139,7 +168,9 @@ trait CloseTrait
     }
 
     /**
-     * {@inheritdoc}
+     * Gets closed reason.
+     *
+     * @return string|null
      */
     public function getClosedReason()
     {

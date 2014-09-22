@@ -23,7 +23,7 @@ use BenatEspina\StackExchangeApiClient\Util\Util;
  */
 class NetworkUser extends BaseNetworkUser implements NetworkUserInterface
 {
-    use 
+    use
         CountTrait,
         TopTrait;
 
@@ -89,7 +89,7 @@ class NetworkUser extends BaseNetworkUser implements NetworkUserInterface
     public function __construct($json = null)
     {
         $this->id = Util::setIfIntegerExists($json, 'user_id');
-        
+
         $this->loadCount($json);
         $this->loadTop($json);
 
@@ -233,7 +233,8 @@ class NetworkUser extends BaseNetworkUser implements NetworkUserInterface
                 self::USER_TYPE_REGISTERED,
                 self::USER_TYPE_UNREGISTERED
             )
-        )) {
+        ) === true
+        ) {
             $this->userType = $userType;
         }
 

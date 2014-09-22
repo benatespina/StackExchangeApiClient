@@ -85,6 +85,37 @@ class ReputationHistory implements ReputationHistoryInterface
     protected $userId;
 
     /**
+     * Private array that contains all the reputation history types. It is useful for not duplicated the code.
+     *
+     * @var string[]
+     */
+    private $reputationHistoryTypes = array(
+        self::REPUTATION_HISTORY_TYPE_ASKER_ACCEPTS_ANSWER,
+        self::REPUTATION_HISTORY_TYPE_ASKER_UNACCEPT_ANSWER,
+        self::REPUTATION_HISTORY_TYPE_ANSWER_ACCEPTED,
+        self::REPUTATION_HISTORY_TYPE_ANSWER_UNACCEPTED,
+        self::REPUTATION_HISTORY_TYPE_VOTER_DOWNVOTES,
+        self::REPUTATION_HISTORY_TYPE_VOTER_UNDOWNVOTES,
+        self::REPUTATION_HISTORY_TYPE_POST_DOWNVOTED,
+        self::REPUTATION_HISTORY_TYPE_POST_UNDOWNVOTED,
+        self::REPUTATION_HISTORY_TYPE_POST_UPVOTED,
+        self::REPUTATION_HISTORY_TYPE_POST_UNUPVOTED,
+        self::REPUTATION_HISTORY_TYPE_SUGGESTED_EDIT_APPROVAL_RECEIVED,
+        self::REPUTATION_HISTORY_TYPE_POST_FLAGGED_AS_SPAM,
+        self::REPUTATION_HISTORY_TYPE_POST_FLAGGED_AS_OFFENSIVE,
+        self::REPUTATION_HISTORY_TYPE_BOUNTY_GIVEN,
+        self::REPUTATION_HISTORY_TYPE_BOUNTY_EARNED,
+        self::REPUTATION_HISTORY_TYPE_BOUNTY_CANCELLED,
+        self::REPUTATION_HISTORY_TYPE_POST_DELETED,
+        self::REPUTATION_HISTORY_TYPE_POST_UNDELETED,
+        self::REPUTATION_HISTORY_TYPE_ASSOCIATION_BONUS,
+        self::REPUTATION_HISTORY_TYPE_ARBITRARY_REPUTATION_CHANGE,
+        self::REPUTATION_HISTORY_TYPE_VOTE_FRAUD_REVERSAL,
+        self::REPUTATION_HISTORY_TYPE_POST_MIGRATED,
+        self::REPUTATION_HISTORY_TYPE_USER_DELETED
+    );
+
+    /**
      * Constructor.
      *
      * @param null|mixed[] $json The json string being decoded
@@ -94,35 +125,7 @@ class ReputationHistory implements ReputationHistoryInterface
         $this->creationDate = Util::setIfDateTimeExists($json, 'creation_date');
         $this->postId = Util::setIfIntegerExists($json, 'post_id');
         $this->reputationChange = Util::setIfIntegerExists($json, 'reputation_change');
-        $this->reputationHistoryType = Util::isEqual(
-            $json,
-            'reputation_history_type',
-            array(
-                self::REPUTATION_HISTORY_TYPE_ASKER_ACCEPTS_ANSWER,
-                self::REPUTATION_HISTORY_TYPE_ASKER_UNACCEPT_ANSWER,
-                self::REPUTATION_HISTORY_TYPE_ANSWER_ACCEPTED,
-                self::REPUTATION_HISTORY_TYPE_ANSWER_UNACCEPTED,
-                self::REPUTATION_HISTORY_TYPE_VOTER_DOWNVOTES,
-                self::REPUTATION_HISTORY_TYPE_VOTER_UNDOWNVOTES,
-                self::REPUTATION_HISTORY_TYPE_POST_DOWNVOTED,
-                self::REPUTATION_HISTORY_TYPE_POST_UNDOWNVOTED,
-                self::REPUTATION_HISTORY_TYPE_POST_UPVOTED,
-                self::REPUTATION_HISTORY_TYPE_POST_UNUPVOTED,
-                self::REPUTATION_HISTORY_TYPE_SUGGESTED_EDIT_APPROVAL_RECEIVED,
-                self::REPUTATION_HISTORY_TYPE_POST_FLAGGED_AS_SPAM,
-                self::REPUTATION_HISTORY_TYPE_POST_FLAGGED_AS_OFFENSIVE,
-                self::REPUTATION_HISTORY_TYPE_BOUNTY_GIVEN,
-                self::REPUTATION_HISTORY_TYPE_BOUNTY_EARNED,
-                self::REPUTATION_HISTORY_TYPE_BOUNTY_CANCELLED,
-                self::REPUTATION_HISTORY_TYPE_POST_DELETED,
-                self::REPUTATION_HISTORY_TYPE_POST_UNDELETED,
-                self::REPUTATION_HISTORY_TYPE_ASSOCIATION_BONUS,
-                self::REPUTATION_HISTORY_TYPE_ARBITRARY_REPUTATION_CHANGE,
-                self::REPUTATION_HISTORY_TYPE_VOTE_FRAUD_REVERSAL,
-                self::REPUTATION_HISTORY_TYPE_POST_MIGRATED,
-                self::REPUTATION_HISTORY_TYPE_USER_DELETED
-            )
-        );
+        $this->reputationHistoryType = Util::isEqual($json, 'reputation_history_type', $this->reputationHistoryTypes);
         $this->userId = Util::setIfIntegerExists($json, 'user_id');
     }
 
@@ -185,34 +188,7 @@ class ReputationHistory implements ReputationHistoryInterface
      */
     public function setReputationHistoryType($reputationHistoryType)
     {
-        if (Util::coincidesElement(
-            $reputationHistoryType,
-            array(
-                self::REPUTATION_HISTORY_TYPE_ASKER_ACCEPTS_ANSWER,
-                self::REPUTATION_HISTORY_TYPE_ASKER_UNACCEPT_ANSWER,
-                self::REPUTATION_HISTORY_TYPE_ANSWER_ACCEPTED,
-                self::REPUTATION_HISTORY_TYPE_ANSWER_UNACCEPTED,
-                self::REPUTATION_HISTORY_TYPE_VOTER_DOWNVOTES,
-                self::REPUTATION_HISTORY_TYPE_VOTER_UNDOWNVOTES,
-                self::REPUTATION_HISTORY_TYPE_POST_DOWNVOTED,
-                self::REPUTATION_HISTORY_TYPE_POST_UNDOWNVOTED,
-                self::REPUTATION_HISTORY_TYPE_POST_UPVOTED,
-                self::REPUTATION_HISTORY_TYPE_POST_UNUPVOTED,
-                self::REPUTATION_HISTORY_TYPE_SUGGESTED_EDIT_APPROVAL_RECEIVED,
-                self::REPUTATION_HISTORY_TYPE_POST_FLAGGED_AS_SPAM,
-                self::REPUTATION_HISTORY_TYPE_POST_FLAGGED_AS_OFFENSIVE,
-                self::REPUTATION_HISTORY_TYPE_BOUNTY_GIVEN,
-                self::REPUTATION_HISTORY_TYPE_BOUNTY_EARNED,
-                self::REPUTATION_HISTORY_TYPE_BOUNTY_CANCELLED,
-                self::REPUTATION_HISTORY_TYPE_POST_DELETED,
-                self::REPUTATION_HISTORY_TYPE_POST_UNDELETED,
-                self::REPUTATION_HISTORY_TYPE_ASSOCIATION_BONUS,
-                self::REPUTATION_HISTORY_TYPE_ARBITRARY_REPUTATION_CHANGE,
-                self::REPUTATION_HISTORY_TYPE_VOTE_FRAUD_REVERSAL,
-                self::REPUTATION_HISTORY_TYPE_POST_MIGRATED,
-                self::REPUTATION_HISTORY_TYPE_USER_DELETED
-            )
-        )) {
+        if (Util::coincidesElement($reputationHistoryType, $this->reputationHistoryTypes) === true) {
             $this->reputationHistoryType = $reputationHistoryType;
         }
 

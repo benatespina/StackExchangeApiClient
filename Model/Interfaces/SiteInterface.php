@@ -10,6 +10,8 @@
 
 namespace BenatEspina\StackExchangeApiClient\Model\Interfaces;
 
+use BenatEspina\StackExchangeApiClient\Model\Interfaces\Traits\BetaDateInterface;
+use BenatEspina\StackExchangeApiClient\Model\Interfaces\Traits\SiteInterface as SiteTrait;
 use BenatEspina\StackExchangeApiClient\Model\Interfaces\Traits\UrlInterface;
 
 /**
@@ -17,7 +19,7 @@ use BenatEspina\StackExchangeApiClient\Model\Interfaces\Traits\UrlInterface;
  *
  * @package BenatEspina\StackExchangeApiClient\Model\Interfaces
  */
-interface SiteInterface extends UrlInterface
+interface SiteInterface extends BetaDateInterface, SiteTrait, UrlInterface
 {
     /**
      * Adds alias.
@@ -40,7 +42,7 @@ interface SiteInterface extends UrlInterface
     /**
      * Gets array of aliases.
      *
-     * @return string[]|null
+     * @return string[]
      */
     public function getAliases();
 
@@ -75,22 +77,6 @@ interface SiteInterface extends UrlInterface
      * @return string
      */
     public function getAudience();
-
-    /**
-     * Sets closed beta date.
-     *
-     * @param \DateTime $closedBetaDate The closed beta date.
-     *
-     * @return $this self Object
-     */
-    public function setClosedBetaDate(\DateTime $closedBetaDate);
-
-    /**
-     * Gets closed beta date.
-     *
-     * @return \DateTime|null
-     */
-    public function getClosedBetaDate();
 
     /**
      * Sets launch date.
@@ -129,7 +115,7 @@ interface SiteInterface extends UrlInterface
     /**
      * Gets array of markdown extensions.
      *
-     * @return string[]|null
+     * @return string[]
      */
     public function getMarkdownExtensions();
 
@@ -148,79 +134,6 @@ interface SiteInterface extends UrlInterface
      * @return string
      */
     public function getName();
-
-    /**
-     * Sets open beta date.
-     *
-     * @param \DateTime $openBetaDate The open beta date.
-     *
-     * @return $this self Object
-     */
-    public function setOpenBetaDate(\DateTime $openBetaDate);
-
-    /**
-     * Gets open beta date.
-     *
-     * @return \DateTime|null
-     */
-    public function getOpenBetaDate();
-
-    /**
-     * Adds related site.
-     *
-     * @param \Benatespina\StackExchangeApiClient\Model\Interfaces\RelatedSiteInterface $relatedSite The related site
-     *
-     * @return $this self Object
-     */
-    public function addRelatedSite(RelatedSiteInterface $relatedSite);
-
-    /**
-     * Removes related site.
-     *
-     * @param \Benatespina\StackExchangeApiClient\Model\Interfaces\RelatedSiteInterface $relatedSite The related site
-     *
-     * @return $this self Object
-     */
-    public function removeRelatedSite(RelatedSiteInterface $relatedSite);
-
-    /**
-     * Gets array of related sites.
-     *
-     * @return array<\Benatespina\StackExchangeApiClient\Model\Interfaces\RelatedSiteInterface>|null
-     */
-    public function getRelatedSites();
-
-    /**
-     * Sets site state.
-     *
-     * @param string $siteState The site state that can be 'normal', 'closed_beta', 'open_beta', or 'linked_meta'
-     *
-     * @return $this self Object
-     */
-    public function setSiteState($siteState);
-
-    /**
-     * Gets site state.
-     *
-     * @return string
-     */
-    public function getSiteState();
-
-    /**
-     * Sets site type.
-     *
-     * @param string $siteType The site state that can be 'main_site' or 'meta_site'
-     *
-     * @return $this self Object
-     */
-    public function setSiteType($siteType);
-
-    /**
-     * Gets site type.
-     *
-     * @return string
-     */
-    public function getSiteType();
 
     /**
      * Sets styling.

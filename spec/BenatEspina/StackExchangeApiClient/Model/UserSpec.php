@@ -68,7 +68,7 @@ class UserSpec extends ObjectBehavior
 
     function its_is_employee_is_mutable()
     {
-        $this->setIsEmployee(true)->shouldReturn($this);
+        $this->setEmployee(true)->shouldReturn($this);
         $this->isEmployee()->shouldReturn(true);
     }
 

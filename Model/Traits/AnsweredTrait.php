@@ -33,7 +33,7 @@ trait AnsweredTrait
      *
      * @return $this self Object
      */
-    public function setIsAnswered($isAnswered)
+    public function setAnswered($isAnswered)
     {
         $this->isAnswered = $isAnswered;
 

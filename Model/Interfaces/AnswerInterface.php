@@ -20,16 +20,16 @@ use BenatEspina\StackExchangeApiClient\Model\Interfaces\Traits\AwardedBountyInte
 interface AnswerInterface extends AwardedBountyInterface
 {
     /**
-     * Sets accepted.
+     * Sets private accepted.
      *
      * @param boolean $accepted The accepted boolean
      *
      * @return $this self Object
      */
-    public function setAccepted($accepted);
+    public function setPrivateAccepted($accepted);
 
     /**
-     * Gets accepted.
+     * Gets private accepted.
      *
      * @return boolean
      */
@@ -58,7 +58,7 @@ interface AnswerInterface extends AwardedBountyInterface
      *
      * @return $this self Object
      */
-    public function setIsAccepted($isAccepted);
+    public function setAccepted($isAccepted);
 
     /**
      * Gets is accepted.

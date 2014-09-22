@@ -121,7 +121,7 @@ interface SearchExcerptInterface extends AnsweredInterface, GenericIdInterface
     /**
      * Gets array of equivalent tags search.
      *
-     * @return string[]|null
+     * @return string[]
      */
     public function getEquivalentTagsSearch();
 

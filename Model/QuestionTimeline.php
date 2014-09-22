@@ -247,7 +247,8 @@ class QuestionTimeline implements QuestionTimelineInterface
                 self::TIMELINE_TYPE_UNACCEPTED_ANSWER,
                 self::TIMELINE_TYPE_VOTE_AGGREGATE,
             )
-        )) {
+        ) === true
+        ) {
             $this->timelineType = $timelineType;
         }
 

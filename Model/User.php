@@ -237,7 +237,7 @@ class User extends ShallowUser implements UserInterface
     /**
      * {@inheritdoc}
      */
-    public function setIsEmployee($isEmployee)
+    public function setEmployee($isEmployee)
     {
         $this->isEmployee = $isEmployee;
 

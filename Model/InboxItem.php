@@ -97,7 +97,7 @@ class InboxItem implements InboxItemInterface
         $this->isUnread = Util::setIfBoolExists($json, 'is_unread');
         $this->itemType = Util::isEqual(
             $json,
-            'item_type', 
+            'item_type',
             array(
                 self::ITEM_TYPE_CAREERS_INVITATIONS,
                 self::ITEM_TYPE_CAREERS_MESSAGE,
@@ -153,7 +153,7 @@ class InboxItem implements InboxItemInterface
     /**
      * {@inheritdoc}
      */
-    public function setIsUnread($isUnread)
+    public function setUnread($isUnread)
     {
         $this->isUnread = $isUnread;
 
@@ -185,7 +185,8 @@ class InboxItem implements InboxItemInterface
                 self::ITEM_TYPE_NEW_ANSWER,
                 self::ITEM_TYPE_POST_NOTICE
             )
-        )) {
+        ) === true
+        ) {
             $this->itemType = $itemType;
         }
 
@@ -242,7 +243,7 @@ class InboxItem implements InboxItemInterface
     public function setTitle($title)
     {
         $this->title = $title;
-        
+
         return $this;
     }
 

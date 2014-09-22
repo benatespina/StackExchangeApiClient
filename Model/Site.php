@@ -10,9 +10,10 @@
 
 namespace BenatEspina\StackExchangeApiClient\Model;
 
-use BenatEspina\StackExchangeApiClient\Model\Interfaces\RelatedSiteInterface;
 use BenatEspina\StackExchangeApiClient\Model\Interfaces\SiteInterface;
 use BenatEspina\StackExchangeApiClient\Model\Interfaces\StylingInterface;
+use BenatEspina\StackExchangeApiClient\Model\Traits\BetaDateTrait;
+use BenatEspina\StackExchangeApiClient\Model\Traits\SiteTrait;
 use BenatEspina\StackExchangeApiClient\Model\Traits\UrlTrait;
 use BenatEspina\StackExchangeApiClient\Util\Util;
 
@@ -23,12 +24,15 @@ use BenatEspina\StackExchangeApiClient\Util\Util;
  */
 class Site implements SiteInterface
 {
-    use UrlTrait;
+    use
+        BetaDateTrait,
+        SiteTrait,
+        UrlTrait;
 
     const SITE_STATE_CLOSED_BETA = 'closed_beta';
     const SITE_STATE_LINKED_META = 'linked_meta';
     const SITE_STATE_NORMAL = 'normal';
-    const SITE_STATE_OPEN_BETA_DATE = 'open_beta';
+    const SITE_STATE_OPEN_BETA = 'open_beta';
 
     const SITE_TYPE_MAIN_SITE = 'main_site';
     const SITE_TYPE_META_SITE = 'meta_site';
@@ -36,7 +40,7 @@ class Site implements SiteInterface
     /**
      * An array of aliases.
      *
-     * @var string[]|null
+     * @var string[]
      */
     protected $aliases;
 
@@ -55,13 +59,6 @@ class Site implements SiteInterface
     protected $audience;
 
     /**
-     * Closed beta date.
-     *
-     * @var \DateTime|null
-     */
-    protected $closedBetaDate;
-
-    /**
      * Launch date.
      *
      * @var \DateTime
@@ -71,7 +68,7 @@ class Site implements SiteInterface
     /**
      * An array of markdown extensions.
      *
-     * @var string[]|null
+     * @var string[]
      */
     protected $markdownExtensions;
 
@@ -81,41 +78,6 @@ class Site implements SiteInterface
      * @var string
      */
     protected $name;
-
-    /**
-     * Open beta date.
-     *
-     * @var \DateTime|null
-     */
-    protected $openBetaDate;
-
-    /**
-     * An array of related sites.
-     *
-     * @var array<\BenatEspina\StackExchangeApiClient\Model\Interfaces\RelatedSiteInterface>|null
-     */
-    protected $relatedSites = array();
-
-    /**
-     * Site state that can be 'normal', 'closed_beta', 'open_beta', or 'linked_meta'.
-     *
-     * @var string
-     */
-    protected $siteState;
-
-    /**
-     * Site type that can be 'main_site' or 'meta_site'.
-     *
-     * @var string
-     */
-    protected $siteType;
-
-    /**
-     * Site url.
-     *
-     * @var string
-     */
-    protected $siteUrl;
 
     /**
      * Styling.
@@ -138,36 +100,25 @@ class Site implements SiteInterface
      */
     public function __construct($json = null)
     {
+        $this->loadBetaDate($json);
+        $this->loadSite(
+            $json,
+            array(
+                self::SITE_STATE_CLOSED_BETA,
+                self::SITE_STATE_LINKED_META,
+                self::SITE_STATE_NORMAL,
+                self::SITE_STATE_OPEN_BETA
+            ),
+            array(self::SITE_TYPE_MAIN_SITE, self::SITE_TYPE_META_SITE)
+        );
         $this->loadUrl($json);
 
         $this->aliases = Util::setIfArrayExists($json, 'aliases');
         $this->apiSiteParameter = Util::setIfStringExists($json, 'api_site_parameter');
         $this->audience = Util::setIfStringExists($json, 'audience');
-        $this->closedBetaDate = Util::setIfDateTimeExists($json, 'closed_beta_date');
         $this->launchDate = Util::setIfDateTimeExists($json, 'launch_date');
         $this->markdownExtensions = Util::setIfArrayExists($json, 'markdown_extensions');
         $this->name = Util::setIfStringExists($json, 'name');
-        $this->openBetaDate = Util::setIfDateTimeExists($json, 'open_beta_date');
-        $sites = Util::setIfArrayExists($json, 'related_sites');
-        foreach ($sites as $site) {
-            $this->relatedSites[] = new RelatedSite($site);
-        }
-        $this->siteState = Util::isEqual(
-            $json,
-            'site_state',
-            array(
-                self::SITE_STATE_CLOSED_BETA,
-                self::SITE_STATE_LINKED_META,
-                self::SITE_STATE_NORMAL,
-                self::SITE_STATE_OPEN_BETA_DATE
-            )
-        );
-        $this->siteType = Util::isEqual(
-            $json,
-            'site_type',
-            array(self::SITE_TYPE_MAIN_SITE, self::SITE_TYPE_META_SITE)
-        );
-        $this->siteUrl = Util::setIfStringExists($json, 'site_url');
         $this->styling = new Styling(Util::setIfArrayExists($json, 'styling'));
         $this->twitterAccount = Util::setIfStringExists($json, 'twitter_account');
     }
@@ -239,24 +190,6 @@ class Site implements SiteInterface
     /**
      * {@inheritdoc}
      */
-    public function setClosedBetaDate(\DateTime $closedBetaDate)
-    {
-        $this->closedBetaDate = $closedBetaDate;
-
-        return $this;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getClosedBetaDate()
-    {
-        return $this->closedBetaDate;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
     public function setLaunchDate(\DateTime $launchDate)
     {
         $this->launchDate = $launchDate;
@@ -316,118 +249,6 @@ class Site implements SiteInterface
     public function getName()
     {
         return $this->name;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function setOpenBetaDate(\DateTime $openBetaDate)
-    {
-        $this->openBetaDate = $openBetaDate;
-
-        return $this;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getOpenBetaDate()
-    {
-        return $this->openBetaDate;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function addRelatedSite(RelatedSiteInterface $relatedSite)
-    {
-        $this->relatedSites[] = $relatedSite;
-
-        return $this;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function removeRelatedSite(RelatedSiteInterface $relatedSite)
-    {
-        $this->relatedSites = Util::removeElement($relatedSite, $this->relatedSites);
-
-        return $this;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getRelatedSites()
-    {
-        return $this->relatedSites;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function setSiteState($siteState)
-    {
-        if (Util::coincidesElement(
-            $siteState,
-            array(
-                self::SITE_STATE_CLOSED_BETA,
-                self::SITE_STATE_LINKED_META,
-                self::SITE_STATE_NORMAL,
-                self::SITE_STATE_OPEN_BETA_DATE
-            )
-        )) {
-            $this->siteState = $siteState;
-        }
-
-        return $this;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getSiteState()
-    {
-        return $this->siteState;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function setSiteType($siteType)
-    {
-        if (Util::coincidesElement($siteType, array(self::SITE_TYPE_MAIN_SITE, self::SITE_TYPE_META_SITE))) {
-            $this->siteType = $siteType;
-        }
-
-        return $this;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getSiteType()
-    {
-        return $this->siteType;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function setSiteUrl($siteUrl)
-    {
-        $this->siteUrl = $siteUrl;
-
-        return $this;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getSiteUrl()
-    {
-        return $this->siteUrl;
     }
 
     /**

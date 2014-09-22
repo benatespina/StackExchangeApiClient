@@ -112,7 +112,8 @@ class Event extends BaseEvent implements EventInterface
                 self::EVENT_TYPE_QUESTION_POSTED,
                 self::EVENT_TYPE_USER_CREATED
             )
-        )) {
+        ) === true
+        ) {
             $this->eventType = $eventType;
         }
 

@@ -10,7 +10,6 @@
 
 namespace BenatEspina\StackExchangeApiClient\Model\Traits;
 
-use BenatEspina\StackExchangeApiClient\Model\ShallowUser;
 use BenatEspina\StackExchangeApiClient\Util\Util;
 
 /**
@@ -98,7 +97,7 @@ trait RevisionTrait
      */
     public function setRevisionType($revisionType)
     {
-        if (Util::coincidesElement($revisionType, array('single_user', 'vote_based'))) {
+        if (Util::coincidesElement($revisionType, array('single_user', 'vote_based')) === true) {
             $this->revisionType = $revisionType;
         }
 

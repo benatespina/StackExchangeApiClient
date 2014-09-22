@@ -54,7 +54,7 @@ interface LastInterface
     /**
      * Gets array of last tags.
      *
-     * @return string[]|null
+     * @return string[]
      */
     public function getLastTags();
 

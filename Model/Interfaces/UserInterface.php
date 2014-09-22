@@ -106,7 +106,7 @@ interface UserInterface extends ShallowUserInterface, ReputationChangeInterface,
      *
      * @return $this self Object
      */
-    public function setIsEmployee($isEmployee);
+    public function setEmployee($isEmployee);
 
     /**
      * Gets is employee.

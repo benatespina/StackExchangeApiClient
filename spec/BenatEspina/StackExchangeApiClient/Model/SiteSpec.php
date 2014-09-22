@@ -10,7 +10,6 @@
 
 namespace spec\BenatEspina\StackExchangeApiClient\Model;
 
-use BenatEspina\StackExchangeApiClient\Model\Interfaces\RelatedSiteInterface;
 use BenatEspina\StackExchangeApiClient\Model\Interfaces\StylingInterface;
 use PhpSpec\ObjectBehavior;
 
@@ -56,14 +55,6 @@ class SiteSpec extends ObjectBehavior
         $this->getAudience()->shouldReturn('audience');
     }
 
-    function its_closed_beta_date_is_mutable()
-    {
-        $closedBetaDate = new \DateTime("@" . 1409845665);
-
-        $this->setClosedBetaDate($closedBetaDate)->shouldReturn($this);
-        $this->getClosedBetaDate()->shouldReturn($closedBetaDate);
-    }
-
     function its_launch_date_is_mutable()
     {
         $launchDate = new \DateTime("@" . 1409845665);
@@ -89,65 +80,6 @@ class SiteSpec extends ObjectBehavior
     {
         $this->setName('The name')->shouldReturn($this);
         $this->getName()->shouldReturn('The name');
-    }
-
-    function its_open_beta_date_is_mutable()
-    {
-        $openBetaDate = new \DateTime("@" . 1409845665);
-
-        $this->setOpenBetaDate($openBetaDate)->shouldReturn($this);
-        $this->getOpenBetaDate()->shouldReturn($openBetaDate);
-    }
-
-    function its_related_site_is_mutable(RelatedSiteInterface $relatedSite)
-    {
-        $this->getRelatedSites()->shouldHaveCount(0);
-
-        $this->addRelatedSite($relatedSite);
-
-        $this->getRelatedSites()->shouldHaveCount(1);
-
-        $this->removeRelatedSite($relatedSite);
-
-        $this->getRelatedSites()->shouldHaveCount(0);
-    }
-
-    function its_is_not_a_valid_site_state()
-    {
-        $this->setSiteState('normal')->shouldReturn($this);
-
-        $this->setSiteState('invalid-site-state')->shouldReturn($this);
-        $this->getSiteState()->shouldReturn('normal');
-    }
-
-    function its_site_state_is_mutable()
-    {
-        $this->setSiteState('normal')->shouldReturn($this);
-
-        $this->setSiteState('closed_beta')->shouldReturn($this);
-        $this->getSiteState()->shouldReturn('closed_beta');
-    }
-
-    function its_is_not_a_valid_site_type()
-    {
-        $this->setSiteType('main_site')->shouldReturn($this);
-
-        $this->setSiteType('invalid-site-type')->shouldReturn($this);
-        $this->getSiteType()->shouldReturn('main_site');
-    }
-
-    function its_site_type_is_mutable()
-    {
-        $this->setSiteType('main_site')->shouldReturn($this);
-
-        $this->setSiteType('meta_site')->shouldReturn($this);
-        $this->getSiteType()->shouldReturn('meta_site');
-    }
-
-    function its_site_url_is_mutable()
-    {
-        $this->setSiteUrl('http://site-url.com')->shouldReturn($this);
-        $this->getSiteUrl()->shouldReturn('http://site-url.com');
     }
 
     function its_styling_is_mutable(StylingInterface $styling)

@@ -64,13 +64,7 @@ class NetworkPost extends BaseNetworkPost implements NetworkPostInterface
      */
     public function setPostType($postType)
     {
-        if (Util::coincidesElement(
-            $postType,
-            array(
-                self::POST_TYPE_ANSWER,
-                self::POST_TYPE_QUESTION
-            )
-        )) {
+        if (Util::coincidesElement($postType, array(self::POST_TYPE_ANSWER, self::POST_TYPE_QUESTION)) === true) {
             $this->postType = $postType;
         }
 

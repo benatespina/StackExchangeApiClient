@@ -153,5 +153,4 @@ interface TagInterface
      * @return int|null
      */
     public function getUserId();
-
 }

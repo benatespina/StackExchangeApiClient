@@ -89,7 +89,8 @@ class Filter implements FilterInterface
                 self::FILTER_TYPE_SAFE,
                 self::FILTER_TYPE_UNSAFE
             )
-        )) {
+        ) === true
+        ) {
             $this->filterType = $filterType;
         }
 

@@ -82,7 +82,7 @@ class FlagOption implements FlagOptionInterface
         $this->description = Util::setIfStringExists($json, 'description');
         $this->dialogTitle = Util::setIfStringExists($json, 'dialog_title');
         $this->hasFlagged = Util::setIfBoolExists($json, 'has_flagged');
-        $this->optionId = Util::setIfStringExists($json, 'option_id');
+        $this->optionId = Util::setIfIntegerExists($json, 'option_id');
         $subOptions = Util::setIfArrayExists($json, 'sub_options');
         foreach ($subOptions as $subOption) {
             $this->subOptions[] = new FlagOption($subOption);

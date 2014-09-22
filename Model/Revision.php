@@ -24,7 +24,7 @@ use BenatEspina\StackExchangeApiClient\Util\Util;
  */
 class Revision extends BaseRevision implements RevisionInterface
 {
-    use 
+    use
         LastTrait,
         RevisionTrait;
 
@@ -91,13 +91,13 @@ class Revision extends BaseRevision implements RevisionInterface
     public function __construct($json = null)
     {
         parent::__construct($json);
-        
+
         $this->loadLast($json);
         $this->loadRevision($json, array(self::REVISION_TYPE_SINGLE_USER, self::REVISION_TYPE_VOTE_BASED));
 
         $this->body = Util::setIfStringExists($json, 'body');
         $this->comment = Util::setIfStringExists($json, 'comment');
-        $this->isRollback = Util::setIfBoolExists($json, 'is_rollback');
+        $this->rollback = Util::setIfBoolExists($json, 'is_rollback');
         $this->postId = Util::setIfIntegerExists($json, 'post_id');
         $this->postType = Util::isEqual($json, 'post_type', array(self::POST_TYPE_QUESTION, self::POST_TYPE_ANSWER));
         $this->setCommunityWiki = Util::setIfBoolExists($json, 'set_community_wiki');
@@ -181,13 +181,7 @@ class Revision extends BaseRevision implements RevisionInterface
      */
     public function setPostType($postType)
     {
-        if (Util::coincidesElement(
-            $postType,
-            array(
-                self::POST_TYPE_ANSWER,
-                self::POST_TYPE_QUESTION
-            )
-        )) {
+        if (Util::coincidesElement($postType, array(self::POST_TYPE_ANSWER, self::POST_TYPE_QUESTION)) === true) {
             $this->postType = $postType;
         }
 

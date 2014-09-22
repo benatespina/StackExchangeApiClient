@@ -117,7 +117,7 @@ class UserTimeline extends BaseUserTimeline implements UserTimelineInterface
         $this->commentId = Util::setIfIntegerExists($json, 'comment_id');
         $this->creationDate = Util::setIfDateTimeExists($json, 'creation_date');
         $this->detail = Util::setIfStringExists($json, 'detail');
-        $this->link = new ShallowUser(Util::setIfArrayExists($json, 'link'));
+        $this->link = Util::setIfStringExists($json, 'link');
         $this->postId = Util::setIfIntegerExists($json, 'post_id');
         $this->postType = Util::isEqual($json, 'post_type', array(self::POST_TYPE_ANSWER, self::POST_TYPE_QUESTION));
         $this->suggestedEditId = Util::setIfIntegerExists($json, 'suggested_edit_id');
@@ -251,13 +251,7 @@ class UserTimeline extends BaseUserTimeline implements UserTimelineInterface
      */
     public function setPostType($postType)
     {
-        if (Util::coincidesElement(
-            $postType,
-            array(
-                self::POST_TYPE_ANSWER,
-                self::POST_TYPE_QUESTION
-            )
-        )) {
+        if (Util::coincidesElement($postType, array(self::POST_TYPE_ANSWER, self::POST_TYPE_QUESTION)) === true) {
             $this->postType = $postType;
         }
 
@@ -307,7 +301,8 @@ class UserTimeline extends BaseUserTimeline implements UserTimelineInterface
                 self::TIMELINE_TYPE_UNACCEPTED_ANSWER,
                 self::TIMELINE_TYPE_VOTE_AGGREGATE,
             )
-        )) {
+        ) === true
+        ) {
             $this->timelineType = $timelineType;
         }
 

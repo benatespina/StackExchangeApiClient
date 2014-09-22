@@ -73,7 +73,7 @@ class RelatedSite implements RelatedSiteInterface
     public function setApiSiteParameter($apiSiteParameter)
     {
         $this->apiSiteParameter = $apiSiteParameter;
-        
+
         return $this;
     }
 
@@ -111,7 +111,8 @@ class RelatedSite implements RelatedSiteInterface
         if (Util::coincidesElement(
             $relation,
             array(self::RELATION_CHAT, self::RELATION_META, self::RELATION_PARENT)
-        )) {
+        ) === true
+        ) {
             $this->relation = $relation;
         }
 
