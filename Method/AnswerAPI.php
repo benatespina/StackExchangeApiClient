@@ -54,7 +54,7 @@ class AnswerAPI
      *
      * @return array<BenatEspina\StackExchangeApiClient\Model\Interfaces\AnswerInterface>
      */
-    public function getAnswers($params = array('site' => 'stackoverflow', 'sort' => 'activity'))
+    public function getAll($params = array('site' => 'stackoverflow', 'sort' => 'activity'))
     {
         return $this->responseToAnswer($this->client->get($this->prefix, $params));
     }
@@ -70,7 +70,7 @@ class AnswerAPI
      *
      * @return array<BenatEspina\StackExchangeApiClient\Model\Interfaces\AnswerInterface>
      */
-    public function getAnswersById($ids, $params = array('site' => 'stackoverflow', 'sort' => 'activity'))
+    public function getByIds($ids, $params = array('site' => 'stackoverflow', 'sort' => 'activity'))
     {
         return $this->responseToAnswer($this->client->get($this->prefix . '/' . implode(';', $ids), $params));
     }
@@ -89,6 +89,40 @@ class AnswerAPI
     {
         return $this->responseToAnswer(
             $this->client->post('/questions/' . $id . $this->prefix . '/add', array(), $request)
+        );
+    }
+
+    /**
+     * Casts an accept vote on the given answer.
+     *
+     * More info: https://api.stackexchange.com/docs/accept-answer
+     *
+     * @param string   $id      The id of question
+     * @param string[] $request The array which contains the required parameters as 'site'
+     *
+     * @return array<BenatEspina\StackExchangeApiClient\Model\Interfaces\AnswerInterface>
+     */
+    public function postAccept($id, $request = array())
+    {
+        return $this->responseToAnswer(
+            $this->client->post($this->prefix . '/' . $id . '/accept', array(), $request)
+        );
+    }
+
+    /**
+     * Undoes an accept vote on the given answer.
+     *
+     * More info: https://api.stackexchange.com/docs/undo-accept-answer
+     *
+     * @param string   $id      The id of question
+     * @param string[] $request The array which contains the required parameters as 'site'
+     *
+     * @return array<BenatEspina\StackExchangeApiClient\Model\Interfaces\AnswerInterface>
+     */
+    public function postUndoAccept($id, $request = array())
+    {
+        return $this->responseToAnswer(
+            $this->client->post($this->prefix . '/' . $id . '/accept/undo', array(), $request)
         );
     }
 

@@ -5,8 +5,8 @@ The following list shows methods available and missing of Answers:
 |:---------:|:---------------------------------------:| -----------------------------------------------------------------------|
 | YES       | **/answers**                            | Get all answers on the site.                                           |
 | YES       | **/answers/{ids}**                      | Get answers identified by a set of ids.                                |
-| NO        | **/answers/{id}/accept**                | Casts an accept vote on the given answer. auth required                |
-| NO        | **/answers/{id}/accept/undo**           | Undoes an accept vote on the given answer. auth required               |
+| YES       | **/answers/{id}/accept**                | Casts an accept vote on the given answer. auth required                |
+| YES       | **/answers/{id}/accept/undo**           | Undoes an accept vote on the given answer. auth required               |
 | NO        | **/answers/{id}/delete**                | Deletes the given answer. auth required                                |
 | NO        | **/answers/{id}/downvote**              | Casts a downvote on the given answer. auth required                    |
 | NO        | **/answers/{id}/downvote/undo**         | Undoes a downvote on the given answer. auth required                   |

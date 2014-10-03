@@ -20,6 +20,11 @@ use PhpSpec\ObjectBehavior;
  */
 class BadgeAPISpec extends ObjectBehavior
 {
+    /**
+     * Response that is return the methods of the BadgeAPI.
+     *
+     * @var (string|boolean|int)[]
+     */
     private $response = array(
         'items' => array(
             array(

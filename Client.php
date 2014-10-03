@@ -66,8 +66,6 @@ class Client
      * @param string $method The api method
      * @param array  $query  QueryString that filters the response
      *
-     * @throws Exception\RequestException when the status code is higher than 226. According to the Wikipedia:
-     *                                    http://en.wikipedia.org/wiki/List_of_HTTP_status_codes#2xx_Success
      * @return mixed Decoded array containing response
      */
     public function get($method, $query = array())
@@ -97,7 +95,9 @@ class Client
      * @param array    $query   QueryString that filters the response
      * @param string[] $content The content that contains the payload of the the request
      *
-     * @throws Exception\RequestException
+     * @throws Exception\RequestException when the status code is higher than 226. According to the Wikipedia:
+     *                                    http://en.wikipedia.org/wiki/List_of_HTTP_status_codes#2xx_Success
+     *
      * @return mixed Decoded array containing response
      */
     private function baseRequest($request, $method, $query = array(), $content = array())
@@ -123,7 +123,7 @@ class Client
                 $url, $this->headers, array_merge($content, $this->authentication->getAuth())
             );
         }
-        
+
         if ($browser->getLastResponse()->getStatusCode() > 226) {
             throw new RequestException(json_decode(gzdecode($browser->getLastResponse()->getContent()), true));
         }
