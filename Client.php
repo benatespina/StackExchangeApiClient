@@ -10,6 +10,7 @@
 
 namespace BenatEspina\StackExchangeApiClient;
 
+use BenatEspina\StackExchangeApiClient\Authentication\AuthenticationInterface;
 use Buzz\Browser;
 use Buzz\Client\Curl;
 use BenatEspina\StackExchangeApiClient\Exception\RequestException;
@@ -36,6 +37,30 @@ class Client
     protected $version = '2.2';
 
     /**
+     * The authentication object.
+     *
+     * @var \BenatEspina\StackExchangeApiClient\Authentication\AuthenticationInterface
+     */
+    protected $authentication;
+
+    /**
+     * Array that contains the headers of a request.
+     *
+     * @var string[]
+     */
+    protected $headers = array('Content-Type' => 'application/json');
+
+    /**
+     * Constructor.
+     *
+     * @param \BenatEspina\StackExchangeApiClient\Authentication\AuthenticationInterface|null $authentication The auth
+     */
+    public function __construct(AuthenticationInterface $authentication = null)
+    {
+        $this->authentication = $authentication;
+    }
+
+    /**
      * Scaffold for GET api requests.
      *
      * @param string $method The api method
@@ -53,28 +78,29 @@ class Client
     /**
      * Scaffold for POST api requests.
      *
-     * @param string $method The api method
-     * @param array  $query  QueryString that filters the response
+     * @param string   $method  The api method
+     * @param array    $query   QueryString that filters the response
+     * @param string[] $content The content that contains the payload of the the request
      *
      * @return mixed Decoded array containing response
      */
-    public function post($method, $query = array())
+    public function post($method, $query = array(), $content = array())
     {
-        return $this->baseRequest('post', $method, $query);
+        return $this->baseRequest('post', $method, $query, $content);
     }
 
     /**
      * Base method for the api requests of library.
      *
-     * @param string $request The request that can be 'get', 'post', 'put', 'patch' and 'delete'
-     * @param string $method  The api method
-     * @param array  $query   QueryString that filters the response
+     * @param string   $request The request that can be 'get', 'post', 'put', 'patch' and 'delete'
+     * @param string   $method  The api method
+     * @param array    $query   QueryString that filters the response
+     * @param string[] $content The content that contains the payload of the the request
      *
-     * @throws Exception\RequestException when the status code is higher than 226. According to the Wikipedia:
-     *                                    http://en.wikipedia.org/wiki/List_of_HTTP_status_codes#2xx_Success
+     * @throws Exception\RequestException
      * @return mixed Decoded array containing response
      */
-    private function baseRequest($request, $method, $query = array())
+    private function baseRequest($request, $method, $query = array(), $content = array())
     {
         $curl = new Curl();
         $browser = new Browser($curl);
@@ -88,8 +114,16 @@ class Client
             $url .= $key . '=' . $value . '&';
         }
 
-        $response = $browser->$request($url);
-
+        if ($this->authentication === null) {
+            $response = $browser->$request($url, $this->headers);
+        } elseif (count($content) === 0) {
+            $response = $browser->$request($url . $this->authentication->getAuthAsString());
+        } else {
+            $response = $browser->$request(
+                $url, $this->headers, array_merge($content, $this->authentication->getAuth())
+            );
+        }
+        
         if ($browser->getLastResponse()->getStatusCode() > 226) {
             throw new RequestException(json_decode(gzdecode($browser->getLastResponse()->getContent()), true));
         }

@@ -9,4 +9,4 @@ The following list shows methods available and missing of Badges:
 | YES       | **/badges/name**                        | Get all non-tagged-based badges in alphabetical order.                 |
 | YES       | **/badges/recipients**                  | Get badges recently awarded on the site.                               |
 | YES       | **/badges/tags**                        | Get all tagged-based badges in alphabetical order.                     |
-| YES / NO  | **/users/{ids}/badges** <br/> ![me](https://cdn.sstatic.net/apiv2/img/me.png?v=f1cb4f2bb0ba) **/me/badges** | Get the badges earned by the users identified by a set of ids. |
+| YES / YES | **/users/{ids}/badges** <br/> ![me](https://cdn.sstatic.net/apiv2/img/me.png?v=f1cb4f2bb0ba) **/me/badges** | Get the badges earned by the users identified by a set of ids. |

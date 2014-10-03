@@ -104,4 +104,44 @@ class AnswerAPISpec extends ObjectBehavior
 
         $this->getAnswersById(array('25652752', '25652751'))->shouldBeArray();
     }
+
+    function it_posts_an_answer(Client $client)
+    {
+        $random = mt_rand();
+        $client->post(
+            '/questions/question-id/answers/add',
+            array(),
+            array(
+                'site' => 'StackApps',
+                'body' => 'Spec for Client with random ' . $random . '; this is part of StackExchangeApiClient tests.'
+            )
+        )->shouldBeCalled()->willReturn(
+            array(
+                'items' => array(
+                    'owner'              => array(
+                        'reputation'    => 71,
+                        'user_id'       => 28421,
+                        'user_type'     => 'registered',
+                        'profile_image' => 'http://i.stack.imgur.com/loshM.png?s=128&g=1',
+                        'display_name'  => 'benatespina',
+                        'link'          => 'http://stackapps.com/users/28421/benatespina'
+                    ),
+                    'is_accepted'        => false,
+                    'score'              => 0,
+                    'last_activity_date' => 1412287563,
+                    'creation_date'      => 1412287563,
+                    'answer_id'          => 0,
+                    'question_id'        => 4878
+                )
+            )
+        );
+
+        $this->postAnswer(
+            'question-id',
+            array(
+                'site' => 'StackApps',
+                'body' => 'Spec for Client with random ' . $random . '; this is part of StackExchangeApiClient tests.'
+            )
+        );
+    }
 }

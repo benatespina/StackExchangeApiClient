@@ -52,7 +52,7 @@ class AnswerAPI
      * @param string[] $params QueryString parameter(s), by default, the basic to work:
      *                         array('site' => 'stackoverflow', 'sort' => 'activity')
      *
-     * @return array<BenatEspina\StackExchangeApiClient\Model\AnswerInterface>
+     * @return array<BenatEspina\StackExchangeApiClient\Model\Interfaces\AnswerInterface>
      */
     public function getAnswers($params = array('site' => 'stackoverflow', 'sort' => 'activity'))
     {
@@ -68,7 +68,7 @@ class AnswerAPI
      * @param string[] $params QueryString parameter(s), by default, the basic to work:
      *                         array('site' => 'stackoverflow', 'sort' => 'activity')
      *
-     * @return array<BenatEspina\StackExchangeApiClient\Model\AnswerInterface>
+     * @return array<BenatEspina\StackExchangeApiClient\Model\Interfaces\AnswerInterface>
      */
     public function getAnswersById($ids, $params = array('site' => 'stackoverflow', 'sort' => 'activity'))
     {
@@ -76,11 +76,28 @@ class AnswerAPI
     }
 
     /**
+     * Create a new answer on the given question.
+     *
+     * More info: https://api.stackexchange.com/docs/create-answer
+     *
+     * @param string   $id      The id of question
+     * @param string[] $request The array which contains the required parameters as 'site' and 'body'
+     *
+     * @return array<BenatEspina\StackExchangeApiClient\Model\Interfaces\AnswerInterface>
+     */
+    public function postAnswer($id, $request = array())
+    {
+        return $this->responseToAnswer(
+            $this->client->post('/questions/' . $id . $this->prefix . '/add', array(), $request)
+        );
+    }
+
+    /**
      * Transforms the json decodes array to answer objects array.
      *
      * @param mixed $response Decoded array containing response
      *
-     * @return array<BenatEspina\StackExchangeApiClient\Model\AnswerInterface>
+     * @return array<BenatEspina\StackExchangeApiClient\Model\Interfaces\AnswerInterface>
      */
     private function responseToAnswer($response)
     {

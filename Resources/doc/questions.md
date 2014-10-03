@@ -18,7 +18,7 @@ The following list shows methods available and missing of Questions:
 | NO        | **/questions/{ids}/related**      | Get the questions that are related to the questions identified by a set of ids.                           |
 | NO        | **/questions/{id}/upvoter**       | Casts an upvote on the given question. auth required                                                      |
 | NO        | **/questions/{id}/upvote/undo**   | Undoes an upvote on the given question. auth required                                                     |
-| NO        | **/questions/add**                | Creates a new question. auth required                                                                     |
+| YES       | **/questions/{id}/add**           | Creates a new question. auth required                                                                     |
 | NO        | **/questions/featured**           | Get all questions on the site with active bounties.                                                       |
 | NO        | **/questions/render**             | Renders a hypothetical question. auth required                                                            |
 | NO        | **/questions/unanswered**         | Get all questions the site considers unanswered.                                                          |

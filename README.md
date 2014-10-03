@@ -17,23 +17,45 @@ Usage
 
 If you check out the [API documentation](http://api.stackexchange.com/docs), you will see that there are some calls that
 do not need authentication, but nevertheless there are other calls that need the authentication. 
-For this reason, I have exposed two different use examples with two variants.
 
 First of all, you have to instantiate the Client that to be used like a parameter of  the constructor of the API objects.
 And then, after create the API object, simply you have to call the different methods that this object offers.
 
-The only difference between two variants is when you are creating the `Client`. Without authentication, the client
-constructor used `null` value by default. 
+The only difference between with or without authentication is the `Client` constructor. Without authentication the
+constructor used the `null` value by default; otherwise, with authentication, firstly, you have to construct the `OAuth`
+object that then it passed as parameter in `Client` constructor.
 
 ### Without authentication:
 
-        $client = new Client();
-        $answerApi = new AnswerAPI($client);
+    $client = new Client();
+    $answerAPI = new AnswerAPI($client);
 
-        $answers = $answerApi->getAnswersById(array('2359967', '1932551'));
+    $answers = $answerAPI->getAnswersById(array('2359967', '1932551'));
 
 *The second parameter has been omitted, because the method `getAnswersById` already contains by default the minimum
 params to do a proper request: `array('site' => 'stackoverflow', 'sort' => 'activity')`*
+
+### With authentication:
+
+There are two variants to construct the `OAuth2` object:
+
+The first one directly passed the `$key` and `$accessToken`.
+
+    $oauth2 = new OAuth2($key, $accessToken);
+    
+    $client = new Client($oauth2);
+    $questionAPI = new QuestionAPI($client);
+
+    $question = $questionAPI->postQuestion('The title of question', 'The body of the question', array('php', 'api'));
+
+But the **recommended** variant is the variant that passes the `$key`, `$clientId`, `$scope`, `$redirectUri` and the `getAccessToken()`, and returns the token.
+
+    $oauth2 = new OAuth2($key, null, $clientId, $scope, $redirectUri);
+    
+    $client = new Client($oauth2);
+    $questionAPI = new QuestionAPI($client);
+
+    $question = $questionAPI->postQuestion('The title of question', 'The body of the question', array('php', 'api'));
 
 Current status
 ---------------
@@ -42,7 +64,7 @@ This API has many methods, so the status of the calls are separated **by type** 
  
  - ![progressed.io - 3 methods](http://progressed.io/bar/100)&nbsp;[Access Tokens](https://github.com/benatespina/StackExchangeApiClient/blob/master/Resources/doc/access_tokens.md)
  - ![progressed.io - 16 methods](http://progressed.io/bar/13)&nbsp;[Answers](https://github.com/benatespina/StackExchangeApiClient/blob/master/Resources/doc/answers.md)
- - ![progressed.io - 7 methods](http://progressed.io/bar/88)&nbsp;[Badges](https://github.com/benatespina/StackExchangeApiClient/blob/master/Resources/doc/badges.md)
+ - ![progressed.io - 7 methods](http://progressed.io/bar/100)&nbsp;[Badges](https://github.com/benatespina/StackExchangeApiClient/blob/master/Resources/doc/badges.md)
  - ![progressed.io - 15 methods](http://progressed.io/bar/0)&nbsp;[Comments](https://github.com/benatespina/StackExchangeApiClient/blob/master/Resources/doc/comments.md)
  - ![progressed.io - 1 methods](http://progressed.io/bar/0)&nbsp;[Errors](https://github.com/benatespina/StackExchangeApiClient/blob/master/Resources/doc/errors.md)
  - ![progressed.io - 1 methods](http://progressed.io/bar/0)&nbsp;[Events](https://github.com/benatespina/StackExchangeApiClient/blob/master/Resources/doc/events.md)
@@ -55,7 +77,7 @@ This API has many methods, so the status of the calls are separated **by type** 
  - ![progressed.io - 4 methods](http://progressed.io/bar/0)&nbsp;[Notifications](https://github.com/benatespina/StackExchangeApiClient/blob/master/Resources/doc/notifications.md)
  - ![progressed.io - 3 methods](http://progressed.io/bar/0)&nbsp;[Posts](https://github.com/benatespina/StackExchangeApiClient/blob/master/Resources/doc/posts.md)
  - ![progressed.io - 2 methods](http://progressed.io/bar/0)&nbsp;[Privileges](https://github.com/benatespina/StackExchangeApiClient/blob/master/Resources/doc/privileges.md)
- - ![progressed.io - 35 methods](http://progressed.io/bar/0)&nbsp;[Questions](https://github.com/benatespina/StackExchangeApiClient/blob/master/Resources/doc/questions.md)
+ - ![progressed.io - 35 methods](http://progressed.io/bar/3)&nbsp;[Questions](https://github.com/benatespina/StackExchangeApiClient/blob/master/Resources/doc/questions.md)
  - ![progressed.io - 1 methods](http://progressed.io/bar/0)&nbsp;[Question Timelines](https://github.com/benatespina/StackExchangeApiClient/blob/master/Resources/doc/question_timelines.md)
  - ![progressed.io - 1 methods](http://progressed.io/bar/0)&nbsp;[Reputation](https://github.com/benatespina/StackExchangeApiClient/blob/master/Resources/doc/reputation.md)
  - ![progressed.io - 2 methods](http://progressed.io/bar/0)&nbsp;[Reputation History](https://github.com/benatespina/StackExchangeApiClient/blob/master/Resources/doc/reputation_history.md)

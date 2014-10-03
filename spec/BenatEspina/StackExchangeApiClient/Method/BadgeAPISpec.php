@@ -112,4 +112,12 @@ class BadgeAPISpec extends ObjectBehavior
 
         $this->getBadgesByUsers(array('2359967'))->shouldBeArray();
     }
+
+    function it_gets_my_badges(Client $client)
+    {
+        $client->get('/me/badges', array('site' => 'stackoverflow', 'sort' => 'rank', 'order' => 'desc'))
+            ->shouldBeCalled()->willReturn($this->response);
+
+        $this->getMyBadges()->shouldBeArray();
+    }
 }

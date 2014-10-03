@@ -163,6 +163,21 @@ class BadgeAPI
     }
 
     /**
+     * Returns the badges earned by the user associated with the given access_token.
+     *
+     * More info: https://api.stackexchange.com/docs/me-badges
+     *
+     * @param string[] $params QueryString parameter(s), by default, the basic to work:
+     *                         array('site' => 'stackoverflow', 'sort' => 'rank', 'order' => 'desc')
+     *
+     * @return array<BenatEspina\StackExchangeApiClient\Model\Interfaces\BadgeInterface>
+     */
+    public function getMyBadges($params = array('site' => 'stackoverflow', 'sort' => 'rank', 'order' => 'desc'))
+    {
+        return $this->responseToBadge($this->client->get('/me' . $this->prefix, $params));
+    }
+
+    /**
      * Transforms the json decodes array to badge objects array.
      *
      * @param mixed $response Decoded array containing response
