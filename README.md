@@ -12,6 +12,14 @@
 
 ***This is a work in progress library and some features are not available yet.***
 
+Installation
+------------
+
+The recommended and the most suitable way to install is through [Composer](https://getcomposer.org/).
+Be sure that the tool is installed in your system and execute the following command:
+
+    composer require benatespina/stack-exchange-api-client:dev-master
+
 Usage
 -----
 
