@@ -84,6 +84,34 @@ class Client
      */
     public function post($method, $query = array(), $content = array())
     {
+        return $this->basePostRequest($method, $content, $query);
+    }
+
+    /**
+     * Scaffold for PUT api requests.
+     *
+     * @param string   $method  The api method
+     * @param string[] $content The content that contains the payload of the the request
+     *
+     * @return mixed Decoded array containing response
+     */
+    public function put($method, $content = array())
+    {
+        return $this->basePostRequest($method, $content);
+    }
+
+    /**
+     * Scaffold for POST api requests. This method exists because internally, StackExchange API
+     * only uses GET and POST requests. So for add, update and delete resources uses a POST request.
+     *
+     * @param string   $method  The api method
+     * @param string[] $content The content that contains the payload of the the request
+     * @param array    $query   QueryString that filters the response
+     *
+     * @return mixed Decoded array containing response
+     */
+    private function basePostRequest($method, $content = array(), $query = array())
+    {
         return $this->baseRequest('post', $method, $query, $content);
     }
 

@@ -35,9 +35,11 @@ class Error extends \Exception implements ErrorInterface
     public function __construct($json = null)
     {
         
-        $this->description = Util::setIfExists($json, 'description')
-            ? Util::setIfStringExists($json, 'description')
-            : Util::setIfStringExists($json, 'error_message');
+        if (isset($json['description']) === true) {
+            $this->description = Util::setIfStringExists($json, 'description');
+        } else {
+            $this->description = Util::setIfStringExists($json, 'error_message');
+        }
         $this->code = Util::setIfIntegerExists($json, 'error_id');
         $this->message = Util::setIfStringExists($json, 'error_name');
     }

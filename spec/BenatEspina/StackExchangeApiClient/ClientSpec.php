@@ -21,6 +21,9 @@ use PhpSpec\ObjectBehavior;
  */
 class ClientSpec extends ObjectBehavior
 {
+    const ACCESS_TOKEN = 'ZJiotG5w9O4RxR7NZ*B0EQ))';
+    const KEY = 'Suy)bfhQl6vE3YgSwFZPxA((';
+
     function it_is_initializable()
     {
         $this->shouldHaveType('BenatEspina\StackExchangeApiClient\Client');
@@ -36,7 +39,7 @@ class ClientSpec extends ObjectBehavior
         $this->beConstructedWith($authentication);
 
         $authentication->getAuthAsString()->shouldBeCalled()->willReturn(
-            '&access_token=5PuEyM(t9ISG44j1sFWsEg))&key=Suy)bfhQl6vE3YgSwFZPxA(('
+            '&access_token=' . self::ACCESS_TOKEN . '&key=' . self::KEY
         );
         $this->get('/me/badges', array('site' => 'stackoverflow', 'sort' => 'rank', 'order' => 'desc'))
             ->shouldBeArray();
@@ -52,7 +55,7 @@ class ClientSpec extends ObjectBehavior
         $this->beConstructedWith($authentication);
 
         $authentication->getAuth()->shouldBeCalled()->willReturn(
-            array('access_token' => '5PuEyM(t9ISG44j1sFWsEg))', 'key' => 'Suy)bfhQl6vE3YgSwFZPxA((')
+            array('access_token' => self::ACCESS_TOKEN, 'key' => self::KEY)
         );
         $this->post(
             '/answers/4914/accept',
@@ -61,12 +64,29 @@ class ClientSpec extends ObjectBehavior
         )->shouldBeArray();
 
         $authentication->getAuth()->shouldBeCalled()->willReturn(
-            array('access_token' => '5PuEyM(t9ISG44j1sFWsEg))', 'key' => 'Suy)bfhQl6vE3YgSwFZPxA((')
+            array('access_token' => self::ACCESS_TOKEN, 'key' => self::KEY)
         );
         $this->post(
             '/answers/4914/accept/undo',
             array(),
             array('site' => 'StackApps')
+        )->shouldBeArray();
+    }
+
+    function it_puts_with_authentication(AuthenticationInterface $authentication)
+    {
+        $this->beConstructedWith($authentication);
+
+        $authentication->getAuth()->shouldBeCalled()->willReturn(
+            array('access_token' => self::ACCESS_TOKEN, 'key' => self::KEY)
+        );
+        $this->put(
+            '/answers/4914/edit',
+            array(
+                'site'    => 'StackApps',
+                'body'    => 'If you have improves about the library, please tell me :)' . mt_rand(),
+                'comment' => 'Edit from api request'
+            )
         )->shouldBeArray();
     }
 
