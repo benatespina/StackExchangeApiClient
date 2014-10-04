@@ -11,7 +11,7 @@
 namespace spec\BenatEspina\StackExchangeApiClient;
 
 use BenatEspina\StackExchangeApiClient\Authentication\AuthenticationInterface;
-use BenatEspina\StackExchangeApiClient\Exception\RequestException;
+use BenatEspina\StackExchangeApiClient\Model\Error;
 use PhpSpec\ObjectBehavior;
 
 /**
@@ -70,23 +70,10 @@ class ClientSpec extends ObjectBehavior
         )->shouldBeArray();
     }
 
-    function it_throws_a_404_no_method_exception()
-    {
-        $this->shouldThrow(
-            new RequestException(
-                array(
-                    'error_id'      => 404,
-                    'error_message' => 'no method found with this name',
-                    'error_name'    => 'no_method'
-                )
-            )
-        )->during('post', array('/no-method'));
-    }
-
     function it_throws_an_400_bad_parameter_exception()
     {
         $this->shouldThrow(
-            new RequestException(
+            new Error(
                 array(
                     'error_id'      => 400,
                     'error_message' => 'site is required',
@@ -94,5 +81,18 @@ class ClientSpec extends ObjectBehavior
                 )
             )
         )->during('get', array('/answers'));
+    }
+
+    function it_throws_a_404_no_method_exception()
+    {
+        $this->shouldThrow(
+            new Error(
+                array(
+                    'error_id'      => 404,
+                    'error_message' => 'no method found with this name',
+                    'error_name'    => 'no_method'
+                )
+            )
+        )->during('post', array('/no-method'));
     }
 }

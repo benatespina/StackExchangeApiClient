@@ -11,9 +11,9 @@
 namespace BenatEspina\StackExchangeApiClient;
 
 use BenatEspina\StackExchangeApiClient\Authentication\AuthenticationInterface;
+use BenatEspina\StackExchangeApiClient\Model\Error;
 use Buzz\Browser;
 use Buzz\Client\Curl;
-use BenatEspina\StackExchangeApiClient\Exception\RequestException;
 
 /**
  * Class Client.
@@ -95,8 +95,8 @@ class Client
      * @param array    $query   QueryString that filters the response
      * @param string[] $content The content that contains the payload of the the request
      *
-     * @throws Exception\RequestException when the status code is higher than 226. According to the Wikipedia:
-     *                                    http://en.wikipedia.org/wiki/List_of_HTTP_status_codes#2xx_Success
+     * @throws \BenatEspina\StackExchangeApiClient\Model\Error when the status code is higher than 226.
+     *         According to the Wikipedia: http://en.wikipedia.org/wiki/List_of_HTTP_status_codes#2xx_Success
      *
      * @return mixed Decoded array containing response
      */
@@ -125,7 +125,7 @@ class Client
         }
 
         if ($browser->getLastResponse()->getStatusCode() > 226) {
-            throw new RequestException(json_decode(gzdecode($browser->getLastResponse()->getContent()), true));
+            throw new Error(json_decode(gzdecode($browser->getLastResponse()->getContent()), true));
         }
 
         return json_decode(gzdecode($response->getContent()), true);

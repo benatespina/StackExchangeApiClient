@@ -71,7 +71,7 @@ Current status
 This API has many methods, so the status of the calls are separated **by type** in the following files:
  
  - ![progressed.io - 3 methods](http://progressed.io/bar/100)&nbsp;[Access Tokens](https://github.com/benatespina/StackExchangeApiClient/blob/master/Resources/doc/access_tokens.md)
- - ![progressed.io - 16 methods](http://progressed.io/bar/25)&nbsp;[Answers](https://github.com/benatespina/StackExchangeApiClient/blob/master/Resources/doc/answers.md)
+ - ![progressed.io - 16 methods](http://progressed.io/bar/31)&nbsp;[Answers](https://github.com/benatespina/StackExchangeApiClient/blob/master/Resources/doc/answers.md)
  - ![progressed.io - 7 methods](http://progressed.io/bar/100)&nbsp;[Badges](https://github.com/benatespina/StackExchangeApiClient/blob/master/Resources/doc/badges.md)
  - ![progressed.io - 15 methods](http://progressed.io/bar/0)&nbsp;[Comments](https://github.com/benatespina/StackExchangeApiClient/blob/master/Resources/doc/comments.md)
  - ![progressed.io - 1 methods](http://progressed.io/bar/0)&nbsp;[Errors](https://github.com/benatespina/StackExchangeApiClient/blob/master/Resources/doc/errors.md)
@@ -85,7 +85,7 @@ This API has many methods, so the status of the calls are separated **by type** 
  - ![progressed.io - 4 methods](http://progressed.io/bar/0)&nbsp;[Notifications](https://github.com/benatespina/StackExchangeApiClient/blob/master/Resources/doc/notifications.md)
  - ![progressed.io - 3 methods](http://progressed.io/bar/0)&nbsp;[Posts](https://github.com/benatespina/StackExchangeApiClient/blob/master/Resources/doc/posts.md)
  - ![progressed.io - 2 methods](http://progressed.io/bar/0)&nbsp;[Privileges](https://github.com/benatespina/StackExchangeApiClient/blob/master/Resources/doc/privileges.md)
- - ![progressed.io - 35 methods](http://progressed.io/bar/3)&nbsp;[Questions](https://github.com/benatespina/StackExchangeApiClient/blob/master/Resources/doc/questions.md)
+ - ![progressed.io - 35 methods](http://progressed.io/bar/0)&nbsp;[Questions](https://github.com/benatespina/StackExchangeApiClient/blob/master/Resources/doc/questions.md)
  - ![progressed.io - 1 methods](http://progressed.io/bar/0)&nbsp;[Question Timelines](https://github.com/benatespina/StackExchangeApiClient/blob/master/Resources/doc/question_timelines.md)
  - ![progressed.io - 1 methods](http://progressed.io/bar/0)&nbsp;[Reputation](https://github.com/benatespina/StackExchangeApiClient/blob/master/Resources/doc/reputation.md)
  - ![progressed.io - 2 methods](http://progressed.io/bar/0)&nbsp;[Reputation History](https://github.com/benatespina/StackExchangeApiClient/blob/master/Resources/doc/reputation_history.md)

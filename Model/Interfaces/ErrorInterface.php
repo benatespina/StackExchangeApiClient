@@ -32,36 +32,4 @@ interface ErrorInterface
      * @return string
      */
     public function getDescription();
-
-    /**
-     * Sets error id.
-     *
-     * @param int $errorId The error id.
-     *
-     * @return $this self Object
-     */
-    public function setErrorId($errorId);
-
-    /**
-     * Gets error id.
-     *
-     * @return int
-     */
-    public function getErrorId();
-
-    /**
-     * Sets error name.
-     *
-     * @param string $errorName The error name
-     *
-     * @return $this self Object
-     */
-    public function setErrorName($errorName);
-
-    /**
-     * Gets error name.
-     *
-     * @return string
-     */
-    public function getErrorName();
 }

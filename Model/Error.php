@@ -18,28 +18,14 @@ use BenatEspina\StackExchangeApiClient\Util\Util;
  *
  * @package BenatEspina\StackExchangeApiClient\Model
  */
-class Error implements ErrorInterface
+class Error extends \Exception implements ErrorInterface
 {
     /**
-     * Description.
+     * The description of error; sometimes comes as 'description' and sometimes as 'error_message'.
      *
      * @var string
      */
     protected $description;
-
-    /**
-     * HTTP status code.
-     *
-     * @var int
-     */
-    protected $errorId;
-
-    /**
-     * HTTP message associated with status code.
-     *
-     * @var string
-     */
-    protected $errorName;
 
     /**
      * Constructor.
@@ -48,9 +34,12 @@ class Error implements ErrorInterface
      */
     public function __construct($json = null)
     {
-        $this->description = Util::setIfStringExists($json, 'description');
-        $this->errorId = Util::setIfIntegerExists($json, 'error_id');
-        $this->errorName = Util::setIfStringExists($json, 'error_name');
+        
+        $this->description = Util::setIfExists($json, 'description')
+            ? Util::setIfStringExists($json, 'description')
+            : Util::setIfStringExists($json, 'error_message');
+        $this->code = Util::setIfIntegerExists($json, 'error_id');
+        $this->message = Util::setIfStringExists($json, 'error_name');
     }
 
     /**
@@ -69,41 +58,5 @@ class Error implements ErrorInterface
     public function getDescription()
     {
         return $this->description;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function setErrorId($errorId)
-    {
-        $this->errorId = $errorId;
-
-        return $this;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getErrorId()
-    {
-        return $this->errorId;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function setErrorName($errorName)
-    {
-        $this->errorName = $errorName;
-
-        return $this;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getErrorName()
-    {
-        return $this->errorName;
     }
 }
