@@ -11,6 +11,9 @@
 namespace spec\BenatEspina\StackExchangeApiClient;
 
 use BenatEspina\StackExchangeApiClient\Authentication\AuthenticationInterface;
+use BenatEspina\StackExchangeApiClient\Authentication\OAuth2;
+use BenatEspina\StackExchangeApiClient\Client;
+use BenatEspina\StackExchangeApiClient\Method\CommentAPI;
 use BenatEspina\StackExchangeApiClient\Model\Error;
 use PhpSpec\ObjectBehavior;
 
@@ -45,12 +48,12 @@ class ClientSpec extends ObjectBehavior
             ->shouldBeArray();
     }
 
-    function it_posts_without_authentication()
+    function it_posts_a_request_without_authentication()
     {
         $this->post('/filters/create')->shouldBeArray();
     }
 
-    function it_posts_with_authentication(AuthenticationInterface $authentication)
+    function it_posts_a_request_with_authentication(AuthenticationInterface $authentication)
     {
         $this->beConstructedWith($authentication);
 
@@ -73,7 +76,7 @@ class ClientSpec extends ObjectBehavior
         )->shouldBeArray();
     }
 
-    function it_puts_with_authentication(AuthenticationInterface $authentication)
+    function it_puts_a_request(AuthenticationInterface $authentication)
     {
         $this->beConstructedWith($authentication);
 
@@ -87,6 +90,33 @@ class ClientSpec extends ObjectBehavior
                 'body'    => 'If you have improves about the library, please tell me :)' . mt_rand(),
                 'comment' => 'Edit from api request'
             )
+        )->shouldBeArray();
+    }
+
+    function it_deletes_a_request(AuthenticationInterface $authentication)
+    {
+        $oauth2 = new OAuth2(self::KEY, self::ACCESS_TOKEN);
+        $client = new Client($oauth2);
+        $commentApi = new CommentAPI($client);
+
+        $comment = $commentApi->create(
+            '4878',
+            array(
+                'site' => 'StackApps',
+                'body' => 'This is a ' . mt_rand() . ' dummy comment from an Api to test the delete request.'
+            )
+        );
+
+
+        $this->beConstructedWith($authentication);
+
+        $authentication->getAuth()->shouldBeCalled()->willReturn(
+            array('access_token' => self::ACCESS_TOKEN, 'key' => self::KEY)
+        );
+
+        $this->delete(
+            '/comments/' . $comment->getId() . '/delete',
+            array('site' => 'StackApps')
         )->shouldBeArray();
     }
 

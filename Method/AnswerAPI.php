@@ -83,7 +83,7 @@ class AnswerAPI
      * @param string   $id      The id of question
      * @param string[] $request The array which contains the required parameters as 'site' and 'body'
      *
-     * @return array<BenatEspina\StackExchangeApiClient\Model\Interfaces\AnswerInterface>
+     * @return \BenatEspina\StackExchangeApiClient\Model\Interfaces\AnswerInterface
      */
     public function postAnswer($id, $request = array())
     {
@@ -100,7 +100,7 @@ class AnswerAPI
      * @param string   $id      The id of question
      * @param string[] $request The array which contains the required parameters as 'site'
      *
-     * @return array<BenatEspina\StackExchangeApiClient\Model\Interfaces\AnswerInterface>
+     * @return \BenatEspina\StackExchangeApiClient\Model\Interfaces\AnswerInterface
      */
     public function postAccept($id, $request = array())
     {
@@ -117,7 +117,7 @@ class AnswerAPI
      * @param string   $id      The id of question
      * @param string[] $request The array which contains the required parameters as 'site'
      *
-     * @return array<BenatEspina\StackExchangeApiClient\Model\Interfaces\AnswerInterface>
+     * @return \BenatEspina\StackExchangeApiClient\Model\Interfaces\AnswerInterface
      */
     public function postUndoAccept($id, $request = array())
     {

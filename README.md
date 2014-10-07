@@ -24,7 +24,7 @@ Usage
 -----
 
 If you check out the [API documentation](http://api.stackexchange.com/docs), you will see that there are some calls that
-do not need authentication, but nevertheless there are other calls that need the authentication. 
+do not need authentication, but nevertheless there are other calls that need the authentication.
 
 First of all, you have to instantiate the Client that to be used like a parameter of  the constructor of the API objects.
 And then, after create the API object, simply you have to call the different methods that this object offers.
@@ -50,7 +50,7 @@ There are two variants to construct the `OAuth2` object:
 The first one directly passed the `$key` and `$accessToken`.
 
     $oauth2 = new OAuth2($key, $accessToken);
-    
+
     $client = new Client($oauth2);
     $questionAPI = new QuestionAPI($client);
 
@@ -59,7 +59,7 @@ The first one directly passed the `$key` and `$accessToken`.
 But the **recommended** variant is the variant that passes the `$key`, `$clientId`, `$scope`, `$redirectUri` and the `getAccessToken()`, and returns the token.
 
     $oauth2 = new OAuth2($key, null, $clientId, $scope, $redirectUri);
-    
+
     $client = new Client($oauth2);
     $questionAPI = new QuestionAPI($client);
 
@@ -69,11 +69,11 @@ Current status
 ---------------
 
 This API has many methods, so the status of the calls are separated **by type** in the following files:
- 
+
  - ![progressed.io - 3 methods](http://progressed.io/bar/100)&nbsp;[Access Tokens](https://github.com/benatespina/StackExchangeApiClient/blob/master/Resources/doc/access_tokens.md)
  - ![progressed.io - 16 methods](http://progressed.io/bar/31)&nbsp;[Answers](https://github.com/benatespina/StackExchangeApiClient/blob/master/Resources/doc/answers.md)
  - ![progressed.io - 7 methods](http://progressed.io/bar/100)&nbsp;[Badges](https://github.com/benatespina/StackExchangeApiClient/blob/master/Resources/doc/badges.md)
- - ![progressed.io - 15 methods](http://progressed.io/bar/0)&nbsp;[Comments](https://github.com/benatespina/StackExchangeApiClient/blob/master/Resources/doc/comments.md)
+ - ![progressed.io - 15 methods](http://progressed.io/bar/53)&nbsp;[Comments](https://github.com/benatespina/StackExchangeApiClient/blob/master/Resources/doc/comments.md)
  - ![progressed.io - 1 methods](http://progressed.io/bar/0)&nbsp;[Errors](https://github.com/benatespina/StackExchangeApiClient/blob/master/Resources/doc/errors.md)
  - ![progressed.io - 1 methods](http://progressed.io/bar/0)&nbsp;[Events](https://github.com/benatespina/StackExchangeApiClient/blob/master/Resources/doc/events.md)
  - ![progressed.io - 2 methods](http://progressed.io/bar/100)&nbsp;[Filters](https://github.com/benatespina/StackExchangeApiClient/blob/master/Resources/doc/filters.md)

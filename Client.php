@@ -101,7 +101,20 @@ class Client
     }
 
     /**
-     * Scaffold for POST api requests. This method exists because internally, StackExchange API
+     * Scaffold for DELETE api requests.
+     *
+     * @param string   $method  The api method
+     * @param string[] $content The content that contains the payload of the the request
+     *
+     * @return mixed Decoded array containing response
+     */
+    public function delete($method, $content = array())
+    {
+        return $this->basePostRequest($method, $content);
+    }
+
+    /**
+     * Base for POST api requests. This method exists because internally, StackExchange API
      * only uses GET and POST requests. So for add, update and delete resources uses a POST request.
      *
      * @param string   $method  The api method
