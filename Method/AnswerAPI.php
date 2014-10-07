@@ -56,7 +56,7 @@ class AnswerAPI
      */
     public function getAll($params = array('site' => 'stackoverflow', 'sort' => 'activity'))
     {
-        return $this->responseToAnswer($this->client->get($this->prefix, $params));
+        return $this->responseToArray($this->client->get($this->prefix, $params));
     }
 
     /**
@@ -72,7 +72,7 @@ class AnswerAPI
      */
     public function getByIds($ids, $params = array('site' => 'stackoverflow', 'sort' => 'activity'))
     {
-        return $this->responseToAnswer($this->client->get($this->prefix . '/' . implode(';', $ids), $params));
+        return $this->responseToArray($this->client->get($this->prefix . '/' . implode(';', $ids), $params));
     }
 
     /**
@@ -127,13 +127,26 @@ class AnswerAPI
     }
 
     /**
+     * Returns the first element of array of answers.
+     * This is useful for these methods that only returns an only one answer.
+     *
+     * @param mixed $response Decoded array containing response
+     *
+     * @return \BenatEspina\StackExchangeApiClient\Model\Interfaces\AnswerInterface
+     */
+    private function responseToAnswer($response)
+    {
+        return $this->responseToArray($response)[0];
+    }
+
+    /**
      * Transforms the json decodes array to answer objects array.
      *
      * @param mixed $response Decoded array containing response
      *
      * @return array<BenatEspina\StackExchangeApiClient\Model\Interfaces\AnswerInterface>
      */
-    private function responseToAnswer($response)
+    private function responseToArray($response)
     {
         $answers = array();
         foreach ($response['items'] as $response) {

@@ -126,7 +126,7 @@ class AnswerAPISpec extends ObjectBehavior
                 'site' => 'StackApps',
                 'body' => 'Spec for Client with random ' . $random . '; this is part of StackExchangeApiClient tests.'
             )
-        )->shouldBeArray();
+        )->shouldReturnAnInstanceOf('BenatEspina\StackExchangeApiClient\Model\Interfaces\AnswerInterface');
     }
 
     function it_accepts_an_answer(Client $client)
@@ -134,7 +134,8 @@ class AnswerAPISpec extends ObjectBehavior
         $client->post('/answers/answer-id/accept', array(), array('site' => 'StackApps'))
             ->shouldBeCalled()->willReturn($this->response);
 
-        $this->postAccept('answer-id', array('site' => 'StackApps'))->shouldBeArray();
+        $this->postAccept('answer-id', array('site' => 'StackApps'))
+            ->shouldReturnAnInstanceOf('BenatEspina\StackExchangeApiClient\Model\Interfaces\AnswerInterface');
     }
 
     function it_undo_accept_an_answer(Client $client)
@@ -142,6 +143,7 @@ class AnswerAPISpec extends ObjectBehavior
         $client->post('/answers/answer-id/accept/undo', array(), array('site' => 'StackApps'))
             ->shouldBeCalled()->willReturn($this->response);
 
-        $this->postUndoAccept('answer-id', array('site' => 'StackApps'))->shouldBeArray();
+        $this->postUndoAccept('answer-id', array('site' => 'StackApps'))
+            ->shouldReturnAnInstanceOf('BenatEspina\StackExchangeApiClient\Model\Interfaces\AnswerInterface');
     }
 }

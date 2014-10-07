@@ -128,9 +128,9 @@ class Util
      *
      * @return string|null
      */
-    public static function isEqual($resource, $key, $array)
+    public static function isEqual($resource, $key, $array = array())
     {
-        if (self::setIfExists($resource, $key) !== null) {
+        if (self::setIfExists($resource, $key) !== null && sizeof($array) > 0) {
             foreach ($array as $string) {
                 if ($resource[$key] === $string) {
                     return $string;
