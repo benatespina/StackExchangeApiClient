@@ -5,10 +5,14 @@
 [![Coverage Status](https://img.shields.io/coveralls/benatespina/StackExchangeApiClient.svg)](https://coveralls.io/r/benatespina/StackExchangeApiClient)
 [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/benatespina/StackExchangeApiClient/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/benatespina/StackExchangeApiClient/?branch=master)
 [![SensioLabsInsight](https://insight.sensiolabs.com/projects/1ebace1c-be1b-4a53-bef8-78d910aa2200/mini.png)](https://insight.sensiolabs.com/projects/1ebace1c-be1b-4a53-bef8-78d910aa2200)
+[![HHVM Status](http://hhvm.h4cc.de/badge/benatespina/stack-exchange-api-client.svg)](http://hhvm.h4cc.de/package/benatespina/stack-exchange-api-client)
+[![Dependency Status](https://www.versioneye.com/user/projects/54347161b2a9c55924000022/badge.svg?style=flat)](https://www.versioneye.com/user/projects/54347161b2a9c55924000022)
 
 [![Latest Stable Version](https://poser.pugx.org/benatespina/stack-exchange-api-client/v/stable.svg)](https://packagist.org/packages/benatespina/stack-exchange-api-client)
+[![Latest Unstable Version](https://poser.pugx.org/benatespina/stack-exchange-api-client/v/unstable.svg)](https://packagist.org/packages/benatespina/stack-exchange-api-client) &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 [![Total Downloads](https://poser.pugx.org/benatespina/stack-exchange-api-client/downloads.svg)](https://packagist.org/packages/benatespina/stack-exchange-api-client)
-[![Latest Unstable Version](https://poser.pugx.org/benatespina/stack-exchange-api-client/v/unstable.svg)](https://packagist.org/packages/benatespina/stack-exchange-api-client)
+[![Monthly Downloads](https://poser.pugx.org/benatespina/stack-exchange-api-client/d/monthly.png)](https://packagist.org/packages/benatespina/stack-exchange-api-client)
+[![Daily Downloads](https://poser.pugx.org/benatespina/stack-exchange-api-client/d/daily.png)](https://packagist.org/packages/benatespina/stack-exchange-api-client)
 
 ***This is a work in progress library and some features are not available yet.***
 
