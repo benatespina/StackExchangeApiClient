@@ -57,10 +57,10 @@ class CommentAPISpec extends ObjectBehavior
 
     function it_gets_comment_by_answer_ids(Client $client)
     {
-        $client->get('/answers/answer-id;answer-id-2/comments', array('site' => 'stackoverflow', 'sort' => 'activity'))
+        $client->get('/answers/answer-id;answer-id-2/comments', array('site' => 'stackoverflow', 'sort' => 'creation'))
             ->shouldBeCalled()->willReturn($this->response);
 
-        $this->getByAnswerIds(array('answer-id', 'answer-id-2'), array('site' => 'stackoverflow', 'sort' => 'activity'))
+        $this->getByAnswerIds(array('answer-id', 'answer-id-2'), array('site' => 'stackoverflow', 'sort' => 'creation'))
             ->shouldBeArray();
     }
 
@@ -74,7 +74,7 @@ class CommentAPISpec extends ObjectBehavior
 
     function it_gets_comments_by_ids(Client $client)
     {
-        $client->get('/comments/comment-id;comment-id-2', array('site' => 'stackoverflow', 'sort' => 'activity'))
+        $client->get('/comments/comment-id;comment-id-2', array('site' => 'stackoverflow', 'sort' => 'creation'))
             ->shouldBeCalled()->willReturn(
                 array(
                     'items' => array(
@@ -113,27 +113,6 @@ class CommentAPISpec extends ObjectBehavior
             );
 
         $this->getByIds(array('comment-id', 'comment-id-2'))->shouldBeArray();
-    }
-
-    function it_creates_a_comment(Client $client)
-    {
-        $random = mt_rand();
-        $client->post(
-            '/posts/post-id/comments/add',
-            array(),
-            array(
-                'site' => 'StackApps',
-                'body' => 'Spec for Client with random ' . $random . '; this is part of StackExchangeApiClient tests.'
-            )
-        )->shouldBeCalled()->willReturn($this->response);
-
-        $this->create(
-            'post-id',
-            array(
-                'site' => 'StackApps',
-                'body' => 'Spec for Client with random ' . $random . '; this is part of StackExchangeApiClient tests.'
-            )
-        )->shouldReturnAnInstanceOf('BenatEspina\StackExchangeApiClient\Model\Interfaces\CommentInterface');
     }
 
     function it_removes_a_comment(Client $client)
@@ -192,5 +171,119 @@ class CommentAPISpec extends ObjectBehavior
 
         $this->undoUpvote('comment-id', array('site' => 'StackApps'))
             ->shouldReturnAnInstanceOf('BenatEspina\StackExchangeApiClient\Model\Interfaces\CommentInterface');
+    }
+
+    function it_gets_a_comment_by_post_answer_and_question_ids(Client $client)
+    {
+        $client->get(
+            '/posts/post-id;question-id;answer-id/comments', array('site' => 'stackoverflow', 'sort' => 'creation')
+        )->shouldBeCalled()->willReturn($this->response);
+
+        $this->getByPostAnswerOrQuestionIds(
+            array('post-id', 'question-id', 'answer-id'),
+            array('site' => 'stackoverflow', 'sort' => 'creation')
+        )->shouldBeArray();
+    }
+
+    function it_creates_a_comment(Client $client)
+    {
+        $random = mt_rand();
+        $client->post(
+            '/posts/post-id/comments/add',
+            array(),
+            array(
+                'site' => 'StackApps',
+                'body' => 'Spec for Client with random ' . $random . '; this is part of StackExchangeApiClient tests.'
+            )
+        )->shouldBeCalled()->willReturn($this->response);
+
+        $this->create(
+            'post-id',
+            array(
+                'site' => 'StackApps',
+                'body' => 'Spec for Client with random ' . $random . '; this is part of StackExchangeApiClient tests.'
+            )
+        )->shouldReturnAnInstanceOf('BenatEspina\StackExchangeApiClient\Model\Interfaces\CommentInterface');
+    }
+
+    function it_renders_a_comment(Client $client)
+    {
+        $client->post(
+            '/posts/post-id/comments/render',
+            array(),
+            array('site' => 'StackApps', 'body' => 'This is a dummy comment.')
+        )->shouldBeCalled()->willReturn($this->response);
+
+        $this->render('post-id', array('site' => 'StackApps', 'body' => 'This is a dummy comment.'))
+            ->shouldReturnAnInstanceOf('BenatEspina\StackExchangeApiClient\Model\Interfaces\CommentInterface');
+    }
+
+    function it_gets_comments_by_question_ids(Client $client)
+    {
+        $client->get(
+            '/questions/question-id;question-id-2/comments',
+            array('site' => 'stackoverflow', 'sort' => 'creation')
+        )->shouldBeCalled()->willReturn($this->response);
+
+        $this->getByQuestionIds(
+            array('question-id', 'question-id-2'), array('site' => 'stackoverflow', 'sort' => 'creation')
+        )->shouldBeArray();
+    }
+
+    function it_gets_comments_by_user_ids(Client $client)
+    {
+        $client->get(
+            '/users/user-id;user-id-2/comments', array('site' => 'stackoverflow', 'sort' => 'creation')
+        )->shouldBeCalled()->willReturn($this->response);
+
+        $this->getByUserIds(
+            array('user-id', 'user-id-2'), array('site' => 'stackoverflow', 'sort' => 'creation')
+        )->shouldBeArray();
+    }
+
+    function it_gets_my_comments(Client $client)
+    {
+        $client->get('/me/comments', array('site' => 'stackoverflow', 'sort' => 'creation'))
+            ->shouldBeCalled()->willReturn($this->response);
+
+        $this->getMyComments(array('site' => 'stackoverflow', 'sort' => 'creation'))->shouldBeArray();
+    }
+
+    function it_gets_comments_by_user_ids_to_another_user(Client $client)
+    {
+        $client->get(
+            '/users/user-id;user-id-2/comments/to-user-id', array('site' => 'stackoverflow', 'sort' => 'creation')
+        )->shouldBeCalled()->willReturn($this->response);
+
+        $this->getByUserIdsToUser(
+            array('user-id', 'user-id-2'), 'to-user-id', array('site' => 'stackoverflow', 'sort' => 'creation')
+        )->shouldBeArray();
+    }
+
+    function it_gets_my_comments_to_another_user(Client $client)
+    {
+        $client->get('/me/comments/to-user-id', array('site' => 'stackoverflow', 'sort' => 'creation'))
+            ->shouldBeCalled()->willReturn($this->response);
+
+        $this->getMyCommentsToUser('to-user-id', array('site' => 'stackoverflow', 'sort' => 'creation'))
+            ->shouldBeArray();
+    }
+
+    function it_gets_mention_comments_by_user_ids(Client $client)
+    {
+        $client->get('/users/user-id;user-id-2/mentioned', array('site' => 'stackoverflow', 'sort' => 'creation'))
+            ->shouldBeCalled()->willReturn($this->response);
+
+        $this->getMentionsByUserIds(
+            array('user-id', 'user-id-2'), array('site' => 'stackoverflow', 'sort' => 'creation')
+        )->shouldBeArray();
+    }
+
+    function it_gets_my_mention_comments(Client $client)
+    {
+        $client->get('/me/mentioned', array('site' => 'stackoverflow', 'sort' => 'creation'))
+            ->shouldBeCalled()->willReturn($this->response);
+
+        $this->getMyMentions(array('site' => 'stackoverflow', 'sort' => 'creation'))->shouldBeArray();
     }
 }
