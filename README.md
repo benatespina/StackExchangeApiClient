@@ -78,7 +78,7 @@ This API has many methods, so the status of the calls are separated **by type** 
  - ![progressed.io - 16 methods](http://progressed.io/bar/31)&nbsp;[Answers](https://github.com/benatespina/StackExchangeApiClient/blob/master/Resources/doc/answers.md)
  - ![progressed.io - 7 methods](http://progressed.io/bar/100)&nbsp;[Badges](https://github.com/benatespina/StackExchangeApiClient/blob/master/Resources/doc/badges.md)
  - ![progressed.io - 15 methods](http://progressed.io/bar/100)&nbsp;[Comments](https://github.com/benatespina/StackExchangeApiClient/blob/master/Resources/doc/comments.md)
- - ![progressed.io - 1 methods](http://progressed.io/bar/0)&nbsp;[Errors](https://github.com/benatespina/StackExchangeApiClient/blob/master/Resources/doc/errors.md)
+ - ![progressed.io - 1 methods](http://progressed.io/bar/100)&nbsp;[Errors](https://github.com/benatespina/StackExchangeApiClient/blob/master/Resources/doc/errors.md)
  - ![progressed.io - 1 methods](http://progressed.io/bar/0)&nbsp;[Events](https://github.com/benatespina/StackExchangeApiClient/blob/master/Resources/doc/events.md)
  - ![progressed.io - 2 methods](http://progressed.io/bar/100)&nbsp;[Filters](https://github.com/benatespina/StackExchangeApiClient/blob/master/Resources/doc/filters.md)
  - ![progressed.io - 4 methods](http://progressed.io/bar/0)&nbsp;[Flag Options](https://github.com/benatespina/StackExchangeApiClient/blob/master/Resources/doc/flag_options.md)
