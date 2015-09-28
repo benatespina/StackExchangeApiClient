@@ -3,7 +3,6 @@
     "description": "StackExchange v2.2 API client",
     "keywords": ["stackExchange", "api", "library", "client"],
     "homepage": "https://github.com/benatespina/StackExchangeApiClient",
-    "version": "0.7.0",
     "type": "library",
     "license": "MIT",
     "authors": [
