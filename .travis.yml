@@ -23,7 +23,7 @@ install:
     - composer update --no-interaction ${COMPOSER_OPTIONS}
 
 script:
-    - bin/phpspec run -fpretty
+    - vendor/bin/phpspec run -fpretty
 
 cache:
     directories:
