@@ -4,10 +4,9 @@
 [![SensioLabsInsight](https://insight.sensiolabs.com/projects/1ebace1c-be1b-4a53-bef8-78d910aa2200/mini.png)](https://insight.sensiolabs.com/projects/1ebace1c-be1b-4a53-bef8-78d910aa2200)
 [![Build Status](https://travis-ci.org/benatespina/StackExchangeApiClient.svg)](https://travis-ci.org/benatespina/StackExchangeApiClient)
 [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/benatespina/StackExchangeApiClient/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/benatespina/StackExchangeApiClient/?branch=master)
-[![HHVM Status](http://hhvm.h4cc.de/badge/benatespina/stack-exchange-api-client.svg)](http://hhvm.h4cc.de/package/benatespina/stack-exchange-api-client)
+[![Total Downloads](https://poser.pugx.org/benatespina/stack-exchange-api-client/downloads.svg)](https://packagist.org/packages/benatespina/stack-exchange-api-client)
 [![Latest Stable Version](https://poser.pugx.org/benatespina/stack-exchange-api-client/v/stable.svg)](https://packagist.org/packages/benatespina/stack-exchange-api-client)
 [![Latest Unstable Version](https://poser.pugx.org/benatespina/stack-exchange-api-client/v/unstable.svg)](https://packagist.org/packages/benatespina/stack-exchange-api-client)
-[![Total Downloads](https://poser.pugx.org/benatespina/stack-exchange-api-client/downloads.svg)](https://packagist.org/packages/benatespina/stack-exchange-api-client)
 
 ***This is a work in progress library and some features are not available yet.***
 
@@ -15,7 +14,7 @@
 The recommended and the most suitable way to install is through [Composer](https://getcomposer.org/).
 Be sure that the tool is installed in your system and execute the following command:
 ```shell
-$ composer require benatespina/stack-exchange-api-client:dev-master
+$ composer require benatespina/stack-exchange-api-client
 ```
 
 ##Usage
@@ -131,8 +130,8 @@ in the [Submitting a Patch][3] section and use the [Pull Request Template][4].
 Inspirated by my friend [Gorka Laucirica](http://gorkalaucirica.net)'s
 [Hipchat v2 Api Client](https://github.com/gorkalaucirica/HipchatAPIv2Client)
 
-Created by **@benatespina** - [benatespina@gmail.com](mailto:benatespina@gmail.com).
-Copyright (c) 2014
+Created by **@benatespina** - [benatespina@gmail.com](mailto:benatespina@gmail.com).<br>
+Copyright (c) 2014, 2015
 
 ##Licensing Options
 [![License](https://poser.pugx.org/benatespina/stack-exchange-api-client/license.svg)](https://github.com/benatespina/StackExchangeApiClient/blob/master/LICENSE)
