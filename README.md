@@ -33,7 +33,7 @@ object that then it passed as parameter in `Client` constructor.
 $client = new Client();
 $answerAPI = new AnswerAPI($client);
 
-$answers = $answerAPI->getAnswersById(array('2359967', '1932551'));
+$answers = $answerAPI->getAnswersById(['2359967', '1932551']);
 ```
 
 *The second parameter has been omitted, because the method `getAnswersById` already contains by default the minimum
