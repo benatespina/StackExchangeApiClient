@@ -1,32 +1,24 @@
-# ![stackExchange-logo](https://d13yacurqjgara.cloudfront.net/users/237691/avatars/mini/se-logo_256-circle.png?1393431053) Stack Exchange v2.2 API Client
+#![stackExchange-logo](https://d13yacurqjgara.cloudfront.net/users/237691/avatars/mini/se-logo_256-circle.png?1393431053) Stack Exchange v2.2 API Client
 > PHP library for interacting with the [Stack Exchange](http://stackexchange.com/)'s version 2.2 REST API.
 
-[![Build Status](https://travis-ci.org/benatespina/StackExchangeApiClient.svg)](https://travis-ci.org/benatespina/StackExchangeApiClient)
-[![Coverage Status](https://img.shields.io/coveralls/benatespina/StackExchangeApiClient.svg)](https://coveralls.io/r/benatespina/StackExchangeApiClient)
-[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/benatespina/StackExchangeApiClient/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/benatespina/StackExchangeApiClient/?branch=master)
 [![SensioLabsInsight](https://insight.sensiolabs.com/projects/1ebace1c-be1b-4a53-bef8-78d910aa2200/mini.png)](https://insight.sensiolabs.com/projects/1ebace1c-be1b-4a53-bef8-78d910aa2200)
+[![Build Status](https://travis-ci.org/benatespina/StackExchangeApiClient.svg)](https://travis-ci.org/benatespina/StackExchangeApiClient)
+[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/benatespina/StackExchangeApiClient/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/benatespina/StackExchangeApiClient/?branch=master)
 [![HHVM Status](http://hhvm.h4cc.de/badge/benatespina/stack-exchange-api-client.svg)](http://hhvm.h4cc.de/package/benatespina/stack-exchange-api-client)
-[![Dependency Status](https://www.versioneye.com/user/projects/54347161b2a9c55924000022/badge.svg?style=flat)](https://www.versioneye.com/user/projects/54347161b2a9c55924000022)
-
 [![Latest Stable Version](https://poser.pugx.org/benatespina/stack-exchange-api-client/v/stable.svg)](https://packagist.org/packages/benatespina/stack-exchange-api-client)
-[![Latest Unstable Version](https://poser.pugx.org/benatespina/stack-exchange-api-client/v/unstable.svg)](https://packagist.org/packages/benatespina/stack-exchange-api-client) &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+[![Latest Unstable Version](https://poser.pugx.org/benatespina/stack-exchange-api-client/v/unstable.svg)](https://packagist.org/packages/benatespina/stack-exchange-api-client)
 [![Total Downloads](https://poser.pugx.org/benatespina/stack-exchange-api-client/downloads.svg)](https://packagist.org/packages/benatespina/stack-exchange-api-client)
-[![Monthly Downloads](https://poser.pugx.org/benatespina/stack-exchange-api-client/d/monthly.png)](https://packagist.org/packages/benatespina/stack-exchange-api-client)
-[![Daily Downloads](https://poser.pugx.org/benatespina/stack-exchange-api-client/d/daily.png)](https://packagist.org/packages/benatespina/stack-exchange-api-client)
 
 ***This is a work in progress library and some features are not available yet.***
 
-Installation
-------------
-
+##Installation
 The recommended and the most suitable way to install is through [Composer](https://getcomposer.org/).
 Be sure that the tool is installed in your system and execute the following command:
+```shell
+$ composer require benatespina/stack-exchange-api-client:dev-master
+```
 
-    composer require benatespina/stack-exchange-api-client:dev-master
-
-Usage
------
-
+##Usage
 If you check out the [API documentation](http://api.stackexchange.com/docs), you will see that there are some calls that
 do not need authentication, but nevertheless there are other calls that need the authentication.
 
@@ -37,41 +29,42 @@ The only difference between with or without authentication is the `Client` const
 constructor used the `null` value by default; otherwise, with authentication, firstly, you have to construct the `OAuth`
 object that then it passed as parameter in `Client` constructor.
 
-### Without authentication:
+###Without authentication:
+```php
+$client = new Client();
+$answerAPI = new AnswerAPI($client);
 
-    $client = new Client();
-    $answerAPI = new AnswerAPI($client);
-
-    $answers = $answerAPI->getAnswersById(array('2359967', '1932551'));
+$answers = $answerAPI->getAnswersById(array('2359967', '1932551'));
+```
 
 *The second parameter has been omitted, because the method `getAnswersById` already contains by default the minimum
-params to do a proper request: `array('site' => 'stackoverflow', 'sort' => 'activity')`*
+params to do a proper request: `['site' => 'stackoverflow', 'sort' => 'activity']`*
 
-### With authentication:
-
+###With authentication:
 There are two variants to construct the `OAuth2` object:
 
 The first one directly passed the `$key` and `$accessToken`.
+```php
+$oauth2 = new OAuth2($key, $accessToken);
 
-    $oauth2 = new OAuth2($key, $accessToken);
+$client = new Client($oauth2);
+$questionAPI = new QuestionAPI($client);
 
-    $client = new Client($oauth2);
-    $questionAPI = new QuestionAPI($client);
+$question = $questionAPI->postQuestion('The title of question', 'The body of the question', ['php', 'api']);
+```
 
-    $question = $questionAPI->postQuestion('The title of question', 'The body of the question', array('php', 'api'));
+But the **recommended** variant is the variant that passes the `$key`, `$clientId`, `$scope`, `$redirectUri` and
+the `getAccessToken()`, and returns the token.
+```php
+$oauth2 = new OAuth2($key, null, $clientId, $scope, $redirectUri);
 
-But the **recommended** variant is the variant that passes the `$key`, `$clientId`, `$scope`, `$redirectUri` and the `getAccessToken()`, and returns the token.
+$client = new Client($oauth2);
+$questionAPI = new QuestionAPI($client);
 
-    $oauth2 = new OAuth2($key, null, $clientId, $scope, $redirectUri);
+$question = $questionAPI->postQuestion('The title of question', 'The body of the question', ['php', 'api']);
+```
 
-    $client = new Client($oauth2);
-    $questionAPI = new QuestionAPI($client);
-
-    $question = $questionAPI->postQuestion('The title of question', 'The body of the question', array('php', 'api'));
-
-Current status
----------------
-
+##Current status
 This API has many methods, so the status of the calls are separated **by type** in the following files:
 
  - ![progressed.io - 3 methods](http://progressed.io/bar/100)&nbsp;[Access Tokens](https://github.com/benatespina/StackExchangeApiClient/blob/master/Resources/doc/access_tokens.md)
@@ -106,46 +99,47 @@ This API has many methods, so the status of the calls are separated **by type** 
  - ![progressed.io - 1 methods](http://progressed.io/bar/0)&nbsp;[User Timeline](https://github.com/benatespina/StackExchangeApiClient/blob/master/Resources/doc/user_timeline.md)
  - ![progressed.io - 1 methods](http://progressed.io/bar/0)&nbsp;[Write Permissions](https://github.com/benatespina/StackExchangeApiClient/blob/master/Resources/doc/write_permissions.md)
 
-Tests
------
-
+##Tests
 This library is completely tested by **[PHPSpec][1], SpecBDD framework for PHP**.
 
-Because you want to contribute or simply because you want to throw the tests, you have to type the following command
-in your terminal.
+If you want to run the tests, only you have to run the following command:
+```shell
+$ vendor/bin/phpspec run -fpretty
+```
 
-    phpspec run -fpretty
+##Contributing
+This projects follows PHP coding standards, so pull requests need to execute the Fabien Potencier's [PHP-CS-Fixer][5]
+and Marc Morera's [PHP-Formatter][6]. Furthermore, if the PR creates some not-PHP file remember that you have to put
+the license header manually.
+```
+$ vendor/bin/php-cs-fixer fix
+$ vendor/bin/php-cs-fixer fix --config-file .phpspec_cs
 
-*Depends the location of the `bin` directory (sometimes in the root dir; sometimes in the `/vendor` dir) the way that
-works every time is to use the absolute path of the binary `vendor/phpspec/phpspec/bin/phpspec`*
+$ vendor/bin/php-formatter formatter:use:sort .
+$ vendor/bin/php-formatter formatter:header:fix .
+```
 
-Contributing
-------------
+There is also a policy for contributing to this project. Pull requests must be explained step by step to make the
+review process easy in order to accept and merge them. New methods or code improvements must come paired with
+[PHPSpec][1] tests.
 
-This projects follows PHP coding standards, so pull requests must pass PHP Code Sniffer and PHP Mess Detector
-checks. In the root directory of this library you have the **custom rulesets** ([ruleset.xml]() for PHPCS and
-[phpmd.xml]() for PHPMD).
-
-There is also a policy for contributing to this project. Pull requests must
-be explained step by step to make the review process easy in order to
-accept and merge them. New methods or code improvements must come paired with [PHPSpec][1] tests.
-
-If you would like to contribute it is a good point to follow Symfony contribution standards,
-so please read the [Contributing Code][2] in the project
-documentation. If you are submitting a pull request, please follow the guidelines
+If you would like to contribute it is a good point to follow Symfony contribution standards, so please read the
+[Contributing Code][2] in the project documentation. If you are submitting a pull request, please follow the guidelines
 in the [Submitting a Patch][3] section and use the [Pull Request Template][4].
+
+##Credits
+Inspirated by my friend [Gorka Laucirica](http://gorkalaucirica.net)'s
+[Hipchat v2 Api Client](https://github.com/gorkalaucirica/HipchatAPIv2Client)
+
+Created by **@benatespina** - [benatespina@gmail.com](mailto:benatespina@gmail.com).
+Copyright (c) 2014
+
+##Licensing Options
+[![License](https://poser.pugx.org/benatespina/stack-exchange-api-client/license.svg)](https://github.com/benatespina/StackExchangeApiClient/blob/master/LICENSE)
 
 [1]: http://www.phpspec.net/
 [2]: http://symfony.com/doc/current/contributing/code/index.html
 [3]: http://symfony.com/doc/current/contributing/code/patches.html#check-list
 [4]: http://symfony.com/doc/current/contributing/code/patches.html#make-a-pull-request
-
-Credits
--------
-Inspirated by my friend [Gorka Laucirica](http://gorkalaucirica.net)'s
-[Hipchat v2 Api Client](https://github.com/gorkalaucirica/HipchatAPIv2Client)
-
-Created by **benatespina** - [benatespina@gmail.com](mailto:benatespina@gmail.com).
-Copyright (c) 2014
-
-[![License](https://poser.pugx.org/benatespina/stack-exchange-api-client/license.svg)](https://packagist.org/packages/benatespina/stack-exchange-api-client)
+[5]: http://cs.sensiolabs.org/
+[6]: https://github.com/mmoreram/php-formatter

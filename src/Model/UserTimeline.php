@@ -1,0 +1,338 @@
+<?php
+
+/*
+ * This file is part of the Stack Exchange Api Client library.
+ *
+ * Copyright (c) 2015 Beñat Espiña <benatespina@gmail.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
+namespace BenatEspina\StackExchangeApiClient\Model;
+
+use BenatEspina\StackExchangeApiClient\Model\Abstracts\BaseAbstract as BaseUserTimeline;
+use BenatEspina\StackExchangeApiClient\Model\Interfaces\UserTimelineInterface;
+use BenatEspina\StackExchangeApiClient\Util\Util;
+
+/**
+ * Class UserTimeline.
+ *
+ * @author Beñat Espiña <benatespina@gmail.com>
+ */
+class UserTimeline extends BaseUserTimeline implements UserTimelineInterface
+{
+    const POST_TYPE_QUESTION = 'question';
+    const POST_TYPE_ANSWER = 'answer';
+
+    const TIMELINE_TYPE_ACCEPTED_ANSWER = 'accepted_answer';
+    const TIMELINE_TYPE_ANSWER = 'answer';
+    const TIMELINE_TYPE_COMMENT = 'comment';
+    const TIMELINE_TYPE_POST_STATE_CHANGED = 'post_state_changed';
+    const TIMELINE_TYPE_QUESTION = 'question';
+    const TIMELINE_TYPE_REVISION = 'revision';
+    const TIMELINE_TYPE_UNACCEPTED_ANSWER = 'unaccepted_answer';
+    const TIMELINE_TYPE_VOTE_AGGREGATE = 'vote_aggregate';
+
+    /**
+     * The badge id.
+     *
+     * @var int|null
+     */
+    protected $badgeId;
+
+    /**
+     * The comment id.
+     *
+     * @var int|null
+     */
+    protected $commentId;
+
+    /**
+     * Creation date.
+     *
+     * @var \DateTime
+     */
+    protected $creationDate;
+
+    /**
+     * The detail.
+     *
+     * @var string|null
+     */
+    protected $detail;
+
+    /**
+     * The link.
+     *
+     * @var string
+     */
+    protected $link;
+
+    /**
+     * The post id.
+     *
+     * @var int|null
+     */
+    protected $postId;
+
+    /**
+     * Post type that can be 'answer' or 'question'.
+     *
+     * @var string
+     */
+    protected $postType;
+
+    /**
+     * Suggested edit id.
+     *
+     * @var int|null
+     */
+    protected $suggestedEditId;
+
+    /**
+     * The timeline type that can be 'question', 'answer', 'comment', 'unaccepted_answer',
+     * 'accepted_answer','vote_aggregate', 'revision', or 'post_state_changed'.
+     *
+     * @var string
+     */
+    protected $timelineType;
+
+    /**
+     * The title.
+     *
+     * @var string|null
+     */
+    protected $title;
+
+    /**
+     * Constructor.
+     *
+     * @param null|mixed[] $json The json string being decoded
+     */
+    public function __construct($json = null)
+    {
+        $this->id = Util::setIfIntegerExists($json, 'user_id');
+
+        $this->badgeId = Util::setIfIntegerExists($json, 'badge_id');
+        $this->commentId = Util::setIfIntegerExists($json, 'comment_id');
+        $this->creationDate = Util::setIfDateTimeExists($json, 'creation_date');
+        $this->detail = Util::setIfStringExists($json, 'detail');
+        $this->link = Util::setIfStringExists($json, 'link');
+        $this->postId = Util::setIfIntegerExists($json, 'post_id');
+        $this->postType = Util::isEqual($json, 'post_type', [self::POST_TYPE_ANSWER, self::POST_TYPE_QUESTION]);
+        $this->suggestedEditId = Util::setIfIntegerExists($json, 'suggested_edit_id');
+        $this->timelineType = Util::isEqual(
+            $json,
+            'timeline_type',
+            [
+                self::TIMELINE_TYPE_ACCEPTED_ANSWER,
+                self::TIMELINE_TYPE_ANSWER,
+                self::TIMELINE_TYPE_COMMENT,
+                self::TIMELINE_TYPE_POST_STATE_CHANGED,
+                self::TIMELINE_TYPE_QUESTION,
+                self::TIMELINE_TYPE_REVISION,
+                self::TIMELINE_TYPE_UNACCEPTED_ANSWER,
+                self::TIMELINE_TYPE_VOTE_AGGREGATE,
+            ]
+        );
+        $this->title = Util::setIfStringExists($json, 'title');
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setBadgeId($badgeId)
+    {
+        $this->badgeId = $badgeId;
+
+        return $this;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getBadgeId()
+    {
+        return $this->badgeId;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setCommentId($commentId)
+    {
+        $this->commentId = $commentId;
+
+        return $this;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getCommentId()
+    {
+        return $this->commentId;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setCreationDate(\DateTime $creationDate)
+    {
+        $this->creationDate = $creationDate;
+
+        return $this;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getCreationDate()
+    {
+        return $this->creationDate;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setDetail($detail)
+    {
+        $this->detail = $detail;
+
+        return $this;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getDetail()
+    {
+        return $this->detail;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setLink($link)
+    {
+        $this->link = $link;
+
+        return $this;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getLink()
+    {
+        return $this->link;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setPostId($postId)
+    {
+        $this->postId = $postId;
+
+        return $this;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getPostId()
+    {
+        return $this->postId;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setPostType($postType)
+    {
+        if (Util::coincidesElement($postType, [self::POST_TYPE_ANSWER, self::POST_TYPE_QUESTION]) === true) {
+            $this->postType = $postType;
+        }
+
+        return $this;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getPostType()
+    {
+        return $this->postType;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setSuggestedEditId($suggestedEditId)
+    {
+        $this->suggestedEditId = $suggestedEditId;
+
+        return $this;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getSuggestedEditId()
+    {
+        return $this->suggestedEditId;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setTimelineType($timelineType)
+    {
+        if (Util::coincidesElement(
+            $timelineType,
+            [
+                self::TIMELINE_TYPE_ACCEPTED_ANSWER,
+                self::TIMELINE_TYPE_ANSWER,
+                self::TIMELINE_TYPE_COMMENT,
+                self::TIMELINE_TYPE_POST_STATE_CHANGED,
+                self::TIMELINE_TYPE_QUESTION,
+                self::TIMELINE_TYPE_REVISION,
+                self::TIMELINE_TYPE_UNACCEPTED_ANSWER,
+                self::TIMELINE_TYPE_VOTE_AGGREGATE,
+            ]
+        ) === true
+        ) {
+            $this->timelineType = $timelineType;
+        }
+
+        return $this;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getTimelineType()
+    {
+        return $this->timelineType;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setTitle($title)
+    {
+        $this->title = $title;
+
+        return $this;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getTitle()
+    {
+        return $this->title;
+    }
+}
