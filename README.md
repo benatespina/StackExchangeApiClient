@@ -1,4 +1,4 @@
-#![stackExchange-logo](https://d13yacurqjgara.cloudfront.net/users/237691/avatars/mini/se-logo_256-circle.png?1393431053) Stack Exchange v2.2 API Client
+#![stackExchange-logo](http://files.quickmediasolutions.com/so-images/stackexchange.svg) Stack Exchange v2.2 API Client
 > PHP library for interacting with the [Stack Exchange](http://stackexchange.com/)'s version 2.2 REST API.
 
 [![SensioLabsInsight](https://insight.sensiolabs.com/projects/1ebace1c-be1b-4a53-bef8-78d910aa2200/mini.png)](https://insight.sensiolabs.com/projects/1ebace1c-be1b-4a53-bef8-78d910aa2200)
@@ -107,15 +107,12 @@ $ vendor/bin/phpspec run -fpretty
 ```
 
 ##Contributing
-This projects follows PHP coding standards, so pull requests need to execute the Fabien Potencier's [PHP-CS-Fixer][5]
+This project follows PHP coding standards, so pull requests need to execute the Fabien Potencier's [PHP-CS-Fixer][5]
 and Marc Morera's [PHP-Formatter][6]. Furthermore, if the PR creates some not-PHP file remember that you have to put
-the license header manually.
-```
-$ vendor/bin/php-cs-fixer fix
-$ vendor/bin/php-cs-fixer fix --config-file .phpspec_cs
-
-$ vendor/bin/php-formatter formatter:use:sort .
-$ vendor/bin/php-formatter formatter:header:fix .
+the license header manually. In order to simplify we provide a Composer script that wraps all the commands related with
+this process.
+```bash
+$ composer run-script cs
 ```
 
 There is also a policy for contributing to this project. Pull requests must be explained step by step to make the
