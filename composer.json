@@ -1,0 +1,45 @@
+{
+    "name": "benatespina/stack-exchange-api-client",
+    "description": "StackExchange v2.2 API client",
+    "keywords": ["stackExchange", "api", "library", "client"],
+    "homepage": "https://github.com/benatespina/StackExchangeApiClient",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Beñat Espiña",
+            "email": "benatespina@gmail.com",
+            "homepage": "http://benatespina.com"
+        }
+    ],
+    "require": {
+        "php":                      ">=5.4",
+
+        "guzzlehttp/guzzle":        "^6.1"
+    },
+    "require-dev": {
+        "fabpot/php-cs-fixer":      "^1.10",
+        "mmoreram/php-formatter":   "^1.0",
+        "phpspec/phpspec":          "^2.3"
+    },
+    "scripts": {
+        "cs": [
+            "php-formatter f:h:f src",
+            "php-formatter f:u:s src",
+            "php-cs-fixer fix --config-file=.php_cs",
+            "php-cs-fixer fix --config-file=.phpspec_cs"
+        ],
+        "test": "phpspec run"
+    },
+    "autoload": {
+        "psr-4": {
+            "BenatEspina\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "spec\\BenatEspina\\StackExchangeApiClient\\": "spec/",
+            "BenatEspina\\StackExchangeApiClient\\Stubs\\": "spec/Stubs/"
+        }
+    }
+}
