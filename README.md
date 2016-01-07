@@ -39,7 +39,7 @@ in case your use case only need for example the AnswerApi method wrapper you can
 ##Current status
 This API has many methods, so the status of the calls are separated **by type** in the following files:
 
- - ![progressed.io - 3 methods](http://progressed.io/bar/0)&nbsp;[Access Tokens](https://github.com/benatespina/StackExchangeApiClient/blob/master/docs/access_tokens.md)
+ - ![progressed.io - 3 methods](http://progressed.io/bar/100)&nbsp;[Access Tokens](https://github.com/benatespina/StackExchangeApiClient/blob/master/docs/access_tokens.md)
  - ![progressed.io - 16 methods](http://progressed.io/bar/100)&nbsp;[Answers](https://github.com/benatespina/StackExchangeApiClient/blob/master/docs/answers.md)
  - ![progressed.io - 7 methods](http://progressed.io/bar/0)&nbsp;[Badges](https://github.com/benatespina/StackExchangeApiClient/blob/master/docs/badges.md)
  - ![progressed.io - 15 methods](http://progressed.io/bar/0)&nbsp;[Comments](https://github.com/benatespina/StackExchangeApiClient/blob/master/docs/comments.md)
