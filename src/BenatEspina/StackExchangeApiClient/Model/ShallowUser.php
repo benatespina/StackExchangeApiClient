@@ -3,7 +3,7 @@
 /*
  * This file is part of the Stack Exchange Api Client library.
  *
- * Copyright (c) 2014-2015 Beñat Espiña <benatespina@gmail.com>
+ * Copyright (c) 2014-2016 Beñat Espiña <benatespina@gmail.com>
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -36,8 +36,8 @@ class ShallowUser
     {
         return new self(
             array_key_exists('user_id', $data) ? $data['user_id'] : null,
-            array_key_exists('accept_rate', $data) ? $data['accept_rate'] : null,
             array_key_exists('badge_counts', $data) ? BadgeCount::fromJson($data['badge_counts']) : null,
+            array_key_exists('accept_rate', $data) ? $data['accept_rate'] : null,
             array_key_exists('display_name', $data) ? $data['display_name'] : null,
             array_key_exists('link', $data) ? $data['link'] : null,
             array_key_exists('profile_image', $data) ? $data['profile_image'] : null,
@@ -184,7 +184,7 @@ class ShallowUser
             self::USER_TYPE_MODERATOR,
             self::USER_TYPE_REGISTERED,
             self::USER_TYPE_UNREGISTERED,
-        ])) {
+        ], true)) {
             $this->userType = $userType;
         }
 

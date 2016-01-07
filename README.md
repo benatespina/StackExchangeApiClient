@@ -19,60 +19,33 @@ $ composer require benatespina/stack-exchange-api-client
 
 ##Usage
 If you check out the [API documentation](http://api.stackexchange.com/docs), you will see that there are some calls that
-do not need authentication, but nevertheless there are other calls that need the authentication.
+do not need authentication, but nevertheless there are other calls that need the authentication so, this library allows
+to instantiate **StackExchange client with or without Authentication**.
 
-First of all, you have to instantiate the Client that to be used like a parameter of  the constructor of the API objects.
-And then, after create the API object, simply you have to call the different methods that this object offers.
+`StackExchange` class is a simple facade that provides the library api method wrappers to simplify the use process but,
+in case your use case only need for example the AnswerApi method wrapper you can directly create an instance of
+`AnswerApi` class.
 
-The only difference between with or without authentication is the `Client` constructor. Without authentication the
-constructor used the `null` value by default; otherwise, with authentication, firstly, you have to construct the `OAuth`
-object that then it passed as parameter in `Client` constructor.
-
-###Without authentication:
 ```php
-$client = new Client();
-$answerAPI = new AnswerAPI($client);
-
-$answers = $answerAPI->getAnswersById(['2359967', '1932551']);
-```
-
-*The second parameter has been omitted, because the method `getAnswersById` already contains by default the minimum
-params to do a proper request: `['site' => 'stackoverflow', 'sort' => 'activity']`*
-
-###With authentication:
-There are two variants to construct the `OAuth2` object:
-
-The first one directly passed the `$key` and `$accessToken`.
-```php
-$oauth2 = new OAuth2($key, $accessToken);
-
-$client = new Client($oauth2);
-$questionAPI = new QuestionAPI($client);
-
-$question = $questionAPI->postQuestion('The title of question', 'The body of the question', ['php', 'api']);
-```
-
-But the **recommended** variant is the variant that passes the `$key`, `$clientId`, `$scope`, `$redirectUri` and
-the `getAccessToken()`, and returns the token.
-```php
-$oauth2 = new OAuth2($key, null, $clientId, $scope, $redirectUri);
-
-$client = new Client($oauth2);
-$questionAPI = new QuestionAPI($client);
-
-$question = $questionAPI->postQuestion('The title of question', 'The body of the question', ['php', 'api']);
+    $client = new StackExchange(new Authentication('stack-exchange-key', 'stack-exchange-access-token'));
+    $answer = $client->answerApi()->answersOfIds(19492059);
+    
+    $answerApi = new AnswerApi();
+    $answer2 = $answerApi->answersOfIds(19492059);
+    
+    $answer === $answer2            # true
 ```
 
 ##Current status
 This API has many methods, so the status of the calls are separated **by type** in the following files:
 
- - ![progressed.io - 3 methods](http://progressed.io/bar/100)&nbsp;[Access Tokens](https://github.com/benatespina/StackExchangeApiClient/blob/master/docs/access_tokens.md)
- - ![progressed.io - 16 methods](http://progressed.io/bar/31)&nbsp;[Answers](https://github.com/benatespina/StackExchangeApiClient/blob/master/docs/answers.md)
- - ![progressed.io - 7 methods](http://progressed.io/bar/100)&nbsp;[Badges](https://github.com/benatespina/StackExchangeApiClient/blob/master/docs/badges.md)
- - ![progressed.io - 15 methods](http://progressed.io/bar/100)&nbsp;[Comments](https://github.com/benatespina/StackExchangeApiClient/blob/master/docs/comments.md)
- - ![progressed.io - 1 methods](http://progressed.io/bar/100)&nbsp;[Errors](https://github.com/benatespina/StackExchangeApiClient/blob/master/docs/errors.md)
+ - ![progressed.io - 3 methods](http://progressed.io/bar/0)&nbsp;[Access Tokens](https://github.com/benatespina/StackExchangeApiClient/blob/master/docs/access_tokens.md)
+ - ![progressed.io - 16 methods](http://progressed.io/bar/100)&nbsp;[Answers](https://github.com/benatespina/StackExchangeApiClient/blob/master/docs/answers.md)
+ - ![progressed.io - 7 methods](http://progressed.io/bar/0)&nbsp;[Badges](https://github.com/benatespina/StackExchangeApiClient/blob/master/docs/badges.md)
+ - ![progressed.io - 15 methods](http://progressed.io/bar/0)&nbsp;[Comments](https://github.com/benatespina/StackExchangeApiClient/blob/master/docs/comments.md)
+ - ![progressed.io - 1 methods](http://progressed.io/bar/0)&nbsp;[Errors](https://github.com/benatespina/StackExchangeApiClient/blob/master/docs/errors.md)
  - ![progressed.io - 1 methods](http://progressed.io/bar/0)&nbsp;[Events](https://github.com/benatespina/StackExchangeApiClient/blob/master/docs/events.md)
- - ![progressed.io - 2 methods](http://progressed.io/bar/100)&nbsp;[Filters](https://github.com/benatespina/StackExchangeApiClient/blob/master/docs/filters.md)
+ - ![progressed.io - 2 methods](http://progressed.io/bar/0)&nbsp;[Filters](https://github.com/benatespina/StackExchangeApiClient/blob/master/docs/filters.md)
  - ![progressed.io - 4 methods](http://progressed.io/bar/0)&nbsp;[Flag Options](https://github.com/benatespina/StackExchangeApiClient/blob/master/docs/flag_options.md)
  - ![progressed.io - 4 methods](http://progressed.io/bar/0)&nbsp;[Inbox Items](https://github.com/benatespina/StackExchangeApiClient/blob/master/docs/inbox_items.md)
  - ![progressed.io - 1 methods](http://progressed.io/bar/0)&nbsp;[Network Users](https://github.com/benatespina/StackExchangeApiClient/blob/master/docs/network_users.md)
@@ -124,11 +97,8 @@ If you would like to contribute it is a good point to follow Symfony contributio
 in the [Submitting a Patch][3] section and use the [Pull Request Template][4].
 
 ##Credits
-Inspirated by my friend [Gorka Laucirica](http://gorkalaucirica.net)'s
-[Hipchat v2 Api Client](https://github.com/gorkalaucirica/HipchatAPIv2Client)
-
 Created by **@benatespina** - [benatespina@gmail.com](mailto:benatespina@gmail.com).<br>
-Copyright (c) 2014, 2015
+Copyright (c) 2014, 2016
 
 ##Licensing Options
 [![License](https://poser.pugx.org/benatespina/stack-exchange-api-client/license.svg)](https://github.com/benatespina/StackExchangeApiClient/blob/master/LICENSE)

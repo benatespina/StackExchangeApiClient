@@ -3,7 +3,7 @@
 /*
  * This file is part of the Stack Exchange Api Client library.
  *
- * Copyright (c) 2014-2015 Beñat Espiña <benatespina@gmail.com>
+ * Copyright (c) 2014-2016 Beñat Espiña <benatespina@gmail.com>
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -53,8 +53,8 @@ final class Http
      * @param array  $params Array which contains the query params
      *
      * @throws \Exception when response does not implement the ResponseInterface
-     * @return array
      *
+     * @return array
      */
     public function get($url, $params)
     {
@@ -73,10 +73,56 @@ final class Http
      * @param array  $params Array which contains the form params
      *
      * @throws \Exception when response does not implement the ResponseInterface
-     * @return array
      *
+     * @return array
      */
     public function post($url, $params)
+    {
+        return $this->internalPost($url, $params);
+    }
+
+    /**
+     * HTTP PUT method.
+     *
+     * @param string $url    The url
+     * @param array  $params Array which contains the form params
+     *
+     * @throws \Exception when response does not implement the ResponseInterface
+     *
+     * @return array
+     */
+    public function put($url, $params)
+    {
+        return $this->internalPost($url, $params);
+    }
+
+    /**
+     * HTTP DELETE method.
+     *
+     * @param string $url    The url
+     * @param array  $params Array which contains the form params
+     *
+     * @throws \Exception when response does not implement the ResponseInterface
+     *
+     * @return array
+     */
+    public function delete($url, $params)
+    {
+        return $this->internalPost($url, $params);
+    }
+
+    /**
+     * Internally, StackExchange API only uses GET and POST requests.
+     * So for add, update and delete resources it needs a POST request.
+     *
+     * @param string $url    The url
+     * @param array  $params Array which contains the form params
+     *
+     * @throws \Exception when response does not implement the ResponseInterface
+     *
+     * @return array
+     */
+    private function internalPost($url, $params)
     {
         $response = $this->client->post($url, ['form_params' => $params]);
         if (!$response instanceof ResponseInterface) {

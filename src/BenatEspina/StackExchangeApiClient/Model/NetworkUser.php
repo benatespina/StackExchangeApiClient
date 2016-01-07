@@ -3,7 +3,7 @@
 /*
  * This file is part of the Stack Exchange Api Client library.
  *
- * Copyright (c) 2014-2015 Beñat Espiña <benatespina@gmail.com>
+ * Copyright (c) 2014-2016 Beñat Espiña <benatespina@gmail.com>
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -256,7 +256,7 @@ class NetworkUser
             self::USER_TYPE_MODERATOR,
             self::USER_TYPE_REGISTERED,
             self::USER_TYPE_UNREGISTERED,
-        ])) {
+        ], true)) {
             $this->userType = $userType;
         }
 
