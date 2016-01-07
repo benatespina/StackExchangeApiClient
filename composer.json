@@ -13,14 +13,14 @@
         }
     ],
     "require": {
-        "php":                      ">=5.4",
+        "php":                      ">=5.5",
 
         "guzzlehttp/guzzle":        "^6.1"
     },
     "require-dev": {
         "fabpot/php-cs-fixer":      "^1.10",
         "mmoreram/php-formatter":   "^1.0",
-        "phpspec/phpspec":          "^2.3"
+        "phpspec/phpspec":          "^2.4"
     },
     "scripts": {
         "cs": [
@@ -33,13 +33,7 @@
     },
     "autoload": {
         "psr-4": {
-            "BenatEspina\\": "src/"
-        }
-    },
-    "autoload-dev": {
-        "psr-4": {
-            "spec\\BenatEspina\\StackExchangeApiClient\\": "spec/",
-            "BenatEspina\\StackExchangeApiClient\\Stubs\\": "spec/Stubs/"
+            "": "src/"
         }
     }
 }
