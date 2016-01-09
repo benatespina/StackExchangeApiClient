@@ -23,5 +23,5 @@ final class UserSerializer extends Serializer
     /**
      * {@inheritdoc}
      */
-    protected $class = User::class;
+    protected static $class = User::class;
 }

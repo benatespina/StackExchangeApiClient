@@ -58,8 +58,14 @@ final class AnswerApi
      *
      * @return array
      */
-    public function all($params = self::QUERY_PARAMS, $serialize = true)
+    public function all(array $params = ['site' => 'stackoverflow'], $serialize = true)
     {
+        if ($this->authentication instanceof Authentication) {
+            if (true === empty($params)) {
+                $params = array_merge($params, self::QUERY_PARAMS);
+            }
+            $params = array_merge($params, $this->authentication->toArray());
+        }
         $response = Http::instance()->get(
             self::URL, $params
         );
@@ -78,8 +84,14 @@ final class AnswerApi
      *
      * @return array|Answer
      */
-    public function getOfIds($ids, array $params = self::QUERY_PARAMS, $serialize = true)
+    public function getOfIds($ids, array $params = ['site' => 'stackoverflow'], $serialize = true)
     {
+        if ($this->authentication instanceof Authentication) {
+            if (true === empty($params)) {
+                $params = array_merge($params, self::QUERY_PARAMS);
+            }
+            $params = array_merge($params, $this->authentication->toArray());
+        }
         $response = Http::instance()->get(
             self::URL . (is_array($ids) ? implode(';', $ids) : $ids), $params
         );
@@ -324,8 +336,14 @@ final class AnswerApi
      *
      * @return array|Answer
      */
-    public function getOfQuestionIds($ids, array $params = self::QUERY_PARAMS, $serialize = true)
+    public function getOfQuestionIds($ids, array $params = ['site' => 'stackoverflow'], $serialize = true)
     {
+        if ($this->authentication instanceof Authentication) {
+            if (true === empty($params)) {
+                $params = array_merge($params, self::QUERY_PARAMS);
+            }
+            $params = array_merge($params, $this->authentication->toArray());
+        }
         $response = Http::instance()->get(
             'questions/' . (is_array($ids) ? implode(';', $ids) : $ids) . self::URL, $params
         );
@@ -375,8 +393,14 @@ final class AnswerApi
      *
      * @return Answer
      */
-    public function render($id, $body, array $params = self::QUERY_PARAMS, $serialize = true)
+    public function render($id, $body, array $params = ['site' => 'stackoverflow'], $serialize = true)
     {
+        if ($this->authentication instanceof Authentication) {
+            if (true === empty($params)) {
+                $params = array_merge($params, self::QUERY_PARAMS);
+            }
+            $params = array_merge($params, $this->authentication->toArray());
+        }
         $response = Http::instance()->post(
             'questions/' . $id . '/' . self::URL . 'render', array_merge(
                 ['body' => $body], $params, $this->authentication->toArray()
@@ -397,8 +421,14 @@ final class AnswerApi
      *
      * @return array|Answer
      */
-    public function getOfUserIds($ids, array $params = self::QUERY_PARAMS, $serialize = true)
+    public function getOfUserIds($ids, array $params = ['site' => 'stackoverflow'], $serialize = true)
     {
+        if ($this->authentication instanceof Authentication) {
+            if (true === empty($params)) {
+                $params = array_merge($params, self::QUERY_PARAMS);
+            }
+            $params = array_merge($params, $this->authentication->toArray());
+        }
         $response = Http::instance()->get(
             'users/' . (is_array($ids) ? implode(';', $ids) : $ids) . '/' . self::URL, $params
         );
@@ -424,7 +454,7 @@ final class AnswerApi
             throw new \Exception('Authentication is required');
         }
         $response = Http::instance()->get(
-            'me/' . self::URL, array_merge($params, ['access_token' => $this->authentication->accessToken()])
+            'me/' . self::URL, array_merge($params, $this->authentication->toArray())
         );
 
         return $serialize === true ? AnswerSerializer::serialize($response) : $response;
@@ -442,8 +472,14 @@ final class AnswerApi
      *
      * @return array|Answer
      */
-    public function getTopOfUserAndTags($userId, $tags, array $params = self::QUERY_PARAMS, $serialize = true)
+    public function getTopOfUserAndTags($userId, $tags, array $params = ['site' => 'stackoverflow'], $serialize = true)
     {
+        if ($this->authentication instanceof Authentication) {
+            if (true === empty($params)) {
+                $params = array_merge($params, self::QUERY_PARAMS);
+            }
+            $params = array_merge($params, $this->authentication->toArray());
+        }
         $response = Http::instance()->get(
             'users/' . $userId . '/tags/' . (is_array($tags) ? implode(';', $tags) : $tags) . '/top-' . self::URL, $params
         );
@@ -472,7 +508,7 @@ final class AnswerApi
         }
         $response = Http::instance()->get(
             'me/tags/' . (is_array($tags) ? implode(';', $tags) : $tags) . '/top-' . self::URL,
-            array_merge($params, ['access_token' => $this->authentication->accessToken()])
+            array_merge($params, $this->authentication->toArray())
         );
 
         return $serialize === true ? AnswerSerializer::serialize($response) : $response;

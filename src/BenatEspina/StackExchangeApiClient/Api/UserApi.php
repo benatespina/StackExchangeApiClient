@@ -26,7 +26,7 @@ final class UserApi
     const URL = 'users/';
     const QUERY_PARAMS = [
         'order'  => 'desc',
-        'sort'   => 'activity',
+        'sort'   => 'reputation',
         'site'   => 'stackoverflow',
         'filter' => Http::FILTER_ALL,
     ];
@@ -58,8 +58,14 @@ final class UserApi
      *
      * @return array
      */
-    public function all($params = self::QUERY_PARAMS, $serialize = true)
+    public function all($params = [], $serialize = true)
     {
+        if ($this->authentication instanceof Authentication) {
+            if (true === empty($params)) {
+                $params = array_merge($params, self::QUERY_PARAMS);
+            }
+            $params = array_merge($params, $this->authentication->toArray());
+        }
         $response = Http::instance()->get(
             self::URL, $params
         );
@@ -78,8 +84,14 @@ final class UserApi
      *
      * @return array|User
      */
-    public function getOfIds($ids, array $params = self::QUERY_PARAMS, $serialize = true)
+    public function getOfIds($ids, array $params = [], $serialize = true)
     {
+        if ($this->authentication instanceof Authentication) {
+            if (true === empty($params)) {
+                $params = array_merge($params, self::QUERY_PARAMS);
+            }
+            $params = array_merge($params, $this->authentication->toArray());
+        }
         $response = Http::instance()->get(
             self::URL . (is_array($ids) ? implode(';', $ids) : $ids), $params
         );
@@ -105,7 +117,7 @@ final class UserApi
             throw new \Exception('Authentication is required');
         }
         $response = Http::instance()->get(
-            'me', array_merge($params, ['access_token' => $this->authentication->accessToken()])
+            'me', array_merge($params, $this->authentication->toArray())
         );
 
         return $serialize === true ? UserSerializer::serialize($response) : $response;
@@ -123,6 +135,12 @@ final class UserApi
      */
     public function moderators(array $params = [], $serialize = true)
     {
+        if ($this->authentication instanceof Authentication) {
+            if (true === empty($params)) {
+                $params = array_merge($params, self::QUERY_PARAMS);
+            }
+            $params = array_merge($params, $this->authentication->toArray());
+        }
         $response = Http::instance()->get(
             self::URL . 'moderators', $params
         );
@@ -142,6 +160,12 @@ final class UserApi
      */
     public function electedModerators(array $params = [], $serialize = true)
     {
+        if ($this->authentication instanceof Authentication) {
+            if (true === empty($params)) {
+                $params = array_merge($params, self::QUERY_PARAMS);
+            }
+            $params = array_merge($params, $this->authentication->toArray());
+        }
         $response = Http::instance()->get(
             self::URL . 'moderators/elected', $params
         );

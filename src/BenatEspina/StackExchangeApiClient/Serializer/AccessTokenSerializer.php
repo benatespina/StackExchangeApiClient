@@ -23,5 +23,5 @@ final class AccessTokenSerializer extends Serializer
     /**
      * {@inheritdoc}
      */
-    protected $class = AccessToken::class;
+    protected static $class = AccessToken::class;
 }

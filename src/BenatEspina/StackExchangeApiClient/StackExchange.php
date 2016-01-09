@@ -11,7 +11,9 @@
 
 namespace BenatEspina\StackExchangeApiClient;
 
+use BenatEspina\StackExchangeApiClient\Api\AccessTokenApi;
 use BenatEspina\StackExchangeApiClient\Api\AnswerApi;
+use BenatEspina\StackExchangeApiClient\Api\UserApi;
 use BenatEspina\StackExchangeApiClient\Authentication\Authentication;
 
 /**
@@ -34,10 +36,22 @@ final class StackExchange
 
     /**
      * Constructor.
+     *
+     * @param Authentication|null $anAuthentication The authentication, it can be null
      */
     public function __construct(Authentication $anAuthentication = null)
     {
         $this->authentication = $anAuthentication;
+    }
+
+    /**
+     * Gets the api related with access tokens.
+     *
+     * @return AccessTokenApi
+     */
+    public function accessTokenApi()
+    {
+        return new AccessTokenApi($this->authentication);
     }
 
     /**
@@ -48,5 +62,15 @@ final class StackExchange
     public function answerApi()
     {
         return new AnswerApi($this->authentication);
+    }
+
+    /**
+     * Gets the api related with users.
+     *
+     * @return UserApi
+     */
+    public function userApi()
+    {
+        return new UserApi($this->authentication);
     }
 }
