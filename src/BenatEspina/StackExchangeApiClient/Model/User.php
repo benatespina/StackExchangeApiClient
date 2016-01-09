@@ -16,7 +16,7 @@ namespace BenatEspina\StackExchangeApiClient\Model;
  *
  * @author Beñat Espiña <benatespina@gmail.com>
  */
-class User
+class User implements Model
 {
     private $shallowUser;
     private $aboutMe;

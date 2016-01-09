@@ -40,7 +40,7 @@ final class AccessTokenApi
             self::URL . (is_array($accessTokens) ? implode(';', $accessTokens) : $accessTokens) . '/invalidate', $params
         );
 
-        return $serialize === true ? AccessTokenSerializer::instance()->serialize($response) : $response;
+        return $serialize === true ? AccessTokenSerializer::serialize($response) : $response;
     }
 
     /**
@@ -60,7 +60,7 @@ final class AccessTokenApi
             self::URL . (is_array($accessTokens) ? implode(';', $accessTokens) : $accessTokens), $params
         );
 
-        return $serialize === true ? AccessTokenSerializer::instance()->serialize($response) : $response;
+        return $serialize === true ? AccessTokenSerializer::serialize($response) : $response;
     }
 
     /**
@@ -80,6 +80,6 @@ final class AccessTokenApi
             self::URL . (is_array($accessTokens) ? implode(';', $accessTokens) : $accessTokens) . '/de-authenticate', $params
         );
 
-        return $serialize === true ? AccessTokenSerializer::instance()->serialize($response) : $response;
+        return $serialize === true ? AccessTokenSerializer::serialize($response) : $response;
     }
 }

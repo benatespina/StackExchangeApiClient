@@ -28,7 +28,7 @@ final class AnswerApi
         'order'  => 'desc',
         'sort'   => 'activity',
         'site'   => 'stackoverflow',
-        'fitler' => Http::FILTER_ALL,
+        'filter' => Http::FILTER_ALL,
     ];
 
     /**
@@ -60,14 +60,11 @@ final class AnswerApi
      */
     public function all($params = self::QUERY_PARAMS, $serialize = true)
     {
-        if (null !== $this->authentication) {
-            $params = array_merge($params, $this->authentication->toArray());
-        }
         $response = Http::instance()->get(
             self::URL, $params
         );
 
-        return $serialize === true ? AnswerSerializer::instance()->serialize($response) : $response;
+        return $serialize === true ? AnswerSerializer::serialize($response) : $response;
     }
 
     /**
@@ -83,14 +80,11 @@ final class AnswerApi
      */
     public function getOfIds($ids, array $params = self::QUERY_PARAMS, $serialize = true)
     {
-        if (null !== $this->authentication) {
-            $params = array_merge($params, $this->authentication->toArray());
-        }
         $response = Http::instance()->get(
             self::URL . (is_array($ids) ? implode(';', $ids) : $ids), $params
         );
 
-        return $serialize === true ? AnswerSerializer::instance()->serialize($response) : $response;
+        return $serialize === true ? AnswerSerializer::serialize($response) : $response;
     }
 
     /**
@@ -115,7 +109,7 @@ final class AnswerApi
             self::URL . $id . '/accept', array_merge($params, $this->authentication->toArray())
         );
 
-        return $serialize === true ? AnswerSerializer::instance()->serialize($response) : $response;
+        return $serialize === true ? AnswerSerializer::serialize($response) : $response;
     }
 
     /**
@@ -140,7 +134,7 @@ final class AnswerApi
             self::URL . $id . '/accept/undo', array_merge($params, $this->authentication->toArray())
         );
 
-        return $serialize === true ? AnswerSerializer::instance()->serialize($response) : $response;
+        return $serialize === true ? AnswerSerializer::serialize($response) : $response;
     }
 
     /**
@@ -165,7 +159,7 @@ final class AnswerApi
             self::URL . $id . '/delete', array_merge($params, $this->authentication->toArray())
         );
 
-        return $serialize === true ? AnswerSerializer::instance()->serialize($response) : $response;
+        return $serialize === true ? AnswerSerializer::serialize($response) : $response;
     }
 
     /**
@@ -190,7 +184,7 @@ final class AnswerApi
             self::URL . $id . '/downvote', array_merge($params, $this->authentication->toArray())
         );
 
-        return $serialize === true ? AnswerSerializer::instance()->serialize($response) : $response;
+        return $serialize === true ? AnswerSerializer::serialize($response) : $response;
     }
 
     /**
@@ -215,7 +209,7 @@ final class AnswerApi
             self::URL . $id . '/downvote/undo', array_merge($params, $this->authentication->toArray())
         );
 
-        return $serialize === true ? AnswerSerializer::instance()->serialize($response) : $response;
+        return $serialize === true ? AnswerSerializer::serialize($response) : $response;
     }
 
     /**
@@ -241,7 +235,7 @@ final class AnswerApi
             self::URL . $id . '/edit', array_merge(['body' => $body], $params, $this->authentication->toArray())
         );
 
-        return $serialize === true ? AnswerSerializer::instance()->serialize($response) : $response;
+        return $serialize === true ? AnswerSerializer::serialize($response) : $response;
     }
 
     /**
@@ -266,7 +260,7 @@ final class AnswerApi
             self::URL . $id . '/upvote', array_merge($params, $this->authentication->toArray())
         );
 
-        return $serialize === true ? AnswerSerializer::instance()->serialize($response) : $response;
+        return $serialize === true ? AnswerSerializer::serialize($response) : $response;
     }
 
     /**
@@ -291,7 +285,7 @@ final class AnswerApi
             self::URL . $id . '/upvote/undo', array_merge($params, $this->authentication->toArray())
         );
 
-        return $serialize === true ? AnswerSerializer::instance()->serialize($response) : $response;
+        return $serialize === true ? AnswerSerializer::serialize($response) : $response;
     }
 
     /**
@@ -316,7 +310,7 @@ final class AnswerApi
             self::URL . $id . '/flags/add', array_merge($params, $this->authentication->toArray())
         );
 
-        return $serialize === true ? AnswerSerializer::instance()->serialize($response) : $response;
+        return $serialize === true ? AnswerSerializer::serialize($response) : $response;
     }
 
     /**
@@ -336,7 +330,7 @@ final class AnswerApi
             'questions/' . (is_array($ids) ? implode(';', $ids) : $ids) . self::URL, $params
         );
 
-        return $serialize === true ? AnswerSerializer::instance()->serialize($response) : $response;
+        return $serialize === true ? AnswerSerializer::serialize($response) : $response;
     }
 
     /**
@@ -364,7 +358,7 @@ final class AnswerApi
             )
         );
 
-        return $serialize === true ? AnswerSerializer::instance()->serialize($response) : $response;
+        return $serialize === true ? AnswerSerializer::serialize($response) : $response;
     }
 
     /**
@@ -389,7 +383,7 @@ final class AnswerApi
             )
         );
 
-        return $serialize === true ? AnswerSerializer::instance()->serialize($response) : $response;
+        return $serialize === true ? AnswerSerializer::serialize($response) : $response;
     }
 
     /**
@@ -409,7 +403,7 @@ final class AnswerApi
             'users/' . (is_array($ids) ? implode(';', $ids) : $ids) . '/' . self::URL, $params
         );
 
-        return $serialize === true ? AnswerSerializer::instance()->serialize($response) : $response;
+        return $serialize === true ? AnswerSerializer::serialize($response) : $response;
     }
 
     /**
@@ -433,7 +427,7 @@ final class AnswerApi
             'me/' . self::URL, array_merge($params, ['access_token' => $this->authentication->accessToken()])
         );
 
-        return $serialize === true ? AnswerSerializer::instance()->serialize($response) : $response;
+        return $serialize === true ? AnswerSerializer::serialize($response) : $response;
     }
 
     /**
@@ -454,7 +448,7 @@ final class AnswerApi
             'users/' . $userId . '/tags/' . (is_array($tags) ? implode(';', $tags) : $tags) . '/top-' . self::URL, $params
         );
 
-        return $serialize === true ? AnswerSerializer::instance()->serialize($response) : $response;
+        return $serialize === true ? AnswerSerializer::serialize($response) : $response;
     }
 
     /**
@@ -481,6 +475,6 @@ final class AnswerApi
             array_merge($params, ['access_token' => $this->authentication->accessToken()])
         );
 
-        return $serialize === true ? AnswerSerializer::instance()->serialize($response) : $response;
+        return $serialize === true ? AnswerSerializer::serialize($response) : $response;
     }
 }

@@ -16,7 +16,7 @@ namespace BenatEspina\StackExchangeApiClient\Model;
  *
  * @author Beñat Espiña <benatespina@gmail.com>
  */
-class Tag
+class Tag implements Model
 {
     private $count;
     private $hasSynonyms;

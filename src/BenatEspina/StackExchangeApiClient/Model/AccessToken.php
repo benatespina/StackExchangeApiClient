@@ -16,7 +16,7 @@ namespace BenatEspina\StackExchangeApiClient\Model;
  *
  * @author Beñat Espiña <benatespina@gmail.com>
  */
-class AccessToken
+class AccessToken implements Model
 {
     private $accessToken;
     private $accountId;

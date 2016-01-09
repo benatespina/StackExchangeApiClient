@@ -16,7 +16,7 @@ namespace BenatEspina\StackExchangeApiClient\Model;
  *
  * @author Beñat Espiña <benatespina@gmail.com>
  */
-class BadgeCount
+class BadgeCount implements Model
 {
     private $bronze;
     private $gold;

@@ -16,7 +16,7 @@ namespace BenatEspina\StackExchangeApiClient\Model;
  *
  * @author Beñat Espiña <benatespina@gmail.com>
  */
-class NetworkUser
+class NetworkUser implements Model
 {
     const USER_TYPE_DOES_NOT_EXIST = 'does_not_exist';
     const USER_TYPE_MODERATOR = 'moderator';

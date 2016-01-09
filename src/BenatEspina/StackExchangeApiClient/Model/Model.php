@@ -9,19 +9,21 @@
  * file that was distributed with this source code.
  */
 
-namespace BenatEspina\StackExchangeApiClient\Serializer;
-
-use BenatEspina\StackExchangeApiClient\Model\AccessToken;
+namespace BenatEspina\StackExchangeApiClient\Model;
 
 /**
- * The access token serializer class.
+ * The base mode class.
  *
  * @author Beñat Espiña <benatespina@gmail.com>
  */
-final class AccessTokenSerializer extends Serializer
+interface Model
 {
     /**
-     * {@inheritdoc}
+     * Builds model object with the given array data.
+     *
+     * @param array $data Array which contains StackExchangeApi request data
+     *
+     * @return Model
      */
-    protected $class = AccessToken::class;
+    public static function fromJson(array $data);
 }

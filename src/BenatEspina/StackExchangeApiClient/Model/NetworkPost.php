@@ -16,7 +16,7 @@ namespace BenatEspina\StackExchangeApiClient\Model;
  *
  * @author Beñat Espiña <benatespina@gmail.com>
  */
-class NetworkPost
+class NetworkPost implements Model
 {
     const POST_TYPE_QUESTION = 'question';
     const POST_TYPE_ANSWER = 'answer';

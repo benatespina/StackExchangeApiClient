@@ -11,17 +11,17 @@
 
 namespace BenatEspina\StackExchangeApiClient\Serializer;
 
-use BenatEspina\StackExchangeApiClient\Model\AccessToken;
+use BenatEspina\StackExchangeApiClient\Model\User;
 
 /**
- * The access token serializer class.
+ * The user serializer class.
  *
  * @author Beñat Espiña <benatespina@gmail.com>
  */
-final class AccessTokenSerializer extends Serializer
+final class UserSerializer extends Serializer
 {
     /**
      * {@inheritdoc}
      */
-    protected $class = AccessToken::class;
+    protected $class = User::class;
 }
