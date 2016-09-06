@@ -729,7 +729,6 @@ class Question implements Model
 
     public function setAnswers(array $answers = [])
     {
-
         $this->answers = $answers;
 
         return $this;

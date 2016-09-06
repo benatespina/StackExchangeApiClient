@@ -53,7 +53,6 @@ class RelatedSite implements Model
         return $instance;
     }
 
-
     public function setApiSiteParameter($apiSiteParameter)
     {
         $this->apiSiteParameter = $apiSiteParameter;

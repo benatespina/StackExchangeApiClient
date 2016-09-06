@@ -21,7 +21,7 @@ use BenatEspina\StackExchangeApiClient\Authentication\Authentication;
  *
  * You can instantiate the concrete API class, for example the AnswerApi but
  * if you plan to use the different api classes across your project, you could
- * use this facade that offers methods to access to any apis of the library.
+ * use this facade that offers methods to access to any API of the library.
  *
  * @author Beñat Espiña <benatespina@gmail.com>
  */
@@ -51,7 +51,7 @@ final class StackExchange
      */
     public function accessTokenApi()
     {
-        return new AccessTokenApi($this->authentication);
+        return new AccessTokenApi();
     }
 
     /**

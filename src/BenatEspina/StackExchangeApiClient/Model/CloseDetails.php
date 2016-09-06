@@ -16,7 +16,7 @@ namespace BenatEspina\StackExchangeApiClient\Model;
  *
  * @author Beñat Espiña <benatespina@gmail.com>
  */
-class ClosedDetails implements Model
+class CloseDetails implements Model
 {
     protected $byUsers;
     protected $description;

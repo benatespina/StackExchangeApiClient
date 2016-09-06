@@ -13,19 +13,21 @@
         }
     ],
     "require": {
-        "php":                      ">=5.6",
-
-        "guzzlehttp/guzzle":        "^6.1"
+        "php": "^5.6 || ^7.0",
+        "guzzlehttp/guzzle": "^6.1"
     },
     "require-dev": {
-        "fabpot/php-cs-fixer":      "^1.10",
-        "mmoreram/php-formatter":   "^1.0",
-        "phpspec/phpspec":          "^2.4"
+        "behat/behat": "^3.1",
+        "behatch/contexts": "^2.5",
+        "behat/mink": "^1.7.1",
+        "behat/mink-extension": "^2.2",
+        "behat/mink-goutte-driver": "^1.2.1",
+        "friendsofphp/php-cs-fixer": "^1.11",
+        "phpspec/phpspec": "^2.5",
+        "symfony/var-dumper": "^3.0"
     },
     "scripts": {
         "cs": [
-            "php-formatter f:h:f src",
-            "php-formatter f:u:s src",
             "php-cs-fixer fix --config-file=.php_cs",
             "php-cs-fixer fix --config-file=.phpspec_cs"
         ],
@@ -33,7 +35,13 @@
     },
     "autoload": {
         "psr-4": {
-            "": "src/"
+            "BenatEspina\\StackExchangeApiClient\\": "src/BenatEspina/StackExchangeApiClient/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "PhpSpec\\": "tests/PhpSpec/",
+            "Behat\\": "tests/Behat/"
         }
     }
 }

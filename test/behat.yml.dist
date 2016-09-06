@@ -1,0 +1,28 @@
+# This file is part of the Stack Exchange Api Client library.
+#
+# Copyright (c) 2014-2016 Beñat Espiña <benatespina@gmail.com>
+#
+# For the full copyright and license information, please view the LICENSE
+# file that was distributed with this source code.
+
+default:
+    formatters:
+        progress:
+            verbose: true
+            paths: true
+            snippets: false
+    suites:
+        answer:
+            paths:
+                features: test/Behat/features/Answer
+            contexts:
+                - Behat\Contexts\FeatureContext
+            filters:
+                tags: '@answer'
+    extensions:
+        Behat\MinkExtension:
+            base_url: 'https://api.stackexchange.com/2.2'
+            goutte: ~
+            browser_name: firefox
+            show_auto: false
+        Sanpi\Behatch\Extension: ~

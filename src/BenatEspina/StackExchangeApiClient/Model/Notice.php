@@ -48,7 +48,6 @@ class Notice implements Model
         return $instance;
     }
 
-
     public function setBody($body)
     {
         $this->body = $body;
