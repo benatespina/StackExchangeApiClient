@@ -18,32 +18,35 @@ namespace BenatEspina\StackExchangeApiClient\Model;
  */
 class ShallowUser implements Model
 {
-    const USER_TYPE_DOES_NOT_EXIST = 'does_not_exist';
-    const USER_TYPE_MODERATOR = 'moderator';
-    const USER_TYPE_REGISTERED = 'registered';
-    const USER_TYPE_UNREGISTERED = 'unregistered';
+    const USER_TYPES = ['does_not_exist', 'moderator', 'registered', 'unregistered'];
 
-    private $id;
-    private $acceptRate;
-    private $badgeCounts;
-    private $displayName;
-    private $link;
-    private $profileImage;
-    private $reputation;
-    private $userType;
+    protected $id;
+    protected $acceptRate;
+    protected $badgeCounts;
+    protected $displayName;
+    protected $link;
+    protected $profileImage;
+    protected $reputation;
+    protected $userType;
 
     public static function fromJson(array $data)
     {
-        return new self(
-            array_key_exists('user_id', $data) ? $data['user_id'] : null,
-            array_key_exists('badge_counts', $data) ? BadgeCount::fromJson($data['badge_counts']) : null,
-            array_key_exists('accept_rate', $data) ? $data['accept_rate'] : null,
-            array_key_exists('display_name', $data) ? $data['display_name'] : null,
-            array_key_exists('link', $data) ? $data['link'] : null,
-            array_key_exists('profile_image', $data) ? $data['profile_image'] : null,
-            array_key_exists('reputation', $data) ? $data['reputation'] : null,
-            array_key_exists('user_type', $data) ? $data['user_type'] : null
-        );
+        $instance = new self();
+        $instance
+            ->setId(array_key_exists('user_id', $data) ? $data['user_id'] : null)
+            ->setBadgeCounts(
+                array_key_exists('badge_counts', $data)
+                    ? BadgeCount::fromJson($data['badge_counts'])
+                    : null
+            )
+            ->setAcceptRate(array_key_exists('accept_rate', $data) ? $data['accept_rate'] : null)
+            ->setDisplayName(array_key_exists('display_name', $data) ? $data['display_name'] : null)
+            ->setLink(array_key_exists('link', $data) ? $data['link'] : null)
+            ->setProfileImage(array_key_exists('profile_image', $data) ? $data['profile_image'] : null)
+            ->setReputation(array_key_exists('reputation', $data) ? $data['reputation'] : null)
+            ->setReputation(array_key_exists('user_type', $data) ? $data['user_type'] : null);
+
+        return $instance;
     }
 
     public static function fromProperties(
@@ -66,26 +69,6 @@ class ShallowUser implements Model
             $reputation,
             $userType
         );
-    }
-
-    protected function __construct(
-        $id = null,
-        BadgeCount $badgeCounts = null,
-        $acceptRate = null,
-        $displayName = null,
-        $link = null,
-        $profileImage = null,
-        $reputation = null,
-        $userType = null
-    ) {
-        $this->id = $id;
-        $this->acceptRate = $acceptRate;
-        $this->badgeCounts = $badgeCounts;
-        $this->displayName = $displayName;
-        $this->link = $link;
-        $this->profileImage = $profileImage;
-        $this->reputation = $reputation;
-        $this->setUserType($userType);
     }
 
     public function getId()
@@ -179,12 +162,7 @@ class ShallowUser implements Model
 
     public function setUserType($userType)
     {
-        if (in_array($userType, [
-            self::USER_TYPE_DOES_NOT_EXIST,
-            self::USER_TYPE_MODERATOR,
-            self::USER_TYPE_REGISTERED,
-            self::USER_TYPE_UNREGISTERED,
-        ], true)) {
+        if (in_array($userType, self::USER_TYPES, true)) {
             $this->userType = $userType;
         }
 

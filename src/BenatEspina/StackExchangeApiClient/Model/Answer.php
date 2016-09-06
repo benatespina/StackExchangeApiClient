@@ -18,33 +18,33 @@ namespace BenatEspina\StackExchangeApiClient\Model;
  */
 class Answer implements Model
 {
-    private $id;
-    private $accepted;
-    private $awardedBountyAmount;
-    private $awardedBountyUsers;
-    private $canFlag;
-    private $isAccepted;
-    private $questionId;
-    private $communityOwnedDate;
-    private $lockedDate;
-    private $tags;
-    private $downvoted;
-    private $lastActivityDate;
-    private $shareLink;
-    private $title;
-    private $commentCount;
-    private $comments;
-    private $lastEditDate;
-    private $lastEditor;
-    private $downVoteCount;
-    private $upVoteCount;
-    private $body;
-    private $bodyMarkDown;
-    private $creationDate;
-    private $link;
-    private $owner;
-    private $score;
-    private $upvoted;
+    protected $id;
+    protected $accepted;
+    protected $awardedBountyAmount;
+    protected $awardedBountyUsers;
+    protected $canFlag;
+    protected $isAccepted;
+    protected $questionId;
+    protected $communityOwnedDate;
+    protected $lockedDate;
+    protected $tags;
+    protected $downvoted;
+    protected $lastActivityDate;
+    protected $shareLink;
+    protected $title;
+    protected $commentCount;
+    protected $comments;
+    protected $lastEditDate;
+    protected $lastEditor;
+    protected $downVoteCount;
+    protected $upVoteCount;
+    protected $body;
+    protected $bodyMarkDown;
+    protected $creationDate;
+    protected $link;
+    protected $owner;
+    protected $score;
+    protected $upvoted;
 
     public static function fromProperties(
         $id,
@@ -54,7 +54,7 @@ class Answer implements Model
         $questionId,
         array $tags,
         $downvoted,
-        \DateTime $lastActivityDate,
+        \DateTimeInterface $lastActivityDate,
         $shareLink,
         $title,
         $commentCount,
@@ -62,48 +62,50 @@ class Answer implements Model
         $upVoteCount,
         $body,
         $bodyMarkDown,
-        \DateTime $creationDate,
+        \DateTimeInterface $creationDate,
         $link,
         $score,
         $upvoted,
+        $awardedBountyAmount,
         array $awardedBountyUsers = [],
         array $comments = [],
-        $awardedBountyAmount = null,
-        \DateTime $communityOwnedDate = null,
+        \DateTimeInterface $communityOwnedDate = null,
         ShallowUser $lastEditor = null,
-        \DateTime $lastEditDate = null,
-        \DateTime $lockedDate = null,
+        \DateTimeInterface $lastEditDate = null,
+        \DateTimeInterface $lockedDate = null,
         ShallowUser $owner = null
     ) {
-        return new self(
-            $id,
-            $accepted,
-            $canFlag,
-            $isAccepted,
-            $questionId,
-            $tags,
-            $downvoted,
-            $lastActivityDate,
-            $shareLink,
-            $title,
-            $commentCount,
-            $downVoteCount,
-            $upVoteCount,
-            $body,
-            $bodyMarkDown,
-            $creationDate,
-            $link,
-            $score,
-            $upvoted,
-            $comments,
-            $awardedBountyUsers,
-            $awardedBountyAmount,
-            $communityOwnedDate,
-            $lastEditor,
-            $lastEditDate,
-            $lockedDate,
-            $owner
-        );
+        $instance = new self();
+        $instance
+            ->setId($id)
+            ->setAccepted($accepted)
+            ->setCanFlag($canFlag)
+            ->setIsAccepted($isAccepted)
+            ->setQuestionId($questionId)
+            ->setTags($tags)
+            ->setDownvoted($downvoted)
+            ->setLastActivityDate($lastActivityDate)
+            ->setShareLink($shareLink)
+            ->setTitle($title)
+            ->setCommentCount($commentCount)
+            ->setDownVoteCount($downVoteCount)
+            ->setUpVoteCount($upVoteCount)
+            ->setBody($body)
+            ->setBodyMarkDown($bodyMarkDown)
+            ->setCreationDate($creationDate)
+            ->setLink($link)
+            ->setScore($score)
+            ->setUpvoted($upvoted)
+            ->setAwardedBountyAmount($awardedBountyAmount)
+            ->setAwardedBountyUsers($awardedBountyUsers)
+            ->setComments($comments)
+            ->setCommunityOwnedDate($communityOwnedDate)
+            ->setLastEditor($lastEditor)
+            ->setLastEditDate($lastEditDate)
+            ->setLockedDate($lockedDate)
+            ->setOwner($owner);
+
+        return $instance;
     }
 
     public static function fromJson(array $data)
@@ -128,93 +130,57 @@ class Answer implements Model
             }
         }
 
-        return new self(
-            array_key_exists('answer_id', $data) ? $data['answer_id'] : null,
-            array_key_exists('accepted', $data) ? $data['accepted'] : null,
-            array_key_exists('can_flag', $data) ? $data['can_flag'] : null,
-            array_key_exists('is_accepted', $data) ? $data['is_accepted'] : null,
-            array_key_exists('question_id', $data) ? $data['question_id'] : null,
-            $tags,
-            array_key_exists('downvoted', $data) ? $data['downvoted'] : null,
-            array_key_exists('last_activity_date', $data) ? new \DateTime('@' . $data['last_activity_date']) : null,
-            array_key_exists('share_link', $data) ? $data['share_link'] : null,
-            array_key_exists('title', $data) ? $data['title'] : null,
-            array_key_exists('comment_count', $data) ? $data['comment_count'] : null,
-            array_key_exists('down_vote_count', $data) ? $data['down_vote_count'] : null,
-            array_key_exists('up_vote_count', $data) ? $data['up_vote_count'] : null,
-            array_key_exists('body', $data) ? $data['body'] : null,
-            array_key_exists('body_markdown', $data) ? $data['body_markdown'] : null,
-            array_key_exists('creation_date', $data) ? new \DateTime('@' . $data['creation_date']) : null,
-            array_key_exists('link', $data) ? $data['link'] : null,
-            array_key_exists('score', $data) ? $data['score'] : null,
-            array_key_exists('upvoted', $data) ? $data['upvoted'] : null,
-            $awardedBountyUsers,
-            $comments,
-            array_key_exists('awarded_bounty_amount', $data) ? $data['awarded_bounty_amount'] : null,
-            array_key_exists('community_owned_date', $data) ? new \DateTime('@' . $data['community_owned_date']) : null,
-            array_key_exists('last_editor', $data) ? ShallowUser::fromJson($data['last_editor']) : null,
-            array_key_exists('last_edit_date', $data) ? new \DateTime('@' . $data['last_edit_date']) : null,
-            array_key_exists('locked_date', $data) ? new \DateTime('@' . $data['locked_date']) : null,
-            array_key_exists('owner', $data) ? ShallowUser::fromJson($data['owner']) : null
-        );
-    }
+        $instance = new self();
+        $instance
+            ->setId(array_key_exists('answer_id', $data) ? $data['answer_id'] : null)
+            ->setAccepted(array_key_exists('accepted', $data) ? $data['accepted'] : null)
+            ->setCanFlag(array_key_exists('can_flag', $data) ? $data['can_flag'] : null)
+            ->setIsAccepted(array_key_exists('is_accepted', $data) ? $data['is_accepted'] : null)
+            ->setQuestionId(array_key_exists('question_id', $data) ? $data['question_id'] : null)
+            ->setTags($tags)
+            ->setDownvoted(array_key_exists('downvoted', $data) ? $data['downvoted'] : null)
+            ->setLastActivityDate(
+                array_key_exists('last_activity_date', $data)
+                    ? new \DateTimeImmutable('@' . $data['last_activity_date'])
+                    : null
+            )
+            ->setShareLink(array_key_exists('share_link', $data) ? $data['share_link'] : null)
+            ->setTitle(array_key_exists('title', $data) ? $data['title'] : null)
+            ->setCommentCount(array_key_exists('comment_count', $data) ? $data['comment_count'] : null)
+            ->setDownVoteCount(array_key_exists('down_vote_count', $data) ? $data['down_vote_count'] : null)
+            ->setUpVoteCount(array_key_exists('up_vote_count', $data) ? $data['up_vote_count'] : null)
+            ->setBody(array_key_exists('body', $data) ? $data['body'] : null)
+            ->setBodyMarkDown(array_key_exists('body_markdown', $data) ? $data['body_markdown'] : null)
+            ->setCreationDate(
+                array_key_exists('creation_date', $data)
+                    ? new \DateTimeImmutable('@' . $data['creation_date'])
+                    : null
+            )
+            ->setLink(array_key_exists('link', $data) ? $data['link'] : null)
+            ->setScore(array_key_exists('score', $data) ? $data['score'] : null)
+            ->setUpvoted(array_key_exists('upvoted', $data) ? $data['upvoted'] : null)
+            ->setAwardedBountyAmount(
+                array_key_exists('awarded_bounty_amount', $data)
+                    ? $data['awarded_bounty_amount']
+                    : null
+            )
+            ->setAwardedBountyUsers($awardedBountyUsers)
+            ->setComments($comments)
+            ->setCommunityOwnedDate(
+                array_key_exists('community_owned_date', $data)
+                    ? new \DateTimeImmutable('@' . $data['community_owned_date'])
+                    : null
+            )
+            ->setLastEditor(array_key_exists('last_editor', $data) ? ShallowUser::fromJson($data['last_editor']) : null)
+            ->setLastEditDate(
+                array_key_exists('last_edit_date', $data)
+                    ? new \DateTimeImmutable('@' . $data['last_edit_date'])
+                    : null
+            )
+            ->setLockedDate(array_key_exists('locked_date', $data) ? new \DateTime('@' . $data['locked_date']) : null)
+            ->setOwner(array_key_exists('owner', $data) ? ShallowUser::fromJson($data['owner']) : null);
 
-    private function __construct(
-        $id = null,
-        $accepted = null,
-        $canFlag = null,
-        $isAccepted = null,
-        $questionId = null,
-        array $tags = [],
-        $downvoted = null,
-        \DateTime $lastActivityDate = null,
-        $shareLink = null,
-        $title = null,
-        $commentCount = null,
-        $downVoteCount = null,
-        $upVoteCount = null,
-        $body = null,
-        $bodyMarkDown = null,
-        \DateTime $creationDate = null,
-        $link = null,
-        $score = null,
-        $upvoted = null,
-        array $awardedBountyUsers = [],
-        array $comments = [],
-        $awardedBountyAmount = null,
-        \DateTime $communityOwnedDate = null,
-        ShallowUser $lastEditor = null,
-        \DateTime $lastEditDate = null,
-        \DateTime $lockedDate = null,
-        ShallowUser $owner = null
-    ) {
-        $this->id = $id;
-        $this->accepted = $accepted;
-        $this->awardedBountyAmount = $awardedBountyAmount;
-        $this->awardedBountyUsers = $awardedBountyUsers;
-        $this->canFlag = $canFlag;
-        $this->isAccepted = $isAccepted;
-        $this->questionId = $questionId;
-        $this->communityOwnedDate = $communityOwnedDate;
-        $this->lockedDate = $lockedDate;
-        $this->tags = $tags;
-        $this->downvoted = $downvoted;
-        $this->lastActivityDate = $lastActivityDate;
-        $this->shareLink = $shareLink;
-        $this->title = $title;
-        $this->commentCount = $commentCount;
-        $this->comments = $comments;
-        $this->lastEditDate = $lastEditDate;
-        $this->lastEditor = $lastEditor;
-        $this->downVoteCount = $downVoteCount;
-        $this->upVoteCount = $upVoteCount;
-        $this->body = $body;
-        $this->bodyMarkDown = $bodyMarkDown;
-        $this->creationDate = $creationDate;
-        $this->link = $link;
-        $this->owner = $owner;
-        $this->score = $score;
-        $this->upvoted = $upvoted;
+        return $instance;
     }
 
     public function getId()
@@ -258,7 +224,7 @@ class Answer implements Model
         return $this->awardedBountyUsers;
     }
 
-    public function setAwardedBountyUsers($awardedBountyUsers)
+    public function setAwardedBountyUsers(array $awardedBountyUsers)
     {
         $this->awardedBountyUsers = $awardedBountyUsers;
 
@@ -306,7 +272,7 @@ class Answer implements Model
         return $this->communityOwnedDate;
     }
 
-    public function setCommunityOwnedDate(\DateTime $communityOwnedDate)
+    public function setCommunityOwnedDate(\DateTimeInterface $communityOwnedDate = null)
     {
         $this->communityOwnedDate = $communityOwnedDate;
 
@@ -318,7 +284,7 @@ class Answer implements Model
         return $this->lockedDate;
     }
 
-    public function setLockedDate(\DateTime $lockedDate)
+    public function setLockedDate(\DateTimeInterface $lockedDate = null)
     {
         $this->lockedDate = $lockedDate;
 
@@ -354,7 +320,7 @@ class Answer implements Model
         return $this->lastActivityDate;
     }
 
-    public function setLastActivityDate(\DateTime $lastActivityDate)
+    public function setLastActivityDate(\DateTimeInterface $lastActivityDate)
     {
         $this->lastActivityDate = $lastActivityDate;
 
@@ -414,7 +380,7 @@ class Answer implements Model
         return $this->lastEditDate;
     }
 
-    public function setLastEditDate(\DateTime $lastEditDate)
+    public function setLastEditDate(\DateTimeInterface $lastEditDate = null)
     {
         $this->lastEditDate = $lastEditDate;
 
@@ -426,7 +392,7 @@ class Answer implements Model
         return $this->lastEditor;
     }
 
-    public function setLastEditor(ShallowUser $lastEditor)
+    public function setLastEditor(ShallowUser $lastEditor = null)
     {
         $this->lastEditor = $lastEditor;
 
@@ -486,7 +452,7 @@ class Answer implements Model
         return $this->creationDate;
     }
 
-    public function setCreationDate(\DateTime $creationDate)
+    public function setCreationDate(\DateTimeInterface $creationDate)
     {
         $this->creationDate = $creationDate;
 
@@ -510,7 +476,7 @@ class Answer implements Model
         return $this->owner;
     }
 
-    public function setOwner($owner)
+    public function setOwner(ShallowUser $owner = null)
     {
         $this->owner = $owner;
 

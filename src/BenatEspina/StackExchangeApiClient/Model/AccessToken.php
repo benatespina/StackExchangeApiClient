@@ -18,45 +18,41 @@ namespace BenatEspina\StackExchangeApiClient\Model;
  */
 class AccessToken implements Model
 {
-    private $accessToken;
-    private $accountId;
-    private $expiresOnDate;
-    private $scope;
+    protected $accessToken;
+    protected $accountId;
+    protected $expiresOnDate;
+    protected $scope;
 
     public static function fromProperties(
         $accessToken,
         $accountId,
-        \DateTime $expiresOnDate = null,
+        \DateTimeInterface $expiresOnDate = null,
         array $scope = null
     ) {
-        return new self(
-            $accessToken,
-            $accountId,
-            $expiresOnDate,
-            $scope
-        );
+        $instance = new self();
+        $instance
+            ->setAccessToken($accessToken)
+            ->setAccountId($accountId)
+            ->setExpiresOnDate($expiresOnDate)
+            ->setScope($scope);
+
+        return $instance;
     }
 
     public static function fromJson(array $data)
     {
-        return new self(
-            array_key_exists('access_token', $data) ? $data['access_token'] : null,
-            array_key_exists('account_id', $data) ? $data['account_id'] : null,
-            array_key_exists('expires_on_date', $data) ? new \DateTime('@' . $data['expires_on_date']) : null,
-            array_key_exists('scope', $data) ? $data['scope'] : null
-        );
-    }
+        $instance = new self();
+        $instance
+            ->setAccessToken(array_key_exists('access_token', $data) ? $data['access_token'] : null)
+            ->setAccountId(array_key_exists('account_id', $data) ? $data['account_id'] : null)
+            ->setExpiresOnDate(
+                array_key_exists('expires_on_date', $data)
+                    ? new \DateTimeImmutable('@' . $data['expires_on_date'])
+                    : null
+            )
+            ->setScope(array_key_exists('scope', $data) ? $data['scope'] : null);
 
-    private function __construct(
-        $accessToken,
-        $accountId,
-        \DateTime $expiresOnDate = null,
-        array $scope = null
-    ) {
-        $this->accessToken = $accessToken;
-        $this->accountId = $accountId;
-        $this->expiresOnDate = $expiresOnDate;
-        $this->scope = $scope;
+        return $instance;
     }
 
     public function setAccessToken($accessToken)
@@ -83,7 +79,7 @@ class AccessToken implements Model
         return $this->accountId;
     }
 
-    public function setExpiresOnDate(\DateTime $expiresOnDate)
+    public function setExpiresOnDate(\DateTimeInterface $expiresOnDate = null)
     {
         $this->expiresOnDate = $expiresOnDate;
 
@@ -95,7 +91,7 @@ class AccessToken implements Model
         return $this->expiresOnDate;
     }
 
-    public function setScope(array $scope)
+    public function setScope(array $scope = null)
     {
         $this->scope = $scope;
 

@@ -18,27 +18,33 @@ namespace BenatEspina\StackExchangeApiClient\Model;
  */
 class Tag implements Model
 {
-    private $count;
-    private $hasSynonyms;
-    private $isModeratorOnly;
-    private $isRequired;
-    private $lastActivityDate;
-    private $name;
-    private $synonyms;
-    private $userId;
+    protected $count;
+    protected $hasSynonyms;
+    protected $isModeratorOnly;
+    protected $isRequired;
+    protected $lastActivityDate;
+    protected $name;
+    protected $synonyms;
+    protected $userId;
 
     public static function fromJson(array $data)
     {
-        return new self(
-            array_key_exists('count', $data) ? $data['count'] : null,
-            array_key_exists('has_synonyms', $data) ? $data['has_synonyms'] : null,
-            array_key_exists('is_moderator_only', $data) ? $data['is_moderator_only'] : null,
-            array_key_exists('is_required', $data) ? $data['is_required'] : null,
-            array_key_exists('last_activity_date', $data) ? new \DateTime('@' . $data['last_activity_date']) : null,
-            array_key_exists('name', $data) ? $data['name'] : null,
-            array_key_exists('synonyms', $data) ? $data['synonyms'] : null,
-            array_key_exists('user_id', $data) ? $data['user_id'] : null
-        );
+        $instance = new self();
+        $instance
+            ->setCount(array_key_exists('count', $data) ? $data['count'] : null)
+            ->setHasSynonyms(array_key_exists('has_synonyms', $data) ? $data['has_synonyms'] : null)
+            ->setIsModeratorOnly(array_key_exists('is_moderator_only', $data) ? $data['is_moderator_only'] : null)
+            ->setIsRequired(array_key_exists('is_required', $data) ? $data['is_required'] : null)
+            ->setLastActivityDate(
+                array_key_exists('last_activity_date', $data)
+                    ? new \DateTimeImmutable('@' . $data['last_activity_date'])
+                    : null
+            )
+            ->setName(array_key_exists('name', $data) ? $data['name'] : null)
+            ->setSynonyms(array_key_exists('synonyms', $data) ? $data['synonyms'] : null)
+            ->setUserId(array_key_exists('user_id', $data) ? $data['user_id'] : null);
+
+        return $instance;
     }
 
     public static function fromProperties(
@@ -48,39 +54,21 @@ class Tag implements Model
         $isRequired,
         $name,
         $synonyms,
-        \DateTime $lastActivityDate = null,
+        \DateTimeInterface $lastActivityDate = null,
         $userId = null
     ) {
-        return new self(
-            $count,
-            $hasSynonyms,
-            $isModeratorOnly,
-            $isRequired,
-            $lastActivityDate,
-            $name,
-            $synonyms,
-            $userId
-        );
-    }
+        $instance = new self();
+        $instance
+            ->setCount($count)
+            ->setHasSynonyms($hasSynonyms)
+            ->setIsModeratorOnly($isModeratorOnly)
+            ->setIsRequired($isRequired)
+            ->setLastActivityDate($lastActivityDate)
+            ->setName($name)
+            ->setSynonyms($synonyms)
+            ->setUserId($userId);
 
-    private function __construct(
-        $count = null,
-        $hasSynonyms = null,
-        $isModeratorOnly = null,
-        $isRequired = null,
-        \DateTime $lastActivityDate = null,
-        $name = null,
-        $synonyms = null,
-        $userId = null
-    ) {
-        $this->count = $count;
-        $this->hasSynonyms = $hasSynonyms;
-        $this->isModeratorOnly = $isModeratorOnly;
-        $this->isRequired = $isRequired;
-        $this->lastActivityDate = $lastActivityDate;
-        $this->name = $name;
-        $this->synonyms = $synonyms;
-        $this->userId = $userId;
+        return $instance;
     }
 
     public function getCount()
@@ -136,7 +124,7 @@ class Tag implements Model
         return $this->lastActivityDate;
     }
 
-    public function setLastActivityDate(\DateTime $lastActivityDate)
+    public function setLastActivityDate(\DateTimeInterface $lastActivityDate = null)
     {
         $this->lastActivityDate = $lastActivityDate;
 

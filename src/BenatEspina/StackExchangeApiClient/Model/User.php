@@ -18,66 +18,104 @@ namespace BenatEspina\StackExchangeApiClient\Model;
  */
 class User implements Model
 {
-    private $shallowUser;
-    private $aboutMe;
-    private $accountId;
-    private $age;
-    private $answerCount;
-    private $creationDate;
-    private $displayName;
-    private $downVoteCount;
-    private $isEmployee;
-    private $lastAccessDate;
-    private $lastModifiedDate;
-    private $location;
-    private $questionCount;
-    private $reputationChangeDay;
-    private $reputationChangeMonth;
-    private $reputationChangeQuarter;
-    private $reputationChangeWeek;
-    private $reputationChangeYear;
-    private $timedPenaltyDate;
-    private $upVoteCount;
-    private $viewCount;
-    private $websiteUrl;
+    protected $shallowUser;
+    protected $aboutMe;
+    protected $accountId;
+    protected $age;
+    protected $answerCount;
+    protected $creationDate;
+    protected $displayName;
+    protected $downVoteCount;
+    protected $isEmployee;
+    protected $lastAccessDate;
+    protected $lastModifiedDate;
+    protected $location;
+    protected $questionCount;
+    protected $reputationChangeDay;
+    protected $reputationChangeMonth;
+    protected $reputationChangeQuarter;
+    protected $reputationChangeWeek;
+    protected $reputationChangeYear;
+    protected $timedPenaltyDate;
+    protected $upVoteCount;
+    protected $viewCount;
+    protected $websiteUrl;
 
     public static function fromJson(array $data)
     {
-        return new self(
-            ShallowUser::fromJson($data),
-            array_key_exists('about_me', $data) ? $data['about_me'] : null,
-            array_key_exists('account_id', $data) ? $data['account_id'] : null,
-            array_key_exists('age', $data) ? $data['age'] : null,
-            array_key_exists('answer_count', $data) ? $data['answer_count'] : null,
-            array_key_exists('creation_date', $data) ? new \DateTime('@' . $data['creation_date']) : null,
-            array_key_exists('display_name', $data) ? $data['display_name'] : null,
-            array_key_exists('down_vote_count', $data) ? $data['down_vote_count'] : null,
-            array_key_exists('is_employee', $data) ? $data['is_employee'] : null,
-            array_key_exists('last_access_date', $data) ? new \DateTime('@' . $data['last_access_date']) : null,
-            array_key_exists('last_modified_date', $data) ? new \DateTime('@' . $data['last_modified_date']) : null,
-            array_key_exists('location', $data) ? $data['location'] : null,
-            array_key_exists('question_count', $data) ? $data['question_count'] : null,
-            array_key_exists('reputation_change_day', $data) ? $data['reputation_change_day'] : null,
-            array_key_exists('reputation_change_month', $data) ? $data['reputation_change_month'] : null,
-            array_key_exists('reputation_change_quarter', $data) ? $data['reputation_change_quarter'] : null,
-            array_key_exists('reputation_change_week', $data) ? $data['reputation_change_week'] : null,
-            array_key_exists('reputation_change_year', $data) ? $data['reputation_change_year'] : null,
-            array_key_exists('timed_penalty_date', $data) ? new \DateTime('@' . $data['timed_penalty_date']) : null,
-            array_key_exists('up_vote_count', $data) ? $data['up_vote_count'] : null,
-            array_key_exists('view_count', $data) ? $data['view_count'] : null,
-            array_key_exists('website_url', $data) ? $data['website_url'] : null
-        );
+        $instance = new self();
+        $instance
+            ->setShallowUser(ShallowUser::fromJson($data))
+            ->setAboutMe(array_key_exists('about_me', $data) ? $data['about_me'] : null)
+            ->setAccountId(array_key_exists('account_id', $data) ? $data['account_id'] : null)
+            ->setAge(array_key_exists('age', $data) ? $data['age'] : null)
+            ->setAnswerCount(array_key_exists('answer_count', $data) ? $data['answer_count'] : null)
+            ->setCreationDate(
+                array_key_exists('creation_date', $data)
+                    ? new \DateTime('@' . $data['creation_date'])
+                    : null
+            )
+            ->setDisplayName(array_key_exists('display_name', $data) ? $data['display_name'] : null)
+            ->setDownVoteCount(array_key_exists('down_vote_count', $data) ? $data['down_vote_count'] : null)
+            ->setIsEmployee(array_key_exists('is_employee', $data) ? $data['is_employee'] : null)
+            ->setLastAccessDate(
+                array_key_exists('last_access_date', $data)
+                    ? new \DateTimeImmutable('@' . $data['last_access_date'])
+                    : null
+            )
+            ->setLastModifiedDate(
+                array_key_exists('last_modified_date', $data)
+                    ? new \DateTimeImmutable('@' . $data['last_modified_date'])
+                    : null
+            )
+            ->setLocation(array_key_exists('location', $data) ? $data['location'] : null)
+            ->setQuestionCount(array_key_exists('question_count', $data) ? $data['question_count'] : null)
+            ->setReputationChangeDay(
+                array_key_exists('reputation_change_day', $data)
+                    ? $data['reputation_change_day']
+                    : null
+            )
+            ->setReputationChangeMonth(
+                array_key_exists('reputation_change_month', $data)
+                    ? $data['reputation_change_month']
+                    : null
+            )
+            ->setReputationChangeQuarter(
+                array_key_exists('reputation_change_quarter', $data)
+                    ? $data['reputation_change_quarter']
+                    : null
+            )
+            ->setReputationChangeWeek(
+                array_key_exists('reputation_change_week', $data)
+                    ? $data['reputation_change_week']
+                    : null
+            )
+            ->setReputationChangeYear(
+                array_key_exists('reputation_change_year', $data)
+                    ? $data['reputation_change_year']
+                    : null
+            )
+            ->setTimedPenaltyDate(
+                array_key_exists('timed_penalty_date', $data)
+                    ? new \DateTimeImmutable('@' . $data['timed_penalty_date'])
+                    : null
+            )
+            ->setUpVoteCount(array_key_exists('up_vote_count', $data) ? $data['up_vote_count'] : null)
+            ->setViewCount(array_key_exists('view_count', $data) ? $data['view_count'] : null)
+            ->setWebsiteUrl(array_key_exists('website_url', $data) ? $data['website_url'] : null);
+
+        return $instance;
     }
 
     public static function fromProperties(
         ShallowUser $shallowUser,
         $accountId,
         $answerCount,
-        \DateTime $creationDate,
+        \DateTimeInterface $creationDate,
         $displayName,
         $downVoteCount,
         $isEmployee,
-        \DateTime $lastAccessDate,
+        \DateTimeInterface $lastAccessDate,
         $questionCount,
         $reputationChangeDay,
         $reputationChangeMonth,
@@ -88,83 +126,37 @@ class User implements Model
         $viewCount,
         $aboutMe = null,
         $age = null,
-        \DateTime $lastModifiedDate = null,
+        \DateTimeInterface $lastModifiedDate = null,
         $location = null,
-        \DateTime $timedPenaltyDate = null,
+        \DateTimeInterface $timedPenaltyDate = null,
         $websiteUrl = null
     ) {
-        return new self(
-            $shallowUser,
-            $aboutMe,
-            $accountId,
-            $age,
-            $answerCount,
-            $creationDate,
-            $displayName,
-            $downVoteCount,
-            $isEmployee,
-            $lastAccessDate,
-            $lastModifiedDate,
-            $location,
-            $questionCount,
-            $reputationChangeDay,
-            $reputationChangeMonth,
-            $reputationChangeQuarter,
-            $reputationChangeWeek,
-            $reputationChangeYear,
-            $timedPenaltyDate,
-            $upVoteCount,
-            $viewCount,
-            $websiteUrl
-        );
-    }
+        $instance = new self();
+        $instance
+            ->setShallowUser($shallowUser)
+            ->setAboutMe($aboutMe)
+            ->setAccountId($accountId)
+            ->setAge($age)
+            ->setAnswerCount($answerCount)
+            ->setCreationDate($creationDate)
+            ->setDisplayName($displayName)
+            ->setDownVoteCount($downVoteCount)
+            ->setIsEmployee($isEmployee)
+            ->setLastAccessDate($lastAccessDate)
+            ->setLastModifiedDate($lastModifiedDate)
+            ->setLocation($location)
+            ->setQuestionCount($questionCount)
+            ->setReputationChangeDay($reputationChangeDay)
+            ->setReputationChangeMonth($reputationChangeMonth)
+            ->setReputationChangeQuarter($reputationChangeQuarter)
+            ->setReputationChangeWeek($reputationChangeWeek)
+            ->setReputationChangeYear($reputationChangeYear)
+            ->setTimedPenaltyDate($timedPenaltyDate)
+            ->setUpVoteCount($upVoteCount)
+            ->setViewCount($viewCount)
+            ->setWebsiteUrl($websiteUrl);
 
-    private function __construct(
-        ShallowUser $shallowUser = null,
-        $aboutMe = null,
-        $accountId = null,
-        $age = null,
-        $answerCount = null,
-        \DateTime $creationDate = null,
-        $displayName = null,
-        $downVoteCount = null,
-        $isEmployee = null,
-        \DateTime $lastAccessDate = null,
-        \DateTime $lastModifiedDate = null,
-        $location = null,
-        $questionCount = null,
-        $reputationChangeDay = null,
-        $reputationChangeMonth = null,
-        $reputationChangeQuarter = null,
-        $reputationChangeWeek = null,
-        $reputationChangeYear = null,
-        \DateTime $timedPenaltyDate = null,
-        $upVoteCount = null,
-        $viewCount = null,
-        $websiteUrl = null
-    ) {
-        $this->shallowUser = $shallowUser;
-        $this->aboutMe = $aboutMe;
-        $this->accountId = $accountId;
-        $this->age = $age;
-        $this->answerCount = $answerCount;
-        $this->creationDate = $creationDate;
-        $this->displayName = $displayName;
-        $this->downVoteCount = $downVoteCount;
-        $this->isEmployee = $isEmployee;
-        $this->lastAccessDate = $lastAccessDate;
-        $this->lastModifiedDate = $lastModifiedDate;
-        $this->location = $location;
-        $this->questionCount = $questionCount;
-        $this->reputationChangeDay = $reputationChangeDay;
-        $this->reputationChangeMonth = $reputationChangeMonth;
-        $this->reputationChangeQuarter = $reputationChangeQuarter;
-        $this->reputationChangeWeek = $reputationChangeWeek;
-        $this->reputationChangeYear = $reputationChangeYear;
-        $this->timedPenaltyDate = $timedPenaltyDate;
-        $this->upVoteCount = $upVoteCount;
-        $this->viewCount = $viewCount;
-        $this->websiteUrl = $websiteUrl;
+        return $instance;
     }
 
     public function getShallowUser()
@@ -172,7 +164,7 @@ class User implements Model
         return $this->shallowUser;
     }
 
-    public function setShallowUser(ShallowUser $shallowUser)
+    public function setShallowUser(ShallowUser $shallowUser = null)
     {
         $this->shallowUser = $shallowUser;
 
@@ -232,7 +224,7 @@ class User implements Model
         return $this->creationDate;
     }
 
-    public function setCreationDate(\DateTime $creationDate)
+    public function setCreationDate(\DateTimeInterface $creationDate = null)
     {
         $this->creationDate = $creationDate;
 
@@ -280,7 +272,7 @@ class User implements Model
         return $this->lastAccessDate;
     }
 
-    public function setLastAccessDate(\DateTime $lastAccessDate)
+    public function setLastAccessDate(\DateTimeInterface $lastAccessDate = null)
     {
         $this->lastAccessDate = $lastAccessDate;
 
@@ -292,7 +284,7 @@ class User implements Model
         return $this->lastModifiedDate;
     }
 
-    public function setLastModifiedDate(\DateTime $lastModifiedDate)
+    public function setLastModifiedDate(\DateTimeInterface $lastModifiedDate = null)
     {
         $this->lastModifiedDate = $lastModifiedDate;
 
@@ -388,7 +380,7 @@ class User implements Model
         return $this->timedPenaltyDate;
     }
 
-    public function setTimedPenaltyDate(\DateTime $timedPenaltyDate)
+    public function setTimedPenaltyDate(\DateTimeInterface $timedPenaltyDate = null)
     {
         $this->timedPenaltyDate = $timedPenaltyDate;
 

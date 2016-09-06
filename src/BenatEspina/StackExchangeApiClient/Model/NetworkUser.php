@@ -18,23 +18,20 @@ namespace BenatEspina\StackExchangeApiClient\Model;
  */
 class NetworkUser implements Model
 {
-    const USER_TYPE_DOES_NOT_EXIST = 'does_not_exist';
-    const USER_TYPE_MODERATOR = 'moderator';
-    const USER_TYPE_REGISTERED = 'registered';
-    const USER_TYPE_UNREGISTERED = 'unregistered';
+    const USER_TYPES = ['does_not_exist', 'moderator', 'registered', 'unregistered'];
 
-    private $id;
-    private $answerCount;
-    private $badgeCounts;
-    private $creationDate;
-    private $lastAccessDate;
-    private $questionCount;
-    private $reputation;
-    private $siteName;
-    private $siteUrl;
-    private $topAnswers;
-    private $topQuestions;
-    private $userType;
+    protected $id;
+    protected $answerCount;
+    protected $badgeCounts;
+    protected $creationDate;
+    protected $lastAccessDate;
+    protected $questionCount;
+    protected $reputation;
+    protected $siteName;
+    protected $siteUrl;
+    protected $topAnswers;
+    protected $topQuestions;
+    protected $userType;
 
     public static function fromJson(array $data)
     {
@@ -51,28 +48,40 @@ class NetworkUser implements Model
             }
         }
 
-        return new self(
-            array_key_exists('user_id', $data) ? $data['user_id'] : null,
-            array_key_exists('answer_count', $data) ? $data['answer_count'] : null,
-            array_key_exists('badge_counts', $data) ? BadgeCount::fromJson($data['badge_counts']) : null,
-            array_key_exists('creation_date', $data) ? new \DateTime('@' . $data['creation_date']) : null,
-            array_key_exists('last_access_date', $data) ? new \DateTime('@' . $data['last_access_date']) : null,
-            array_key_exists('question_count', $data) ? $data['question_count'] : null,
-            array_key_exists('reputation', $data) ? $data['reputation'] : null,
-            array_key_exists('site_name', $data) ? $data['site_name'] : null,
-            array_key_exists('site_url', $data) ? $data['site_url'] : null,
-            $topAnswers,
-            $topQuestions,
-            array_key_exists('user_type', $data) ? $data['user_type'] : null
-        );
+        $instance = new self();
+        $instance
+            ->setId(array_key_exists('user_id', $data) ? $data['user_id'] : null)
+            ->setAnswerCount(array_key_exists('answer_count', $data) ? $data['answer_count'] : null)
+            ->setBadgeCounts(
+                array_key_exists('badge_counts', $data)
+                    ? BadgeCount::fromJson($data['badge_counts'])
+                    : null
+            )
+            ->setCreationDate(array_key_exists('creation_date', $data)
+                ? new \DateTimeImmutable('@' . $data['creation_date'])
+                : null
+            )
+            ->setLastAccessDate(array_key_exists('last_access_date', $data)
+                ? new \DateTimeImmutable('@' . $data['last_access_date'])
+                : null
+            )
+            ->setQuestionCount(array_key_exists('question_count', $data) ? $data['question_count'] : null)
+            ->setQuestionCount(array_key_exists('reputation', $data) ? $data['reputation'] : null)
+            ->setQuestionCount(array_key_exists('site_name', $data) ? $data['site_name'] : null)
+            ->setQuestionCount(array_key_exists('site_url', $data) ? $data['site_url'] : null)
+            ->setTopAnswers($topAnswers)
+            ->setTopQuestions($topQuestions)
+            ->setUserType(array_key_exists('user_type', $data) ? $data['user_type'] : null);
+
+        return $instance;
     }
 
     public static function fromProperties(
         $id,
         $answerCount,
         BadgeCount $badgeCounts,
-        \DateTime $creationDate,
-        \DateTime $lastAccessDate,
+        \DateTimeInterface $creationDate,
+        \DateTimeInterface $lastAccessDate,
         $questionCount,
         $reputation,
         $siteName,
@@ -81,35 +90,22 @@ class NetworkUser implements Model
         array $topQuestions,
         $userType
     ) {
-    }
+        $instance = new self();
+        $instance
+            ->setId($id)
+            ->setAnswerCount($answerCount)
+            ->setBadgeCounts($badgeCounts)
+            ->setCreationDate($creationDate)
+            ->setLastAccessDate($lastAccessDate)
+            ->setQuestionCount($questionCount)
+            ->setReputation($reputation)
+            ->setSiteName($siteName)
+            ->setSiteUrl($siteUrl)
+            ->setTopAnswers($topAnswers)
+            ->setTopQuestions($topQuestions)
+            ->setUserType($userType);
 
-    private function __construct(
-        $id = null,
-        $answerCount = null,
-        BadgeCount $badgeCounts = null,
-        \DateTime $creationDate = null,
-        \DateTime $lastAccessDate = null,
-        $questionCount = null,
-        $reputation = null,
-        $siteName = null,
-        $siteUrl = null,
-        array $topAnswers = [],
-        array $topQuestions = [],
-        $userType = null
-    ) {
-        $this->id = $id;
-        $this->answerCount = $answerCount;
-        $this->badgeCounts = $badgeCounts;
-        $this->creationDate = $creationDate;
-        $this->lastAccessDate = $lastAccessDate;
-        $this->questionCount = $questionCount;
-        $this->reputation = $reputation;
-        $this->siteName = $siteName;
-        $this->siteUrl = $siteUrl;
-        $this->topAnswers = $topAnswers;
-        $this->topQuestions = $topQuestions;
-        $this->userType = $userType;
-        $this->setUserType($userType);
+        return $instance;
     }
 
     public function getId()
@@ -141,7 +137,7 @@ class NetworkUser implements Model
         return $this->badgeCounts;
     }
 
-    public function setBadgeCounts(BadgeCount $badgeCounts)
+    public function setBadgeCounts(BadgeCount $badgeCounts = null)
     {
         $this->badgeCounts = $badgeCounts;
 
@@ -153,7 +149,7 @@ class NetworkUser implements Model
         return $this->creationDate;
     }
 
-    public function setCreationDate(\DateTime $creationDate)
+    public function setCreationDate(\DateTimeInterface $creationDate = null)
     {
         $this->creationDate = $creationDate;
 
@@ -165,7 +161,7 @@ class NetworkUser implements Model
         return $this->lastAccessDate;
     }
 
-    public function setLastAccessDate(\DateTime $lastAccessDate)
+    public function setLastAccessDate(\DateTimeInterface $lastAccessDate = null)
     {
         $this->lastAccessDate = $lastAccessDate;
 
@@ -251,12 +247,7 @@ class NetworkUser implements Model
 
     public function setUserType($userType)
     {
-        if (in_array($userType, [
-            self::USER_TYPE_DOES_NOT_EXIST,
-            self::USER_TYPE_MODERATOR,
-            self::USER_TYPE_REGISTERED,
-            self::USER_TYPE_UNREGISTERED,
-        ], true)) {
+        if (in_array($userType, self::USER_TYPES, true)) {
             $this->userType = $userType;
         }
 

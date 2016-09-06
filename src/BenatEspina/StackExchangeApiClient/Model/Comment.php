@@ -18,29 +18,28 @@ namespace BenatEspina\StackExchangeApiClient\Model;
  */
 class Comment implements Model
 {
-    const POST_TYPE_QUESTION = 'question';
-    const POST_TYPE_ANSWER = 'answer';
+    const POST_TYPES = ['question', 'answer'];
 
-    private $id;
-    private $body;
-    private $bodyMarkdown;
-    private $canFlag;
-    private $creationDate;
-    private $edited;
-    private $link;
-    private $owner;
-    private $postId;
-    private $postType;
-    private $replyToUser;
-    private $score;
-    private $upvoted;
+    protected $id;
+    protected $body;
+    protected $bodyMarkdown;
+    protected $canFlag;
+    protected $creationDate;
+    protected $edited;
+    protected $link;
+    protected $owner;
+    protected $postId;
+    protected $postType;
+    protected $replyToUser;
+    protected $score;
+    protected $upvoted;
 
     public static function fromProperties(
         $id,
         $body,
         $bodyMarkdown,
         $canFlag,
-        \DateTime $creationDate,
+        \DateTimeInterface $creationDate,
         $edited,
         $link,
         $postId,
@@ -50,70 +49,52 @@ class Comment implements Model
         ShallowUser $owner = null,
         ShallowUser $replyToUser = null
     ) {
-        return new self(
-            $id,
-            $body,
-            $bodyMarkdown,
-            $canFlag,
-            $creationDate,
-            $edited,
-            $link,
-            $owner,
-            $postId,
-            $postType,
-            $replyToUser,
-            $score,
-            $upvoted
-        );
+        $instance = new self();
+        $instance
+            ->setId($id)
+            ->setBody($body)
+            ->setBodyMarkdown($bodyMarkdown)
+            ->setCanFlag($canFlag)
+            ->setCreationDate($creationDate)
+            ->setEdited($edited)
+            ->setLink($link)
+            ->setOwner($owner)
+            ->setPostId($postId)
+            ->setPostType($postType)
+            ->setReplyToUser($replyToUser)
+            ->setScore($score)
+            ->setUpvoted($upvoted);
+
+        return $instance;
     }
 
     public static function fromJson(array $data)
     {
-        return new self(
-            array_key_exists('comment_id', $data) ? $data['comment_id'] : null,
-            array_key_exists('body', $data) ? $data['body'] : null,
-            array_key_exists('body_markdown', $data) ? $data['body_markdown'] : null,
-            array_key_exists('can_flag', $data) ? $data['can_flag'] : null,
-            array_key_exists('creation_date', $data) ? new \DateTime('@' . $data['creation_date']) : null,
-            array_key_exists('edited', $data) ? $data['edited'] : null,
-            array_key_exists('link', $data) ? $data['link'] : null,
-            array_key_exists('owner', $data) ? ShallowUser::fromJson($data['owner']) : null,
-            array_key_exists('postId', $data) ? $data['postId'] : null,
-            array_key_exists('post_type', $data) ? $data['post_type'] : null,
-            array_key_exists('reply_to_user', $data) ? ShallowUser::fromJson($data['reply_to_user']) : null,
-            array_key_exists('score', $data) ? $data['score'] : null,
-            array_key_exists('upvoted', $data) ? $data['upvoted'] : null
-        );
-    }
+        $instance = new self();
+        $instance
+            ->setId(array_key_exists('comment_id', $data) ? $data['comment_id'] : null)
+            ->setBody(array_key_exists('body', $data) ? $data['body'] : null)
+            ->setBodyMarkdown(array_key_exists('body_markdown', $data) ? $data['body_markdown'] : null)
+            ->setCanFlag(array_key_exists('can_flag', $data) ? $data['can_flag'] : null)
+            ->setCreationDate(
+                array_key_exists('creation_date', $data)
+                    ? new \DateTimeImmutable('@' . $data['creation_date'])
+                    : null
+            )
+            ->setEdited(array_key_exists('edited', $data) ? $data['edited'] : null)
+            ->setLink(array_key_exists('link', $data) ? $data['link'] : null)
+            ->setOwner(array_key_exists('owner', $data) ? ShallowUser::fromJson($data['owner']) : null)
+            ->setPostId(array_key_exists('postId', $data) ? $data['postId'] : null)
+            ->setPostType(array_key_exists('post_type', $data) ? $data['post_type'] : null)
+            ->setReplyToUser(array_key_exists(
+                'reply_to_user', $data)
+                ? ShallowUser::fromJson($data['reply_to_user'])
+                : null
+            )
+            ->setScore(array_key_exists('score', $data) ? $data['score'] : null)
+            ->setUpvoted(array_key_exists('upvoted', $data) ? $data['upvoted'] : null);
 
-    private function __construct(
-        $id = null,
-        $body = null,
-        $bodyMarkdown = null,
-        $canFlag = null,
-        \DateTime $creationDate = null,
-        $edited = null,
-        $link = null,
-        ShallowUser $owner = null,
-        $postId = null,
-        $postType = null,
-        ShallowUser $replyToUser = null,
-        $score = null,
-        $upvoted = null
-    ) {
-        $this->id = $id;
-        $this->body = $body;
-        $this->bodyMarkdown = $bodyMarkdown;
-        $this->canFlag = $canFlag;
-        $this->creationDate = $creationDate;
-        $this->edited = $edited;
-        $this->link = $link;
-        $this->owner = $owner;
-        $this->postId = $postId;
-        $this->setPostType($postType);
-        $this->replyToUser = $replyToUser;
-        $this->score = $score;
-        $this->upvoted = $upvoted;
+        return $instance;
     }
 
     public function getId()
@@ -169,7 +150,7 @@ class Comment implements Model
         return $this->creationDate;
     }
 
-    public function setCreationDate(\DateTime $creationDate)
+    public function setCreationDate(\DateTimeInterface $creationDate)
     {
         $this->creationDate = $creationDate;
 
@@ -205,7 +186,7 @@ class Comment implements Model
         return $this->owner;
     }
 
-    public function setOwner(ShallowUser $owner)
+    public function setOwner(ShallowUser $owner = null)
     {
         $this->owner = $owner;
 
@@ -231,7 +212,7 @@ class Comment implements Model
 
     public function setPostType($postType)
     {
-        if (in_array($postType, [self::POST_TYPE_QUESTION, self::POST_TYPE_ANSWER], true)) {
+        if (in_array($postType, self::POST_TYPES, true)) {
             $this->postType = $postType;
         }
 
@@ -243,7 +224,7 @@ class Comment implements Model
         return $this->replyToUser;
     }
 
-    public function setReplyToUser(ShallowUser $replyToUser)
+    public function setReplyToUser(ShallowUser $replyToUser = null)
     {
         $this->replyToUser = $replyToUser;
 

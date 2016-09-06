@@ -18,29 +18,30 @@ namespace BenatEspina\StackExchangeApiClient\Model;
  */
 class BadgeCount implements Model
 {
-    private $bronze;
-    private $gold;
-    private $silver;
+    protected $bronze;
+    protected $gold;
+    protected $silver;
 
     public static function fromJson(array $data)
     {
-        return new self(
-            array_key_exists('bronze', $data) ? $data['bronze'] : null,
-            array_key_exists('gold', $data) ? $data['gold'] : null,
-            array_key_exists('silver', $data) ? $data['silver'] : null
-        );
+        $instance = new self();
+        $instance
+            ->setBronze(array_key_exists('bronze', $data) ? $data['bronze'] : null)
+            ->setGold(array_key_exists('gold', $data) ? $data['gold'] : null)
+            ->setSilver(array_key_exists('silver', $data) ? $data['silver'] : null);
+
+        return $instance;
     }
 
     public static function fromProperties($bronze, $gold, $silver)
     {
-        return new self($bronze, $gold, $silver);
-    }
+        $instance = new self();
+        $instance
+            ->setBronze($bronze)
+            ->setGold($gold)
+            ->setSilver($silver);
 
-    private function __construct($bronze = null, $gold = null, $silver = null)
-    {
-        $this->bronze = $bronze;
-        $this->gold = $gold;
-        $this->silver = $silver;
+        return $instance;
     }
 
     public function getBronze()

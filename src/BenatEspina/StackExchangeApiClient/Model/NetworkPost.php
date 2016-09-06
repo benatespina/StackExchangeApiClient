@@ -18,35 +18,35 @@ namespace BenatEspina\StackExchangeApiClient\Model;
  */
 class NetworkPost implements Model
 {
-    const POST_TYPE_QUESTION = 'question';
-    const POST_TYPE_ANSWER = 'answer';
+    const POST_TYPES = ['question', 'answer'];
 
-    private $id;
-    private $postType;
-    private $score;
-    private $title;
+    protected $id;
+    protected $postType;
+    protected $score;
+    protected $title;
 
     public static function fromProperties($id, $postType, $score, $title)
     {
-        return new self($id, $postType, $score, $title);
+        $instance = new self();
+        $instance
+            ->setId($id)
+            ->setPostType($postType)
+            ->setScore($score)
+            ->setTitle($title);
+
+        return $instance;
     }
 
     public static function fromJson(array $data)
     {
-        return new self(
-            array_key_exists('post_id', $data) ? $data['post_id'] : null,
-            array_key_exists('post_type', $data) ? $data['post_type'] : null,
-            array_key_exists('score', $data) ? $data['score'] : null,
-            array_key_exists('title', $data) ? $data['title'] : null
-        );
-    }
+        $instance = new self();
+        $instance
+            ->setId(array_key_exists('post_id', $data) ? $data['post_id'] : null)
+            ->setPostType(array_key_exists('post_type', $data) ? $data['post_type'] : null)
+            ->setScore(array_key_exists('score', $data) ? $data['score'] : null)
+            ->setTitle(array_key_exists('title', $data) ? $data['title'] : null);
 
-    private function __construct($id = null, $postType = null, $score = null, $title = null)
-    {
-        $this->id = $id;
-        $this->setPostType($postType);
-        $this->score = $score;
-        $this->title = $title;
+        return $instance;
     }
 
     public function getId()
@@ -68,7 +68,7 @@ class NetworkPost implements Model
 
     public function setPostType($postType)
     {
-        if (in_array($postType, [self::POST_TYPE_QUESTION, self::POST_TYPE_ANSWER], true)) {
+        if (in_array($postType, self::POST_TYPES, true)) {
             $this->postType = $postType;
         }
 
