@@ -12,7 +12,7 @@
 namespace BenatEspina\StackExchangeApiClient\Model;
 
 /**
- * The migration info model class.
+ * The site model class.
  *
  * @author Beñat Espiña <benatespina@gmail.com>
  */
