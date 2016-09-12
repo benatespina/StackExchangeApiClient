@@ -107,7 +107,7 @@ class Question implements Model
             )
             ->setClosedDetails(
                 array_key_exists('closed_details', $data)
-                    ? ClosedDetails::fromJson($data['closed_details'])
+                    ? CloseDetails::fromJson($data['closed_details'])
                     : null
             )
             ->setClosedReason(array_key_exists('closed_reason', $data) ? $data['closed_reason'] : null)

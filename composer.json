@@ -40,8 +40,8 @@
     },
     "autoload-dev": {
         "psr-4": {
-            "PhpSpec\\": "tests/PhpSpec/",
-            "Behat\\": "tests/Behat/"
+            "PhpSpec\\": "test/PhpSpec/",
+            "Behat\\": "test/Behat/"
         }
     }
 }
