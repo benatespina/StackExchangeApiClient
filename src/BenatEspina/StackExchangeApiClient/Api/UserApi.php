@@ -3,16 +3,18 @@
 /*
  * This file is part of the Stack Exchange Api Client library.
  *
- * Copyright (c) 2014-2016 Beñat Espiña <benatespina@gmail.com>
+ * (c) Beñat Espiña <benatespina@gmail.com>
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace BenatEspina\StackExchangeApiClient\Api;
 
 use BenatEspina\StackExchangeApiClient\Authentication\Authentication;
-use BenatEspina\StackExchangeApiClient\Http\Http;
+use BenatEspina\StackExchangeApiClient\Http\HttpClient;
 use BenatEspina\StackExchangeApiClient\Model\User;
 use BenatEspina\StackExchangeApiClient\Serializer\UserSerializer;
 
@@ -28,7 +30,7 @@ final class UserApi
         'order'  => 'desc',
         'sort'   => 'reputation',
         'site'   => 'stackoverflow',
-        'filter' => Http::FILTER_ALL,
+        'filter' => HttpClient::FILTER_ALL,
     ];
 
     /**
@@ -66,7 +68,7 @@ final class UserApi
             }
             $params = array_merge($params, $this->authentication->toArray());
         }
-        $response = Http::instance()->get(
+        $response = HttpClient::instance()->get(
             self::URL, $params
         );
 
@@ -92,7 +94,7 @@ final class UserApi
             }
             $params = array_merge($params, $this->authentication->toArray());
         }
-        $response = Http::instance()->get(
+        $response = HttpClient::instance()->get(
             self::URL . (is_array($ids) ? implode(';', $ids) : $ids), $params
         );
 
@@ -116,7 +118,7 @@ final class UserApi
         if (!$this->authentication instanceof Authentication) {
             throw new \Exception('Authentication is required');
         }
-        $response = Http::instance()->get(
+        $response = HttpClient::instance()->get(
             'me', array_merge($params, $this->authentication->toArray())
         );
 
@@ -141,7 +143,7 @@ final class UserApi
             }
             $params = array_merge($params, $this->authentication->toArray());
         }
-        $response = Http::instance()->get(
+        $response = HttpClient::instance()->get(
             self::URL . 'moderators', $params
         );
 
@@ -166,7 +168,7 @@ final class UserApi
             }
             $params = array_merge($params, $this->authentication->toArray());
         }
-        $response = Http::instance()->get(
+        $response = HttpClient::instance()->get(
             self::URL . 'moderators/elected', $params
         );
 

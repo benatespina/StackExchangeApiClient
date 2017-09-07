@@ -1,47 +1,40 @@
 {
     "name": "benatespina/stack-exchange-api-client",
     "description": "StackExchange v2.2 API client",
-    "keywords": ["stackExchange", "api", "library", "client"],
-    "homepage": "https://github.com/benatespina/StackExchangeApiClient",
+    "keywords": [
+        "stackExchange",
+        "api",
+        "library",
+        "client"
+    ],
     "type": "library",
     "license": "MIT",
+    "homepage": "https://github.com/benatespina/StackExchangeApiClient",
     "authors": [
         {
             "name": "Beñat Espiña",
             "email": "benatespina@gmail.com",
-            "homepage": "http://benatespina.com"
+            "homepage": "https://benatespina.com"
         }
     ],
     "require": {
-        "php": "^5.6 || ^7.0",
+        "php": "^7.1",
         "guzzlehttp/guzzle": "^6.1"
     },
     "require-dev": {
-        "behat/behat": "^3.1",
-        "behatch/contexts": "^2.5",
-        "behat/mink": "^1.7.1",
-        "behat/mink-extension": "^2.2",
-        "behat/mink-goutte-driver": "^1.2.1",
-        "friendsofphp/php-cs-fixer": "^1.11",
-        "phpspec/phpspec": "^2.5",
-        "symfony/var-dumper": "^3.0"
+        "friendsofphp/php-cs-fixer": "^2.5",
+        "phpspec/phpspec": "^4.0"
     },
     "scripts": {
         "cs": [
-            "php-cs-fixer fix --config-file=.php_cs",
-            "php-cs-fixer fix --config-file=.phpspec_cs"
+            "php-cs-fixer fix --config=.php_cs",
+            "php-cs-fixer fix --config=.phpspec_cs"
         ],
         "test": "phpspec run"
     },
     "autoload": {
         "psr-4": {
             "BenatEspina\\StackExchangeApiClient\\": "src/BenatEspina/StackExchangeApiClient/"
-        }
-    },
-    "autoload-dev": {
-        "psr-4": {
-            "PhpSpec\\": "test/PhpSpec/",
-            "Behat\\": "test/Behat/"
         }
     }
 }

@@ -3,82 +3,46 @@
 /*
  * This file is part of the Stack Exchange Api Client library.
  *
- * Copyright (c) 2014-2016 Beñat Espiña <benatespina@gmail.com>
+ * (c) Beñat Espiña <benatespina@gmail.com>
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace BenatEspina\StackExchangeApiClient\Authentication;
 
 /**
- * Authentication class.
- *
  * @author Beñat Espiña <benatespina@gmail.com>
  */
 final class Authentication
 {
-    /**
-     * The key that makes requests against the
-     * API to receive a higher request quota.
-     *
-     * @var string
-     */
     private $key;
-
-    /**
-     * The access token.
-     */
     private $accessToken;
 
-    /**
-     * Constructor.
-     *
-     * @param string $aKey          The key
-     * @param string $anAccessToken The access token
-     */
-    public function __construct($aKey, $anAccessToken)
+    public function __construct(string $key, string $accessToken)
     {
-        $this->key = $aKey;
-        $this->accessToken = $anAccessToken;
+        $this->key = $key;
+        $this->accessToken = $accessToken;
     }
 
-    /**
-     * Gets the key.
-     *
-     * @return string
-     */
-    public function key()
+    public function key() : string
     {
         return $this->key;
     }
 
-    /**
-     * Gets the access token.
-     *
-     * @return string
-     */
-    public function accessToken()
+    public function accessToken() : string
     {
         return $this->accessToken;
     }
 
-    /**
-     * Gets the key and access token in array format.
-     *
-     * @return array
-     */
-    public function toArray()
+    public function toArray() : array
     {
         return ['key' => $this->key, 'access_token' => $this->accessToken];
     }
 
-    /**
-     * Gets the key and access token in url format.
-     *
-     * @return string
-     */
-    public function toUrl()
+    public function toUrl() : string
     {
         return '&access_token=' . $this->accessToken . '&key=' . $this->key;
     }

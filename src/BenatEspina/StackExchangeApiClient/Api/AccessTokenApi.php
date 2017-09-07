@@ -3,83 +3,48 @@
 /*
  * This file is part of the Stack Exchange Api Client library.
  *
- * Copyright (c) 2014-2016 Beñat Espiña <benatespina@gmail.com>
+ * (c) Beñat Espiña <benatespina@gmail.com>
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace BenatEspina\StackExchangeApiClient\Api;
 
-use BenatEspina\StackExchangeApiClient\Http\Http;
-use BenatEspina\StackExchangeApiClient\Serializer\AccessTokenSerializer;
+use BenatEspina\StackExchangeApiClient\Api\AccessToken\ApplicationDeAuthenticate;
+use BenatEspina\StackExchangeApiClient\Api\AccessToken\Invalidate;
+use BenatEspina\StackExchangeApiClient\Api\AccessToken\Read;
+use BenatEspina\StackExchangeApiClient\Http\HttpClient;
+use BenatEspina\StackExchangeApiClient\Serializer\Serializer;
 
 /**
- * The access token api class.
- *
  * @author Beñat Espiña <benatespina@gmail.com>
  */
-final class AccessTokenApi
+class AccessTokenApi
 {
-    const URL = 'access-tokens/';
+    private $client;
+    private $serializer;
 
-    /**
-     * Immediately expires the access tokens passed.
-     *
-     * More info: https://api.stackexchange.com/docs/invalidate-access-tokens
-     *
-     * @param string|array $accessTokens Array which contains the tokens delimited by semicolon, or a simple token
-     * @param array        $params       QueryString parameter(s), it admits page and pagesize; by default is null
-     * @param bool         $serialize    Checks if the result will be serialize or not, by default is true
-     *
-     * @return array
-     */
-    public function invalidate($accessTokens, array $params = [], $serialize = true)
+    public function __construct(HttpClient $client, Serializer $serializer)
     {
-        $response = Http::instance()->get(
-            self::URL . (is_array($accessTokens) ? implode(';', $accessTokens) : $accessTokens) . '/invalidate', $params
-        );
-
-        return $serialize === true ? AccessTokenSerializer::serialize($response) : $response;
+        $this->client = $client;
+        $this->serializer = $serializer;
     }
 
-    /**
-     * Reads the properties for a set of access tokens.
-     *
-     * More info: https://api.stackexchange.com/docs/read-access-tokens
-     *
-     * @param string|array $accessTokens Array which contains the tokens delimited by semicolon, or a simple token
-     * @param array        $params       QueryString parameter(s), it admits page and pagesize; by default is null
-     * @param bool         $serialize    Checks if the result will be serialize or not, by default is true
-     *
-     * @return array
-     */
-    public function getOfToken($accessTokens, array $params = [], $serialize = true)
+    public function applicationDeAuthenticate($accessTokens, array $parameters = [])
     {
-        $response = Http::instance()->get(
-            self::URL . (is_array($accessTokens) ? implode(';', $accessTokens) : $accessTokens), $params
-        );
-
-        return $serialize === true ? AccessTokenSerializer::serialize($response) : $response;
+        return (new ApplicationDeAuthenticate($this->client, $this->serializer))->__invoke($accessTokens, $parameters);
     }
 
-    /**
-     * Allows an application to de-authorize itself for a set of users.
-     *
-     * More info: https://api.stackexchange.com/docs/application-de-authenticate
-     *
-     * @param string|array $accessTokens Array which contains the tokens delimited by semicolon, or a simple token
-     * @param array        $params       QueryString parameter(s), it admits page and pagesize; by default is null
-     * @param bool         $serialize    Checks if the result will be serialize or not, by default is true
-     *
-     * @return array
-     */
-    public function deAuthenticate($accessTokens, array $params = [], $serialize = true)
+    public function invalidate($accessTokens, array $parameters = [])
     {
-        $response = Http::instance()->get(
-            self::URL . (is_array($accessTokens) ? implode(';', $accessTokens) : $accessTokens) . '/de-authenticate', $params
-        );
+        return (new Invalidate($this->client, $this->serializer))->__invoke($accessTokens, $parameters);
+    }
 
-        return $serialize === true ? AccessTokenSerializer::serialize($response) : $response;
+    public function read($accessTokens, array $parameters = [])
+    {
+        return (new Read($this->client, $this->serializer))->__invoke($accessTokens, $parameters);
     }
 }
