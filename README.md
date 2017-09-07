@@ -26,7 +26,7 @@ StackExchange client with or without Authentication. Furthermore there two ways 
 ```php
 <?php
 
-require_once __DIR__ . '/../vendor';
+require_once __DIR__ . '/../vendor/autoload.php';
 
 use BenatEspina\StackExchangeApiClient\StackExchange;
 
@@ -52,7 +52,7 @@ $answer = $client->answer()->createAnswer('the-question-id', 'This is my awesome
 ```php
 <?php
 
-require_once __DIR__ . '/../vendor';
+require_once __DIR__ . '/../vendor/autoload.php';
 
 use BenatEspina\StackExchangeApiClient\Authentication\Authentication;
 use BenatEspina\StackExchangeApiClient\Http\GuzzleHttpClient;
