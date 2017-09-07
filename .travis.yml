@@ -1,6 +1,6 @@
 # This file is part of the Stack Exchange Api Client library.
 #
-# Copyright (c) 2015 Beñat Espiña <benatespina@gmail.com>
+# (c) Beñat Espiña <benatespina@gmail.com>
 #
 # For the full copyright and license information, please view the LICENSE
 # file that was distributed with this source code.
@@ -10,20 +10,16 @@ sudo: false
 language: php
 
 php:
-    - 5.4
-    - 5.5
-    - 5.6
-    - 7.0
-    - hhvm
+    - 7.1
 
 env:
     - COMPOSER_OPTIONS="--prefer-source"
 
 install:
-    - composer update --no-interaction ${COMPOSER_OPTIONS}
+    - composer install --no-interaction ${COMPOSER_OPTIONS}
 
 script:
-    - vendor/bin/phpspec run -fpretty
+    - vendor/bin/phpspec run
 
 cache:
     directories:
@@ -31,9 +27,3 @@ cache:
 
 matrix:
     fast_finish: true
-    allow_failures:
-        - php: 7.0
-        - php: hhvm
-    include:
-        - php: 5.4
-          env: COMPOSER_OPTIONS="--prefer-lowest"

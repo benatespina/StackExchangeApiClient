@@ -1,4 +1,4 @@
-#![stackExchange-logo](http://files.quickmediasolutions.com/so-images/stackexchange.svg) Stack Exchange v2.2 API Client
+# ![stackExchange-logo](http://files.quickmediasolutions.com/so-images/stackexchange.svg) Stack Exchange v2.2 API Client
 > PHP library for interacting with the [Stack Exchange](http://stackexchange.com/)'s version 2.2 REST API.
 
 [![SensioLabsInsight](https://insight.sensiolabs.com/projects/1ebace1c-be1b-4a53-bef8-78d910aa2200/mini.png)](https://insight.sensiolabs.com/projects/1ebace1c-be1b-4a53-bef8-78d910aa2200)
@@ -8,71 +8,87 @@
 [![Latest Stable Version](https://poser.pugx.org/benatespina/stack-exchange-api-client/v/stable.svg)](https://packagist.org/packages/benatespina/stack-exchange-api-client)
 [![Latest Unstable Version](https://poser.pugx.org/benatespina/stack-exchange-api-client/v/unstable.svg)](https://packagist.org/packages/benatespina/stack-exchange-api-client)
 
-***This is a work in progress library and some features are not available yet.***
+## Requirements
+PHP >= 7.1</br>
 
-##Installation
-The recommended and the most suitable way to install is through [Composer](https://getcomposer.org/).
-Be sure that the tool is installed in your system and execute the following command:
-```shell
+## Installation
+The easiest way to install this bundle is using [Composer][2]
+```bash
 $ composer require benatespina/stack-exchange-api-client
 ```
 
-##Usage
+## Usage
 If you check out the [API documentation](http://api.stackexchange.com/docs), you will see that there are some calls that
-do not need authentication, but nevertheless there are other calls that need the authentication.
+do not need authentication, but nevertheless there are other calls that need it so, this library allows to instantiate
+StackExchange client with or without Authentication. Furthermore there two ways to use this library.
 
-First of all, you have to instantiate the Client that to be used like a parameter of  the constructor of the API objects.
-And then, after create the API object, simply you have to call the different methods that this object offers.
-
-The only difference between with or without authentication is the `Client` constructor. Without authentication the
-constructor used the `null` value by default; otherwise, with authentication, firstly, you have to construct the `OAuth`
-object that then it passed as parameter in `Client` constructor.
-
-###Without authentication:
+### Default usage
 ```php
-$client = new Client();
-$answerAPI = new AnswerAPI($client);
+<?php
 
-$answers = $answerAPI->getAnswersById(['2359967', '1932551']);
+require_once __DIR__ . '/../vendor';
+
+use BenatEspina\StackExchangeApiClient\StackExchange;
+
+$client = StackExchange::withAuth('stack-exchange-key', 'stack-exchange-access-token');
+
+$profile = $client->user()->me();
+$answers = $client->answer()->answers();
+$answer = $client->answer()->createAnswer('the-question-id', 'This is my awesome answer!');
+
+
+$client = StackExchange::withoutAuth();
+
+// Throws an AuthenticationIsRequired exception
+$profile = $client->user()->me();
+
+$answers = $client->answer()->answers();
+
+// Throws an AuthenticationIsRequired exception
+$answer = $client->answer()->createAnswer('the-question-id', 'This is my awesome answer!');
 ```
 
-*The second parameter has been omitted, because the method `getAnswersById` already contains by default the minimum
-params to do a proper request: `['site' => 'stackoverflow', 'sort' => 'activity']`*
-
-###With authentication:
-There are two variants to construct the `OAuth2` object:
-
-The first one directly passed the `$key` and `$accessToken`.
+### Full customized usage
 ```php
-$oauth2 = new OAuth2($key, $accessToken);
+<?php
 
-$client = new Client($oauth2);
-$questionAPI = new QuestionAPI($client);
+require_once __DIR__ . '/../vendor';
 
-$question = $questionAPI->postQuestion('The title of question', 'The body of the question', ['php', 'api']);
+use BenatEspina\StackExchangeApiClient\Authentication\Authentication;
+use BenatEspina\StackExchangeApiClient\Http\GuzzleHttpClient;
+use BenatEspina\StackExchangeApiClient\Model\Answer;
+use BenatEspina\StackExchangeApiClient\Serializer\ToModelSerializer;
+use BenatEspina\StackExchangeApiClient\StackExchange;
+
+$httpClient = new GuzzleHttpClient();
+$authentication = new Authentication('stack-exchange-key', 'stack-exchange-access-token');
+
+$client = new StackExchange($httpClient, $authentication);
+
+$profile = $client->user()->me();
+$answers = $client->answer()->answers();
+$answer = $client->answer()->createAnswer('the-question-id', 'This is my awesome answer!');
+
+
+// CUSTOM SERIALIZATION
+//
+// Instantiate the AnswerApi with custom serializer
+// The following calls returns an answer model instance instead of a plain array
+
+$answersApi = $client->answer(new ToModelSerializer(Answer::class));
+$answers = $answersApi->answers();
+$answer = $answersApi->createAnswer('the-question-id', 'This is my awesome answer!');
 ```
 
-But the **recommended** variant is the variant that passes the `$key`, `$clientId`, `$scope`, `$redirectUri` and
-the `getAccessToken()`, and returns the token.
-```php
-$oauth2 = new OAuth2($key, null, $clientId, $scope, $redirectUri);
-
-$client = new Client($oauth2);
-$questionAPI = new QuestionAPI($client);
-
-$question = $questionAPI->postQuestion('The title of question', 'The body of the question', ['php', 'api']);
-```
-
-##Current status
-This API has many methods, so the status of the calls are separated **by type** in the following files:
-
+## Current status
+The API has many methods, so the calls' implementation status are separated **by type** in the following files:
  - ![progressed.io - 3 methods](http://progressed.io/bar/100)&nbsp;[Access Tokens](https://github.com/benatespina/StackExchangeApiClient/blob/master/docs/access_tokens.md)
- - ![progressed.io - 16 methods](http://progressed.io/bar/31)&nbsp;[Answers](https://github.com/benatespina/StackExchangeApiClient/blob/master/docs/answers.md)
- - ![progressed.io - 7 methods](http://progressed.io/bar/100)&nbsp;[Badges](https://github.com/benatespina/StackExchangeApiClient/blob/master/docs/badges.md)
- - ![progressed.io - 15 methods](http://progressed.io/bar/100)&nbsp;[Comments](https://github.com/benatespina/StackExchangeApiClient/blob/master/docs/comments.md)
- - ![progressed.io - 1 methods](http://progressed.io/bar/100)&nbsp;[Errors](https://github.com/benatespina/StackExchangeApiClient/blob/master/docs/errors.md)
+ - ![progressed.io - 16 methods](http://progressed.io/bar/50)&nbsp;[Answers](https://github.com/benatespina/StackExchangeApiClient/blob/master/docs/answers.md)
+ - ![progressed.io - 7 methods](http://progressed.io/bar/0)&nbsp;[Badges](https://github.com/benatespina/StackExchangeApiClient/blob/master/docs/badges.md)
+ - ![progressed.io - 15 methods](http://progressed.io/bar/0)&nbsp;[Comments](https://github.com/benatespina/StackExchangeApiClient/blob/master/docs/comments.md)
+ - ![progressed.io - 1 methods](http://progressed.io/bar/0)&nbsp;[Errors](https://github.com/benatespina/StackExchangeApiClient/blob/master/docs/errors.md)
  - ![progressed.io - 1 methods](http://progressed.io/bar/0)&nbsp;[Events](https://github.com/benatespina/StackExchangeApiClient/blob/master/docs/events.md)
- - ![progressed.io - 2 methods](http://progressed.io/bar/100)&nbsp;[Filters](https://github.com/benatespina/StackExchangeApiClient/blob/master/docs/filters.md)
+ - ![progressed.io - 2 methods](http://progressed.io/bar/0)&nbsp;[Filters](https://github.com/benatespina/StackExchangeApiClient/blob/master/docs/filters.md)
  - ![progressed.io - 4 methods](http://progressed.io/bar/0)&nbsp;[Flag Options](https://github.com/benatespina/StackExchangeApiClient/blob/master/docs/flag_options.md)
  - ![progressed.io - 4 methods](http://progressed.io/bar/0)&nbsp;[Inbox Items](https://github.com/benatespina/StackExchangeApiClient/blob/master/docs/inbox_items.md)
  - ![progressed.io - 1 methods](http://progressed.io/bar/0)&nbsp;[Network Users](https://github.com/benatespina/StackExchangeApiClient/blob/master/docs/network_users.md)
@@ -98,44 +114,34 @@ This API has many methods, so the status of the calls are separated **by type** 
  - ![progressed.io - 1 methods](http://progressed.io/bar/0)&nbsp;[User Timeline](https://github.com/benatespina/StackExchangeApiClient/blob/master/docs/user_timeline.md)
  - ![progressed.io - 1 methods](http://progressed.io/bar/0)&nbsp;[Write Permissions](https://github.com/benatespina/StackExchangeApiClient/blob/master/docs/write_permissions.md)
 
-##Tests
-This library is completely tested by **[PHPSpec][1], SpecBDD framework for PHP**.
+## Tests
+This bundle is completely tested by **[PHPSpec][3], SpecBDD framework for PHP**.
 
-If you want to run the tests, only you have to run the following command:
-```shell
+Run the following command to launch tests:
+```bash
 $ vendor/bin/phpspec run -fpretty
 ```
 
-##Contributing
-This project follows PHP coding standards, so pull requests need to execute the Fabien Potencier's [PHP-CS-Fixer][5]
-and Marc Morera's [PHP-Formatter][6]. Furthermore, if the PR creates some not-PHP file remember that you have to put
-the license header manually. In order to simplify we provide a Composer script that wraps all the commands related with
-this process.
+## Contributing
+This bundle follows PHP coding standards, so pull requests need to execute the Fabien Potencier's [PHP-CS-Fixer][4].
+Furthermore, if the PR creates some not-PHP file remember that you have to put the license header manually. In order
+to simplify we provide a Composer script that wraps all the commands related with this process.
 ```bash
 $ composer run-script cs
 ```
 
-There is also a policy for contributing to this project. Pull requests must be explained step by step to make the
+There is also a policy for contributing to this bundle. Pull requests must be explained step by step to make the
 review process easy in order to accept and merge them. New methods or code improvements must come paired with
-[PHPSpec][1] tests.
+[PHPSpec][3] tests.
 
-If you would like to contribute it is a good point to follow Symfony contribution standards, so please read the
-[Contributing Code][2] in the project documentation. If you are submitting a pull request, please follow the guidelines
-in the [Submitting a Patch][3] section and use the [Pull Request Template][4].
+## Credits
+This library is created by:
+>
+**@benatespina** - [benatespina@gmail.com](mailto:benatespina@gmail.com)
 
-##Credits
-Inspirated by my friend [Gorka Laucirica](http://gorkalaucirica.net)'s
-[Hipchat v2 Api Client](https://github.com/gorkalaucirica/HipchatAPIv2Client)
-
-Created by **@benatespina** - [benatespina@gmail.com](mailto:benatespina@gmail.com).<br>
-Copyright (c) 2014, 2015
-
-##Licensing Options
+## Licensing Options
 [![License](https://poser.pugx.org/benatespina/stack-exchange-api-client/license.svg)](https://github.com/benatespina/StackExchangeApiClient/blob/master/LICENSE)
 
-[1]: http://www.phpspec.net/
-[2]: http://symfony.com/doc/current/contributing/code/index.html
-[3]: http://symfony.com/doc/current/contributing/code/patches.html#check-list
-[4]: http://symfony.com/doc/current/contributing/code/patches.html#make-a-pull-request
-[5]: http://cs.sensiolabs.org/
-[6]: https://github.com/mmoreram/php-formatter
+[2]: http://getcomposer.org
+[3]: http://www.phpspec.net/en/stable/
+[4]: http://cs.sensiolabs.org/
