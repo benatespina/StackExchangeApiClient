@@ -1,7 +1,7 @@
 # ![stackExchange-logo](http://files.quickmediasolutions.com/so-images/stackexchange.svg) Stack Exchange v2.2 API Client
 > PHP library for interacting with the [Stack Exchange](http://stackexchange.com/)'s version 2.2 REST API.
 
-[![SensioLabsInsight](https://insight.sensiolabs.com/projects/66aaf1b9-c8bc-4d03-a831-3311630f5014/mini.png)](https://insight.sensiolabs.com/projects/66aaf1b9-c8bc-4d03-a831-3311630f5014)
+[![SensioLabsInsight](https://insight.sensiolabs.com/projects/1ebace1c-be1b-4a53-bef8-78d910aa2200/mini.png)](https://insight.sensiolabs.com/projects/1ebace1c-be1b-4a53-bef8-78d910aa2200)
 [![Build Status](https://travis-ci.org/benatespina/StackExchangeApiClient.svg)](https://travis-ci.org/benatespina/StackExchangeApiClient)
 [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/benatespina/StackExchangeApiClient/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/benatespina/StackExchangeApiClient/?branch=master)
 [![Total Downloads](https://poser.pugx.org/benatespina/stack-exchange-api-client/downloads.svg)](https://packagist.org/packages/benatespina/stack-exchange-api-client)
