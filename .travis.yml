@@ -15,6 +15,11 @@ php:
 env:
     - COMPOSER_OPTIONS="--prefer-source"
 
+addons:
+    apt:
+        packages:
+            - xmlstarlet
+
 install:
     - composer install --no-interaction ${COMPOSER_OPTIONS}
 
