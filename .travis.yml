@@ -18,8 +18,14 @@ env:
 install:
     - composer install --no-interaction ${COMPOSER_OPTIONS}
 
+before_script:
+    - cp phpunit.xml.dist phpunit.xml
+    - xmlstarlet ed --inplace -u '/phpunit/php/const[@value="{{ ACCESS_TOKEN }}"]/@value' -v '${ACCESS_TOKEN}' phpunit.xml
+    - xmlstarlet ed --inplace -u '/phpunit/php/const[@value="{{ KEY }}"]/@value' -v '${KEY}' phpunit.xml
+
 script:
     - vendor/bin/phpspec run
+    - vendor/bin/phpunit
 
 cache:
     directories:
