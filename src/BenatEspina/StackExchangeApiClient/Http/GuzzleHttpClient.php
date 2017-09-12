@@ -30,27 +30,27 @@ final class GuzzleHttpClient implements HttpClient
         ]);
     }
 
-    public function get(string $url, array $parameters)
+    public function get(string $url, array $parameters) : array
     {
         $response = $this->client->get($url, ['query' => $parameters]);
         if (!$response instanceof ResponseInterface) {
-            throw new \Exception('The response must be implements the ResponseInterface');
+            throw new ResponseIsNotValidInstance();
         }
 
         return json_decode($response->getBody()->getContents(), true);
     }
 
-    public function post(string $url, array $parameters)
+    public function post(string $url, array $parameters) : array
     {
         return $this->internalPost($url, $parameters);
     }
 
-    public function put(string $url, array $parameters)
+    public function put(string $url, array $parameters) : array
     {
         return $this->internalPost($url, $parameters);
     }
 
-    public function delete(string $url, array $parameters)
+    public function delete(string $url, array $parameters) : array
     {
         return $this->internalPost($url, $parameters);
     }
@@ -59,7 +59,7 @@ final class GuzzleHttpClient implements HttpClient
     {
         $response = $this->client->post($url, ['form_params' => $parameters]);
         if (!$response instanceof ResponseInterface) {
-            throw new \Exception('The response must be implements the ResponseInterface');
+            throw new ResponseIsNotValidInstance();
         }
 
         return json_decode($response->getBody()->getContents(), true);

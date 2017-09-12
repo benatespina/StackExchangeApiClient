@@ -11,19 +11,15 @@
 
 declare(strict_types=1);
 
-namespace BenatEspina\StackExchangeApiClient\Serializer;
+namespace BenatEspina\StackExchangeApiClient\Http;
 
 /**
  * @author Beñat Espiña <benatespina@gmail.com>
  */
-final class NoSerializeSerializer implements Serializer
+class ResponseIsNotValidInstance extends \Exception
 {
-    public function serialize(array $data) : array
+    public function __construct()
     {
-        if (!array_key_exists('items', $data)) {
-            throw new SerializedDataIsNotValid();
-        }
-
-        return $data['items'];
+        parent::__construct('The response must be implements the "Psr\Http\Message\ResponseInterface" interface');
     }
 }

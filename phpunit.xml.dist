@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+
+This file is part of the Stack Exchange Api Client library.
+
+(c) Beñat Espiña <benatespina@gmail.com>
+
+For the full copyright and license information, please view the LICENSE
+file that was distributed with this source code.
+
+-->
+
+<phpunit xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:noNamespaceSchemaLocation="http://schema.phpunit.de/5.6/phpunit.xsd"
+         backupGlobals="false"
+         colors="true"
+>
+    <php>
+        <const name="ACCESS_TOKEN" value="{{ ACCESS_TOKEN }}"/>
+        <const name="KEY" value="{{ KEY }}"/>
+    </php>
+
+    <testsuites>
+        <testsuite name="StackExchangeApiClient tests">
+            <directory>tests</directory>
+        </testsuite>
+    </testsuites>
+
+    <filter>
+        <whitelist>
+            <directory>src</directory>
+        </whitelist>
+    </filter>
+</phpunit>

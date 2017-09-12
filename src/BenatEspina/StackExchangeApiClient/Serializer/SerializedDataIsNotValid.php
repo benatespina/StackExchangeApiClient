@@ -16,14 +16,6 @@ namespace BenatEspina\StackExchangeApiClient\Serializer;
 /**
  * @author Beñat Espiña <benatespina@gmail.com>
  */
-final class NoSerializeSerializer implements Serializer
+class SerializedDataIsNotValid extends \Exception
 {
-    public function serialize(array $data) : array
-    {
-        if (!array_key_exists('items', $data)) {
-            throw new SerializedDataIsNotValid();
-        }
-
-        return $data['items'];
-    }
 }

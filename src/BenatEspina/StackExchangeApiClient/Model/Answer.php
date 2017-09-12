@@ -10,20 +10,10 @@
  */
 
 declare(strict_types=1);
-/*
- * This file is part of the Stack Exchange Api Client library.
- *
- * (c) Beñat Espiña <benatespina@gmail.com>
- *
- * For the full copyright and license information, please view the LICENSE
- * file that was distributed with this source code.
- */
 
 namespace BenatEspina\StackExchangeApiClient\Model;
 
 /**
- * The answer model class.
- *
  * @author Beñat Espiña <benatespina@gmail.com>
  */
 class Answer implements Model
@@ -56,69 +46,7 @@ class Answer implements Model
     protected $score;
     protected $upvoted;
 
-    public static function fromProperties(
-        $id,
-        $accepted,
-        $canFlag,
-        $isAccepted,
-        $questionId,
-        array $tags,
-        $downvoted,
-        \DateTimeInterface $lastActivityDate,
-        $shareLink,
-        $title,
-        $commentCount,
-        $downVoteCount,
-        $upVoteCount,
-        $body,
-        $bodyMarkDown,
-        \DateTimeInterface $creationDate,
-        $link,
-        $score,
-        $upvoted,
-        $awardedBountyAmount,
-        array $awardedBountyUsers = [],
-        array $comments = [],
-        \DateTimeInterface $communityOwnedDate = null,
-        ShallowUser $lastEditor = null,
-        \DateTimeInterface $lastEditDate = null,
-        \DateTimeInterface $lockedDate = null,
-        ShallowUser $owner = null
-    ) {
-        $instance = new self();
-        $instance
-            ->setId($id)
-            ->setAccepted($accepted)
-            ->setCanFlag($canFlag)
-            ->setIsAccepted($isAccepted)
-            ->setQuestionId($questionId)
-            ->setTags($tags)
-            ->setDownvoted($downvoted)
-            ->setLastActivityDate($lastActivityDate)
-            ->setShareLink($shareLink)
-            ->setTitle($title)
-            ->setCommentCount($commentCount)
-            ->setDownVoteCount($downVoteCount)
-            ->setUpVoteCount($upVoteCount)
-            ->setBody($body)
-            ->setBodyMarkDown($bodyMarkDown)
-            ->setCreationDate($creationDate)
-            ->setLink($link)
-            ->setScore($score)
-            ->setUpvoted($upvoted)
-            ->setAwardedBountyAmount($awardedBountyAmount)
-            ->setAwardedBountyUsers($awardedBountyUsers)
-            ->setComments($comments)
-            ->setCommunityOwnedDate($communityOwnedDate)
-            ->setLastEditor($lastEditor)
-            ->setLastEditDate($lastEditDate)
-            ->setLockedDate($lockedDate)
-            ->setOwner($owner);
-
-        return $instance;
-    }
-
-    public static function fromJson(array $data)
+    public static function fromJson(array $data) : self
     {
         $tags = [];
         $awardedBountyUsers = [];
@@ -193,327 +121,360 @@ class Answer implements Model
         return $instance;
     }
 
-    public function getId()
+    public function getId() : ?int
     {
         return $this->id;
     }
 
-    public function setId($id)
+    public function setId(?int $id) : self
     {
         $this->id = $id;
 
         return $this;
     }
 
-    public function getAccepted()
+    public function getAccepted() : ?bool
     {
         return $this->accepted;
     }
 
-    public function setAccepted($accepted)
+    public function setAccepted(?bool $accepted) : self
     {
         $this->accepted = $accepted;
 
         return $this;
     }
 
-    public function getAwardedBountyAmount()
+    public function getAwardedBountyAmount() : ?int
     {
         return $this->awardedBountyAmount;
     }
 
-    public function setAwardedBountyAmount($awardedBountyAmount)
+    public function setAwardedBountyAmount(?int $awardedBountyAmount) : self
     {
         $this->awardedBountyAmount = $awardedBountyAmount;
 
         return $this;
     }
 
-    public function getAwardedBountyUsers()
+    public function getAwardedBountyUsers() : array
     {
         return $this->awardedBountyUsers;
     }
 
-    public function setAwardedBountyUsers(array $awardedBountyUsers)
+    public function setAwardedBountyUsers(array $awardedBountyUsers) : self
     {
         $this->awardedBountyUsers = $awardedBountyUsers;
 
         return $this;
     }
 
-    public function getCanFlag()
+    public function getCanFlag() : ?bool
     {
         return $this->canFlag;
     }
 
-    public function setCanFlag($canFlag)
+    public function setCanFlag(?bool $canFlag) : self
     {
         $this->canFlag = $canFlag;
 
         return $this;
     }
 
-    public function getIsAccepted()
+    public function getIsAccepted() : ?bool
     {
         return $this->isAccepted;
     }
 
-    public function setIsAccepted($isAccepted)
+    public function setIsAccepted(?bool $isAccepted) : self
     {
         $this->isAccepted = $isAccepted;
 
         return $this;
     }
 
-    public function getQuestionId()
+    public function getQuestionId() : ?int
     {
         return $this->questionId;
     }
 
-    public function setQuestionId($questionId)
+    public function setQuestionId(?int $questionId) : self
     {
         $this->questionId = $questionId;
 
         return $this;
     }
 
-    public function getCommunityOwnedDate()
+    public function getCommunityOwnedDate() : ?\DateTimeInterface
     {
         return $this->communityOwnedDate;
     }
 
-    public function setCommunityOwnedDate(\DateTimeInterface $communityOwnedDate = null)
+    public function setCommunityOwnedDate(?\DateTimeInterface $communityOwnedDate) : self
     {
         $this->communityOwnedDate = $communityOwnedDate;
 
         return $this;
     }
 
-    public function getLockedDate()
+    public function getLockedDate() : ?\DateTimeInterface
     {
         return $this->lockedDate;
     }
 
-    public function setLockedDate(\DateTimeInterface $lockedDate = null)
+    public function setLockedDate(?\DateTimeInterface $lockedDate) : self
     {
         $this->lockedDate = $lockedDate;
 
         return $this;
     }
 
-    public function getTags()
+    public function getTags() : array
     {
         return $this->tags;
     }
 
-    public function setTags(array $tags)
+    public function setTags(array $tags) : self
     {
         $this->tags = $tags;
 
         return $this;
     }
 
-    public function getDownvoted()
+    public function getDownvoted() : ?bool
     {
         return $this->downvoted;
     }
 
-    public function setDownvoted($downvoted)
+    public function setDownvoted(?bool $downvoted) : self
     {
         $this->downvoted = $downvoted;
 
         return $this;
     }
 
-    public function getLastActivityDate()
+    public function getLastActivityDate() : \DateTimeInterface
     {
         return $this->lastActivityDate;
     }
 
-    public function setLastActivityDate(\DateTimeInterface $lastActivityDate)
+    public function setLastActivityDate(\DateTimeInterface $lastActivityDate) : self
     {
         $this->lastActivityDate = $lastActivityDate;
 
         return $this;
     }
 
-    public function getShareLink()
+    public function getShareLink() : ?string
     {
         return $this->shareLink;
     }
 
-    public function setShareLink($shareLink)
+    public function setShareLink(?string $shareLink) : self
     {
         $this->shareLink = $shareLink;
 
         return $this;
     }
 
-    public function getTitle()
+    public function getTitle() : ?string
     {
         return $this->title;
     }
 
-    public function setTitle($title)
+    public function setTitle(?string $title) : self
     {
         $this->title = $title;
 
         return $this;
     }
 
-    public function getCommentCount()
+    public function getCommentCount() : ?int
     {
         return $this->commentCount;
     }
 
-    public function setCommentCount($commentCount)
+    public function setCommentCount(?int $commentCount) : self
     {
         $this->commentCount = $commentCount;
 
         return $this;
     }
 
-    public function getComments()
+    public function getComments() : array
     {
         return $this->comments;
     }
 
-    public function setComments(array $comments)
+    public function setComments(array $comments) : self
     {
         $this->comments = $comments;
 
         return $this;
     }
 
-    public function getLastEditDate()
+    public function getLastEditDate() : ?\DateTimeInterface
     {
         return $this->lastEditDate;
     }
 
-    public function setLastEditDate(\DateTimeInterface $lastEditDate = null)
+    public function setLastEditDate(?\DateTimeInterface $lastEditDate) : self
     {
         $this->lastEditDate = $lastEditDate;
 
         return $this;
     }
 
-    public function getLastEditor()
+    public function getLastEditor() : ?ShallowUser
     {
         return $this->lastEditor;
     }
 
-    public function setLastEditor(ShallowUser $lastEditor = null)
+    public function setLastEditor(?ShallowUser $lastEditor) : self
     {
         $this->lastEditor = $lastEditor;
 
         return $this;
     }
 
-    public function getDownVoteCount()
+    public function getDownVoteCount() : ?int
     {
         return $this->downVoteCount;
     }
 
-    public function setDownVoteCount($downVoteCount)
+    public function setDownVoteCount(?int $downVoteCount) : self
     {
         $this->downVoteCount = $downVoteCount;
 
         return $this;
     }
 
-    public function getUpVoteCount()
+    public function getUpVoteCount() : ?int
     {
         return $this->upVoteCount;
     }
 
-    public function setUpVoteCount($upVoteCount)
+    public function setUpVoteCount(?int $upVoteCount) : self
     {
         $this->upVoteCount = $upVoteCount;
 
         return $this;
     }
 
-    public function getBody()
+    public function getBody() : ?string
     {
         return $this->body;
     }
 
-    public function setBody($body)
+    public function setBody(?string $body) : self
     {
         $this->body = $body;
 
         return $this;
     }
 
-    public function getBodyMarkDown()
+    public function getBodyMarkDown() : ?string
     {
         return $this->bodyMarkDown;
     }
 
-    public function setBodyMarkDown($bodyMarkDown)
+    public function setBodyMarkDown(?string $bodyMarkDown) : self
     {
         $this->bodyMarkDown = $bodyMarkDown;
 
         return $this;
     }
 
-    public function getCreationDate()
+    public function getCreationDate() : \DateTimeInterface
     {
         return $this->creationDate;
     }
 
-    public function setCreationDate(\DateTimeInterface $creationDate)
+    public function setCreationDate(\DateTimeInterface $creationDate) : self
     {
         $this->creationDate = $creationDate;
 
         return $this;
     }
 
-    public function getLink()
+    public function getLink() : ?string
     {
         return $this->link;
     }
 
-    public function setLink($link)
+    public function setLink(?string $link) : self
     {
         $this->link = $link;
 
         return $this;
     }
 
-    public function getOwner()
+    public function getOwner() : ?ShallowUser
     {
         return $this->owner;
     }
 
-    public function setOwner(ShallowUser $owner = null)
+    public function setOwner(?ShallowUser $owner) : self
     {
         $this->owner = $owner;
 
         return $this;
     }
 
-    public function getScore()
+    public function getScore() : ?int
     {
         return $this->score;
     }
 
-    public function setScore($score)
+    public function setScore(?int $score) : self
     {
         $this->score = $score;
 
         return $this;
     }
 
-    public function getUpvoted()
+    public function getUpvoted() : ?bool
     {
         return $this->upvoted;
     }
 
-    public function setUpvoted($upvoted)
+    public function setUpvoted(?bool $upvoted) : self
     {
         $this->upvoted = $upvoted;
 
         return $this;
+    }
+
+    public function jsonSerialize() : array
+    {
+        return [
+            'accepted'              => $this->getAccepted(),
+            'answer_id'             => $this->getId(),
+            'awarded_bounty_amount' => $this->getAwardedBountyAmount(),
+            'awarded_bounty_users'  => $this->getAwardedBountyUsers(),
+            'body'                  => $this->getBody(),
+            'body_markdown'         => $this->getBodyMarkDown(),
+            'can_flag'              => $this->getCanFlag(),
+            'comment_count'         => $this->getCommentCount(),
+            'comments'              => $this->getComments(),
+            'community_owned_date'  => $this->getCommunityOwnedDate(),
+            'creation_date'         => $this->getCreationDate(),
+            'down_vote_count'       => $this->getDownVoteCount(),
+            'downvoted'             => $this->getDownvoted(),
+            'is_accepted'           => $this->getIsAccepted(),
+            'last_activity_date'    => $this->getLastActivityDate(),
+            'last_edit_date'        => $this->getLastEditDate(),
+            'last_editor'           => $this->getLastEditor(),
+            'link'                  => $this->getLink(),
+            'locked_date'           => $this->getLockedDate(),
+            'owner'                 => $this->getOwner(),
+            'question_id'           => $this->getQuestionId(),
+            'score'                 => $this->getScore(),
+            'share_link'            => $this->getShareLink(),
+            'tags'                  => $this->getTags(),
+            'title'                 => $this->getTitle(),
+            'up_vote_count'         => $this->getUpVoteCount(),
+            'upvoted'               => $this->getUpvoted(),
+        ];
     }
 }

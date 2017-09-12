@@ -10,20 +10,10 @@
  */
 
 declare(strict_types=1);
-/*
- * This file is part of the Stack Exchange Api Client library.
- *
- * (c) Beñat Espiña <benatespina@gmail.com>
- *
- * For the full copyright and license information, please view the LICENSE
- * file that was distributed with this source code.
- */
 
 namespace BenatEspina\StackExchangeApiClient\Model;
 
 /**
- * The access token model class.
- *
  * @author Beñat Espiña <benatespina@gmail.com>
  */
 class AccessToken implements Model
@@ -33,23 +23,7 @@ class AccessToken implements Model
     protected $expiresOnDate;
     protected $scope;
 
-    public static function fromProperties(
-        $accessToken,
-        $accountId,
-        \DateTimeInterface $expiresOnDate = null,
-        array $scope = null
-    ) {
-        $instance = new self();
-        $instance
-            ->setAccessToken($accessToken)
-            ->setAccountId($accountId)
-            ->setExpiresOnDate($expiresOnDate)
-            ->setScope($scope);
-
-        return $instance;
-    }
-
-    public static function fromJson(array $data)
+    public static function fromJson(array $data) : self
     {
         $instance = new self();
         $instance
@@ -65,51 +39,69 @@ class AccessToken implements Model
         return $instance;
     }
 
-    public function setAccessToken($accessToken)
+    public function setAccessToken(?string $accessToken) : self
     {
         $this->accessToken = $accessToken;
 
         return $this;
     }
 
-    public function getAccessToken()
+    public function getAccessToken() : ?string
     {
         return $this->accessToken;
     }
 
-    public function setAccountId($accountId)
+    public function setAccountId(?int $accountId) : self
     {
         $this->accountId = $accountId;
 
         return $this;
     }
 
-    public function getAccountId()
+    public function getAccountId() : ?int
     {
         return $this->accountId;
     }
 
-    public function setExpiresOnDate(\DateTimeInterface $expiresOnDate = null)
+    public function setExpiresOnDate(?\DateTimeInterface $expiresOnDate) : self
     {
         $this->expiresOnDate = $expiresOnDate;
 
         return $this;
     }
 
-    public function getExpiresOnDate()
+    public function getExpiresOnDate() : ?\DateTimeInterface
     {
         return $this->expiresOnDate;
     }
 
-    public function setScope(array $scope = null)
+    public function setScope(?array $scope) : self
     {
         $this->scope = $scope;
 
         return $this;
     }
 
-    public function getScope()
+    public function getScope() : ?array
     {
         return $this->scope;
+    }
+
+    public function jsonSerialize() : array
+    {
+        $result = [
+            'account_id'      => $this->getAccountId(),
+            'access_token'    => $this->getAccessToken(),
+            'expires_on_date' => $this->getExpiresOnDate(),
+            'scope'           => $this->getScope(),
+        ];
+
+        foreach ($result as $key => $element) {
+            if (null === $element) {
+                unset($result[$key]);
+            }
+        }
+
+        return $result;
     }
 }

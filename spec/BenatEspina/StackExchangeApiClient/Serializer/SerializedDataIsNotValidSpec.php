@@ -13,26 +13,17 @@ declare(strict_types=1);
 
 namespace spec\BenatEspina\StackExchangeApiClient\Serializer;
 
-use BenatEspina\StackExchangeApiClient\Serializer\NoSerializeSerializer;
 use BenatEspina\StackExchangeApiClient\Serializer\SerializedDataIsNotValid;
-use BenatEspina\StackExchangeApiClient\Serializer\Serializer;
 use PhpSpec\ObjectBehavior;
 
 /**
  * @author Beñat Espiña <benatespina@gmail.com>
  */
-class NoSerializeSerializerSpec extends ObjectBehavior
+class SerializedDataIsNotValidSpec extends ObjectBehavior
 {
     function it_can_be_created()
     {
-        $this->shouldHaveType(NoSerializeSerializer::class);
-        $this->shouldImplement(Serializer::class);
-
-        $this->serialize(['items' => []])->shouldReturn([]);
-    }
-
-    function it_cannot_be_created_when_items_root_key_does_not_exist()
-    {
-        $this->shouldThrow(SerializedDataIsNotValid::class)->duringSerialize([]);
+        $this->shouldHaveType(SerializedDataIsNotValid::class);
+        $this->shouldHaveType(\Exception::class);
     }
 }

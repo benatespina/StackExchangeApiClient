@@ -30,18 +30,19 @@ final class ToModelSerializer implements Serializer
     public function serialize(array $data)
     {
         if (false === array_key_exists('items', $data)) {
-            throw new \Exception('Given data is incorrect');
+            throw new SerializedDataIsNotValid();
         }
+
         if (count($data['items']) > 1) {
             $objects = [];
             foreach ($data['items'] as $item) {
-                $objects[] = $this->className::fromJson($item);
+                $objects[] = forward_static_call_array([$this->className, 'fromJson'], [$item]);
             }
 
             return $objects;
         }
 
-        return $this->className::fromJson($data['items'][0]);
+        return forward_static_call_array([$this->className, 'fromJson'], [$data['items'][0]]);
     }
 
     private function setClassName(string $className) : void
