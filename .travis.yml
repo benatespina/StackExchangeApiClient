@@ -12,23 +12,23 @@ language: php
 php:
     - 7.1
 
-env:
-    - COMPOSER_OPTIONS="--prefer-source"
-    - ACCESS_TOKEN="${ACCESS_TOKEN} | sed 's/\\//g'"
-    - KEY="${KEY} | sed 's/\\//g'"
-
 addons:
     apt:
         packages:
             - xmlstarlet
+
+before_install:
+    - COMPOSER_OPTIONS="--prefer-source"
+    - ACCESS_TOKEN="${ACCESS_TOKEN} | sed 's/\\//g'"
+    - KEY="${KEY} | sed 's/\\//g'"
 
 install:
     - composer install --no-interaction ${COMPOSER_OPTIONS}
 
 before_script:
     - cp phpunit.xml.dist phpunit.xml
-    - xmlstarlet ed --inplace -u '/phpunit/php/const[@value="{{ ACCESS_TOKEN }}"]/@value' -v '${ACCESS_TOKEN}' phpunit.xml
-    - xmlstarlet ed --inplace -u '/phpunit/php/const[@value="{{ KEY }}"]/@value' -v '${KEY}' phpunit.xml
+    - xmlstarlet ed --inplace -u '/phpunit/php/const[@value="{{ ACCESS_TOKEN }}"]/@value' -v '$ACCESS_TOKEN' phpunit.xml
+    - xmlstarlet ed --inplace -u '/phpunit/php/const[@value="{{ KEY }}"]/@value' -v '$KEY' phpunit.xml
 
 script:
     - vendor/bin/phpspec run
