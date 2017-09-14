@@ -19,13 +19,13 @@ use BenatEspina\StackExchangeApiClient\Http\HttpClient;
 use BenatEspina\StackExchangeApiClient\Serializer\Serializer;
 
 /**
- * https://api.stackexchange.com/docs/create-answer-flag.
+ * https://api.stackexchange.com/docs/me-tags-top-answers.
  *
  * @author Beñat Espiña <benatespina@gmail.com>
  */
-class CreateAnswerFlag
+class MeTagsTopAnswers
 {
-    private const URL = '/answers/{id}/flags/add';
+    private const URL = '/me/tags{tags}/top-answers';
 
     private $client;
     private $serializer;
@@ -38,19 +38,19 @@ class CreateAnswerFlag
         $this->authentication = $authentication;
     }
 
-    public function __invoke(string $id, array $parameters = AnswerApi::QUERY_PARAMS)
+    public function __invoke($tags, array $parameters = AnswerApi::QUERY_PARAMS)
     {
         return $this->serializer->serialize(
-            $this->client->post(
-                $this->url($id),
+            $this->client->get(
+                $this->url($tags),
                 $this->mergeAuthenticationIntoParameters($parameters)
             )
         );
     }
 
-    private function url(string $id) : string
+    private function url($tags) : string
     {
-        return str_replace('{id}', $id, self::URL);
+        return str_replace('{tags}', is_array($tags) ? implode(';', $tags) : $tags, self::URL);
     }
 
     private function mergeAuthenticationIntoParameters(array $parameters) : array

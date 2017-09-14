@@ -19,31 +19,31 @@ use BenatEspina\StackExchangeApiClient\Http\HttpClient;
 use BenatEspina\StackExchangeApiClient\Serializer\Serializer;
 
 /**
- * https://api.stackexchange.com/docs/create-answer-flag.
+ * https://api.stackexchange.com/docs/render-answer.
  *
  * @author Beñat Espiña <benatespina@gmail.com>
  */
-class CreateAnswerFlag
+class RenderAnswer
 {
-    private const URL = '/answers/{id}/flags/add';
+    private const URL = '/questions/{id}/answers/render';
 
     private $client;
     private $serializer;
     private $authentication;
 
-    public function __construct(HttpClient $client, Serializer $serializer, Authentication $authentication)
+    public function __construct(HttpClient $client, Serializer $serializer, ?Authentication $authentication)
     {
         $this->client = $client;
         $this->serializer = $serializer;
         $this->authentication = $authentication;
     }
 
-    public function __invoke(string $id, array $parameters = AnswerApi::QUERY_PARAMS)
+    public function __invoke(string $id, string $body, array $parameters = AnswerApi::QUERY_PARAMS)
     {
         return $this->serializer->serialize(
             $this->client->post(
                 $this->url($id),
-                $this->mergeAuthenticationIntoParameters($parameters)
+                $this->mergeParameters($body, $parameters)
             )
         );
     }
@@ -53,8 +53,29 @@ class CreateAnswerFlag
         return str_replace('{id}', $id, self::URL);
     }
 
+    private function mergeParameters(string $body, array $parameters) : array
+    {
+        return $this->mergeAuthenticationIntoParameters(
+            $this->mergeBodyIntoParameters($body, $parameters)
+        );
+    }
+
+    private function mergeBodyIntoParameters(string $body, array $parameters) : array
+    {
+        return array_merge([$parameters, 'body' => $body]);
+    }
+
     private function mergeAuthenticationIntoParameters(array $parameters) : array
     {
+        if ($this->checkAuthenticationIsAvailable()) {
+            return $parameters;
+        }
+
         return array_merge($parameters, $this->authentication->toArray());
+    }
+
+    private function checkAuthenticationIsAvailable() : bool
+    {
+        return $this->authentication instanceof Authentication;
     }
 }

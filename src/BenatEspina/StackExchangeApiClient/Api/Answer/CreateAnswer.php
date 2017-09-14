@@ -41,7 +41,7 @@ class CreateAnswer
     public function __invoke(string $questionId, string $body, array $parameters = AnswerApi::QUERY_PARAMS)
     {
         return $this->serializer->serialize(
-            $this->client->get(
+            $this->client->post(
                 $this->url($questionId),
                 $this->buildParameters($parameters, $body)
             )

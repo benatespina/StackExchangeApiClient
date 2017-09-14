@@ -19,13 +19,13 @@ use BenatEspina\StackExchangeApiClient\Http\HttpClient;
 use BenatEspina\StackExchangeApiClient\Serializer\Serializer;
 
 /**
- * https://api.stackexchange.com/docs/create-answer-flag.
+ * https://api.stackexchange.com/docs/upvote-answer.
  *
  * @author Beñat Espiña <benatespina@gmail.com>
  */
-class CreateAnswerFlag
+class UpvoteAnswer
 {
-    private const URL = '/answers/{id}/flags/add';
+    private const URL = '/answers/{id}/upvote';
 
     private $client;
     private $serializer;
@@ -41,7 +41,7 @@ class CreateAnswerFlag
     public function __invoke(string $id, array $parameters = AnswerApi::QUERY_PARAMS)
     {
         return $this->serializer->serialize(
-            $this->client->post(
+            $this->client->put(
                 $this->url($id),
                 $this->mergeAuthenticationIntoParameters($parameters)
             )

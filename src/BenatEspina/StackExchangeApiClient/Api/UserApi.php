@@ -72,7 +72,7 @@ final class UserApi
             self::URL, $params
         );
 
-        return $serialize === true ? UserSerializer::serialize($response) : $response;
+        return true === $serialize ? UserSerializer::serialize($response) : $response;
     }
 
     /**
@@ -98,7 +98,7 @@ final class UserApi
             self::URL . (is_array($ids) ? implode(';', $ids) : $ids), $params
         );
 
-        return $serialize === true ? UserSerializer::serialize($response) : $response;
+        return true === $serialize ? UserSerializer::serialize($response) : $response;
     }
 
     /**
@@ -122,7 +122,7 @@ final class UserApi
             'me', array_merge($params, $this->authentication->toArray())
         );
 
-        return $serialize === true ? UserSerializer::serialize($response) : $response;
+        return true === $serialize ? UserSerializer::serialize($response) : $response;
     }
 
     /**
@@ -147,7 +147,7 @@ final class UserApi
             self::URL . 'moderators', $params
         );
 
-        return $serialize === true ? UserSerializer::serialize($response) : $response;
+        return true === $serialize ? UserSerializer::serialize($response) : $response;
     }
 
     /**
@@ -172,6 +172,6 @@ final class UserApi
             self::URL . 'moderators/elected', $params
         );
 
-        return $serialize === true ? UserSerializer::serialize($response) : $response;
+        return true === $serialize ? UserSerializer::serialize($response) : $response;
     }
 }

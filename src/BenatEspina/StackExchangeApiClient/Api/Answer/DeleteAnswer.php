@@ -41,7 +41,7 @@ class DeleteAnswer
     public function __invoke(string $id, array $parameters = AnswerApi::QUERY_PARAMS)
     {
         return $this->serializer->serialize(
-            $this->client->get(
+            $this->client->delete(
                 $this->url($id),
                 $this->mergeAuthenticationIntoParameters($parameters)
             )

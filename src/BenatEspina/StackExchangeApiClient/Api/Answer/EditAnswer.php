@@ -19,13 +19,13 @@ use BenatEspina\StackExchangeApiClient\Http\HttpClient;
 use BenatEspina\StackExchangeApiClient\Serializer\Serializer;
 
 /**
- * https://api.stackexchange.com/docs/create-answer-flag.
+ * https://api.stackexchange.com/docs/edit-answer.
  *
  * @author Beñat Espiña <benatespina@gmail.com>
  */
-class CreateAnswerFlag
+class EditAnswer
 {
-    private const URL = '/answers/{id}/flags/add';
+    private const URL = '/answers/{id}/edit';
 
     private $client;
     private $serializer;
@@ -38,12 +38,12 @@ class CreateAnswerFlag
         $this->authentication = $authentication;
     }
 
-    public function __invoke(string $id, array $parameters = AnswerApi::QUERY_PARAMS)
+    public function __invoke(string $id, string $body, array $parameters = AnswerApi::QUERY_PARAMS)
     {
         return $this->serializer->serialize(
-            $this->client->post(
+            $this->client->put(
                 $this->url($id),
-                $this->mergeAuthenticationIntoParameters($parameters)
+                $this->mergeParameters($body, $parameters)
             )
         );
     }
@@ -51,6 +51,18 @@ class CreateAnswerFlag
     private function url(string $id) : string
     {
         return str_replace('{id}', $id, self::URL);
+    }
+
+    private function mergeParameters(string $body, array $parameters) : array
+    {
+        return $this->mergeAuthenticationIntoParameters(
+            $this->mergeBodyIntoParameters($body, $parameters)
+        );
+    }
+
+    private function mergeBodyIntoParameters(string $body, array $parameters) : array
+    {
+        return array_merge([$parameters, 'body' => $body]);
     }
 
     private function mergeAuthenticationIntoParameters(array $parameters) : array

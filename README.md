@@ -83,7 +83,7 @@ $answer = $answersApi->createAnswer('the-question-id', 'This is my awesome answe
 ## Current status
 The API has many methods, so the calls' implementation status are separated **by type** in the following files:
  - ![progressed.io - 3 methods](http://progressed.io/bar/100)&nbsp;[Access Tokens](https://github.com/benatespina/StackExchangeApiClient/blob/master/docs/access_tokens.md)
- - ![progressed.io - 16 methods](http://progressed.io/bar/50)&nbsp;[Answers](https://github.com/benatespina/StackExchangeApiClient/blob/master/docs/answers.md)
+ - ![progressed.io - 16 methods](http://progressed.io/bar/100)&nbsp;[Answers](https://github.com/benatespina/StackExchangeApiClient/blob/master/docs/answers.md)
  - ![progressed.io - 7 methods](http://progressed.io/bar/0)&nbsp;[Badges](https://github.com/benatespina/StackExchangeApiClient/blob/master/docs/badges.md)
  - ![progressed.io - 15 methods](http://progressed.io/bar/0)&nbsp;[Comments](https://github.com/benatespina/StackExchangeApiClient/blob/master/docs/comments.md)
  - ![progressed.io - 1 methods](http://progressed.io/bar/0)&nbsp;[Errors](https://github.com/benatespina/StackExchangeApiClient/blob/master/docs/errors.md)
