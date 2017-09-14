@@ -110,7 +110,7 @@ The API has many methods, so the calls' implementation status are separated **by
  - ![progressed.io - 2 methods](http://progressed.io/bar/0)&nbsp;[Tag Synonyms](https://github.com/benatespina/StackExchangeApiClient/blob/master/docs/tag_synonyms.md)
  - ![progressed.io - 1 methods](http://progressed.io/bar/0)&nbsp;[Tag Wikis](https://github.com/benatespina/StackExchangeApiClient/blob/master/docs/tag_wikis.md)
  - ![progressed.io - 3 methods](http://progressed.io/bar/0)&nbsp;[Top Tags](https://github.com/benatespina/StackExchangeApiClient/blob/master/docs/top_tags.md)
- - ![progressed.io - 4 methods](http://progressed.io/bar/0)&nbsp;[Users](https://github.com/benatespina/StackExchangeApiClient/blob/master/docs/users.md)
+ - ![progressed.io - 4 methods](http://progressed.io/bar/100)&nbsp;[Users](https://github.com/benatespina/StackExchangeApiClient/blob/master/docs/users.md)
  - ![progressed.io - 1 methods](http://progressed.io/bar/0)&nbsp;[User Timeline](https://github.com/benatespina/StackExchangeApiClient/blob/master/docs/user_timeline.md)
  - ![progressed.io - 1 methods](http://progressed.io/bar/0)&nbsp;[Write Permissions](https://github.com/benatespina/StackExchangeApiClient/blob/master/docs/write_permissions.md)
 

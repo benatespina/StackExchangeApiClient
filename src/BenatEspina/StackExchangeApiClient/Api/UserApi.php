@@ -13,165 +13,86 @@ declare(strict_types=1);
 
 namespace BenatEspina\StackExchangeApiClient\Api;
 
+use BenatEspina\StackExchangeApiClient\Api\User\ElectedModerators;
+use BenatEspina\StackExchangeApiClient\Api\User\Me;
+use BenatEspina\StackExchangeApiClient\Api\User\Moderators;
+use BenatEspina\StackExchangeApiClient\Api\User\Users;
+use BenatEspina\StackExchangeApiClient\Api\User\UsersByIds;
 use BenatEspina\StackExchangeApiClient\Authentication\Authentication;
+use BenatEspina\StackExchangeApiClient\Authentication\AuthenticationIsRequired;
 use BenatEspina\StackExchangeApiClient\Http\HttpClient;
-use BenatEspina\StackExchangeApiClient\Model\User;
-use BenatEspina\StackExchangeApiClient\Serializer\UserSerializer;
+use BenatEspina\StackExchangeApiClient\Serializer\Serializer;
 
 /**
- * The user api class.
- *
  * @author Beñat Espiña <benatespina@gmail.com>
  */
 final class UserApi
 {
-    const URL = 'users/';
-    const QUERY_PARAMS = [
+    public const QUERY_PARAMS = [
         'order'  => 'desc',
         'sort'   => 'reputation',
         'site'   => 'stackoverflow',
         'filter' => HttpClient::FILTER_ALL,
     ];
 
-    /**
-     * The authentication.
-     *
-     * @var Authentication|null
-     */
+    private $client;
+    private $serializer;
     private $authentication;
 
-    /**
-     * Constructor.
-     *
-     * @param Authentication|null $anAuthentication The authentication
-     */
-    public function __construct(Authentication $anAuthentication = null)
+    public function __construct(HttpClient $client, Serializer $serializer, Authentication $authentication = null)
     {
-        $this->authentication = $anAuthentication;
+        $this->client = $client;
+        $this->serializer = $serializer;
+        $this->authentication = $authentication;
     }
 
-    /**
-     * Returns all users on a site.
-     *
-     * More info: https://api.stackexchange.com/docs/users
-     *
-     * @param array $params    QueryString parameter(s), it admits page and pagesize; by default is null
-     * @param bool  $serialize Checks if the result will be serialize or not, by default is true
-     *
-     * @return array
-     */
-    public function all($params = [], $serialize = true)
+    public function electedModerators(array $parameters = self::QUERY_PARAMS)
     {
-        if ($this->authentication instanceof Authentication) {
-            if (true === empty($params)) {
-                $params = array_merge($params, self::QUERY_PARAMS);
-            }
-            $params = array_merge($params, $this->authentication->toArray());
-        }
-        $response = HttpClient::instance()->get(
-            self::URL, $params
-        );
-
-        return true === $serialize ? UserSerializer::serialize($response) : $response;
+        return (new ElectedModerators(
+            $this->client,
+            $this->serializer
+        ))->__invoke($parameters);
     }
 
-    /**
-     * Gets the users identified in ids in {ids}.
-     *
-     * More info: https://api.stackexchange.com/docs/users-by-ids
-     *
-     * @param string|array $ids       Array which contains the ids delimited by semicolon, or a simple id
-     * @param array        $params    QueryString parameter(s)
-     * @param bool         $serialize Checks if the result will be serialize or not, by default is true
-     *
-     * @return array|User
-     */
-    public function getOfIds($ids, array $params = [], $serialize = true)
+    public function me(array $parameters = self::QUERY_PARAMS)
     {
-        if ($this->authentication instanceof Authentication) {
-            if (true === empty($params)) {
-                $params = array_merge($params, self::QUERY_PARAMS);
-            }
-            $params = array_merge($params, $this->authentication->toArray());
-        }
-        $response = HttpClient::instance()->get(
-            self::URL . (is_array($ids) ? implode(';', $ids) : $ids), $params
-        );
+        $this->checkAuthenticationIsEnabled();
 
-        return true === $serialize ? UserSerializer::serialize($response) : $response;
+        return (new Me(
+            $this->client,
+            $this->serializer,
+            $this->authentication
+        ))->__invoke($parameters);
     }
 
-    /**
-     * Returns the user associated with the passed access_token.
-     *
-     * More info: https://api.stackexchange.com/docs/me
-     *
-     * @param array $params    QueryString parameter(s)
-     * @param bool  $serialize Checks if the result will be serialize or not, by default is true
-     *
-     * @throws \Exception when the auth is null
-     *
-     * @return User
-     */
-    public function me(array $params = self::QUERY_PARAMS, $serialize = true)
+    public function moderators(array $parameters = self::QUERY_PARAMS)
+    {
+        return (new Moderators(
+            $this->client,
+            $this->serializer
+        ))->__invoke($parameters);
+    }
+
+    public function users(array $parameters = self::QUERY_PARAMS)
+    {
+        return (new Users(
+            $this->client,
+            $this->serializer
+        ))->__invoke($parameters);
+    }
+
+    public function usersByIds($ids, array $parameters = self::QUERY_PARAMS)
+    {
+        return (new UsersByIds(
+            $this->client,
+            $this->serializer
+        ))->__invoke($ids, $parameters);
+    }
+
+    private function checkAuthenticationIsEnabled() : void
     {
         if (!$this->authentication instanceof Authentication) {
-            throw new \Exception('Authentication is required');
+            throw new AuthenticationIsRequired();
         }
-        $response = HttpClient::instance()->get(
-            'me', array_merge($params, $this->authentication->toArray())
-        );
-
-        return true === $serialize ? UserSerializer::serialize($response) : $response;
-    }
-
-    /**
-     * Gets those users on a site who can exercise moderation powers.
-     *
-     * More info: https://api.stackexchange.com/docs/moderators
-     *
-     * @param array $params    QueryString parameter(s), it admits page and pagesize; by default is null
-     * @param bool  $serialize Checks if the result will be serialize or not, by default is true
-     *
-     * @return array
-     */
-    public function moderators(array $params = [], $serialize = true)
-    {
-        if ($this->authentication instanceof Authentication) {
-            if (true === empty($params)) {
-                $params = array_merge($params, self::QUERY_PARAMS);
-            }
-            $params = array_merge($params, $this->authentication->toArray());
-        }
-        $response = HttpClient::instance()->get(
-            self::URL . 'moderators', $params
-        );
-
-        return true === $serialize ? UserSerializer::serialize($response) : $response;
-    }
-
-    /**
-     * Returns those users on a site who both have moderator powers, and were actually elected.
-     *
-     * More info: https://api.stackexchange.com/docs/elected-moderators
-     *
-     * @param array $params    QueryString parameter(s), it admits page and pagesize; by default is null
-     * @param bool  $serialize Checks if the result will be serialize or not, by default is true
-     *
-     * @return array
-     */
-    public function electedModerators(array $params = [], $serialize = true)
-    {
-        if ($this->authentication instanceof Authentication) {
-            if (true === empty($params)) {
-                $params = array_merge($params, self::QUERY_PARAMS);
-            }
-            $params = array_merge($params, $this->authentication->toArray());
-        }
-        $response = HttpClient::instance()->get(
-            self::URL . 'moderators/elected', $params
-        );
-
-        return true === $serialize ? UserSerializer::serialize($response) : $response;
     }
 }
